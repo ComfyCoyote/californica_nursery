@@ -29,7 +29,7 @@ function SignupPage() : React.JSX.Element {
   return (
     <Box p={4} display='flex' justifyContent='center' alignItems='center' maxWidth="100%" mx="auto">
     <HStack>
-        <Image boxSize='500px' src='/images/Logo_with_background.png' />
+        <Image boxSize='500px' src='/images/Logo_with_background.png' alt='/images/vercel.svg'/>
       <VStack spacing={4}>
         <FormControl id="email" isRequired>
           <FormLabel>Email</FormLabel>

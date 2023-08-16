@@ -34,7 +34,7 @@ export default function Navbar() : React.JSX.Element {
               <Button variant="nav">Contact Us</Button>
             </Link>
         </HStack>
-        <Image style={{marginRight: '27%' }} src={'/images/Logo_with_background.png'} h="60px" />
+        <Image style={{marginRight: '27%' }} src={'/images/Logo_with_background.png'} alt={'/images/vercel.svg'} h="60px" />
         <HStack>
           <Link style={{paddingRight: '10px'}}>
             <HiOutlineShoppingBag style={{height: '30px', width: '30px'}}/>

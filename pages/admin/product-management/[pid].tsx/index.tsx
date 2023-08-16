@@ -17,7 +17,7 @@
 
 'use client'
 
-
+/*
 import UploadImageContainer from '@/components/upload-image';
 import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, VStack, Select } from '@chakra-ui/react';
 import { Field, Form, Formik, ErrorMessage, FormikProps} from 'formik';
@@ -292,7 +292,7 @@ export default EditProduct;
 
 
 
-
+*/
 
 
 

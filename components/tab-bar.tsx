@@ -19,7 +19,7 @@ const TabBar: React.FC<TabBarPropTypes> = ({tabOptions}) => {
       <TabList>
         {tabOptions.map((item: string) => {
             return(
-                <Tab>
+                <Tab key={item}>
                     {item}
                 </Tab>
             )

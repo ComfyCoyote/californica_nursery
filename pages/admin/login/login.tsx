@@ -56,7 +56,7 @@ function LoginPage() {
   return (
     <Box width={'100%'} >
       <HStack width={'100%'}>
-      <Image boxSize='45%' src='/images/garden_sign.png' />
+      <Image boxSize='45%' src='/images/garden_sign.png' alt='/images/vercel.svg'/>
       <form onSubmit={handleSubmit}>
         <VStack width={'100%'} ml={'10%'} spacing={4}>
           <Text 
