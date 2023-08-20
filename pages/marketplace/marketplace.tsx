@@ -1,17 +1,16 @@
 'use client'
 
-import { getImageURL, listImages, queryFirestorePlants } from "@/firebase/firebaseFunctions"
-import ProductCard from "./productCardTest"
+import { getImageURL, queryFirestorePlants } from "@/firebase/firebaseFunctions"
 import MarketplaceDrawer from "@/components/drawer"
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import Navbar from "@/components/navbar"
 import TabBar from "@/components/tab-bar"
 import ShoppingCart from "@/components/shoppingCart"
-import { CartProvider, useCart } from "@/shoppingCartContext/shoppingCartContext"
+import { useCart } from "@/shoppingCartContext/shoppingCartContext"
 import { Plant } from "@/Interfaces/interfaces"
 import CardArray from "./productArray"
-import { GetStaticProps, GetServerSideProps } from "next"
-import { Image } from "@chakra-ui/react"
+import { GetServerSideProps } from "next"
+
 
 
 interface MarketplacePropTypes{
@@ -32,6 +31,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= (props) => {
     console.log(cartItems)
 
 
+    if(props){
     return(
         <React.Fragment>
         <Navbar />
@@ -42,6 +42,15 @@ const Marketplace: React.FC<MarketplacePropTypes>= (props) => {
         </React.Fragment>
 
     )
+    } else {
+
+        return(
+            <div>
+                <text>The data was unable to be fetched</text>
+            </div>
+        )
+
+    }
 }
 
 

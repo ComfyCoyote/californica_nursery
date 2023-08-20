@@ -7,6 +7,8 @@ interface ProductListProps {
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
+
+    if(products){
     return (
         <VStack align="flex-start" spacing={4}>
         <Text fontSize="xl" fontWeight="bold">Product List</Text>
@@ -20,6 +22,15 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
         </UnorderedList>
         </VStack>
     );
+    } else {
+        return(
+            <div>
+                <text>
+                    No checkout items available
+                </text>
+            </div>
+        )
+    }
 };
   
   export default ProductList;
