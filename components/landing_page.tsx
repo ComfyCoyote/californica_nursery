@@ -27,13 +27,13 @@ const LandingPage: React.FC = () => {
         <Image 
             onMouseEnter={() => setHover(true)} 
             onMouseLeave={() => setHover(false)} 
-            src={hover ? "/animations/hand drip.gif" : "/images/hand paper demo.PNG"} 
+            src={hover ? "/animations/hand drip.gif" : "/images/hand paper demo.png"} 
             alt='/images/vercel.svg' width={300} height={300}  />
         <Image src="/images/shovel.png" alt='/images/vercel.svg' width={350} height={350} />
     </Flex>
     <Flex justifyContent="center" width={'100%'}>
-        <Image src="/images/shirt.PNG" alt='/images/vercel.svg'  width={300} height={300}/>
-        <Image src="/images/person.PNG" alt='/images/vercel.svg' width={300} height={300} />
+        <Image src="/images/shirt.png" alt='/images/vercel.svg'  width={300} height={300}/>
+        <Image src="/images/person.png" alt='/images/vercel.svg' width={300} height={300} />
     </Flex>
     </Flex>
     </Box>
