@@ -1,4 +1,4 @@
-import { VStack, FormControl, FormLabel, FormErrorMessage, Input, Select } from '@chakra-ui/react';
+import { VStack, FormControl, FormLabel, FormErrorMessage, Input, Select, Textarea } from '@chakra-ui/react';
 import { Field } from 'formik';
 
 interface NameFormPropTypes {
@@ -20,7 +20,7 @@ export default function NameForm(props : NameFormPropTypes){
             </FormControl>
             <FormControl isInvalid={formik.errors.description && formik.touched.description}>
               <FormLabel>Description</FormLabel>
-              <Input type="text" id="description" name="description" onChange={formik.handleChange} value={formik.values.description}/>
+              <Textarea id="description" name="description" onChange={formik.handleChange} value={formik.values.description}/>
               <FormErrorMessage>{formik.errors.description}</FormErrorMessage>
             </FormControl>
             <FormControl isInvalid={formik.errors.category && formik.touched.category}>

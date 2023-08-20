@@ -139,9 +139,6 @@ function NewProduct() {
           selectedImage={selectedImage} 
           setSelectedImage={setSelectedImage} 
           formik={formik}/>
-          <Button type='submit'>
-            Submit
-          </Button>
         </form>
         </FormikProvider>
         </Box>
