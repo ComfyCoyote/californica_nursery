@@ -21,6 +21,8 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({item}) => {
         
     }, [])
 
+    if(item){
+
     return(
         <Card maxW='sm'>
             <CardBody>
@@ -52,6 +54,14 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({item}) => {
             </CardFooter>
             </Card>
     )
+    } else {
+        return(
+            <div>
+                <text>No items available</text>
+            </div>
+        )
+
+    }
 }
 
 
