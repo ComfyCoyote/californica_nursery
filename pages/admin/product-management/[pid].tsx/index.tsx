@@ -17,7 +17,7 @@
 
 'use client'
 
-/*
+
 import UploadImageContainer from '@/components/upload-image';
 import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, VStack, Select } from '@chakra-ui/react';
 import { Field, Form, Formik, ErrorMessage, FormikProps} from 'formik';
@@ -27,7 +27,6 @@ import * as yup from 'yup'
 import AlertComponent from '@/components/alert';
 import { useState } from 'react'
 import { useRouter } from 'next/router';
-import { Product } from '@/Interfaces/interfaces';
 import { GetServerSideProps } from 'next';
 import { doc, getDoc } from "firebase/firestore";
 import path from 'path';
@@ -45,10 +44,6 @@ interface FormValues {
   owner: string
 }
 
-interface EditItemPropTypes {
-
-    item: Product 
-}
 
 const validationSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -70,7 +65,7 @@ const messages = [
 
 
 
-function EditProduct({item} : EditItemPropTypes) {
+function EditProduct({item} : any) {
 
   const [alert, setAlert] = useState(false)
   const [error, setError] = useState(false)
@@ -126,7 +121,6 @@ function EditProduct({item} : EditItemPropTypes) {
     <Box width={'100%'} mx="auto" >
       <AlertComponent display={alert} status={error ? 'error' : 'success'} message={error ? messages[1] : messages[0]} toggleFunction={toggleAlert} />
       <HStack width={'100%'}>
-        <UploadImageContainer isUploading={isUploading} imgName={imgName}/>
         <Box width={'50%'} m={'10%'}>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
       {(formikProps: FormikProps<FormValues>) => (
@@ -292,7 +286,6 @@ export default EditProduct;
 
 
 
-*/
 
 
 
