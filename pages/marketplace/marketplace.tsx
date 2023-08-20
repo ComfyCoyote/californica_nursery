@@ -31,7 +31,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= (props) => {
     console.log(cartItems)
 
 
-    if(props){
+    if(props.data){
     return(
         <React.Fragment>
         <Navbar />
