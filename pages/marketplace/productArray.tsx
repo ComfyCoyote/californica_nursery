@@ -10,9 +10,17 @@ interface CardArrayPropTypes {
 }
 
 
-const CardArray: Function = (props : CardArrayPropTypes ): JSX.Element[] => {
+const CardArray: Function = (props : CardArrayPropTypes ) => {
 
-    return props.items.map((item) => <ProductCard key={item.id} item={item} />);
+    if(props.items){
+        return props.items.map((item) => <ProductCard key={item.id} item={item} />);
+    } else {
+        return (
+            <div>
+                <text>No Products</text>
+            </div>
+        )
+    }
 };
 
 export default CardArray

@@ -29,6 +29,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= (props) => {
     const { cartItems } = useCart()
 
     console.log(cartItems)
+    console.log(props.data)
 
 
     if(props.data){
