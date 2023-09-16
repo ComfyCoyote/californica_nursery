@@ -38,7 +38,6 @@ const Marketplace: React.FC<MarketplacePropTypes>= (props) => {
         <Navbar />
         <TabBar tabOptions={['Succulents', 'Flowers', 'Cacti']}/>
         <MarketplaceDrawer />
-        <ShoppingCart />
         <CardArray items={props.data} secondItem={'test data'}/>
         </React.Fragment>
 
