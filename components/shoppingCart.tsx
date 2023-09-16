@@ -25,7 +25,13 @@ interface Product {
   price: number;
 }
 
-export default function ShoppingCart() {
+interface ShoppingCartPropTypes {
+  open: boolean
+  toggleCart: () => void
+
+}
+
+const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   //const [cartItems, setCartItems] = useState<Product[]>([]);
   const { cartItems, removeFromCart, addItem, subtractItem } = useCart()
@@ -58,15 +64,7 @@ export default function ShoppingCart() {
 
   return (
     <>
-      <Alert status='success'>
-      <AlertIcon />
-        Data uploaded to the server. Fire on!
-      </Alert>
-      <Button onClick={handleCartOpen} leftIcon={<Icon as={FiShoppingCart} />}>
-        Cart ({cartItems.length})
-      </Button>
-
-      <Drawer isOpen={isCartOpen} onClose={handleCartClose} placement="right" size="sm">
+      <Drawer isOpen={open} onClose={toggleCart} placement="right" size="sm">
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
@@ -111,3 +109,5 @@ export default function ShoppingCart() {
     </>
   );
 }
+
+export default ShoppingCart;
