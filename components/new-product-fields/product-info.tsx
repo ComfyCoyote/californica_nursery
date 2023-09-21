@@ -1,6 +1,7 @@
-import { VStack, FormControl, FormLabel, FormErrorMessage, Input, Select } from '@chakra-ui/react';
+import { VStack, FormControl, FormLabel, FormErrorMessage, Input, Select, Stack, Checkbox } from '@chakra-ui/react';
 import { Field, FormikProps} from 'formik';
 import { FormValues } from '@/pages/admin/product-management/newProduct';
+import { useState } from 'react';
 
 interface ProductInfoFormPropTypes {
   formik: any
@@ -8,12 +9,64 @@ interface ProductInfoFormPropTypes {
 
 export default function ProductInfoForm(props: ProductInfoFormPropTypes){
 
-  const {formik} = props
+    const {formik} = props
+
+    console.log(formik.values.size)
 
     return(
     <VStack width={'50%'} m={'10%'} spacing={4}>
             <FormControl isInvalid={formik.errors.size && formik.touched.size}>
             <FormLabel>Size</FormLabel>
+            <Stack spacing={[1, 5]} direction={['column', 'row']}>
+              <Checkbox 
+                value={'1 Gallon'}
+                onChange={(e) => checkSelect(e)} 
+                size='sm' colorScheme='red'>
+                1 Gallon
+              </Checkbox>
+              <Checkbox 
+              value={'4 inches'}
+              onChange={(e) => checkSelect(e)}
+              size='md' colorScheme='green'>
+                4 inches
+              </Checkbox>
+              <Checkbox 
+              value={'6 oz'}
+              onChange={(e) => checkSelect(e)}
+              size='lg' colorScheme='orange'>
+                6 oz
+              </Checkbox>
+              <Checkbox
+              value={'extra small'} 
+              onChange={(e) => checkSelect(e)}
+              size='sm' colorScheme='red'>
+                extra small
+              </Checkbox>
+              <Checkbox
+              value={'small'} 
+              onChange={(e) => checkSelect(e)}
+              size='md' colorScheme='green'>
+                small
+              </Checkbox>
+              <Checkbox
+              value={'medium'} 
+              onChange={(e) => checkSelect(e)}
+              size='lg' colorScheme='orange'>
+                medium
+              </Checkbox>
+              <Checkbox
+              value={'large'} 
+              onChange={(e) => checkSelect(e)}
+              size='md' colorScheme='green'>
+                large
+              </Checkbox>
+              <Checkbox
+              value={'extra large'} 
+              onChange={(e) => checkSelect(e)}
+              size='lg' colorScheme='orange'>
+                extra large
+              </Checkbox>
+            </Stack>
             <Select
               id="size"
               name="size"
@@ -53,5 +106,15 @@ export default function ProductInfoForm(props: ProductInfoFormPropTypes){
             </FormControl>
         </VStack>
     )
+
+    function checkSelect(e: React.ChangeEvent<HTMLInputElement>){
+      const index = formik.values.size.indexOf(e.target.value)
+      if(index === -1){
+        formik.setFieldValue('size', [...formik.values.size, e.target.value])
+      } else if(index !== -1) {
+        const newArr = formik.values.size.filter((_: any, item: number) => item !== index)
+        formik.setFieldValue('size', newArr)
+      }
+    }
     
 }

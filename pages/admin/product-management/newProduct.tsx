@@ -16,7 +16,7 @@ export interface FormValues {
   name: string;
   description: string;
   category: string;
-  size: string | null;
+  size: [] | null;
   sub_category: string;
   listing_status: string;
   quantity: string;
@@ -59,7 +59,7 @@ function NewProduct() {
     name: '',
     category: '',
     sub_category: '',
-    size: '',
+    size: [],
     description: '',
     quantity: '',
     sku: '',
