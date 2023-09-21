@@ -34,13 +34,23 @@ const LandingPage: React.FC = () => {
     </Flex>
     <Flex direction="column" alignItems="center" justifyContent="center" minHeight="100%">
     <Flex justifyContent="center" width={'100%'} maxWidth={'100%'}>
-        <Image 
+        {hover === 'tips' ?
+            <Image 
             onMouseEnter={() => setHover('tips')} 
             onMouseLeave={() => setHover('')} 
             style={{cursor: 'pointer' }}
-            src={hover === 'tips' ? "/animations/tidy tips transparent.gif" : "/images/TT paper demo.png"} 
+            src={"/animations/tidy tips transparent.gif"} 
+            alt='/images/vercel.svg'  
+            width={350} height={300} /> 
+            : 
+            <Image 
+            onMouseEnter={() => setHover('tips')} 
+            onMouseLeave={() => setHover('')} 
+            style={{cursor: 'pointer' }}
+            src={"/images/TT paper demo.png"} 
             alt='/images/vercel.svg'  
             width={350} height={300} />
+        }
         <Image 
             onMouseEnter={() => setHover('hand')} 
             onMouseLeave={() => setHover('')}
