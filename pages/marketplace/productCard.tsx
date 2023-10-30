@@ -4,7 +4,6 @@ import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import React, {useEffect, useState} from 'react'
 import { getImageURL } from '@/firebase/firebaseFunctions'
 import Image from 'next/image'
-import { string } from 'square/dist/types/schema'
 
 interface ProductCardPropTypes {
     item: Plant | Apparel | PlaidProduct

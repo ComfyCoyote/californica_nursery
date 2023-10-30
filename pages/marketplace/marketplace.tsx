@@ -1,5 +1,3 @@
-'use client'
-
 import { getImageURL, queryFirestorePlants } from "@/firebase/firebaseFunctions"
 import MarketplaceDrawer from "@/components/drawer"
 import React from 'react'
