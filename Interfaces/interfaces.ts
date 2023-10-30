@@ -27,6 +27,18 @@ export interface Plant {
     image_primary: string;
     image_alt: string;
     owner: string;
+    imageUrls?: Array<string | null>;
+}
+
+export interface PlaidProduct {
+    id?: string;
+    name?: string;
+    description?: string;
+    images?: Array<any>;
+    imageUrls?: Array<string | null>
+    price?: string;
+
+
 }
 
 /*
@@ -68,5 +80,6 @@ export interface Apparel {
     image_primary: string;
     image_alt: string;
     owner: string;
+    imageUrls?: Array<string | null>;
 
 }

@@ -1,11 +1,13 @@
-import { Card, CardBody, CardFooter, Image, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react'
 import { useCart } from '@/shoppingCartContext/shoppingCartContext'
-import { Apparel, Plant } from '@/Interfaces/interfaces'
+import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import React, {useEffect, useState} from 'react'
 import { getImageURL } from '@/firebase/firebaseFunctions'
+import Image from 'next/image'
+import { string } from 'square/dist/types/schema'
 
 interface ProductCardPropTypes {
-    item: Plant | Apparel
+    item: Plant | Apparel | PlaidProduct
 }
 
 
@@ -27,9 +29,10 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({item}) => {
         <Card maxW='sm'>
             <CardBody>
                 <Image
-                src={image}
+                src={imageCheck(item)}
                 alt='Green double couch with wooden legs'
-                borderRadius='lg'
+                width={300}
+                height={300}
                 />
                 <Stack mt='6' spacing='3'>
                 <Heading size='md'>{item.name}</Heading>
@@ -47,7 +50,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({item}) => {
                 <Button variant='solid' colorScheme='blue'>
                     Buy now
                 </Button>
-                <Button variant='ghost' colorScheme='blue' onClick={(event) => addToCart(event, item)}>
+                <Button variant='ghost' colorScheme='blue' onClick={(event) => console.log('buttonclicked')}>
                     Add to cart
                 </Button>
                 </ButtonGroup>
@@ -60,6 +63,20 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({item}) => {
                 <text>No items available</text>
             </div>
         )
+
+    }
+
+    function imageCheck(item: Plant | PlaidProduct | Apparel): string {
+        if(item.imageUrls){
+            if(typeof item.imageUrls[0] === 'string'){
+                return item.imageUrls[0]
+            } else {
+                return ''
+            }
+        } else {
+
+            return ''
+        }
 
     }
 }
