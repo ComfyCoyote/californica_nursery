@@ -30,7 +30,7 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
 
                 return(
                     <Button
-                        key={randomUUID()}
+                        key={option.price}
                         h='20%'
                         w='60%'
                         bg={'green.200'}

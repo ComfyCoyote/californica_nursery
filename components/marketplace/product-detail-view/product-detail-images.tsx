@@ -33,7 +33,7 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                 if(img){
                     return(
                         <Image 
-                        key={randomUUID()}
+                        key={img}
                         src={img} 
                         alt="Image" 
                         h="60px" 
