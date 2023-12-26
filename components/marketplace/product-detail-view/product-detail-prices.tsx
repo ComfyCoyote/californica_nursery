@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, HStack, Button, Text, VStack } from '@chakra-ui/react';
 import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import Link from 'next/link';
+import { randomUUID } from 'crypto';
 
 interface ProductDetailInfoPropTypes {
     item: PlaidProduct
@@ -29,6 +30,7 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
 
                 return(
                     <Button
+                        key={randomUUID()}
                         h='20%'
                         w='60%'
                         bg={'green.200'}

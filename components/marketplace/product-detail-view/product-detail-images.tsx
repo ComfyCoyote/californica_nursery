@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import Link from 'next/link';
+import { randomUUID } from 'crypto';
 
 interface ProductDetailInfoPropTypes {
     item: PlaidProduct
@@ -32,6 +33,7 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                 if(img){
                     return(
                         <Image 
+                        key={randomUUID()}
                         src={img} 
                         alt="Image" 
                         h="60px" 
