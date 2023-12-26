@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import  { HiMenu } from 'react-icons/hi'
 import { Box, Container, Flex} from '@chakra-ui/react';
 import Image from 'next/image'
-import ShoppingCart from './shoppingCart';
+import ShoppingCart from './marketplace/shoppingCartContext/shoppingCart';
 
 
 const LandingPage: React.FC = () => {

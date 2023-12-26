@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { FiShoppingCart } from 'react-icons/fi';
-import { useCart } from '@/shoppingCartContext/shoppingCartContext';
+import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext';
 
 interface Product {
   id: number;

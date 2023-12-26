@@ -36,11 +36,16 @@ export interface PlaidProduct {
     description?: string;
     images?: Array<any>;
     imageUrls?: Array<string | null>
-    price?: string;
+    price?: Array<PriceVariation>;
 
 
 }
 
+
+export interface PriceVariation {
+    price: string;
+    type: string;
+}
 /*
 (Clothing Image)
 w/ 2 photos

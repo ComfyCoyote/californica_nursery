@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Box,
   Button,
@@ -17,21 +16,18 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react';
 
-export default function MarketplaceDrawer() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+interface MarketplaceDrawerPropTypes{
+  handleDrawerOpen: () => void,
+  isDrawerOpen: boolean,
+  handleDrawerClose: () => void,
+}
 
-  const handleDrawerOpen = () => {
-    setIsDrawerOpen(true);
-  };
 
-  const handleDrawerClose = () => {
-    setIsDrawerOpen(false);
-  };
+const MarketplaceDrawer: React.FC<MarketplaceDrawerPropTypes>=({handleDrawerOpen, isDrawerOpen, handleDrawerClose}) => {
+
 
   return (
     <>
-      <Button onClick={handleDrawerOpen}>Open Drawer</Button>
-
       <Drawer isOpen={isDrawerOpen} onClose={handleDrawerClose} size="sm">
         <DrawerOverlay>
           <DrawerContent>
@@ -97,3 +93,6 @@ export default function MarketplaceDrawer() {
     </>
   );
 }
+
+
+export default MarketplaceDrawer

@@ -1,5 +1,5 @@
 import { Card, CardBody, CardFooter, Image, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react'
-import { useCart } from '@/shoppingCartContext/shoppingCartContext'
+import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext'
 import { Plant } from '@/Interfaces/interfaces'
 
 interface ProductCardPropTypes {

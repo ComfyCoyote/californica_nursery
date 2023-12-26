@@ -1,5 +1,5 @@
 import { Apparel, Plant } from "@/Interfaces/interfaces";
-import ProductCard from "@/components/marketplace/product-display/product-card";
+import ProductCard from "./product-card";
 
 interface CardArrayPropTypes {
     items: Array<Plant | Apparel>
@@ -8,7 +8,7 @@ interface CardArrayPropTypes {
 }
 
 
-const CardArray: Function = (props : CardArrayPropTypes ) => {
+const ProductCardArray: Function = (props : CardArrayPropTypes ) => {
 
     if(props.items){
         return props.items.map((item) => <ProductCard key={item.id} item={item} />);
@@ -21,4 +21,4 @@ const CardArray: Function = (props : CardArrayPropTypes ) => {
     }
 };
 
-export default CardArray
+export default ProductCardArray

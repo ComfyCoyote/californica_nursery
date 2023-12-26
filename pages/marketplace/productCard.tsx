@@ -1,5 +1,5 @@
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react'
-import { useCart } from '@/shoppingCartContext/shoppingCartContext'
+import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext'
 import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import React, {useEffect, useState} from 'react'
 import { getImageURL } from '@/firebase/firebaseFunctions'

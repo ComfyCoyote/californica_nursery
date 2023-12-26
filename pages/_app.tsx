@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import { AuthProvider } from '@/firebase/firebaseAuth'
-import { CartProvider } from '@/shoppingCartContext/shoppingCartContext'
+import { CartProvider } from '@/components/marketplace/shoppingCartContext/shoppingCartContext'
 
 function MyApp({ Component, pageProps } : AppProps) {
   return (

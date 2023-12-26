@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { PaymentForm, CreditCard } from 'react-square-web-payments-sdk'
-import { CartProvider, useCart } from '@/shoppingCartContext/shoppingCartContext'
+import { CartProvider, useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext'
 import ProductList from './itemList'
 import axios from 'axios'
 

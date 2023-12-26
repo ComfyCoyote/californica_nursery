@@ -1,10 +1,10 @@
 import { getImageURL, queryFirestorePlants } from "@/firebase/firebaseFunctions"
-import MarketplaceDrawer from "@/components/drawer"
+import MarketplaceDrawer from "@/components/marketplace-drawer"
 import React from 'react'
 import Navbar from "@/components/navbar"
 import TabBar from "@/components/tab-bar"
-import ShoppingCart from "@/components/shoppingCart"
-import { useCart } from "@/shoppingCartContext/shoppingCartContext"
+import ShoppingCart from "@/components/marketplace/shoppingCartContext/shoppingCart"
+import { useCart } from "@/components/marketplace/shoppingCartContext/shoppingCartContext"
 import { PlaidProduct, Plant } from "@/Interfaces/interfaces"
 import CardArray from "./productArray"
 import { GetServerSideProps } from "next"
@@ -14,7 +14,9 @@ import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "squa
 import { NONAME } from "dns"
 import { Vazirmatn } from "next/font/google"
 import { type } from "os"
-
+import ProductCardArray from "@/components/marketplace/product-display/product-card-array"
+import { Grid } from "@chakra-ui/react"
+import { object } from "square/dist/types/schema"
 
 
 interface MarketplacePropTypes{
@@ -31,10 +33,6 @@ async function getSampleImage() {
 const Marketplace: React.FC<MarketplacePropTypes>= (props) => {
 
     const { cartItems } = useCart()
-    const [items, setItems] = useState([]);
-
-    console.log(cartItems)
-    console.log(props.data)
 
 
     if(props.data){
@@ -43,16 +41,22 @@ const Marketplace: React.FC<MarketplacePropTypes>= (props) => {
         <Navbar />
         <TabBar tabOptions={['Succulents', 'Flowers', 'Cacti']}/>
         <MarketplaceDrawer />
-        <CardArray items={props.data} secondItem={'test data'}/>
+        <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+       {/* <ProductCardArray items={props.data} secondItem={'test data'}/>*/} 
+        </Grid>
         </React.Fragment>
 
     )
     } else {
 
         return(
+          <React.Fragment>
+            <Navbar />
             <div>
                 <text>The data was unable to be fetched</text>
             </div>
+          </React.Fragment>
+            
         )
 
     }
@@ -84,16 +88,26 @@ export const getServerSideProps : GetServerSideProps = async () => {
     const response = await catalogApi.searchCatalogItems({})
 
     data = response.result?.items?.map((item) => {
+
+      const priceVariations : Object[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
+
+     return {
+          'price' :  i.itemVariationData?.priceMoney?.amount,
+          'type' :  i.itemVariationData?.name
+        } 
+      })
       
       return {
         id: item.id,
         name : item?.itemData?.name,
         description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
         images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
+        price: priceVariations,
         imageUrls: []
       } as PlaidProduct
 
     })
+
 
     let imageIdArray :  string[] = []
     data?.forEach((item: PlaidProduct) => {
@@ -140,10 +154,16 @@ export const getServerSideProps : GetServerSideProps = async () => {
     }
   }
 
+  /*
   return {
     props : {
         data: data
     }
+  }
+  */
+
+  return{
+    props: { data: null }
   }
 };
       
