@@ -1,8 +1,8 @@
-import { Apparel, Plant } from "@/Interfaces/interfaces";
+import { Apparel, PlaidProduct, Plant } from "@/Interfaces/interfaces";
 import ProductCard from "./product-card";
 
 interface CardArrayPropTypes {
-    items: Array<Plant | Apparel>
+    items: Array<PlaidProduct>
     images: string[]
     secondItem: string
 }
