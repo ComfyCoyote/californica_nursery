@@ -62,7 +62,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item }) => {
   }
 
   
-  function getPriceRange(item: Plant | Apparel | PlaidProduct): string {
+  function getPriceRange(item: PlaidProduct){
 
     const priceArr = item?.price ?? null
     console.log(priceArr)
@@ -73,7 +73,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item }) => {
 
       console.log(`${startPrice} - ${endPrice}`)
 
-      return `$${startPrice/100} - $${endPrice/100}`
+      return `$${Number(startPrice)/100} - $${Number(endPrice)/100}`
 
     } else {
 
