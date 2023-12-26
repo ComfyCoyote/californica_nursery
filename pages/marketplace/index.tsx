@@ -105,12 +105,6 @@ export const getServerSideProps : GetServerSideProps = async () => {
     }
   }
 
-  if(data){
-    console.log(data[0])
-    console.log(data[0]?.price[0]?.price)
-    console.log(typeof data[0]?.price[0]?.price)
-  }
-
   return{
     props: { data: data }
   }
