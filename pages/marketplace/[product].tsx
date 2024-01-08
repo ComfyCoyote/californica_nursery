@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
 import { string } from 'square/dist/types/schema';
+import { useCallback } from 'react';
+import Marketplace from '@/components/marketplace/marketplace';
 
 interface ProductDetailPagePropTypes{
     item: PlaidProduct
@@ -15,7 +17,9 @@ interface ProductDetailPagePropTypes{
 const ProductDetailPage: React.FC<ProductDetailPagePropTypes> = (props) => {
 
     return(
-        <ProductDetailView item={props.item}/>
+        <Marketplace>
+            <ProductDetailView item={props.item}/>
+        </Marketplace>
     )
 }
 
@@ -24,6 +28,7 @@ const ProductDetailPage: React.FC<ProductDetailPagePropTypes> = (props) => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     console.log(params)
     console.log('PARAMS')
+    
     const { product } = params as { product: string };
 
     let response;

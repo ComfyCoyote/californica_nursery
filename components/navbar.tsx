@@ -1,6 +1,7 @@
 import {  Image, Flex, Button,  HStack , Avatar } from '@chakra-ui/react';
 import React from "react";
 import Link from 'next/link';
+import ShoppingCart from './marketplace/shoppingCartContext/shoppingCart';
 
 interface NavbarPropTypes {
   handleDrawerOpen: () => void
@@ -10,6 +11,7 @@ const Navbar: React.FC<NavbarPropTypes>=({handleDrawerOpen}) => {
 
   return (
       <Flex
+        position={'fixed'}
         as='header'
         bg='olive'
         w="100%"
@@ -48,7 +50,7 @@ const Navbar: React.FC<NavbarPropTypes>=({handleDrawerOpen}) => {
               </Button>
             </Link>
             <Link 
-              href='/marketplace'
+              href='/landscaping'
               >
               <Button 
               border="2px solid black" 
@@ -76,7 +78,7 @@ const Navbar: React.FC<NavbarPropTypes>=({handleDrawerOpen}) => {
               </Button>
             </Link>
             <Link 
-              href='/marketplace'
+              href='/about'
               >
               <Button 
               border="2px solid black" 

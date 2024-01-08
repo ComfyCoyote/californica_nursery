@@ -2,6 +2,7 @@ import Marketplace from "@/components/marketplace/marketplace";
 import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
 import { GetServerSideProps } from "next";
 import { PlaidProduct, PriceVariation } from "@/Interfaces/interfaces"
+import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
 
 
 interface MarketplacePropTypes{
@@ -14,7 +15,9 @@ interface MarketplacePropTypes{
 const MarketplacePage: React.FC<MarketplacePropTypes> = (props) => {
 
     return(
-        <Marketplace data={props.data}/>
+        <Marketplace>
+          <ProductCardArray items={props.data} />
+        </Marketplace>
     )
 }
 

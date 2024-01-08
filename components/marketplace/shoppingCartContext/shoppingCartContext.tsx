@@ -2,10 +2,10 @@
 
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { createContext, useContext, useState } from 'react';
-import { Apparel, Plant } from '@/Interfaces/interfaces';
+import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces';
 
 interface CartContextProps {
-  cartItems: Array<Plant | Apparel>;
+  cartItems: Array<Plant | Apparel | PlaidProduct>;
   addToCart: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => void;
   removeFromCart: (event: React.MouseEvent<HTMLButtonElement>, productId: string) => void;
   subtractItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => void;
@@ -28,21 +28,21 @@ const CartContext = createContext<CartContextProps>({
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider: React.FC <CartProviderProps>= (props) => {
-  const [cartItems, setCartItems] = useState<Array<Plant | Apparel>>([]);
+  const [cartItems, setCartItems] = useState<Array<Plant | Apparel | PlaidProduct>>([]);
 
   console.log(cartItems)
 
 
-  const addToCart = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => {
+  const addToCart = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct) => {
     console.log(product)
     setCartItems((prevItems) => [...prevItems, product]);
   };
 
-  const removeFromCart = (event: React.MouseEvent<HTMLButtonElement>, productId: string) => {
-    setCartItems((prevItems) => prevItems.filter((item: Plant | Apparel) => item.id !== productId));
+  const removeFromCart = (event: React.MouseEvent<HTMLButtonElement>, productId: string | undefined) => {
+    setCartItems((prevItems) => prevItems.filter((item: Plant | Apparel | PlaidProduct) => item.id !== productId));
   };
 
-  const subtractItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => {
+  const subtractItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct) => {
     let index = cartItems.indexOf(product);
     const newArray = [...cartItems]
     newArray.splice(index, 1); 
@@ -50,7 +50,7 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
     setCartItems(newArray);
   }
 
-  const addItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => {
+  const addItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct) => {
     const newArray = [...cartItems, product]
     setCartItems(newArray)
   }

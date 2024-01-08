@@ -7,9 +7,10 @@ import { Grid } from "@chakra-ui/react"
 import ProductCardArray from "./product-display/product-card-array"
 import { Box } from "@chakra-ui/react"
 import { useState } from "react"
+import ShoppingCart from "./shoppingCartContext/shoppingCart"
 
 interface MarketplacePropTypes{
-    data: Array<Object>
+    children: any
     
 }
 
@@ -19,11 +20,10 @@ async function getSampleImage() {
     
 }
 
-const Marketplace: React.FC<MarketplacePropTypes>= ({data}) => {
-
-    const { cartItems } = useCart()
+const Marketplace: React.FC<MarketplacePropTypes>= ({children}) => {
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [shoppingCartOpen, setShoppingCartOpen] = useState(false)
 
     const handleDrawerOpen = () => {
         setIsDrawerOpen(true);
@@ -33,42 +33,39 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({data}) => {
         setIsDrawerOpen(false);
     };
 
-
-    if(data){
-
-        return(
-            <React.Fragment>
-            <Navbar
-                handleDrawerOpen={handleDrawerOpen}
-            />
-            <MarketplaceDrawer 
-                isDrawerOpen={isDrawerOpen}
-                handleDrawerClose={handleDrawerClose}
-                handleDrawerOpen={handleDrawerOpen}
-            />
-            <Box bg='NavajoWhite' h='100%' w='100%' p={10}>
-            <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-            <ProductCardArray items={data} secondItem={'test data'}/> 
-            </Grid>
-            </Box>
-            </React.Fragment>
-
-        )
-
-    } else {
-
-        return(
-          <React.Fragment>
-            <Navbar handleDrawerOpen={handleDrawerOpen}/>
-            <div>
-                <text>The data was unable to be fetched</text>
-            </div>
-          </React.Fragment>
-            
-        )
-
+    const handleShoppingCartOpen = () => {
+        setShoppingCartOpen(true)
     }
+
+    const toggleShoppingCart = () => {
+        setShoppingCartOpen(!shoppingCartOpen)
+    }
+
+    return(
+        <React.Fragment>
+        <Navbar
+            handleDrawerOpen={handleShoppingCartOpen}
+        />
+        <ShoppingCart 
+            open={shoppingCartOpen}
+            toggleCart={toggleShoppingCart}/>
+        <MarketplaceDrawer 
+            isDrawerOpen={isDrawerOpen}
+            handleDrawerClose={handleDrawerClose}
+            handleDrawerOpen={handleDrawerOpen}
+        />
+        <Box bg='NavajoWhite' h='100%' w='100%' p={10}>
+            {children}
+        </Box>
+        </React.Fragment>
+
+    )
 }
 
+/*
+<Grid templateColumns="repeat(3, 1fr)" gap={4}>
+            <ProductCardArray items={data} secondItem={'test data'}/> 
+            </Grid>
+*/
 
 export default Marketplace;

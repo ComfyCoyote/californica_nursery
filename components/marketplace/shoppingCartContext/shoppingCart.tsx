@@ -19,12 +19,6 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { FiShoppingCart } from 'react-icons/fi';
 import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
-
 interface ShoppingCartPropTypes {
   open: boolean
   toggleCart: () => void
@@ -60,7 +54,7 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
   };
   */
 
-  const totalAmount = cartItems.reduce((total, item) => total + parseInt(item.price), 0);
+  //const totalAmount = cartItems.reduce((total, item) => total + parseInt(item.price), 0);
 
   return (
     <>
@@ -78,7 +72,6 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
                   <Flex key={item.id} justifyContent="space-between" alignItems="center" mb={4}>
                     <Box>
                       <Text>{item.name}</Text>
-                      <Text fontWeight="bold">${item.price}</Text>
                       <Text>{cartItems.filter(x => x.name === item.name).length }</Text>
                     </Box>
                     <Button  variant='ghost' onClick={(e) => {addItem(e, item)}}>
@@ -96,9 +89,12 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
             </DrawerBody>
 
             <DrawerFooter>
+              {
+                /*
               <Text fontWeight="bold" fontSize="lg">
                 Total: ${totalAmount}
               </Text>
+              */}
               <Button colorScheme="blue" size="sm">
                 Checkout
               </Button>

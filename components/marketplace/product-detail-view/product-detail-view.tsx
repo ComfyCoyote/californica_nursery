@@ -20,9 +20,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
 
     console.log(imageCheck(item))
     console.log(item)
-
-    
-    const { cartItems } = useCart()
+    const { addToCart } = useCart()
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 
@@ -36,15 +34,8 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
 
     return(
         <Box
-            bg='navajowhite'
-            h={'100%'} 
-            w={'100%'}>
-        <Navbar
-                handleDrawerOpen={handleDrawerOpen}
-            />
-        <Box
             bg='navajowhite' 
-            p={5}  
+            p={20}  
             h={'100%'} 
             w={'100%'}>
         <HStack 
@@ -60,6 +51,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
                 <ProductDetailInfo item={item}/>
                 <ProductDetailPrices item={item} />
                 <Button
+                    onClick={(event) => addToCart(event, item)}
                     bg={'green.200'}
                     borderRadius={0}
                     borderWidth={1}
@@ -71,7 +63,6 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
                 </VStack>
                 
         </HStack>
-        </Box>
         </Box>
     )
 
