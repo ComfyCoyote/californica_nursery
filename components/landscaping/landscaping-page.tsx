@@ -20,13 +20,13 @@ const LandscapingPage = () => {
             {imageList.map((img) => {
                 return(
                     <Image
+                        key={img}
                         src={`images/landscaping/${img}`}
                         alt='vercel.svg'
                         height={400}
                         width={250}
-                    >
+                    />
 
-                    </Image>
                 )
             })}
         </HStack>
