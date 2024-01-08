@@ -44,7 +44,7 @@ const AboutPage = () => {
             {
                 textArr.map((txt) => {
                     return(
-                        <Text>
+                        <Text key={txt}>
                             {txt}
                         </Text>
                     )
