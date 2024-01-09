@@ -6,10 +6,10 @@ import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces';
 
 interface CartContextProps {
   cartItems: Array<Plant | Apparel | PlaidProduct>;
-  addToCart: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => void;
-  removeFromCart: (event: React.MouseEvent<HTMLButtonElement>, productId: string) => void;
-  subtractItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => void;
-  addItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel) => void;
+  addToCart: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct) => void;
+  removeFromCart: (event: React.MouseEvent<HTMLButtonElement>, productId: string | undefined) => void;
+  subtractItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct) => void;
+  addItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct) => void;
 }
 
 interface CartProviderProps {
