@@ -1,9 +1,9 @@
 import React from 'react';
 import { VStack, Text, ListItem, UnorderedList } from '@chakra-ui/react';
-import { Apparel, Plant } from '@/Interfaces/interfaces';
+import { Apparel, Plant, PlaidProduct} from '@/Interfaces/interfaces';
 
 interface ProductListProps {
-    products: Array<Plant | Apparel>;
+    products: Array<Plant | Apparel | PlaidProduct>;
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
@@ -16,7 +16,6 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
             {products.map((product) => (
             <ListItem key={product.id}>
                 <Text fontSize="lg" fontWeight="medium">{product.name}</Text>
-                <Text fontSize="sm" color="gray.500">${product.price}</Text>
             </ListItem>
             ))}
         </UnorderedList>
