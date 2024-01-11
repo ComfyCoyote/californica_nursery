@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
+import { useState } from 'react';
 import Link from 'next/link';
 import { randomUUID } from 'crypto';
 
@@ -13,13 +14,26 @@ const image = 'https://items-images-production.s3.us-west-2.amazonaws.com/files/
 
 const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
 
+    const [mainImage, setMainImage] = useState('')
+
+    useEffect(() => {
+
+        const image = imageCheck(item)
+
+        if(image){
+            setMainImage(image)
+
+        }
+
+    }, [])
+
 
   return(
         <VStack
             h='100%'
             w='35%'>
         <Image 
-            src={imageCheck(item)} 
+            src={mainImage} 
             alt="Image" 
             h="600px" 
             w="500px" 
