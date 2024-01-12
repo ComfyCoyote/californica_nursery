@@ -3,6 +3,8 @@ import React from "react";
 import Link from 'next/link';
 import ShoppingCart from './marketplace/shoppingCartContext/shoppingCart';
 
+//navbar SHOP and EXPLORE buttons should collapse slide the searchable items
+
 interface NavbarPropTypes {
   handleDrawerOpen: () => void
 }

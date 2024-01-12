@@ -1,9 +1,11 @@
 import React, { ReactNode, useState } from 'react';
 import  { HiMenu } from 'react-icons/hi'
-import { Box, Container, Flex} from '@chakra-ui/react';
+import { Box, Button, Container, Flex, VStack, HStack} from '@chakra-ui/react';
 import Image from 'next/image'
 import ShoppingCart from './marketplace/shoppingCartContext/shoppingCart';
 import Link from 'next/link';
+
+// add text under each link
 
 const LandingPage: React.FC = () => {
 
@@ -34,6 +36,7 @@ const LandingPage: React.FC = () => {
     </Flex>
     <Flex direction="column" alignItems="center" justifyContent="center" minHeight="100%">
     <Flex justifyContent="center" width={'100%'} maxWidth={'100%'}>
+        <VStack>
         {hover === 'tips' ?
             <Link href={'/marketplace'}>
             <Image 
@@ -55,6 +58,18 @@ const LandingPage: React.FC = () => {
             width={350} height={300} />
             </Link>
         }
+        <Button 
+              border="2px solid black" 
+              borderRadius={0}
+              bg="green.300" 
+              color="black" 
+              _hover={{ bg: 'green.700' }} 
+              _active={{ bg: 'green.700' }}
+              >
+                PLANTS
+        </Button>
+        </VStack>
+        <VStack>
         <Link href={'/marketplace'}>
         <Image 
             onMouseEnter={() => setHover('hand')} 
@@ -64,6 +79,18 @@ const LandingPage: React.FC = () => {
             alt='/images/vercel.svg' 
             width={300} height={300}  />
         </Link>
+        <Button
+              border="2px solid black" 
+              borderRadius={0}
+              bg="blue.300" 
+              color="black" 
+              _hover={{ bg: 'blue.700' }} 
+              _active={{ bg: 'blue.700' }}
+              >
+                SEEDS
+        </Button>
+        </VStack>
+        <VStack>
         <Link href={'/marketplace'}>
         <Image
             onMouseEnter={() => setHover('shovel')} 
@@ -73,8 +100,20 @@ const LandingPage: React.FC = () => {
             alt='/images/vercel.svg' 
             width={350} height={350} />
         </Link>
+        <Button 
+        border="2px solid black" 
+        borderRadius={0}
+        bg="orange.300" 
+        color="black" 
+        _hover={{ bg: 'orange.700' }} 
+        _active={{ bg: 'orange.700' }}
+        >
+        LANDSCAPING
+        </Button>
+        </VStack>
     </Flex>
     <Flex justifyContent="center" width={'100%'}>
+        <VStack>
         <Link href={'/marketplace'}>
         <Image 
             onMouseEnter={() => setHover('shirt')} 
@@ -83,6 +122,18 @@ const LandingPage: React.FC = () => {
             src={hover === 'shirt' ? "/animations/shirt transparent.gif" : "/images/shirt.png"} alt='/images/vercel.svg'  
             width={300} height={300}/>
         </Link>
+        <Button 
+              border="2px solid black" 
+              borderRadius={0}
+              bg="purple.400" 
+              color="black" 
+              _hover={{ bg: 'purple.700' }} 
+              _active={{ bg: 'purple.700' }}
+              >
+                MERCH
+        </Button>
+        </VStack>
+        <VStack>
         <Link href={'/marketplace'}>
         <Image 
             onMouseEnter={() => setHover('person')} 
@@ -91,6 +142,17 @@ const LandingPage: React.FC = () => {
             src={hover === 'person' ? "/animations/person transparent.gif" : "/images/person.png"} 
             alt='/images/vercel.svg' width={300} height={300} />
         </Link>
+        <Button 
+        border="2px solid black" 
+        borderRadius={0}
+        bg="yellow.200" 
+        color="black" 
+        _hover={{ bg: 'yellow.600' }} 
+        _active={{ bg: 'yellow.700' }} 
+        >
+        ABOUT
+        </Button>
+        </VStack>
     </Flex>
     </Flex>
     </Box>

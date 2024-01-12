@@ -79,6 +79,8 @@ export const getServerSideProps : GetServerSideProps = async () => {
       objectIds: imageIdArray
     });
 
+    console.log(imageUrls)
+
     imageUrls.result?.objects?.forEach((img) => {
       data?.forEach((item) => {
         if(item.images?.indexOf(img.id) !== -1){
