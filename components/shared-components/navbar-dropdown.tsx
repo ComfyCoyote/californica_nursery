@@ -34,7 +34,7 @@ const NavbarDropdown: React.FC<NavbarDropdownProps> = ({ options, placeholder })
           <PopoverBody>
             <VStack>
               {options.map((option) => (
-                <Box width={'100%'}>
+                <Box width={'100%'} key={option.value}>
                 <Link href={option.href}>
                 <Button
                   width={'100%'}

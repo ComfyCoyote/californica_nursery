@@ -34,7 +34,7 @@ const LandscapingServicesCard = () => {
             {
                 services.map((t) => {
                     return(
-                        <HStack>
+                        <HStack key={t}>
                             <CheckIcon color='green.300' />
                             <Text fontSize={23}>
                                 {t}
