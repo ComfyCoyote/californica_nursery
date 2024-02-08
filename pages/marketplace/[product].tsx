@@ -17,8 +17,8 @@ interface ProductDetailPagePropTypes{
 const ProductDetailPage: React.FC<ProductDetailPagePropTypes> = (props) => {
 
     return(
-        <Marketplace>
-            <ProductDetailView item={props.item}/>
+        <Marketplace title={'plants'}>
+            <ProductDetailView item={props.item} setProduct={() => console.log('product')}/>
         </Marketplace>
     )
 }

@@ -8,15 +8,20 @@ import { string } from 'square/dist/types/schema';
 import ProductDetailInfo from './product-detail-info';
 import ProductDetailImages from './product-detail-images';
 import ProductDetailPrices from './product-detail-prices';
+import { ArrowBackIcon } from '@chakra-ui/icons';
+
+// a user should first select a plant size and then select add to cart to add to cart,
+// add to cart is disabled unless the select a size
 
 
 interface ProductCardPropTypes {
-    item: PlaidProduct
+    item: Plant
+    setProduct: React.Dispatch<React.SetStateAction<Plant | null>> | (() => void)
 }
 
 const image = 'https://items-images-production.s3.us-west-2.amazonaws.com/files/b8cbe24e82bb4b9aad5b8f35485ddca30541986a/original.jpeg'
 
-const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
+const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, setProduct}) => {
 
     console.log(imageCheck(item))
     console.log(item)
@@ -38,6 +43,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
             p={20}  
             h={'100%'} 
             w={'100%'}>
+        <ArrowBackIcon onClick={() => setProduct(null)}/>
         <HStack 
             h='100%'
             w='100%'

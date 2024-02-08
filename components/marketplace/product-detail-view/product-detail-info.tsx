@@ -4,12 +4,15 @@ import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import Link from 'next/link';
 
 interface ProductDetailInfoPropTypes {
-    item: PlaidProduct
+    item: Plant 
 }
 
 
 
 const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
+
+    console.log(item.plantAttributes?.lifeCycle?.join(', '))
+    console.log(item)
 
   return(
     <VStack 
@@ -37,15 +40,15 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
     <Text>
         {item.description}
     </Text>
-    <VStack
+        <VStack
         display={'flex'} 
         alignItems={'flex-start'}>
         <HStack>
         <Text fontWeight={600}>
-            {`TYPE: `}
+            {`LIFE CYCLE: `}
         </Text>
         <Text>
-            Annual
+            {item.plantAttributes?.lifeCycle?.join(', ')}
         </Text>
         </HStack>
         <HStack>
@@ -53,7 +56,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
             {`MATURE SIZE: `}
         </Text>
         <Text>
-            4ft
+            {item.plantAttributes?.lifeCycle?.join(', ')}
         </Text>
         </HStack>
         <HStack>
@@ -61,7 +64,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
             {`FORM: `}
         </Text>
         <Text>
-            Spreading
+        {item.plantAttributes?.form?.join(', ')}
         </Text>
         </HStack>
         <HStack>
@@ -69,7 +72,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
             {`GROWTH: `}
         </Text>
         <Text>
-            Moderate
+            {item.plantAttributes?.growthForm?.join(', ')}
         </Text>
         </HStack>
         <HStack>
@@ -77,7 +80,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
             {`DORMANCY: `}
         </Text>
         <Text>
-            Winter
+            {item.plantAttributes?.dormancy?.join(', ')}
         </Text>
         </HStack>
         <HStack>
@@ -85,7 +88,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
             {`FLOWERING: `}
         </Text>
         <Text>
-            Summer
+            {item.plantAttributes?.flowerColor?.join(', ')}
         </Text>
         </HStack>
         <HStack>
@@ -93,7 +96,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
             {`DIFFICUTY: `}
         </Text>
         <Text>
-            Moderate
+            {item.plantAttributes?.difficulty?.join(', ')}
         </Text>
         </HStack>
     </VStack>

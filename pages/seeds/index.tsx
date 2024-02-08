@@ -1,9 +1,9 @@
 import Marketplace from "@/components/marketplace/marketplace";
 import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
 import { GetServerSideProps } from "next";
-import { PlaidProduct, PriceVariation } from "@/Interfaces/interfaces"
+import { Plant, PlantAttributes, PriceVariation, SelectOption, AttributeSelection, AttributeSelectionMap, PlantAttributesAsArray } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
-
+import { plantAttributeMapping, SEED_CATEGORY_ID, attributeSelectionMapping } from "@/components/square-utils/custom-attributes";
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -15,7 +15,7 @@ interface MarketplacePropTypes{
 const MarketplacePage: React.FC<MarketplacePropTypes> = (props) => {
 
     return(
-        <Marketplace title='plants'>
+        <Marketplace title='seeds'>
           <ProductCardArray items={props.data} />
         </Marketplace>
     )
@@ -40,38 +40,31 @@ export const getServerSideProps : GetServerSideProps = async () => {
       };
 
 
-    let data : PlaidProduct[] | undefined = []
-
+    let data : Plant[] | undefined = []
+    
   try{
     let { catalogApi } = client
 
+
     const response = await catalogApi.searchCatalogItems({})
 
-    data = response.result?.items?.map((item) => {
+    response.result?.items?.forEach((item) => {
 
-    const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
+    if(item.itemData?.categoryId === SEED_CATEGORY_ID){
 
-        return {
-            'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
-            'type' :  i.itemVariationData?.name
-        } as PriceVariation
-    })
-      
+        console.log(item)
+       
 
-    return  {
-        id: item.id,
-        name : item?.itemData?.name,
-        description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
-        images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
-        price: priceVariations,
-        imageUrls: []
-    } as PlaidProduct
+
+    }
+
+    
 
 })
 
 
     let imageIdArray :  string[] = []
-    data?.forEach((item: PlaidProduct) => {
+    data?.forEach((item: Plant) => {
       if(item){
         item.images?.forEach((id) => imageIdArray.push(id))
       }})

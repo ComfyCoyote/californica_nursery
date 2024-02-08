@@ -4,6 +4,7 @@ import { Box, Button, Container, Flex, VStack, HStack} from '@chakra-ui/react';
 import Image from 'next/image'
 import ShoppingCart from './marketplace/shoppingCartContext/shoppingCart';
 import Link from 'next/link';
+import { theme } from '@/theme/theme';
 
 // add text under each link
 
@@ -19,20 +20,16 @@ const LandingPage: React.FC = () => {
   return (
     <Box 
         minHeight="100vh" 
-        background={`radial-gradient(ellipse at center, rgba(132, 141, 67, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%)`}>
+        background={`${theme.palette.olive}`}>
     <ShoppingCart open={shoppingCart} toggleCart={toggleCart}/>        
-    <Flex direction={'row'} alignItems={"center"} justifyContent={"space-between"}>
-        <HiMenu style={{height: '5%', width: '5%'}} />
+    <Flex direction={'row'} alignItems={"center"} justifyContent={"center"}>
+        <Box
+            p={5}>
         <Image 
-            src="/images/CALIFORNICA WORDMARK cream.png" 
+            src="/images/ca_nursery_title.png" 
             alt='/images/vercel.svg' 
-            width={200} height={70}/>
-        <Image 
-            onClick={toggleCart}
-            style={{cursor: 'pointer' }} 
-            src="/images/basket.PNG" 
-            alt='/images/vercel.svg'  
-            width={120} height={50} />
+            width={600} height={100}/>
+        </Box>
     </Flex>
     <Flex direction="column" alignItems="center" justifyContent="center" minHeight="100%">
     <Flex justifyContent="center" width={'100%'} maxWidth={'100%'}>
@@ -43,7 +40,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('tips')} 
             onMouseLeave={() => setHover('')} 
             style={{cursor: 'pointer' }}
-            src={"/animations/tidy tips transparent.gif"} 
+            src={"/images/home_images/plants ani.PNG"} 
             alt='/images/vercel.svg'  
             width={350} height={300} /> 
             </Link>
@@ -53,7 +50,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('tips')} 
             onMouseLeave={() => setHover('')} 
             style={{cursor: 'pointer' }}
-            src={"/images/TT paper demo.png"} 
+            src={"/images/home_images/plants.PNG"} 
             alt='/images/vercel.svg'  
             width={350} height={300} />
             </Link>
@@ -75,7 +72,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('hand')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }} 
-            src={hover === 'hand' ? "/animations/hand drip transparent.gif" : "/images/hand paper demo.png"} 
+            src={hover === 'hand' ? "/images/home_images/seeds ani.PNG" : "/images/home_images/seeds.PNG"} 
             alt='/images/vercel.svg' 
             width={300} height={300}  />
         </Link>
@@ -96,7 +93,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('shovel')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }}  
-            src={hover === 'shovel' ? "/animations/shovel transparent.gif" : "/images/shovel.png"} 
+            src={hover === 'shovel' ? "/images/home_images/landscaping ani.PNG" : "/images/home_images/landscaping.PNG"} 
             alt='/images/vercel.svg' 
             width={350} height={350} />
         </Link>
@@ -119,7 +116,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('shirt')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }} 
-            src={hover === 'shirt' ? "/animations/shirt transparent.gif" : "/images/shirt.png"} alt='/images/vercel.svg'  
+            src={hover === 'shirt' ? "/images/home_images/merch ani.PNG" : "/images/home_images/merch.PNG"} alt='/images/vercel.svg'  
             width={300} height={300}/>
         </Link>
         <Button 
@@ -139,7 +136,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('person')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }} 
-            src={hover === 'person' ? "/animations/person transparent.gif" : "/images/person.png"} 
+            src={hover === 'person' ? "/images/home_images/about ani.PNG" : "/images/home_images/about.PNG"} 
             alt='/images/vercel.svg' width={300} height={300} />
         </Link>
         <Button 
@@ -154,6 +151,14 @@ const LandingPage: React.FC = () => {
         </Button>
         </VStack>
     </Flex>
+    </Flex>
+    <Flex justifyContent={'flex-end'}>
+        <Box>
+            <Image
+               src="/images/basket_cream.png" 
+               alt='/images/vercel.svg' 
+               width={120} height={120} />
+        </Box>
     </Flex>
     </Box>
   );
