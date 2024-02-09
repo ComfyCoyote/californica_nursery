@@ -41,7 +41,7 @@ const Navbar: React.FC=() => {
         <Image  
           height={50}
           width={200}
-          src={'/images/californica_cream.PNG'} 
+          src={'/images/californica_cream.png'} 
           alt={'/images/vercel.svg'} 
         />
         </Link>
