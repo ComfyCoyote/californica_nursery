@@ -23,7 +23,6 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         if(props.items){
             return(
                 <Grid 
-                pt={20}
                 templateColumns="repeat(4, 1fr)"
                 gap={4}>
                 {props.items.map((item) => <ProductCard key={item.id} item={item} setProduct={setCurrentProduct}/>)}

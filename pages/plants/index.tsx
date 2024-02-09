@@ -84,7 +84,7 @@ export const getServerSideProps : GetServerSideProps = async () => {
                     attributeMapping['lifeCycle'] = attributeSelectionObj
                     break;
                 case "Form":
-                    attributeMapping['form'] = attributeSelectionObj
+                    attributeMapping['plantType'] = attributeSelectionObj
                     break;
                 case "Soil Moisture":
                     attributeMapping['soilMoisture'] = attributeSelectionObj

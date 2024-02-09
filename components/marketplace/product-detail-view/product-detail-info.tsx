@@ -24,7 +24,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
     <Box
         bg='green.200'>
     <Text 
-        fontWeight={600}
+        fontWeight={700}
         fontSize={'2xl'}>
         {item?.name && getComName(item?.name)}
     </Text>
@@ -53,18 +53,10 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
         </HStack>
         <HStack>
         <Text fontWeight={600}>
-            {`MATURE SIZE: `}
+            {'PLANT TYPE:'}
         </Text>
         <Text>
-            {item.plantAttributes?.lifeCycle?.join(', ')}
-        </Text>
-        </HStack>
-        <HStack>
-        <Text fontWeight={600}>
-            {`FORM: `}
-        </Text>
-        <Text>
-        {item.plantAttributes?.form?.join(', ')}
+        {item.plantAttributes?.plantType?.join(', ')}
         </Text>
         </HStack>
         <HStack>
@@ -109,7 +101,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
 
     if(start){
 
-        return name.slice(0, start - 1)
+        return name.slice(0, start - 1).toUpperCase()
 
     } else {
 

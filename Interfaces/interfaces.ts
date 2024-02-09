@@ -38,7 +38,7 @@ export interface PlantAttributes {
         [key: string]: any;
 
         soilMoisture?: string | string[]; 
-        form?: string | string[]; 
+        plantType?: string | string[]; 
         difficulty?: string | string[]; 
         dormancy?: string | string[];
         growthRate?: string | string[];
@@ -54,7 +54,7 @@ export interface PlantAttributesAsArray {
     [key: string]: any;
     
     soilMoisture?: string[]; 
-    form?: string[]; 
+    plantType?: string[]; 
     difficulty?: string[]; 
     dormancy?: string[];
     growthRate?: string[];
@@ -70,7 +70,7 @@ export interface AttributeSelectionMap {
     [key: string]: any;
 
     soilMoisture?: AttributeSelection 
-    form?: AttributeSelection 
+    plantType?: AttributeSelection 
     difficulty?: AttributeSelection 
     dormancy?: AttributeSelection
     growthRate?: AttributeSelection

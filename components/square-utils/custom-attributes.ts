@@ -6,9 +6,16 @@ export const MERCH_CATEGORY_ID = "RFJSGP4VD2ORANC5GVV5E6WU"
 export const LAND_CATEGORY_ID = "DCZQK2SJZMBMKJXDSHG5HBXD"
 
 
+/*
+mature size is no longer a key
+form is now plant type
+
+
+*/
+
 export const plantAttributeMapping: PlantAttributes = {
     'soilMoisture': "Square:a11811ec-64b6-4aaa-bf02-a1a84ce9e867",
-    'form': "Square:06563530-5d71-4036-99a9-f4eeb9d13794",
+    'plantType': "Square:06563530-5d71-4036-99a9-f4eeb9d13794",
     'difficulty': "Square:67ef524a-68ae-49eb-8fa9-27de90660c6a",
     'dormancy': "Square:0e4417c9-cb0a-46e2-93ca-813fcc5f105a",
     'growthRate': "Square:e1c09dc1-d774-4baa-8eb1-d5fbe382f802",
@@ -25,7 +32,7 @@ export const attributeSelectionMapping = {
     flowerColor: "7VJXNGHBTZ7P4WHGZ2GQPSHL",
     dormancy: "PQWZSRAOF6N7DWJCVXCZ4KRD",
     lifeCycle: "M54WP4JUNMDX64XE4SXTY5US",
-    form: "PQJVV27VT5S3OIYFPVVVFE2D",
+    plantType: "PQJVV27VT5S3OIYFPVVVFE2D",
     soilMoisture: "PJGVN7QD6R2CCAYG2ZSPOTHX",
     difficulty: "6LOTTMYJHOVTNZF2IRFMNMYI",
     sun: "WXT2OEFLILYVVWPMHVFB3T44",

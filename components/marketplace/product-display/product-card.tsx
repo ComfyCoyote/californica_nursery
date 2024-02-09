@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item, setProduct }) => {
       <Box onClick={() => setProduct(item)}>
       <Image src={imageCheck(item)} alt="Image" h="400px" w="350px" objectFit="cover" />
         <HStack bgColor={`${theme.palette.lime}`} p={2} w='100%' justify={"space-between"} alignItems={'center'}>
-            <Text fontWeight={600}>{formatName(item)}</Text>
+            <Text fontWeight={700}>{formatName(item)}</Text>
            <Text fontWeight={600}>{getPriceRange(item)}</Text> 
         </HStack>
       </Box>     
@@ -46,7 +46,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item, setProduct }) => {
 
     if(name){
       
-      return name.replace(/\([^)]*\)/g, ''); 
+      return name.replace(/\([^)]*\)/g, '').toUpperCase(); 
 
     } else {
 

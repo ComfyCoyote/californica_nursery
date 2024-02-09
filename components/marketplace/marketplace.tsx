@@ -96,9 +96,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
             handleDrawerOpen={handleDrawerOpen}
         />
         <Box bg='NavajoWhite' h='100%' w='100%' p={10} pt={20}>
-            <Box h={70} w={300} p={5}>
-                <Image src={getImage()} alt={'alternate'} width={300} height={400}/>
-            </Box>
+            <Image src={getImage()} alt={'alternate'} width={500} height={600}/>
             {children}
         </Box>
         <SearchFloatingActionButton toggleSearchDrawer={handleSearchDrawerOpen}/>
