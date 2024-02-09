@@ -13,6 +13,7 @@ import {
     aboutText10
  } from "./about-text";
 import Image from "next/image";
+import Navbar from "../navbar";
 
 
 
@@ -33,7 +34,9 @@ const textArr = [
 const AboutPage = () => {
 
     return(
-        <Box bg='NavajoWhite' h='100%' w='100%' p={10}>
+        <>
+        <Navbar />
+        <Box bg='NavajoWhite' h='100%' w='100%' p={10} pt={20}>
             <VStack>
             <Image
                 src="/images/4EF49614-2297-4C64-8F81-AF0CCF1D1EF6.png"
@@ -52,6 +55,7 @@ const AboutPage = () => {
             }
             </VStack>
         </Box>
+        </>
 
     )
 }

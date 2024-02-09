@@ -1,4 +1,5 @@
-import {  Image, Flex, Box, HStack} from '@chakra-ui/react';
+import {Flex, Box, HStack} from '@chakra-ui/react';
+import Image from 'next/image';
 import React from "react";
 import Link from 'next/link';
 import NavbarDropdown from './shared-components/navbar-dropdown';
@@ -38,7 +39,8 @@ const Navbar: React.FC=() => {
         <Box padding={5}>
         <Link href='/'>
         <Image  
-          h='50px'
+          height={50}
+          width={200}
           src={'/images/CALIFORNICA WORDMARK cream.PNG'} 
           alt={'/images/vercel.svg'} 
         />
