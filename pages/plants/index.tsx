@@ -109,11 +109,10 @@ export const getServerSideProps : GetServerSideProps = async () => {
     })
 
 
-    const response = await catalogApi.searchCatalogItems({})
+    const response = await catalogApi.searchCatalogItems({categoryIds: [PLANT_CATEGORY_ID]})
 
     response.result?.items?.forEach((item) => {
 
-    if(item.itemData?.categoryId === PLANT_CATEGORY_ID){
 
         const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
 
@@ -175,16 +174,7 @@ export const getServerSideProps : GetServerSideProps = async () => {
 
         }
         */
-          
-        console.log({
-            id: item.id,
-            name : item?.itemData?.name,
-            description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
-            images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
-            price: priceVariations,
-            imageUrls: [],
-            plantAttributes: plantAttributes
-        })
+
         data?.push({
             id: item.id,
             name : item?.itemData?.name,
@@ -196,16 +186,16 @@ export const getServerSideProps : GetServerSideProps = async () => {
         } as Plant)
 
 
-    }
-
-    
-
-})
+    })
 
 
     let imageIdArray :  string[] = []
     data?.forEach((item: Plant) => {
       if(item){
+        if(item.images?.length !== undefined && item.images?.length > 1){
+          console.log("MORE THAN TWO IMAGES")
+          console.log(item)
+        }
         item.images?.forEach((id) => imageIdArray.push(id))
       }})
 
@@ -214,6 +204,8 @@ export const getServerSideProps : GetServerSideProps = async () => {
     });
 
     console.log(imageUrls)
+
+
 
     imageUrls.result?.objects?.forEach((img) => {
       data?.forEach((item) => {

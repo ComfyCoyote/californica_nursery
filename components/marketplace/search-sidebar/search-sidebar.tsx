@@ -9,8 +9,6 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Flex,
-  Text,
 } from '@chakra-ui/react';
 import MultiSelectDropdown from '@/components/shared-components/search-dropdown';
 import { CustomOption } from '@/components/shared-components/search-dropdown';
@@ -22,6 +20,8 @@ interface SearchSidebarPropTypes {
   setOption: (filter: MultiValue<CustomOption>) => void;
 
 }
+
+
 
 const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({open, toggleSearch, setOption}) => {
   //const [cartItems, setCartItems] = useState<Product[]>([]);

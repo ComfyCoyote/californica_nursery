@@ -67,7 +67,7 @@ const LandingPage: React.FC = () => {
         </Button>
         </VStack>
         <VStack>
-        <Link href={'/marketplace'}>
+        <Link href={'/seeds'}>
         <Image 
             onMouseEnter={() => setHover('hand')} 
             onMouseLeave={() => setHover('')}
@@ -88,7 +88,7 @@ const LandingPage: React.FC = () => {
         </Button>
         </VStack>
         <VStack>
-        <Link href={'/marketplace'}>
+        <Link href={'/landscaping'}>
         <Image
             onMouseEnter={() => setHover('shovel')} 
             onMouseLeave={() => setHover('')}
@@ -97,6 +97,7 @@ const LandingPage: React.FC = () => {
             alt='/images/vercel.svg' 
             width={350} height={350} />
         </Link>
+        <Link href={'/landscaping'}>
         <Button 
         border="2px solid black" 
         borderRadius={0}
@@ -107,11 +108,12 @@ const LandingPage: React.FC = () => {
         >
         LANDSCAPING
         </Button>
+        </Link>
         </VStack>
     </Flex>
     <Flex justifyContent="center" width={'100%'}>
         <VStack>
-        <Link href={'/marketplace'}>
+        <Link href={'/merch'}>
         <Image 
             onMouseEnter={() => setHover('shirt')} 
             onMouseLeave={() => setHover('')}
@@ -119,6 +121,7 @@ const LandingPage: React.FC = () => {
             src={hover === 'shirt' ? "/images/home_images/merch ani.PNG" : "/images/home_images/merch.PNG"} alt='/images/vercel.svg'  
             width={300} height={300}/>
         </Link>
+        <Link href={'/merch'}>
         <Button 
               border="2px solid black" 
               borderRadius={0}
@@ -129,9 +132,10 @@ const LandingPage: React.FC = () => {
               >
                 MERCH
         </Button>
+        </Link>
         </VStack>
         <VStack>
-        <Link href={'/marketplace'}>
+        <Link href={'/about'}>
         <Image 
             onMouseEnter={() => setHover('person')} 
             onMouseLeave={() => setHover('')}
@@ -139,6 +143,7 @@ const LandingPage: React.FC = () => {
             src={hover === 'person' ? "/images/home_images/about ani.PNG" : "/images/home_images/about.PNG"} 
             alt='/images/vercel.svg' width={300} height={300} />
         </Link>
+        <Link href={'/about'}>
         <Button 
         border="2px solid black" 
         borderRadius={0}
@@ -149,6 +154,7 @@ const LandingPage: React.FC = () => {
         >
         ABOUT
         </Button>
+        </Link>
         </VStack>
     </Flex>
     </Flex>

@@ -14,6 +14,7 @@ import Image from "next/image"
 import SearchFloatingActionButton from "../shared-components/search-fab"
 import { CustomOption } from "../shared-components/search-dropdown" 
 import { MultiValue } from 'react-select';
+import { useSearch } from "./search-sidebar/search-sidebar-context"
 
 interface MarketplacePropTypes{
     children: any
@@ -21,11 +22,6 @@ interface MarketplacePropTypes{
     
 }
 
-async function getSampleImage() {
-    const image = await getImageURL('sample image')
-    return image
-    
-}
 
 const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
 
@@ -33,6 +29,8 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
     const [shoppingCartOpen, setShoppingCartOpen] = useState(false)
     const [searchDrawer, setSearchDrawer] = useState(false)
     const [searchFilters, setSearchFilter] = useState([])
+
+    const {open, toggleOpen} = useSearch()
 
     const handleSearchFilterChange = (filter: MultiValue<CustomOption>) => {
         console.log(filter)
@@ -80,12 +78,10 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
 
     return(
         <React.Fragment>
-        <Navbar/>
         <MarketplaceSearchSidebar 
-            open={searchDrawer}
-            toggleSearch={handleSearchDrawerClose}
-            setOption={handleSearchFilterChange}
-
+        open={open}
+        toggleSearch={toggleOpen}
+        setOption={handleSearchFilterChange}
         />
         <ShoppingCart 
             open={shoppingCartOpen}
@@ -95,11 +91,12 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
             handleDrawerClose={handleDrawerClose}
             handleDrawerOpen={handleDrawerOpen}
         />
+        <Navbar/>
         <Box bg='NavajoWhite' h='100%' w='100%' p={10} pt={20}>
             <Image src={getImage()} alt={'alternate'} width={500} height={600}/>
             {children}
         </Box>
-        <SearchFloatingActionButton toggleSearchDrawer={handleSearchDrawerOpen}/>
+        <SearchFloatingActionButton toggleSearchDrawer={toggleOpen}/>
         <FloatingActionButton toggleShoppingCart={toggleShoppingCart}/>
         </React.Fragment>
 

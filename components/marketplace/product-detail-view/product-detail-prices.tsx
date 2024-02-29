@@ -4,8 +4,12 @@ import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import Link from 'next/link';
 import { randomUUID } from 'crypto';
 
+// make the size button stick, and then add to cart adds that size to cart
+//
+
 interface ProductDetailInfoPropTypes {
     item: PlaidProduct
+    selectPrice: (item: any) => void
 }
 
 

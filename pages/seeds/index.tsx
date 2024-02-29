@@ -1,7 +1,7 @@
 import Marketplace from "@/components/marketplace/marketplace";
 import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
 import { GetServerSideProps } from "next";
-import { Plant, PlantAttributes, PriceVariation, SelectOption, AttributeSelection, AttributeSelectionMap, PlantAttributesAsArray } from "@/Interfaces/interfaces"
+import { Plant, PlantAttributes, PriceVariation, SelectOption, AttributeSelection, AttributeSelectionMap, PlantAttributesAsArray, Seed } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
 import { plantAttributeMapping, SEED_CATEGORY_ID, attributeSelectionMapping } from "@/components/square-utils/custom-attributes";
 
@@ -40,23 +40,35 @@ export const getServerSideProps : GetServerSideProps = async () => {
       };
 
 
-    let data : Plant[] | undefined = []
+    let data : Seed[] | undefined = []
     
   try{
     let { catalogApi } = client
 
 
-    const response = await catalogApi.searchCatalogItems({})
+    const response = await catalogApi.searchCatalogItems({categoryIds: [SEED_CATEGORY_ID]})
 
     response.result?.items?.forEach((item) => {
 
-    if(item.itemData?.categoryId === SEED_CATEGORY_ID){
+      const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
 
-        console.log(item)
-       
+        return {
+            'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
+            'type' :  i.itemVariationData?.name
+        } as PriceVariation
+    })
+
+    data?.push({
+      id: item.id,
+      name : item?.itemData?.name,
+      description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
+      images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
+      price: priceVariations,
+      imageUrls: [],
+      seedAttributes: null
+  } as Seed)
 
 
-    }
 
     
 
@@ -64,7 +76,7 @@ export const getServerSideProps : GetServerSideProps = async () => {
 
 
     let imageIdArray :  string[] = []
-    data?.forEach((item: Plant) => {
+    data?.forEach((item: Seed) => {
       if(item){
         item.images?.forEach((id) => imageIdArray.push(id))
       }})
@@ -73,7 +85,6 @@ export const getServerSideProps : GetServerSideProps = async () => {
       objectIds: imageIdArray
     });
 
-    console.log(imageUrls)
 
     imageUrls.result?.objects?.forEach((img) => {
       data?.forEach((item) => {

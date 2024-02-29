@@ -26,16 +26,13 @@ const Navbar: React.FC=() => {
         position={'fixed'}
         as='header'
         bg={`${theme.palette.olive}`}
+        zIndex={1000}
         w="100%"
         px="1"
         py="2"
         alignItems="center"
         justifyContent="space-between"
       >
-        <HStack as="nav" spacing="5">
-          <NavbarDropdown options={shopOptions} placeholder='Shop'/>
-          <NavbarDropdown options={exploreOptions} placeholder='Explore'/>
-        </HStack>
         <Box padding={5}>
         <Link href='/'>
         <Image  
@@ -46,6 +43,10 @@ const Navbar: React.FC=() => {
         />
         </Link>
         </Box>
+        <HStack as="nav" spacing="5">
+          <NavbarDropdown options={shopOptions} placeholder='Shop'/>
+          <NavbarDropdown options={exploreOptions} placeholder='Explore'/>
+        </HStack>
       </Flex>
   );
 }

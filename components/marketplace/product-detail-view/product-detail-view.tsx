@@ -28,6 +28,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, setProduct}) =
     const { addToCart } = useCart()
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+    const [priceVariation, setPriceVariation] = useState('')
 
     const handleDrawerOpen = () => {
         setIsDrawerOpen(true);
@@ -36,6 +37,11 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, setProduct}) =
     const handleDrawerClose = () => {
         setIsDrawerOpen(false);
     };
+
+    const selectPrice = (item: any) => {
+
+        setPriceVariation(item)
+    }
 
     return(
         <Box
@@ -55,8 +61,9 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, setProduct}) =
                     display={'flex'}
                     alignItems={'flex-start'}>
                 <ProductDetailInfo item={item}/>
-                <ProductDetailPrices item={item} />
+                <ProductDetailPrices item={item} selectPrice={selectPrice} />
                 <Button
+                    disabled={priceVariation.length === 0}
                     onClick={(event) => addToCart(event, item)}
                     bg={'green.200'}
                     borderRadius={0}

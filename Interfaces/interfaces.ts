@@ -1,13 +1,14 @@
 import exp from "constants";
 import { CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection } from "square";
 
-export interface Plant {
-    id?: string;
-    name?: string;
-    description?: string;
-    images?: Array<any>;
-    imageUrls?: Array<string | null>
-    price?: Array<PriceVariation>;
+
+
+export interface Seed extends PlaidProduct{
+    seedAttributes: PlantAttributesAsArray | null
+}
+
+
+export interface Plant extends PlaidProduct {
     plantAttributes?: PlantAttributesAsArray;
 }
 

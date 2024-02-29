@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, Text, VStack } from '@chakra-ui/react';
+import Image from 'next/image';
 import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
 import { useState } from 'react';
 import Link from 'next/link';
@@ -32,13 +33,20 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
         <VStack
             h='100%'
             w='35%'>
-        <Image 
-            src={mainImage} 
-            alt="Image" 
-            h="600px" 
-            w="500px" 
-            objectFit="cover"
-        />
+        <Box 
+            position={'relative'}
+            height={'75vh'}
+            width={'32vw'}
+            overflow={'hidden'}
+            >
+            <Image 
+                src={mainImage} 
+                alt="Image"  
+                fill={true}
+                style={{objectFit: 'cover'}}
+                priority
+            />
+        </Box>
         <HStack
             h='20%'>
 
@@ -46,14 +54,23 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
             item?.imageUrls && item?.imageUrls.map((img) => {
                 if(img){
                     return(
-                        <Image 
-                        key={img}
-                        src={img} 
-                        alt="Image" 
-                        h="60px" 
-                        w="50px" 
-                        objectFit="cover"
-                    />
+                        <Box 
+                            position={'relative'}
+                            height={'10vh'}
+                            width={'5vw'}
+                            overflow={'hidden'}
+                            cursor={'pointer'}
+                            onClick={() => {setMainImage(img)}}
+                        >
+                            <Image 
+                            key={img}
+                            src={img} 
+                            alt="Image" 
+                            fill={true}
+                            style={{objectFit: 'cover'}}
+                            priority
+                        />
+                    </Box>
                     )
 
 
