@@ -55,6 +55,7 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                 if(img){
                     return(
                         <Box 
+                            key={img}
                             position={'relative'}
                             height={'10vh'}
                             width={'5vw'}
