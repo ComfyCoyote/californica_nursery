@@ -1,4 +1,4 @@
-import {Flex, Box, HStack} from '@chakra-ui/react';
+import {Flex, Box, IconButton, HStack} from '@chakra-ui/react';
 import Image from 'next/image';
 import React from "react";
 import Link from 'next/link';
@@ -46,6 +46,24 @@ const Navbar: React.FC=() => {
         <HStack as="nav" spacing="5">
           <NavbarDropdown options={shopOptions} placeholder='Shop'/>
           <NavbarDropdown options={exploreOptions} placeholder='Explore'/>
+          <Box>
+            <IconButton
+              aria-label="Add"
+              icon={  <Image
+                  src="/images/basket_cream.PNG"
+                  alt="Your Image Alt Text"
+                  fill // Set the desired size for your image
+                  objectFit="cover"
+                />}
+              height={70}
+              width={70}
+              borderRadius={'full'}
+              size="lg"
+              color="white"
+              bgColor={theme.palette.olive}
+              _hover={{ bgColor: 'transparent' }}
+            />
+          </Box>
         </HStack>
       </Flex>
   );

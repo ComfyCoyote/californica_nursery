@@ -26,7 +26,7 @@ const LandingPage: React.FC = () => {
         <Box
             p={5}>
         <Image 
-            src="/images/ca_nursery_title.png" 
+            src="/images/Californica Nursery Website Capitalized - cream-05.png" 
             alt='/images/vercel.svg' 
             width={600} height={100}/>
         </Box>
