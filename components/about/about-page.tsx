@@ -63,7 +63,7 @@ const AboutPage = () => {
                         {bio1}
                     </Text>
                 </VStack>
-                <Image fill priority src='/images/jackson2.png' alt='ian and jackson' width={600}  height={600}/>
+                <Image priority src='/images/jackson2.png' alt='ian and jackson' width={600}  height={600}/>
             </HStack>
                 <Box bg={theme.palette.lime} width={'100%'}>
                 <Text fontSize={50} fontWeight={600} animation="scrollText 15s linear infinite"
@@ -77,7 +77,7 @@ const AboutPage = () => {
                 </Text>
                 </Box>
             <HStack bg={theme.palette.darkBrown} width={'100%'}>
-                <Image fill priority src='/images/jackson1.png' alt='hiking photo' width={600} height={600}/>
+                <Image priority src='/images/jackson1.png' alt='hiking photo' width={600} height={600}/>
                 <VStack p={10} width={'100%'}>
                     <Text fontSize={20} fontWeight={600} color={'white'}>
                             IAN RHODES
@@ -96,7 +96,7 @@ const AboutPage = () => {
                         {jacksonsBio}
                     </Text>
                 </VStack>
-                <Image fill priority src="/images/Jackson & Ian 2.png" alt="hking photo" width={600} height={600}/>
+                <Image priority src="/images/Jackson & Ian 2.png" alt="hking photo" width={600} height={600}/>
             </HStack>
             <Box bg={theme.palette.lime} width={'100%'}>
             <Text fontSize={50} fontWeight={600} animation="scrollText 15s linear infinite"

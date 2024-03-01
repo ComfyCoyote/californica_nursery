@@ -56,6 +56,7 @@ const LandingPage: React.FC = () => {
             </Link>
         }
         <Button 
+              as="a"
               border="2px solid black" 
               borderRadius={0}
               bg="green.300" 
@@ -77,6 +78,7 @@ const LandingPage: React.FC = () => {
             width={300} height={300}  />
         </Link>
         <Button
+              as="a"
               border="2px solid black" 
               borderRadius={0}
               bg="blue.300" 
@@ -99,6 +101,7 @@ const LandingPage: React.FC = () => {
         </Link>
         <Link href={'/landscaping'}>
         <Button 
+        as="a"
         border="2px solid black" 
         borderRadius={0}
         bg="orange.300" 
@@ -123,6 +126,7 @@ const LandingPage: React.FC = () => {
         </Link>
         <Link href={'/merch'}>
         <Button 
+              as="a"
               border="2px solid black" 
               borderRadius={0}
               bg="purple.400" 
@@ -145,6 +149,7 @@ const LandingPage: React.FC = () => {
         </Link>
         <Link href={'/about'}>
         <Button 
+        as="a"
         border="2px solid black" 
         borderRadius={0}
         bg="yellow.200" 
