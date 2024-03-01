@@ -74,16 +74,22 @@ const AboutPage = () => {
                     <Text fontSize={20} fontWeight={600} color={'white'}>
                         {iansBio}
                     </Text>
+                    <Box display={'flex'} alignItems={'center'} justifyContent={'flex-start'}>
+                        <Image priority src='/images/Ian Signature.png' alt="jackson signature" width={300} height={200}/>
+                    </Box>
                 </VStack>
             </HStack>
             <HStack bg={theme.palette.olive} width={'100%'}>
-                <VStack p={10} width={'100%'}>
+                <VStack p={10} width={'100%'} justifyContent={'space-between'}>
                     <Text fontSize={30} fontWeight={600} color={'white'}>
                             JACKSON DRISCOLL
                     </Text>
                     <Text fontSize={20} fontWeight={600} color={'white'}>
                         {jacksonsBio}
                     </Text>
+                    <Box display={'flex'} alignItems={'center'} justifyContent={'flex-start'}>
+                        <Image priority src='/images/Jackson signature.png' alt="jackson signature" width={300} height={200}/>
+                    </Box>
                 </VStack>
                 <Image priority src="/images/jackson1.png" alt="hking photo" width={600} height={600}/>
             </HStack>
