@@ -21,7 +21,7 @@ const PreCheckoutPage: React.FC = () => {
     <Heading as="h1" mb="4">Pre-Checkout Page</Heading>
     <VStack spacing="4" align="start">
       {orderItems.map((item ) => {
-        return (<PreCheckoutItem item={item}/>)
+        return (<PreCheckoutItem key={item.catalogObjectId} item={item}/>)
       })}
     </VStack>
     <Text mt="4">Total Price: ${calculated ? calculated : 'Unable to calculate'}</Text>
@@ -112,7 +112,7 @@ const PreCheckoutPage: React.FC = () => {
     console.log(request)
 
     try {
-      
+
       const response = await axios.post('/api/createPaymentLink', request);
 
       if(response.data.url){

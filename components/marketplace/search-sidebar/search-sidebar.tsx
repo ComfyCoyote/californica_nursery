@@ -49,7 +49,7 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({open, toggleSearch, fi
 
                 filters && Object.keys(filters).map((i, index) => {
                   return(
-                    <VStack>
+                    <VStack key={i}>
                       <Text>
                         {attributeNames[index]}
                       </Text>

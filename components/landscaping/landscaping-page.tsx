@@ -3,6 +3,7 @@ import { Box, HStack, VStack, Text } from "@chakra-ui/react"
 import Image from "next/image";
 import Navbar from "../layout/navbar";
 import { theme } from "@/theme/theme";
+import { uuid } from "uuidv4";
 
 
 const images = ['IMG_0092.png', 'IMG_0960.png', 'IMG_1012.png', 'IMG_1180.png'];
@@ -11,7 +12,6 @@ const LandscapingPage = () => {
 
     return(
         <>
-        <Navbar />
         <Box overflowX={'hidden'} bg='NavajoWhite' h='100%' w='100%' pt={40} display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
             <VStack spacing={0} p={0}>
             <Text bg="brown">
@@ -21,7 +21,7 @@ const LandscapingPage = () => {
                 {
                     images.map((img: string) => {
                         return(
-                            <Image priority src={`/images/landscaping/${img}`} alt='ian and jackson' width={500}  height={500}/>
+                            <Image key={uuid()} priority src={`/images/landscaping/${img}`} alt='ian and jackson' width={500}  height={500}/>
                         )
                     })
                 }
