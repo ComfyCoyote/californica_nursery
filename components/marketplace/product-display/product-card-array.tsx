@@ -1,9 +1,8 @@
-'use client'
-
 import { Plant, Seed } from "@/Interfaces/interfaces";
 import ProductCard from "./product-card";
-import { Grid } from "@chakra-ui/react"
+import { Grid, useEditable } from "@chakra-ui/react"
 import { useSearch } from "../search-sidebar/search-sidebar-context";
+import { useEffect, useState } from "react";
 
 interface CardArrayPropTypes {
     items: Plant[] | Seed[]
@@ -15,6 +14,13 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
 
     const { filterValues, filters, open} = useSearch()
 
+    const [displayArray, setDisplayArray] = useState<Array<any>>([])
+
+    useEffect(() => {
+        const filtered = props.items.filter(item => filterAnyFunction(item))
+        setDisplayArray(filtered)
+    }, [filterValues])
+
 
         if(props.items){
             return(
@@ -22,7 +28,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                 width={open ? '50vw' : '100%'}
                 templateColumns="repeat(4, 1fr)"
                 gap={4}>
-                {props.items.filter(item => filterAnyFunction(item)).map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
+                {displayArray.map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
             )
         } else {
