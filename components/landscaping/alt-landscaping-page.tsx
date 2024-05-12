@@ -24,7 +24,6 @@ const LandscapingPage = () => {
 
     return(
         <React.Fragment>
-        <Navbar />
         <Box padding={20} bg='NavajoWhite' overflowX={'hidden'} background={gradient} >
         <LandscapingTitleCard />
         <LandscapingServicesCard />
