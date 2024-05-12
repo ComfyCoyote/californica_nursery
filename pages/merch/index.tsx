@@ -1,9 +1,9 @@
 import Marketplace from "@/components/marketplace/marketplace";
 import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
 import { GetServerSideProps } from "next";
-import { PlaidProduct, PriceVariation } from "@/Interfaces/interfaces"
+import { Plant, PlantAttributes, PriceVariation, Merch } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
-
+import { plantAttributeMapping, SEED_CATEGORY_ID, attributeSelectionMapping, MERCH_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -15,8 +15,8 @@ interface MarketplacePropTypes{
 const MarketplacePage: React.FC<MarketplacePropTypes> = (props) => {
 
     return(
-        <Marketplace title='plants'>
-          <ProductCardArray items={props.data} />
+        <Marketplace title='merch' filterOptions={null}>
+          <ProductCardArray items={props.data} type="merch"/>
         </Marketplace>
     )
 }
@@ -40,38 +40,43 @@ export const getServerSideProps : GetServerSideProps = async () => {
       };
 
 
-    let data : PlaidProduct[] | undefined = []
-
+    let data : Merch[] | undefined = []
+    
   try{
     let { catalogApi } = client
 
-    const response = await catalogApi.searchCatalogItems({})
 
-    data = response.result?.items?.map((item) => {
+    const response = await catalogApi.searchCatalogItems({categoryIds: [MERCH_CATEGORY_ID]})
 
-    const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
+    response.result?.items?.forEach((item) => {
+
+      const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
 
         return {
             'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
             'type' :  i.itemVariationData?.name
         } as PriceVariation
     })
-      
 
-    return  {
-        id: item.id,
-        name : item?.itemData?.name,
-        description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
-        images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
-        price: priceVariations,
-        imageUrls: []
-    } as PlaidProduct
+    data?.push({
+      id: item.id,
+      name : item?.itemData?.name,
+      description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
+      images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
+      price: priceVariations,
+      imageUrls: [],
+      seedAttributes: null
+  } as Merch)
+
+
+
+    
 
 })
 
 
     let imageIdArray :  string[] = []
-    data?.forEach((item: PlaidProduct) => {
+    data?.forEach((item: Merch) => {
       if(item){
         item.images?.forEach((id) => imageIdArray.push(id))
       }})
@@ -80,7 +85,6 @@ export const getServerSideProps : GetServerSideProps = async () => {
       objectIds: imageIdArray
     });
 
-    console.log(imageUrls)
 
     imageUrls.result?.objects?.forEach((img) => {
       data?.forEach((item) => {

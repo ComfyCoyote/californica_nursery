@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import Navbar from '@/components/navbar'
+import Navbar from '@/components/layout/navbar'
 import React from 'react'
 import LandingPage from '@/components/landing_page'
 

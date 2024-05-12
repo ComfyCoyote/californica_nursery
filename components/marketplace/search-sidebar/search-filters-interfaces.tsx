@@ -1,4 +1,6 @@
 interface BaseFilter {
+    [key: string]: any;
+    
     price: string[] | null;
     name: string | null;
 
@@ -6,6 +8,8 @@ interface BaseFilter {
 
 
 export interface PlantFilters extends BaseFilter {
+    
+
     soilMoisture: string[] | null;
     plantType?: string[] | null;
     difficulty?: string[] | null; 

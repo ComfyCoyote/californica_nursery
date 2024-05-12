@@ -35,7 +35,7 @@ const LandingPage: React.FC = () => {
     <Flex justifyContent="center" width={'100%'} maxWidth={'100%'}>
         <VStack>
         {hover === 'tips' ?
-            <Link href={'/marketplace'}>
+            <Link href={'/plants'}>
             <Image 
             onMouseEnter={() => setHover('tips')} 
             onMouseLeave={() => setHover('')} 
@@ -45,7 +45,7 @@ const LandingPage: React.FC = () => {
             width={350} height={300} /> 
             </Link>
             : 
-            <Link href={'/marketplace'}>
+            <Link href={'/plants'}>
             <Image 
             onMouseEnter={() => setHover('tips')} 
             onMouseLeave={() => setHover('')} 

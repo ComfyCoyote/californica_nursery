@@ -41,6 +41,23 @@ export const attributeSelectionMapping = {
 
 }
 
+interface ReversedAttributeSelectionMapping {
+  [key: string]: string;
+}
+
+
+export const attributeSelectionMappingReverse: ReversedAttributeSelectionMapping= {
+  "7VJXNGHBTZ7P4WHGZ2GQPSHL": "flowerColor",
+  "PQWZSRAOF6N7DWJCVXCZ4KRD": "dormancy",
+  "M54WP4JUNMDX64XE4SXTY5US": "lifeCycle",
+  "PQJVV27VT5S3OIYFPVVVFE2D": "plantType",
+  "PJGVN7QD6R2CCAYG2ZSPOTHX": "soilMoisture",
+  "6LOTTMYJHOVTNZF2IRFMNMYI": "difficulty",
+  "WXT2OEFLILYVVWPMHVFB3T44": "sun",
+  "EMANJUNNUZVJGQ5TN6NLYFA7": "ecosystems",
+  "HW22ERID4Y75QG3BFBPRAFVP": "growthForm"
+};
+
 
 
 

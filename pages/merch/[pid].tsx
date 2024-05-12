@@ -1,44 +1,32 @@
-import Marketplace from "@/components/marketplace/marketplace";
-import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
+import { Client, Environment, ApiError} from "square";
 import { GetServerSideProps } from "next";
-import { Plant, PriceVariation, SelectOption, AttributeSelection, AttributeSelectionMap, PlantAttributesAsArray } from "@/Interfaces/interfaces"
-import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
+import { Plant, PriceVariation, SelectOption, AttributeSelection, AttributeSelectionMap, PlantAttributesAsArray, Merch } from "@/Interfaces/interfaces"
 import { plantAttributeMapping, attributeSelectionMappingReverse, PLANT_CATEGORY_ID, attributeSelectionMapping } from "@/components/square-utils/custom-attributes";
 import { CustomOption } from '@/components/shared-components/search-dropdown';
-import { NextPageWithLayout } from "../_app";
-import Layout from "@/components/layout/layout";
-import type { ReactElement } from "react";
+import { Box, VStack } from "@chakra-ui/react";
+import ProductDetailView from "@/components/marketplace/product-detail-view/product-detail-view";
+import Navbar from "@/components/layout/navbar";
 
 
 interface MarketplacePropTypes{
-    data: Array<Object>
-    filterOptionsObject: any
+    data: Plant
 }
 
-
-
-const MarketplacePage: NextPageWithLayout<MarketplacePropTypes> = (props) => {
-
+const ProductDetailPage: React.FC<MarketplacePropTypes> = (props) => {
 
     return(
+        <>
+        <Navbar/>
+        <ProductDetailView item={props.data}/>
+        </>
 
-        <Marketplace title='plants' filterOptions={props.filterOptionsObject}>
-          <ProductCardArray items={props.data} type="plants"/>
-        </Marketplace>
+    )    
 
-    )
 }
 
-MarketplacePage.getLayout = function getLayout(page: ReactElement){
-  return(
-      <Layout>
-          {page}
-      </Layout>
-  )
-}
+export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
-
-export const getServerSideProps : GetServerSideProps = async () => {
+    console.log(params)
 
 
     const client = new Client({
@@ -46,18 +34,12 @@ export const getServerSideProps : GetServerSideProps = async () => {
         environment: Environment.Production,
     });
 
-    const body: SearchCatalogObjectsRequest = {
-        objectTypes: [
-          'ITEM'
-        ],
-        limit: 100,
-      };
 
-
-    let data : Plant[] | undefined = []
+    let data : Merch | undefined
     let filterOptionsObject: any = {}
     
   try{
+
     let { catalogApi } = client
 
     let attributeMapping: AttributeSelectionMap = {};
@@ -81,6 +63,7 @@ export const getServerSideProps : GetServerSideProps = async () => {
         filterOptionsObject[name] = options 
       }
     })
+
 
 
     //return await filterOptionsObject as FilterOptionsObject
@@ -140,60 +123,61 @@ export const getServerSideProps : GetServerSideProps = async () => {
         }
     })
 
+    let response;
 
-    const response = await catalogApi.searchCatalogItems({categoryIds: [PLANT_CATEGORY_ID]})
+    if(params?.pid){
 
-    response.result?.items?.forEach((item) => {
+        response = await client.catalogApi.retrieveCatalogObject(params?.pid as string);
+    }
+    
 
+    const item = response?.result.object
 
-        const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
+    const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
 
-          console.log(i)
-          console.log(i.id)
+        return {
+            'id': i.itemVariationData?.itemId,
+            'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
+            'type' :  i.itemVariationData?.name
+        } as PriceVariation
+    })
 
-            return {
-                'id': i.id,
-                'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
-                'type' :  i.itemVariationData?.name
-            } as PriceVariation
+    const attributeCheck = item?.customAttributeValues
+
+    const plantAttributes: PlantAttributesAsArray = {}
+
+    const attributeArray = [
+        'soilMoisture',
+        'form',
+        'difficulty',
+        'dormancy',
+        'growthRate',
+        'flowerColor',
+        'ecosystems',
+        'lifeCycle',
+        'sun',
+        'growthForm'
+    ]
+
+    if(attributeCheck){
+        attributeArray.forEach((val) => {
+            const valCheck = attributeCheck[plantAttributeMapping[val]]
+            if(valCheck){
+                let values: string[] = []
+                valCheck.selectionUidValues?.forEach((i) => {
+                    attributeMapping[val]?.selectionArr?.forEach((sel: SelectOption) => {
+                        if(i === sel.id){
+                            sel.value && values.push(sel.value)
+                        }
+                    })
+                })
+
+                plantAttributes[val] = values
+            }
+
         })
 
-        const attributeCheck = item.customAttributeValues
-
-        const plantAttributes: PlantAttributesAsArray = {}
-
-        const attributeArray = [
-            'soilMoisture',
-            'form',
-            'difficulty',
-            'dormancy',
-            'growthRate',
-            'flowerColor',
-            'ecosystems',
-            'lifeCycle',
-            'sun',
-            'growthForm'
-        ]
-
-        if(attributeCheck){
-            attributeArray.forEach((val) => {
-                const valCheck = attributeCheck[plantAttributeMapping[val]]
-                if(valCheck){
-                    let values: string[] = []
-                    valCheck.selectionUidValues?.forEach((i) => {
-                        attributeMapping[val]?.selectionArr?.forEach((sel: SelectOption) => {
-                            if(i === sel.id){
-                               sel.value && values.push(sel.value)
-                            }
-                        })
-                    })
-
-                    plantAttributes[val] = values
-                }
-
-            })
-
-        }
+    }
         
 
 
@@ -211,50 +195,28 @@ export const getServerSideProps : GetServerSideProps = async () => {
         }
         */
 
-        data?.push({
-            id: item.id,
-            name : item?.itemData?.name,
-            description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
-            images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
-            price: priceVariations,
-            imageUrls: [],
-            plantAttributes: plantAttributes
-        } as Plant)
+    data = {
+        id: item?.id,
+        name : item?.itemData?.name,
+        description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
+        images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
+        price: priceVariations,
+        imageUrls: [],
+        plantAttributes: plantAttributes
+    } as Merch
 
-
-    })
 
 
     let imageIdArray :  string[] = []
-    data?.forEach((item: Plant) => {
-      if(item){
-        item.images?.forEach((id) => imageIdArray.push(id))
-      }})
+    
+    data.images?.forEach((id) => imageIdArray.push(id))
+      
 
     const imageUrls = await client.catalogApi.batchRetrieveCatalogObjects({
       objectIds: imageIdArray
     });
 
-
-
-
-
-    imageUrls.result?.objects?.forEach((img) => {
-      data?.forEach((item) => {
-        if(item.images?.indexOf(img.id) !== -1){
-          if(img.imageData?.url !== undefined && item.imageUrls !== undefined){
-            const extantArr = item.imageUrls
-            const newArr = [...extantArr, img.imageData?.url ]
-            item.imageUrls = newArr
-
-          }
-          
-
-        }
-
-      })
-
-    })
+    data.imageUrls = imageUrls.result?.objects?.map((item) => item.imageData?.url ? item.imageData?.url : null)
 
   } catch (error) {
     if (error instanceof ApiError) {
@@ -269,9 +231,11 @@ export const getServerSideProps : GetServerSideProps = async () => {
   }
 
   return{
-    props: { data: data, filterOptionsObject: filterOptionsObject }
+    props: { data: data }
   }
-};
+    
+}
 
 
-export default MarketplacePage;
+
+export default ProductDetailPage;

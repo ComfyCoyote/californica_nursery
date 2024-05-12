@@ -1,56 +1,52 @@
 import React from 'react';
 import { Box, HStack, Image, Text, VStack, Button } from '@chakra-ui/react';
-import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
-import Navbar from '@/components/navbar';
+import { Apparel, OrderItem, PlaidProduct, Plant, Merch, Seed, PriceVariation } from '@/Interfaces/interfaces'
 import { useCart } from '../shoppingCartContext/shoppingCartContext';
 import { useState } from 'react';
-import { string } from 'square/dist/types/schema';
 import ProductDetailInfo from './product-detail-info';
 import ProductDetailImages from './product-detail-images';
 import ProductDetailPrices from './product-detail-prices';
-import { ArrowBackIcon } from '@chakra-ui/icons';
-
+import CustomAlert from '@/components/alert';
+import { OrderLineItemAppliedTax } from 'square';
 // a user should first select a plant size and then select add to cart to add to cart,
 // add to cart is disabled unless the select a size
 
+const success = 'Added item to cart!'
+const fail = 'Unable to add item to cart!'
+
 
 interface ProductCardPropTypes {
-    item: Plant
-    setProduct: React.Dispatch<React.SetStateAction<Plant | null>> | (() => void)
+    item: Plant | Merch | Seed
 }
 
-const image = 'https://items-images-production.s3.us-west-2.amazonaws.com/files/b8cbe24e82bb4b9aad5b8f35485ddca30541986a/original.jpeg'
+export interface Variation {
+    name: string,
+    id: string
+}
 
-const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, setProduct}) => {
 
-    console.log(imageCheck(item))
-    console.log(item)
+const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
+
     const { addToCart } = useCart()
 
-    const [isDrawerOpen, setIsDrawerOpen] = useState(true);
-    const [priceVariation, setPriceVariation] = useState('')
+    const [priceVariation, setPriceVariation] = useState<Variation>()
+    const [alert, setAlert] = useState(false)
 
-    const handleDrawerOpen = () => {
-        setIsDrawerOpen(true);
-    };
 
-    const handleDrawerClose = () => {
-        setIsDrawerOpen(false);
-    };
+    const selectPrice = (event: React.MouseEvent<HTMLButtonElement>, option: PriceVariation ) => {
 
-    const selectPrice = (item: any) => {
-
-        setPriceVariation(item)
+        setPriceVariation({id: option.id, name: option.type} as Variation)
     }
 
     return(
         <Box
-            bg='navajowhite' 
-            p={20}  
+            bg='navajowhite'
+            p={30}  
             h={'100%'} 
             w={'100%'}>
-        <ArrowBackIcon onClick={() => setProduct(null)}/>
         <HStack 
+            mt={20}
+            p={50}
             h='100%'
             w='100%'
             spacing={10}>
@@ -61,10 +57,13 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, setProduct}) =
                     display={'flex'}
                     alignItems={'flex-start'}>
                 <ProductDetailInfo item={item}/>
-                <ProductDetailPrices item={item} selectPrice={selectPrice} />
+                {
+                    item.price && <ProductDetailPrices prices={item.price} selectPrice={selectPrice} priceVariation={priceVariation}/>
+                }
+                <CustomAlert display={alert} status={'success'} message={success} toggleFunction={() => { setAlert(!alert)}}/>
                 <Button
-                    disabled={priceVariation.length === 0}
-                    onClick={(event) => addToCart(event, item)}
+                    isDisabled={!priceVariation}
+                    onClick={(event) => handleAddToCartClick(event)}
                     bg={'green.200'}
                     borderRadius={0}
                     borderWidth={1}
@@ -74,29 +73,35 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, setProduct}) =
                     </Box>
                 </Button>
                 </VStack>
-                
         </HStack>
         </Box>
     )
 
-    function imageCheck(item: PlaidProduct): string {
-        if(item.imageUrls){
-            if(typeof item.imageUrls[0] === 'string'){
-                return item.imageUrls[0]
-            } else {
-                return ''
-            }
-        } else {
-    
-            return ''
-        }
 
-        
-      
-    
+    function handleAddToCartClick(event: React.MouseEvent<HTMLButtonElement>){
+        const price = item?.price?.filter((i) => i.id === priceVariation?.id)
+        let val;
+        if(price){
+            val = price[0]
+        }
+        const orderItem =  {
+            name: `${item.name} ${priceVariation?.name}`, 
+            quantity: '1', 
+            catalogObjectId: priceVariation?.id, 
+            //appliedTaxes: [{'taxUid': 'SMCQJAH25YSCS7RP5G2I5OHN'} as OrderLineItemAppliedTax],
+            appliedDiscounts: undefined,
+            misc: {
+                image: item.imageUrls && item.imageUrls[0],
+                price: val?.price
+            }
+        } as OrderItem
+
+        addToCart(event,item,orderItem)
+            
+        setAlert(true)
     }
 
-    
 }
+
 
 export default ProductDetailView;

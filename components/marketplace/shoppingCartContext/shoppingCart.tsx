@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -10,14 +10,12 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
-  Icon,
   Text,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react';
+import { OrderItem } from '@/Interfaces/interfaces';
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { FiShoppingCart } from 'react-icons/fi';
 import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext';
+import Link from 'next/link';
 
 interface ShoppingCartPropTypes {
   open: boolean
@@ -27,11 +25,9 @@ interface ShoppingCartPropTypes {
 
 const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [items, setItems] = useState<OrderItem[]>([])
   //const [cartItems, setCartItems] = useState<Product[]>([]);
-  const { cartItems, removeFromCart, addItem, subtractItem } = useCart()
-  const uniqueArray = cartItems.filter((value, index, self) => {
-    return self.indexOf(value) === index;
-  })
+  const { orderItems, removeFromCart, addItem, subtractItem } = useCart()
 
 
   const handleCartOpen = () => {
@@ -43,19 +39,6 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
   };
 
 
-  /*
-  const addToCart = (product: Product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
-  };
-  
-
-  const removeFromCart = (productId: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
-  };
-  */
-
-  //const totalAmount = cartItems.reduce((total, item) => total + parseInt(item.price), 0);
-
   return (
     <>
       <Drawer isOpen={open} onClose={toggleCart} placement="right" size="sm">
@@ -65,22 +48,15 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
             <DrawerHeader>Shopping Cart</DrawerHeader>
 
             <DrawerBody>
-              {uniqueArray.length === 0 ? (
+              {orderItems.length === 0 ? (
                 <Text>No items in the cart</Text>
               ) : (
-                uniqueArray.map((item) => (
+                orderItems.map((item) => (
                   <Flex key={item.id} justifyContent="space-between" alignItems="center" mb={4}>
                     <Box>
                       <Text>{item.name}</Text>
-                      <Text>{cartItems.filter(x => x.name === item.name).length }</Text>
                     </Box>
-                    <Button  variant='ghost' onClick={(e) => {addItem(e, item)}}>
-                      <AddIcon/>
-                    </Button>
-                    <Button variant='ghost' onClick={(e) => {subtractItem(e, item)}}>
-                      <MinusIcon/>
-                    </Button>
-                    <Button variant="outline" colorScheme="red" size="sm" onClick={(e) => removeFromCart(e, item.id)}>
+                    <Button variant="outline" colorScheme="red" size="sm" onClick={(e) => removeFromCart(e, item.catalogObjectId)}>
                       Remove
                     </Button>
                   </Flex>
@@ -95,9 +71,11 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
                 Total: ${totalAmount}
               </Text>
               */}
+              <Link href="/checkout/pre-checkout">
               <Button colorScheme="blue" size="sm">
                 Checkout
               </Button>
+              </Link>
             </DrawerFooter>
           </DrawerContent>
         </DrawerOverlay>

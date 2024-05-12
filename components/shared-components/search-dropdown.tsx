@@ -1,6 +1,9 @@
 // Import necessary Chakra UI components and styles
 import { ChakraProvider, CSSReset, Box, VStack } from '@chakra-ui/react';
-import Select, { MultiValue } from 'react-select';
+import Select from 'react-select';
+import { useSearch } from '../marketplace/search-sidebar/search-sidebar-context';
+import { useState } from 'react';
+
 
 export interface CustomOption {
   value: string;
@@ -9,11 +12,14 @@ export interface CustomOption {
 
 interface MultiSelectDropdownPropTypes {
     options: CustomOption[];
-    setState: (filter: MultiValue<CustomOption>) => void
+    attribute: string;
 }
 
-const MultiSelectDropdown: React.FC<MultiSelectDropdownPropTypes> = ({options, setState}) => {
-  // Sample options data
+const MultiSelectDropdown: React.FC<MultiSelectDropdownPropTypes> = ({options, attribute}) => {
+
+  const [selected, setSelected] = useState<CustomOption[]>([])
+
+  const {setPlantFilters, filters} = useSearch()
 
   return (
     <ChakraProvider>
@@ -23,9 +29,10 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownPropTypes> = ({options, s
         <VStack spacing={4}>
           <Select
             placeholder="Select multiple options"
+            value={getValue()}
             isMulti
             options={options}
-            onChange={(newValue) => setState(newValue)}
+            onChange={(val, action) => {setPlantFilters(val, attribute); localSelected(val);} }
             styles={{
               control: (styles) => ({
                 ...styles,
@@ -43,6 +50,31 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownPropTypes> = ({options, s
       </Box>
     </ChakraProvider>
   );
+
+  function localSelected(val: any){
+    if(selected.indexOf(val) === -1){
+      const arr = val.map((i: any) => i as CustomOption)
+      setSelected(arr)
+    } 
+
+  }
+
+  function getValue(){
+    if(filters){
+      const sel = filters[attribute]
+      if(sel){
+        if(sel.length > 0){
+          let values: CustomOption[] = []
+          options.forEach(i => sel.indexOf(i.value) !== -1 && values.push(i))
+          return values
+        }
+      } else {
+        return selected
+      }
+    }
+  }
+
+  
 };
 
 export default MultiSelectDropdown;

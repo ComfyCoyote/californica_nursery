@@ -11,8 +11,6 @@ interface ProductDetailInfoPropTypes {
 
 const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
 
-    console.log(item.plantAttributes?.lifeCycle?.join(', '))
-    console.log(item)
 
   return(
     <VStack 

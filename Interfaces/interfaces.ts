@@ -1,6 +1,6 @@
 import exp from "constants";
 import { CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection } from "square";
-
+import type { OrderLineItemModifier, OrderLineItemAppliedDiscount, OrderLineItemAppliedTax } from "square";
 
 
 export interface Seed extends PlaidProduct{
@@ -10,6 +10,10 @@ export interface Seed extends PlaidProduct{
 
 export interface Plant extends PlaidProduct {
     plantAttributes?: PlantAttributesAsArray;
+}
+
+export interface Merch extends PlaidProduct {
+    merchAttributes?: MerchAttributesAsArray;
 }
 
 export interface PlaidProduct {
@@ -67,6 +71,13 @@ export interface PlantAttributesAsArray {
 
 }
 
+export interface MerchAttributesAsArray {
+    [key: string]: any;
+
+    type?: string;
+
+}
+
 export interface AttributeSelectionMap {
     [key: string]: any;
 
@@ -83,8 +94,22 @@ export interface AttributeSelectionMap {
 }
 
 
+export interface OrderItem {
+    [key: string]: any;
+
+    name: string;
+    quantity: string;
+    catalogObjectId: string;
+    modifiers?: OrderLineItemModifier[];
+    appliedDiscounts?: OrderLineItemAppliedDiscount[]
+    appliedTaxes: OrderLineItemAppliedTax[]
+    misc: any
+
+}
+
 
 export interface PriceVariation {
+    id: string;
     price: string;
     type: string;
 }

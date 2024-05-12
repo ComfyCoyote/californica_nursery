@@ -1,36 +1,9 @@
 import React from "react";
 import { Box, HStack, VStack, Text } from "@chakra-ui/react"
-import { 
-    aboutText1,
-    aboutText2,
-    aboutText3,
-    aboutText4,
-    aboutText5,
-    aboutText6,
-    aboutText7,
-    aboutText8,
-    aboutText9,
-    aboutText10
- } from "./about-text";
 import Image from "next/image";
-import Navbar from "../navbar";
+import Navbar from "../layout/navbar";
 import { iansBio, bio1, bio2, jacksonsBio } from "./bios";
 import { theme } from "@/theme/theme";
-
-
-
-const textArr = [
-    aboutText1,
-    aboutText2,
-    aboutText3,
-    aboutText4,
-    aboutText5,
-    aboutText6,
-    aboutText7,
-    aboutText8,
-    aboutText9,
-    aboutText10
-]
 
 
 const AboutPage = () => {

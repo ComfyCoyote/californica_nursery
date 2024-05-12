@@ -17,8 +17,7 @@ const SearchFloatingActionButton: React.FC<SearchFloatingActionButtonPropTypes> 
     <Box
       position="fixed"
       bottom={4}
-      right={30}
-      left={1175}
+      left={1300}
       zIndex={999} // Adjust zIndex to ensure the FAB is above other content
     >
       <IconButton

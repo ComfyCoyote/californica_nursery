@@ -3,8 +3,12 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup';
 import { createPayment, tokenize } from '../../square/squareFunctions'
-import { Card } from 'square';
+import { Card, OrderLineItem } from 'square';
 import { initializeCard } from '../../square/squareFunctions';
+import { GetServerSideProps } from 'next';
+import { Client, Environment } from "square";
+import { OrderItem } from '@/Interfaces/interfaces';
+import { randomUUID } from 'crypto';
 
 
 const CheckoutPage = () => {
@@ -119,6 +123,27 @@ const CheckoutPage = () => {
   );
 }
 
+export const getServerSideProps : GetServerSideProps = async () => { 
+
+    const client = new Client({
+      accessToken: process.env.SQUARE_PRODUCTION_ACCESS_TOKEN,
+      environment: Environment.Production,
+  });
+
+  const orderItems: OrderLineItem[] = requestedOrder.map((i: OrderItem) => i as OrderLineItem)
+
+  const order = {
+    order: {
+      "locationId": "our-location-id",
+      "lineItems": orderItems,
+    },
+    idempotencyKey: randomUUID()
+  }
+
+  const response = await client.ordersApi.createOrder(order)
+
   
+
+}
 
 export default CheckoutPage;

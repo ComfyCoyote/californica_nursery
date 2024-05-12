@@ -1,36 +1,28 @@
-import { Apparel, PlaidProduct, Plant, Seed } from "@/Interfaces/interfaces";
+'use client'
+
+import { Plant, Seed } from "@/Interfaces/interfaces";
 import ProductCard from "./product-card";
 import { Grid } from "@chakra-ui/react"
-import { useState } from "react";
-import ProductDetailView from "../product-detail-view/product-detail-view";
 import { useSearch } from "../search-sidebar/search-sidebar-context";
 
 interface CardArrayPropTypes {
     items: Plant[] | Seed[]
+    type: string;
 }
 
 
 const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTypes ) => {
 
-    const [currentProduct, setCurrentProduct] = useState<Plant | Seed | null>(null)
+    const { filterValues, filters, open} = useSearch()
 
-    const {open} = useSearch()
-
-    if(currentProduct){
-
-        return(
-            <ProductDetailView item={currentProduct} setProduct={setCurrentProduct}/>
-        )
-    } else {
 
         if(props.items){
             return(
                 <Grid 
-                
                 width={open ? '50vw' : '100%'}
                 templateColumns="repeat(4, 1fr)"
                 gap={4}>
-                {props.items.map((item) => <ProductCard key={item.id} item={item} setProduct={setCurrentProduct}/>)}
+                {props.items.filter(item => filterAnyFunction(item)).map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
             )
         } else {
@@ -42,7 +34,86 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         }
 
 
+    function filterAnyFunction(item: Plant | Seed | null){
+        const boo = filterValues?.length ? filterValues.length : 0
+        let flat: string[] = []
 
+        if(filters){
+            flat = Object.values(filters).flatMap(value => Array.isArray(value) ? value : [value])
+        } 
+
+        if(filters !== null && flat?.length > 0){
+            let itemAttributes: string[] = [];
+            if(item){
+                if('plantAttributes' in item){
+                    const plant = item as Plant
+                    const att = plant?.plantAttributes
+                    if(att){
+                        itemAttributes = Object.values(att).flatMap(value => Array.isArray(value) ? value : [value]);
+                    }
+                    
+                } else if('seedAttributes' in item){
+                    const seed = item as Seed
+                    const att = seed?.seedAttributes
+                    if(att){
+                        itemAttributes = Object.values(att[0]).flatMap(value => Array.isArray(value) ? value : [value]);
+                    }
+                    
+                }
+            }
+
+            if(itemAttributes?.some(el => flat?.includes(el))){
+                return item
+            }
+            
+
+        } else {
+
+            console.log('ITEM RETURNED')
+
+            return item
+        }
+
+    }
+
+    function filterSpecificFunction(item: Plant | Seed | null){
+        
+        const boo = filterValues?.length ? filterValues.length : 0
+        let flat: string[];
+        
+        if(filters !== null){
+            flat = Object.values(filters).flatMap(value => Array.isArray(value) ? value : [value])
+            let itemAttributes: string[] = [];
+            if(item){
+                if('plantAttributes' in item){
+                    const plant = item as Plant
+                    const att = plant?.plantAttributes
+                    if(att){
+                        itemAttributes = Object.values(att).flatMap(value => Array.isArray(value) ? value : [value]);
+                    }
+                    
+                } else if('seedAttributes' in item){
+                    const seed = item as Seed
+                    const att = seed?.seedAttributes
+                    if(att){
+                        itemAttributes = Object.values(att[0]).flatMap(value => Array.isArray(value) ? value : [value]);
+                    }
+                    
+                }
+            }
+
+
+            if(itemAttributes === flat){
+                return item
+            }
+            
+
+        } else {
+
+            console.log('ITEM RETURNED')
+
+            return item
+        }
 
     }
 

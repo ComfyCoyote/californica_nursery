@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Container, Stack, Text, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ST } from 'next/dist/shared/lib/utils';
-
+import { theme } from '@/theme/theme'
 //embedded email link into email
 // embedded email box to send emails directly from website
 
@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
         spacing={4}
         justify={'center'}
         align={'center'}
-        bgColor={'#592C15'}>
+        bgColor={theme.palette.darkBrown}>
         <Stack width={'100%'} direction={'row'} justifyContent={'space-between'}>
         <Stack>
           <Text fontSize={20} fontWeight={800} color={'white'}>Californica Nursery</Text>

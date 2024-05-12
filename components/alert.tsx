@@ -1,7 +1,7 @@
 'use client'
 
 import { Alert, AlertIcon, CloseButton, Flex } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface AlertProps {
   display: Boolean;
@@ -10,7 +10,7 @@ interface AlertProps {
   toggleFunction: () => void;
 }
 
-const AlertComponent: React.FC<AlertProps> = ({ status, toggleFunction, message, display }) => {
+const CustomAlert: React.FC<AlertProps> = ({ status, toggleFunction, message, display }) => {
 
   if (!display) {
     return null;
@@ -30,4 +30,4 @@ const AlertComponent: React.FC<AlertProps> = ({ status, toggleFunction, message,
   );
 };
 
-export default AlertComponent;
+export default CustomAlert;

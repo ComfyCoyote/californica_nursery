@@ -15,8 +15,8 @@ interface MarketplacePropTypes{
 const MarketplacePage: React.FC<MarketplacePropTypes> = (props) => {
 
     return(
-        <Marketplace title='seeds'>
-          <ProductCardArray items={props.data} />
+        <Marketplace title='seeds' filterOptions={null}>
+          <ProductCardArray items={props.data} type="seeds"/>
         </Marketplace>
     )
 }

@@ -6,17 +6,18 @@ import Link from 'next/link';
 import { theme } from '@/theme/theme';
 
 interface ProductCardPropTypes {
-    item: Plant | Seed
-    setProduct:  React.Dispatch<React.SetStateAction<Plant | null>>
+    item: Plant | Seed;
+    type: string;
 }
 
 
 
-const ProductCard: React.FC<ProductCardPropTypes> = ({ item, setProduct }) => {
+const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
 
   return (
+    <Link href={`/${type}/${item.id}`}>
     <VStack align="center" spacing={4}>
-      <Box onClick={() => setProduct(item)}>
+      <Box>
       <Box 
             bgColor={'yellow'}
             position={'relative'}
@@ -38,6 +39,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item, setProduct }) => {
         </HStack>
       </Box>     
     </VStack>
+    </Link>
   );
 
   function imageCheck(item: PlaidProduct): string {
@@ -75,13 +77,11 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item, setProduct }) => {
   function getPriceRange(item: PlaidProduct){
 
     const priceArr = item?.price ?? null
-    console.log(priceArr)
+
     if(priceArr){
 
       const startPrice = priceArr[0].price
       const endPrice = priceArr[priceArr.length - 1].price
-
-      console.log(`${startPrice} - ${endPrice}`)
 
       return `$${Number(startPrice)/100} - $${Number(endPrice)/100}`
 

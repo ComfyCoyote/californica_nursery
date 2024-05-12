@@ -2,13 +2,15 @@ import {Flex, Box, IconButton, HStack} from '@chakra-ui/react';
 import Image from 'next/image';
 import React from "react";
 import Link from 'next/link';
-import NavbarDropdown from './shared-components/navbar-dropdown';
+import NavbarDropdown from '../shared-components/navbar-dropdown';
 import { theme } from '@/theme/theme';
 //navbar SHOP and EXPLORE buttons should collapse slide the searchable items
 
+interface NavbarProps {
+  toggleShoppingCart: () => void;
+}
 
-
-const Navbar: React.FC=() => {
+const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
   const shopOptions = [
     { value: 'option1', label: 'Plants', bgColor: 'green.300', hoverColor: 'green.700', href: '/plants'},
     { value: 'option2', label: 'Seeds', bgColor: 'blue.300', hoverColor: 'blue.700', href: '/seeds' },
@@ -25,7 +27,7 @@ const Navbar: React.FC=() => {
       <Flex
         position={'fixed'}
         as='header'
-        bg={`${theme.palette.olive}`}
+        bg={`${theme.palette.darkBrown}`}
         zIndex={1000}
         w="100%"
         px="1"
@@ -49,6 +51,7 @@ const Navbar: React.FC=() => {
           <Box>
             <IconButton
               aria-label="Add"
+              onClick={toggleShoppingCart}
               icon={  <Image
                   src="/images/basket_cream.PNG"
                   alt="Your Image Alt Text"
@@ -60,7 +63,7 @@ const Navbar: React.FC=() => {
               borderRadius={'full'}
               size="lg"
               color="white"
-              bgColor={theme.palette.olive}
+              bgColor={theme.palette.darkBrown}
               _hover={{ bgColor: 'transparent' }}
             />
           </Box>

@@ -1,20 +1,19 @@
 import React from 'react';
 import { Box, HStack, Button, Text, VStack } from '@chakra-ui/react';
-import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
-import Link from 'next/link';
-import { randomUUID } from 'crypto';
+import { PlaidProduct, PriceVariation} from '@/Interfaces/interfaces'
+import { Variation } from './product-detail-view';
 
 // make the size button stick, and then add to cart adds that size to cart
 //
 
 interface ProductDetailInfoPropTypes {
-    item: PlaidProduct
-    selectPrice: (item: any) => void
+    priceVariation: Variation | undefined
+    prices: PriceVariation[] ,
+    selectPrice: (e: any, option: PriceVariation ) => void
 }
 
 
-const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
-
+const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ prices, priceVariation, selectPrice}) => {
 
   return(
     <VStack
@@ -29,17 +28,17 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
         alignItems='flex-start'
     >
     {
-        item?.price ? item?.price.map(
+        prices.map(
             (option) => {
-
                 return(
                     <Button
+                        onClick={(e) => selectPrice(e, option)}
                         key={option.price}
                         h='20%'
                         w='60%'
                         bg={'green.200'}
                         borderRadius={0}
-                        borderWidth={1}
+                        borderWidth={priceVariation?.id === option.id ? 1 : 0}
                         borderColor={'black'}>
                         <Box>
                             <VStack>
@@ -56,12 +55,6 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                 )
             }
         )
-        
-        :
-        
-        <Text>
-            No Pricing Options
-        </Text>
     }
     </HStack>
     </VStack>
