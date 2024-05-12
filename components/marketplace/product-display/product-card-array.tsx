@@ -40,7 +40,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         }
 
 
-    function filterAnyFunction(item: Plant | Seed | null){
+    function filterAnyFunction(item: any){
         const boo = filterValues?.length ? filterValues.length : 0
         let flat: string[] = []
 
