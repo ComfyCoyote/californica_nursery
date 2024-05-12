@@ -5,7 +5,7 @@ import { useSearch } from "../search-sidebar/search-sidebar-context";
 import { useEffect, useState } from "react";
 
 interface CardArrayPropTypes {
-    items: Plant[] | Seed[]
+    items: any[];
     type: string;
 }
 
