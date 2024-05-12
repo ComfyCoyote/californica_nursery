@@ -16,7 +16,6 @@ const ProductDetailPage: React.FC<MarketplacePropTypes> = (props) => {
 
     return(
         <>
-        <Navbar/>
         <ProductDetailView item={props.data}/>
         </>
 
