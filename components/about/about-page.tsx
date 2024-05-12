@@ -10,7 +10,6 @@ const AboutPage = () => {
 
     return(
         <>
-        <Navbar />
         <Box overflowX={'hidden'} bg='NavajoWhite' h='100%' w='100%' pt={40} display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
             <VStack spacing={0} p={0}>
             <VStack bg='NavajoWhite'>
