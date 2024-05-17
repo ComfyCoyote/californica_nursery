@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
               aria-label="Add"
               onClick={toggleShoppingCart}
               icon={  <Image
-                  src="/images/basket_cream.PNG"
+                  src="/images/basket_cream.png"
                   alt="Your Image Alt Text"
                   fill // Set the desired size for your image
                   objectFit="cover"
