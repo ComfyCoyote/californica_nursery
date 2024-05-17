@@ -2,7 +2,7 @@ import React from "react";
 import { Box, HStack, VStack, Text } from "@chakra-ui/react"
 import Image from "next/image";
 import Navbar from "../layout/navbar";
-import { iansBio, bio1, bio2, jacksonsBio } from "./bios";
+import { iansBio, bio1, bio2, jacksonsBio, jacksonsBioAlt, iansBioAlt, bio1Alt, bio2Alt, bio3Alt  } from "./bios";
 import { theme } from "@/theme/theme";
 
 
@@ -17,12 +17,17 @@ const AboutPage = () => {
                 About Us
             </Text>
             <Text fontSize={20} fontWeight={600} p={10}>
-                {bio1}
+                {bio1Alt}
             </Text>
             <HStack p={10} width={'100%'}>
-                <Text fontSize={20} fontWeight={600}>
-                    {bio2}
-                </Text>
+                <VStack>
+                    <Text fontSize={20} fontWeight={600}>
+                        {bio2Alt}
+                    </Text>
+                    <Text fontSize={20} fontWeight={600}>
+                        {bio3Alt}
+                    </Text>
+                </VStack>
                 <Image priority src='/images/person.png' alt='ian and jackson' width={500}  height={500}/>
             </HStack>
             </VStack>
@@ -34,7 +39,7 @@ const AboutPage = () => {
           to: { transform: "translateX(-100%)" }
         }
       }}>
-                    Our Landscaping services, save your yard, plant a native
+                    Heal the urban landscape // Plant a native plant // Support local wildlife
                 </Text>
                 </Box>
             <HStack bg={theme.palette.darkBrown} width={'100%'}>
@@ -44,7 +49,7 @@ const AboutPage = () => {
                             IAN RHODES
                     </Text>
                     <Text fontSize={20} fontWeight={600} color={'white'}>
-                        {iansBio}
+                        {iansBioAlt}
                     </Text>
                     <Box display={'flex'} alignItems={'center'} justifyContent={'flex-start'}>
                         <Image priority src='/images/Ian Signature.png' alt="jackson signature" width={300} height={200}/>
@@ -57,7 +62,7 @@ const AboutPage = () => {
                             JACKSON DRISCOLL
                     </Text>
                     <Text fontSize={20} fontWeight={600} color={'white'}>
-                        {jacksonsBio}
+                        {jacksonsBioAlt}
                     </Text>
                     <Box display={'flex'} alignItems={'center'} justifyContent={'flex-start'}>
                         <Image priority src='/images/Jackson signature.png' alt="jackson signature" width={300} height={200}/>
