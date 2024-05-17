@@ -79,7 +79,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
                     Purchased plants are available for contactless pickup every Friday in Long Beach, CA. 
                 </Text>
                 <Text fontSize={25} fontWeight={600} color="white">
-                    For wholesale inquiries, contact calfornicanursery@gmail.com``
+                    For wholesale inquiries, contact californicanursery@gmail.com
                 </Text>
             </VStack>
             {children}
