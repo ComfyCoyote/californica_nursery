@@ -76,7 +76,10 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
             <VStack spacing="auto" justify="center" p={5}>
                 <Image src={getImage()} alt={'alternate'} width={500} height={600}/>
                 <Text fontSize={25} fontWeight={600} color="white">
-                    Purchased plants are available for contactless pickup in Long Beach, CA
+                    Purchased plants are available for contactless pickup every Friday in Long Beach, CA. 
+                </Text>
+                <Text fontSize={25} fontWeight={600} color="white">
+                    For wholesale inquiries, contact calfornicanursery@gmail.com``
                 </Text>
             </VStack>
             {children}

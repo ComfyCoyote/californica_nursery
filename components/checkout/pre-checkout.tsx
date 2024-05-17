@@ -13,7 +13,16 @@ import { uuid } from 'uuidv4';
 const PreCheckoutPage: React.FC = () => {
   // Sample items data
   // State to store selected items
+  // notify users that orders made are available friday-sunday
+  // orders made on friday will be available next friday
+
+  //if you have any questions about your order email californicanursery@gmail.com
+
   const {orderItems, calculated } = useCart()
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
 
 
   return (
@@ -73,6 +82,8 @@ const PreCheckoutPage: React.FC = () => {
   }
 
   async function getPaymentLink(){
+
+
 
     const fulfillment = createPickupFulfillment('Muzzy Adamjee', 'muzzadamjee@gmail.com', '3107365643', 'Test Purchase')
 
