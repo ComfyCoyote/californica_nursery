@@ -1,7 +1,7 @@
 import { Client, Environment, ApiError} from "square";
 import { GetServerSideProps } from "next";
 import { Plant, PriceVariation, SelectOption, AttributeSelection, AttributeSelectionMap, PlantAttributesAsArray } from "@/Interfaces/interfaces"
-import { plantAttributeMapping, attributeSelectionMappingReverse, PLANT_CATEGORY_ID, attributeSelectionMapping } from "@/components/square-utils/custom-attributes";
+import { plantAttributeMapping, attributeSelectionMappingReverse, attributeSelectionMapping } from "@/components/square-utils/custom-attributes";
 import { CustomOption } from '@/components/shared-components/search-dropdown';
 import { Box, VStack } from "@chakra-ui/react";
 import ProductDetailView from "@/components/marketplace/product-detail-view/product-detail-view";
@@ -47,8 +47,6 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
     let filterOptionsObject: any = {}
     
   try{
-
-    let { catalogApi } = client
 
     let attributeMapping: AttributeSelectionMap = {};
 
@@ -106,7 +104,7 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
                 case "Life Cycle":
                     attributeMapping['lifeCycle'] = attributeSelectionObj
                     break;
-                case "Form":
+                case "Plant Type":
                     attributeMapping['plantType'] = attributeSelectionObj
                     break;
                 case "Soil Moisture":
@@ -141,6 +139,8 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
     const item = response?.result.object
 
+    console.log(item)
+
     const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
 
         return {
@@ -158,6 +158,7 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
         'soilMoisture',
         'form',
         'difficulty',
+        'plantType',
         'dormancy',
         'growthRate',
         'flowerColor',
@@ -170,11 +171,18 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
     if(attributeCheck){
         attributeArray.forEach((val) => {
             const valCheck = attributeCheck[plantAttributeMapping[val]]
+            console.log(plantAttributeMapping[val])
+            console.log(val)
+            console.log(valCheck)
             if(valCheck){
                 let values: string[] = []
                 valCheck.selectionUidValues?.forEach((i) => {
+                    console.log()
+                    console.log(i)
                     attributeMapping[val]?.selectionArr?.forEach((sel: SelectOption) => {
                         if(i === sel.id){
+                            console.log(val)
+                            console.log(sel.value)
                             sel.value && values.push(sel.value)
                         }
                     })

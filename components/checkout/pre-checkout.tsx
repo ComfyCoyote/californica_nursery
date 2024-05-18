@@ -17,6 +17,14 @@ const PreCheckoutPage: React.FC = () => {
   // orders made on friday will be available next friday
 
   //if you have any questions about your order email californicanursery@gmail.com
+  
+  //post purchase message to inform client when and where pickup is
+
+  //all purchases should have california sales tax
+
+  //provide the redirect url for when users purchase, redirect to the marketplace page!
+  
+  //sometimes the checkout page doesnt load immediately
 
   const {orderItems, calculated } = useCart()
 

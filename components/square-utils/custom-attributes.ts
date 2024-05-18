@@ -15,7 +15,7 @@ form is now plant type
 
 export const plantAttributeMapping: PlantAttributes = {
     'soilMoisture': "Square:a11811ec-64b6-4aaa-bf02-a1a84ce9e867",
-    'plantType': "Square:06563530-5d71-4036-99a9-f4eeb9d13794",
+    'plantType': "Square:8bd38961-b53d-4f1a-8c45-d7e4d02b801a",
     'difficulty': "Square:67ef524a-68ae-49eb-8fa9-27de90660c6a",
     'dormancy': "Square:0e4417c9-cb0a-46e2-93ca-813fcc5f105a",
     'growthRate': "Square:e1c09dc1-d774-4baa-8eb1-d5fbe382f802",

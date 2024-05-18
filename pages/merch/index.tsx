@@ -4,6 +4,10 @@ import { GetServerSideProps } from "next";
 import { Plant, PlantAttributes, PriceVariation, Merch } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
 import { plantAttributeMapping, SEED_CATEGORY_ID, attributeSelectionMapping, MERCH_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
+import type { ReactElement } from "react";
+import type { NextPageWithLayout } from "../_app";
+import Layout from "@/components/layout/layout";
+import { getCatalogItemsAPI } from "@/components/square-utils/getCatalogItemsAPI";
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -12,7 +16,7 @@ interface MarketplacePropTypes{
 
 
 
-const MarketplacePage: React.FC<MarketplacePropTypes> = (props) => {
+const MarketplacePage: NextPageWithLayout<MarketplacePropTypes> = (props) => {
 
     return(
         <Marketplace title='merch' filterOptions={null}>
@@ -21,6 +25,13 @@ const MarketplacePage: React.FC<MarketplacePropTypes> = (props) => {
     )
 }
 
+MarketplacePage.getLayout = function getLayout(page: ReactElement){
+  return(
+      <Layout>
+          {page}
+      </Layout>
+  )
+}
 
 
 
@@ -32,12 +43,7 @@ export const getServerSideProps : GetServerSideProps = async () => {
         environment: Environment.Production,
     });
 
-    const body: SearchCatalogObjectsRequest = {
-        objectTypes: [
-          'ITEM'
-        ],
-        limit: 100,
-      };
+    
 
 
     let data : Merch[] | undefined = []
@@ -45,24 +51,30 @@ export const getServerSideProps : GetServerSideProps = async () => {
   try{
     let { catalogApi } = client
 
+    const body = {
+      categoryIds: [MERCH_CATEGORY_ID],
+      archivedState: "ARCHIVED_STATE_NOT_ARCHIVED"
+    };
 
-    const response = await catalogApi.searchCatalogItems({categoryIds: [MERCH_CATEGORY_ID]})
+    const response = await catalogApi.searchCatalogItems(body)
 
-    response.result?.items?.forEach((item) => {
+    const archivedState = await getCatalogItemsAPI(MERCH_CATEGORY_ID)
 
-      const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
+    archivedState?.items?.forEach((item: any) => {
+
+      const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i: any) => {
 
         return {
-            'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
-            'type' :  i.itemVariationData?.name
+            'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
+            'type' :  i.item_variation_data?.name
         } as PriceVariation
     })
 
     data?.push({
       id: item.id,
-      name : item?.itemData?.name,
-      description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
-      images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
+      name : item?.item_data?.name,
+      description: item?.item_data?.description !== undefined ? item?.item_data?.description : null,
+      images: item?.item_data?.image_ids !== undefined ? item?.item_data?.image_ids :  null,
       price: priceVariations,
       imageUrls: [],
       seedAttributes: null

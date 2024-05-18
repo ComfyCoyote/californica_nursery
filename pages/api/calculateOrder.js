@@ -20,14 +20,11 @@ export default async function handler(req, res){
     try{
         if (req.method === 'POST' ) {
             const { body } = req
-            console.log(req)
-            console.log('CALCULATE ORDER')
-            console.log(body)
+            
             body["proposedRewards"] = null
 
             const { result } = await ordersApi.calculateOrder(body)
 
-            console.log(result)
             
             if(result.errors){
     

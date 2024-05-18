@@ -1,9 +1,13 @@
 import Marketplace from "@/components/marketplace/marketplace";
-import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
+import { Client, Environment, ApiError, SearchCatalogObjectsRequest, CatalogItem, CatalogObject } from "square";
 import { GetServerSideProps } from "next";
-import { Plant, PlantAttributes, PriceVariation, SelectOption, AttributeSelection, AttributeSelectionMap, PlantAttributesAsArray, Seed } from "@/Interfaces/interfaces"
+import { PriceVariation, Seed } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
-import { plantAttributeMapping, SEED_CATEGORY_ID, attributeSelectionMapping } from "@/components/square-utils/custom-attributes";
+import { SEED_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
+import type { ReactElement } from "react";
+import type { NextPageWithLayout } from "../_app";
+import Layout from "@/components/layout/layout";
+import { getCatalogItemsAPI } from "@/components/square-utils/getCatalogItemsAPI";
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -12,13 +16,21 @@ interface MarketplacePropTypes{
 
 
 
-const MarketplacePage: React.FC<MarketplacePropTypes> = (props) => {
+const MarketplacePage: NextPageWithLayout<MarketplacePropTypes> = (props) => {
 
     return(
         <Marketplace title='seeds' filterOptions={null}>
           <ProductCardArray items={props.data} type="seeds"/>
         </Marketplace>
     )
+}
+
+MarketplacePage.getLayout = function getLayout(page: ReactElement){
+  return(
+      <Layout>
+          {page}
+      </Layout>
+  )
 }
 
 
@@ -32,47 +44,44 @@ export const getServerSideProps : GetServerSideProps = async () => {
         environment: Environment.Production,
     });
 
-    const body: SearchCatalogObjectsRequest = {
-        objectTypes: [
-          'ITEM'
-        ],
-        limit: 100,
-      };
-
-
     let data : Seed[] | undefined = []
     
   try{
-    let { catalogApi } = client
 
+    const body = {
+      categoryIds: [SEED_CATEGORY_ID],
+      archivedState: "ARCHIVED_STATE_NOT_ARCHIVED"
+    }
 
-    const response = await catalogApi.searchCatalogItems({categoryIds: [SEED_CATEGORY_ID]})
+    const response = await client.catalogApi.searchCatalogItems(body)
 
-    response.result?.items?.forEach((item) => {
+    const archivedState = await getCatalogItemsAPI(SEED_CATEGORY_ID)
 
-      const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
+    archivedState?.items?.forEach((item: any) => {
+
+      console.log('Archival Status')
+
+      console.log(item)
+
+      const priceVariations : PriceVariation[] | undefined = item?.item_data?.variations?.map((i: any) => {
 
         return {
-            'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
-            'type' :  i.itemVariationData?.name
+            'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
+            'type' :  i.item_variation_data?.name
         } as PriceVariation
+        })
+
+        data?.push({
+          id: item.id,
+          name : item?.item_data?.name,
+          description: item?.item_data?.description !== undefined ? item?.item_data?.description : null,
+          images: item?.item_data?.image_ids !== undefined ? item?.item_data?.image_ids :  null,
+          price: priceVariations,
+          imageUrls: [],
+          seedAttributes: null
+      } as Seed)
+
     })
-
-    data?.push({
-      id: item.id,
-      name : item?.itemData?.name,
-      description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
-      images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
-      price: priceVariations,
-      imageUrls: [],
-      seedAttributes: null
-  } as Seed)
-
-
-
-    
-
-})
 
 
     let imageIdArray :  string[] = []

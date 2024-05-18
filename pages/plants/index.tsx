@@ -8,6 +8,8 @@ import { CustomOption } from '@/components/shared-components/search-dropdown';
 import { NextPageWithLayout } from "../_app";
 import Layout from "@/components/layout/layout";
 import type { ReactElement } from "react";
+import { getCatalogItemsAPI } from "@/components/square-utils/getCatalogItemsAPI";
+import type { SearchCatalogItemsRequest } from "square";
 
 
 interface MarketplacePropTypes{
@@ -46,14 +48,6 @@ export const getServerSideProps : GetServerSideProps = async () => {
         environment: Environment.Production,
     });
 
-    const body: SearchCatalogObjectsRequest = {
-        objectTypes: [
-          'ITEM'
-        ],
-        limit: 100,
-      };
-
-
     let data : Plant[] | undefined = []
     let filterOptionsObject: any = {}
     
@@ -65,7 +59,8 @@ export const getServerSideProps : GetServerSideProps = async () => {
     const attributes = await client.catalogApi.searchCatalogObjects({
         objectTypes: [
           'CUSTOM_ATTRIBUTE_DEFINITION'
-        ]
+        ],
+        
       });
 
 
@@ -140,25 +135,30 @@ export const getServerSideProps : GetServerSideProps = async () => {
         }
     })
 
+    const body = {
+      categoryIds: [PLANT_CATEGORY_ID],
+      archivedState: "ARCHIVED_STATE_NOT_ARCHIVED"
+    }
 
-    const response = await catalogApi.searchCatalogItems({categoryIds: [PLANT_CATEGORY_ID]})
+    const response = await catalogApi.searchCatalogItems(body)
 
-    response.result?.items?.forEach((item) => {
+    const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID)
+
+    archivedState.items?.forEach((item: any) => {
 
 
-        const priceVariations : PriceVariation[] | undefined = item?.itemData?.variations?.map((i, index, array) => {
-
-          console.log(i)
-          console.log(i.id)
+        const priceVariations : PriceVariation[] | undefined = item?.item_data?.variations?.map((i: any) => {
 
             return {
                 'id': i.id,
-                'price' :  i.itemVariationData?.priceMoney?.amount?.toString() ?? null,
-                'type' :  i.itemVariationData?.name
+                'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
+                'type' :  i.item_variation_data?.name
             } as PriceVariation
         })
 
-        const attributeCheck = item.customAttributeValues
+        const attributeCheck = item.custom_attribute_values
+        console.log('ATTRIBUTE CHECK')
+        console.log(attributeCheck)
 
         const plantAttributes: PlantAttributesAsArray = {}
 
@@ -180,7 +180,7 @@ export const getServerSideProps : GetServerSideProps = async () => {
                 const valCheck = attributeCheck[plantAttributeMapping[val]]
                 if(valCheck){
                     let values: string[] = []
-                    valCheck.selectionUidValues?.forEach((i) => {
+                    valCheck.selection_uid_values?.forEach((i: any) => {
                         attributeMapping[val]?.selectionArr?.forEach((sel: SelectOption) => {
                             if(i === sel.id){
                                sel.value && values.push(sel.value)
@@ -194,33 +194,16 @@ export const getServerSideProps : GetServerSideProps = async () => {
             })
 
         }
-        
-
-
-        /*
-        const plantAttributes: PlantAttributes = {
-            soilMoisture: item.customAttributeValues?[plantAttributeMapping.soilMoisture]
-            form:
-            difficulty:
-            dormancy:
-            growthRate:
-            ecosystems: 
-            sun:
-            lifeCycle:
-
-        }
-        */
-
-        data?.push({
-            id: item.id,
-            name : item?.itemData?.name,
-            description: item?.itemData?.description !== undefined ? item?.itemData?.description : null,
-            images: item?.itemData?.imageIds !== undefined ? item?.itemData?.imageIds :  null,
-            price: priceVariations,
-            imageUrls: [],
-            plantAttributes: plantAttributes
-        } as Plant)
-
+  
+      data?.push({
+          id: item.id,
+          name : item?.item_data?.name,
+          description: item?.item_data?.description !== undefined ? item?.item_data?.description : null,
+          images: item?.item_data?.image_ids !== undefined ? item?.item_data?.image_ids :  null,
+          price: priceVariations,
+          imageUrls: [],
+          plantAttributes: plantAttributes
+      } as Plant)
 
     })
 

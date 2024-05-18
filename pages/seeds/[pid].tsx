@@ -48,8 +48,6 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
     
   try{
 
-    let { catalogApi } = client
-
     let attributeMapping: AttributeSelectionMap = {};
 
     const attributes = await client.catalogApi.searchCatalogObjects({
