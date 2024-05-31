@@ -1,0 +1,1 @@
+export const checkoutNote = 'This is the sample checkout message that got applied through the payment_note field in the checkout api'

@@ -12,9 +12,9 @@ export default async function handler(req, res){
     try{
         if (req.method === 'POST' ) {
             const { body } = req
-            
+            console.log(body)
             const { result } = await checkoutApi.createPaymentLink(body)
-            
+            console.log(result)
             if(result.errors){
                 
               res.status(400).json(result.errors)

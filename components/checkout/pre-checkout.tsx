@@ -8,7 +8,7 @@ import type { Fulfillment,  OrderLineItem } from 'square';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import { uuid } from 'uuidv4';
-
+import { checkoutNote } from './checkout-note';
 
 const PreCheckoutPage: React.FC = () => {
   // Sample items data
@@ -112,6 +112,7 @@ const PreCheckoutPage: React.FC = () => {
     const order = createOrder(lineItems, [fulfillment], stJosephs)
 
     const request = {
+      paymentNote: checkoutNote,
       idempotencyKey: uuid(),
       order: order.order,
       checkoutOptions: {
@@ -122,7 +123,7 @@ const PreCheckoutPage: React.FC = () => {
           cashAppPay: true
         },
         appFeeMoney: {
-          amount: 300,
+          amount: 0,
           currency: 'USD'
         }
       }
