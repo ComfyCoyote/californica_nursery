@@ -78,7 +78,7 @@ const AboutPage = () => {
           to: { transform: "translateX(-100%)" }
         }
       }}>
-                Email us Californica@gmail.com call us (000) 000-0000
+                Email us californicanursery@gmail.com
             </Text>
             </Box>
             </VStack>

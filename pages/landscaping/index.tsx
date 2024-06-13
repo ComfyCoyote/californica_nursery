@@ -1,4 +1,4 @@
-import LandscapingPage from "@/components/landscaping/landscaping-page";
+import SecondaryLandscapingPage from "@/components/landscaping/secondary-landscaping-page";
 import { NextPageWithLayout } from "../_app";
 import Layout from "@/components/layout/layout";
 import type { ReactElement } from "react";
@@ -7,7 +7,7 @@ import type { ReactElement } from "react";
 const Landscaping: NextPageWithLayout = (props) => {
 
     return(
-        <LandscapingPage />
+        <SecondaryLandscapingPage />
     )
 }
 

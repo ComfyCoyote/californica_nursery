@@ -2,6 +2,7 @@ import ShoppingCart from "../marketplace/shoppingCartContext/shoppingCart";
 import Footer from "./footer";
 import Navbar from "./navbar";
 import React, { useState } from "react";
+import { Box } from "@chakra-ui/react";
 
 interface LayoutPropTypes {
     children: any
@@ -22,7 +23,9 @@ const Layout: React.FC<LayoutPropTypes> = ({children}) => {
         <ShoppingCart 
             open={shoppingCartOpen}
             toggleCart={toggleShoppingCart}/>
+            <Box>
             {children}
+            </Box>
         <Footer />
         </React.Fragment>
 
