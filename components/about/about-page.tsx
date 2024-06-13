@@ -78,7 +78,7 @@ const AboutPage = () => {
           to: { transform: "translateX(-100%)" }
         }
       }}>
-                Email us californicanursery@gmail.com
+                EMAIL US - CALIFORNICANURSERY@GMAIL.COM
             </Text>
             </Box>
             </VStack>
