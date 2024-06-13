@@ -3,12 +3,12 @@ import { theme } from '../../theme/theme'
 import Image from "next/image";
 import { text } from "stream/consumers";
 
-const bp1 = 'Create a functioning habitat of hyper local plants'
+const bp1 = 'Create a functioning habitat of hyper-local plants'
 const bp2 = 'Utilize rainwater capture and varied topography, free from supplemental irrigation'
-const bp3 = 'Work with, not against your sites microclimates'
+const bp3 = 'Work with, not against your site\'s microclimates'
 
-const text1 = 'With four easy steps we can transform your green space into a vibrant california native landscape, full of pollinators and free from excessive water use'
-const text2 = 'Native landscaping isnt a walk in the park, so let us help you build a deeper connection with your land through a sustainable outdoor space'
+const text1 = 'With four easy steps, we can transform your green space into a vibrant california native landscape full of pollinators and free from excessive water use.'
+const text2 = 'Native landscaping isnt a walk in the park, so let us help you build a deeper connection with your land through a sustainable outdoor space.'
 
 
 const wp1 = '1. Site Assessment and Consultation'

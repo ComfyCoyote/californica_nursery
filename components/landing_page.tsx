@@ -8,6 +8,11 @@ import { theme } from '@/theme/theme';
 
 // add text under each link
 
+/// for mobile devices, stack the link icons vertically
+
+// for mobile devices, marketplace pages should be 2 columns
+
+
 const LandingPage: React.FC = () => {
 
     const [hover, setHover] = useState('')
@@ -21,14 +26,22 @@ const LandingPage: React.FC = () => {
     <Box 
         minHeight="100vh" 
         background={`${theme.palette.olive}`}>
-    <ShoppingCart open={shoppingCart} toggleCart={toggleCart}/>        
-    <Flex direction={'row'} alignItems={"center"} justifyContent={"center"}>
+    <ShoppingCart open={shoppingCart} toggleCart={toggleCart}/>     
+    <Flex backgroundColor={theme.palette.darkOlive} direction={'row'} alignItems={"center"} justifyContent={"center"}>
         <Box
             p={5}>
-        <Image 
-            src="/images/Californica Nursery Website Capitalized - cream-05.png" 
-            alt='/images/vercel.svg' 
-            width={600} height={100}/>
+            <Image 
+                src="/images/home_title_cream.png" 
+                alt='/images/vercel.svg' 
+                width={600} height={100}/>
+        </Box>
+        <Box 
+            position={"absolute"}
+            right={10}>
+            <Image
+                src="/images/basket_cream.png" 
+                alt='/images/vercel.svg' 
+                width={120} height={120} />
         </Box>
     </Flex>
     <Flex direction="column" alignItems="center" justifyContent="center" minHeight="100%">
@@ -162,14 +175,6 @@ const LandingPage: React.FC = () => {
         </Link>
         </VStack>
     </Flex>
-    </Flex>
-    <Flex justifyContent={'flex-end'}>
-        <Box>
-            <Image
-               src="/images/basket_cream.png" 
-               alt='/images/vercel.svg' 
-               width={120} height={120} />
-        </Box>
     </Flex>
     </Box>
   );

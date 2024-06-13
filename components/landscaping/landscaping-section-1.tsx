@@ -2,8 +2,8 @@ import { VStack, Box, Text } from "@chakra-ui/react";
 import { theme } from '../../theme/theme'       
 import Image from "next/image";
 
-const text1 = 'At californica nursery, we are determined to restore the greater Long Beach area into a beautiful and ecologically valuable refuge for our local wildlife one garden at a time.'
-const text2 = 'Nature is the best designer and our work reflects its beauty'
+const text1 = 'At californica nursery, we are determined to restore the greater Long Beach area into a beautiful and ecologically valuable refuge for our local wildlife, one garden at a time.'
+const text2 = 'Nature is the best designer and our work reflects its beauty.'
 
 
 const LandscapingSectionOne = () => {

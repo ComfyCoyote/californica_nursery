@@ -9,6 +9,7 @@ export const theme = {
         lightYellow: '#F2EF8A',
         lime: '#C0D84D',
         orange: '#F36E21',
-        skyBlue: '#91D7eE'
+        skyBlue: '#91D7eE',
+        darkOlive: ''
     }
 }
