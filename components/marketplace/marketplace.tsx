@@ -5,7 +5,7 @@ import Navbar from "@/components/layout/navbar"
 import { useCart } from "@/components/marketplace/shoppingCartContext/shoppingCartContext"
 import { Grid, VStack } from "@chakra-ui/react"
 import ProductCardArray from "./product-display/product-card-array"
-import { Box } from "@chakra-ui/react"
+import { Box, Flex} from "@chakra-ui/react"
 import { useState } from "react"
 import ShoppingCart from "./shoppingCartContext/shoppingCart"
 import SearchSidebar from "./search-sidebar/search-sidebar"
@@ -25,6 +25,8 @@ interface MarketplacePropTypes{
     filterOptions: any;
     
 }
+
+//make plants banner continuous
 
 
 const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOptions}) => {
@@ -72,14 +74,46 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         filters={filterOptions}
         toggleSearch={toggleOpen}
         />
-        <Box bg={theme.palette.olive} h='100%' w='100%' p={10} pt={20}>
+        <Box bg={theme.palette.cream} h='100%' w='100%' p={10} pt={20}>
             <VStack spacing="auto" justify="center" p={5}>
-                <Image src={getImage()} alt={'alternate'} width={500} height={600}/>
-                <Text fontSize={25} fontWeight={600} color="white">
-                    Purchased plants, seeds, and merchandise are available for contactless pickup every Friday in Long Beach, CA. 
-                </Text>
-                <Text fontSize={25} fontWeight={600} color="white">
-                    For wholesale inquiries, contact californicanursery@gmail.com
+                <Box bg={theme.palette.lime} width={'100vw'} height={55}>
+                    <Text 
+                        pt={2}
+                        width={'100vw'}
+                        fontSize={30} 
+                        fontWeight={700} 
+                        animation="scrollText 15s linear infinite"
+                        noOfLines={1}
+                        sx={{
+                            "@keyframes scrollText": {
+                            from: { transform: "translateX(100%)" },
+                            to: { transform: "translateX(-100%)" }
+                            }
+                    }}>
+                        <Flex justifyContent={'space-between'} alignItems={'center'} w={'100vw'} h={'100%'}>
+                            <Text>
+                                {title.toUpperCase()}
+                            </Text>
+                            <Text>
+                                {title.toUpperCase()}
+                            </Text>
+                            <Text>
+                                {title.toUpperCase()}
+                            </Text>
+                            <Text>
+                                {title.toUpperCase()}
+                            </Text>
+                            <Text>
+                                {title.toUpperCase()}
+                            </Text>
+                            <Text>
+                                {title.toUpperCase()}
+                            </Text>
+                        </Flex>
+                    </Text>
+                </Box>
+                <Text fontSize={25} fontWeight={600} p={10} color="black" textAlign={'center'}>
+                    *Purchased plants, seeds, and merchandise are available for contactless pickup every Friday in Long Beach, CA.  For wholesale inquiries, contact californicanursery@gmail.com
                 </Text>
             </VStack>
             {children}
@@ -88,6 +122,17 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         </React.Fragment>
 
     )
+
+    function getBanner(): string{
+        const spaces = '          '
+        const upper = title.toUpperCase()
+        const spaced = upper + spaces
+        const banner = [0,1,2].map((i) => (spaced)).join(' ')
+
+        console.log(banner)
+
+        return banner
+    }
 
     function getImage(): string{
         let src = ''

@@ -27,9 +27,9 @@ interface BulletPointProps {
 const BulletPoint: React.FC<BulletPointProps> = ({text}) => {
 
     return(
-        <HStack>
-            <Image src={'/basket_cream.png'} alt="star" height={100} width={100}/>
-            <Text color={'navajowhite'} fontSize={30} fontWeight={700}>
+        <HStack spacing={10}>
+            <Image src={'/images/icons/pink_star.png'} alt="star" height={50} width={50}/>
+            <Text color={'navajowhite'} fontSize={27} fontWeight={700}>
                 {text}
             </Text>
         </HStack>

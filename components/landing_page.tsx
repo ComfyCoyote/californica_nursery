@@ -5,12 +5,15 @@ import Image from 'next/image'
 import ShoppingCart from './marketplace/shoppingCartContext/shoppingCart';
 import Link from 'next/link';
 import { theme } from '@/theme/theme';
+import Footer from './layout/footer';
 
 // add text under each link
 
 /// for mobile devices, stack the link icons vertically
 
 // for mobile devices, marketplace pages should be 2 columns
+
+//line up the button text, reduce the image sizes
 
 
 const LandingPage: React.FC = () => {
@@ -23,15 +26,17 @@ const LandingPage: React.FC = () => {
     }
 
   return (
+    <React.Fragment>
     <Box 
         minHeight="100vh" 
-        background={`${theme.palette.olive}`}>
+        background={`${theme.palette.olive}`}
+    >
     <ShoppingCart open={shoppingCart} toggleCart={toggleCart}/>     
-    <Flex backgroundColor={theme.palette.darkOlive} direction={'row'} alignItems={"center"} justifyContent={"center"}>
+    <Flex backgroundColor={theme.palette.darkGreen} direction={'row'} alignItems={"center"} justifyContent={"center"}>
         <Box
             p={5}>
             <Image 
-                src="/images/home_title_cream.png" 
+                src="/images/titles/wordmark_web.png" 
                 alt='/images/vercel.svg' 
                 width={600} height={100}/>
         </Box>
@@ -39,12 +44,12 @@ const LandingPage: React.FC = () => {
             position={"absolute"}
             right={10}>
             <Image
-                src="/images/basket_cream.png" 
+                src="/images/icons/basket_lime.png" 
                 alt='/images/vercel.svg' 
-                width={120} height={120} />
+                width={100} height={100} />
         </Box>
     </Flex>
-    <Flex direction="column" alignItems="center" justifyContent="center" minHeight="100%">
+    <Flex direction="column" alignItems="center" justifyContent="center" minHeight="100%" p={20}>
     <Flex justifyContent="center" width={'100%'} maxWidth={'100%'}>
         <VStack>
         {hover === 'tips' ?
@@ -68,6 +73,7 @@ const LandingPage: React.FC = () => {
             width={350} height={300} />
             </Link>
         }
+        <Link href={'/plants'} />
         <Button 
               as="a"
               border="2px solid black" 
@@ -90,6 +96,7 @@ const LandingPage: React.FC = () => {
             alt='/images/vercel.svg' 
             width={300} height={300}  />
         </Link>
+        <Link href={'/seeds'} />
         <Button
               as="a"
               border="2px solid black" 
@@ -177,6 +184,8 @@ const LandingPage: React.FC = () => {
     </Flex>
     </Flex>
     </Box>
+    <Footer />
+    </React.Fragment>
   );
 };
 

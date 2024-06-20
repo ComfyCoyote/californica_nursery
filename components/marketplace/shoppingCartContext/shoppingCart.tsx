@@ -26,8 +26,9 @@ interface ShoppingCartPropTypes {
 const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [items, setItems] = useState<OrderItem[]>([])
+  const [checkoutLink, setCheckoutLink] = useState('')
   //const [cartItems, setCartItems] = useState<Product[]>([]);
-  const { orderItems, removeFromCart, addItem, subtractItem } = useCart()
+  const { orderItems, removeFromCart } = useCart()
 
 
   const handleCartOpen = () => {
@@ -71,7 +72,7 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
                 Total: ${totalAmount}
               </Text>
               */}
-              <Link href="/checkout/pre-checkout">
+              <Link href={`/checkout/pre-checkout?redirect=/plants`}>
               <Button colorScheme="blue" size="sm">
                 Checkout
               </Button>
@@ -82,6 +83,8 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
       </Drawer>
     </>
   );
+
+
 }
 
 export default ShoppingCart;

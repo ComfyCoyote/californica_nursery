@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
       <Flex
         position={'fixed'}
         as='header'
-        bg={`${theme.palette.darkBrown}`}
+        bg={`${theme.palette.darkGreen}`}
         zIndex={1000}
         w="100%"
         px="1"
@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
         <Image  
           height={50}
           width={200}
-          src={'/images/californica_cream.png'} 
+          src={'/images/titles/nav_bar.png'} 
           alt={'/images/vercel.svg'} 
         />
         </Link>
@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
               aria-label="Add"
               onClick={toggleShoppingCart}
               icon={  <Image
-                  src="/images/basket_cream.png"
+                  src="/images/icons/basket_lime.png"
                   alt="Your Image Alt Text"
                   fill // Set the desired size for your image
                   objectFit="cover"

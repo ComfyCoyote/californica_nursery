@@ -47,7 +47,7 @@ const LandscapingSectionThree = () => {
                 borderRadius="lg"
                 boxShadow="md"
                 >
-            <HStack spacing={4}>
+            <HStack spacing={4} width={'100%'}>
                     {images.map((src, index) => (
                     <Box
                         key={src}

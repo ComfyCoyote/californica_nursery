@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '../marketplace/shoppingCartContext/shoppingCartContext';
-import { Checkbox, Button, Container, Heading, Text, VStack, useEditable } from '@chakra-ui/react';
+import { HStack, Button, Container, Heading, Text, VStack, FormControl, FormLabel, FormErrorMessage, Input  } from '@chakra-ui/react';
 import { OrderItem } from '@/Interfaces/interfaces';
 import PreCheckoutItem from './pre-checkout-item';
 import type { Fulfillment,  OrderLineItem } from 'square';
@@ -9,6 +9,13 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import { uuid } from 'uuidv4';
 import { checkoutNote } from './checkout-note';
+import { useForm } from 'react-hook-form';
+
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+};
 
 const PreCheckoutPage: React.FC = () => {
   // Sample items data
@@ -32,23 +39,55 @@ const PreCheckoutPage: React.FC = () => {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
 
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const [formData, setFormData] = useState<FormData | null>(null);
+
+  const onSubmit = (data: FormData) => {
+    setFormData(data);
+  };
+
+
 
   return (
-    <Container maxW="container.md" mt="8">
+    <Container width={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} maxW="container.md" mt="8">
     <Heading as="h1" mb="4">Pre-Checkout Page</Heading>
+    <HStack width={'100%'}>
     <VStack spacing="4" align="start">
       {orderItems.map((item ) => {
         return (<PreCheckoutItem key={item.catalogObjectId} item={item}/>)
       })}
     </VStack>
+    
+    <VStack display={'flex'} justifyContent={'flex-start'} spacing={4} p={10}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl isInvalid={errors.name ? true : false}>
+          <FormLabel htmlFor="name">Name</FormLabel>
+          <Input id="name" type="text" {...register('name', { required: 'Name is required' })} />
+          <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
+        </FormControl>
+
+        <FormControl isInvalid={errors.email ? true : false}>
+          <FormLabel htmlFor="email">Email</FormLabel>
+          <Input id="email" type="email" {...register('email', { required: 'Email is required' })} />
+          <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
+        </FormControl>
+
+        <FormControl isInvalid={errors.phone ? true : false}>
+          <FormLabel htmlFor="phone">Phone Number</FormLabel>
+          <Input id="phone" type="tel" {...register('phone', { required: 'Phone number is required' })} />
+          <FormErrorMessage>{errors.phone && errors.phone.message}</FormErrorMessage>
+        </FormControl>
+      </form>
+    </VStack>
+    </HStack>
     <Text mt="4">Total Price: ${calculated ? calculated : 'Unable to calculate'}</Text>
-    <Button onClick={getPaymentLink}>
+    <Button type="submit" onClick={getPaymentLink}>
       Proceed to checkout
     </Button>
   </Container>
   );
 
-  function createPickupFulfillment(name: string, email: string, phone: string, note: string){
+  function createPickupFulfillment(name: string, email: string, phone: string, note: string | null){
     const date = dayjs()
     const expires = date.add(1, 'day')
     const pickup = date.add(1, 'hour')
@@ -91,9 +130,9 @@ const PreCheckoutPage: React.FC = () => {
 
   async function getPaymentLink(){
 
+    if(formData?.name && formData?.email && formData?.phone){
 
-
-    const fulfillment = createPickupFulfillment('Muzzy Adamjee', 'muzzadamjee@gmail.com', '3107365643', 'Test Purchase')
+    const fulfillment = createPickupFulfillment(formData?.name, formData?.email, formData?.phone, null)
 
     const stJosephs = 'L3C4J69QTRCAA'
 
@@ -117,6 +156,7 @@ const PreCheckoutPage: React.FC = () => {
       order: order.order,
       checkoutOptions: {
         allowTipping: true,
+        redirectUrl: `${window.location.hostname}/plants`,
         acceptedPaymentMethods: {
           applePay: true,
           googlePay: true,
@@ -156,6 +196,7 @@ const PreCheckoutPage: React.FC = () => {
         currency: 'USD'
     });
   }
+}
 
   
 };

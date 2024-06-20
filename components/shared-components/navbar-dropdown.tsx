@@ -7,10 +7,12 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
+  Text,
   Button,
   VStack,
   Box
 } from '@chakra-ui/react';
+import { theme } from '@/theme/theme';
 
 interface NavbarDropdownProps {
   options: { value: string; label: string; bgColor: string, hoverColor: string, href: string }[];
@@ -26,8 +28,10 @@ const NavbarDropdown: React.FC<NavbarDropdownProps> = ({ options, placeholder })
     <VStack spacing={4}>
       <Popover>
         <PopoverTrigger>
-          <Button bgColor={'transparent'} color='white' fontSize={23} _hover={{bgColor: 'transparent'}}>
-            {placeholder}
+          <Button bgColor={'transparent'} color={'white'} fontSize={23} _hover={{bgColor: 'transparent'}}>
+            <Text color={theme.palette.cream}>
+                {placeholder?.toUpperCase()}
+            </Text>
           </Button>
         </PopoverTrigger>
         <PopoverContent>
