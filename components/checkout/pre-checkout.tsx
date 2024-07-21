@@ -10,12 +10,14 @@ import axios from 'axios';
 import { uuid } from 'uuidv4';
 import { checkoutNote } from './checkout-note';
 import { useForm } from 'react-hook-form';
+import ErrorAlert from './error-alert';
+import { title } from 'process';
 
-type FormData = {
-  name: string;
-  email: string;
-  phone: string;
-};
+interface Error {
+  title: string,
+  desc: string,
+  status: boolean
+}
 
 const PreCheckoutPage: React.FC = () => {
   // Sample items data
@@ -33,59 +35,85 @@ const PreCheckoutPage: React.FC = () => {
   
   //sometimes the checkout page doesnt load immediately
 
-  const {orderItems, calculated } = useCart()
+  const { orderItems, calculated } = useCart(); // Assuming useCart provides orderItems, calculated, and getPaymentLink
 
-  const [name, setName] = useState('')
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const [formData, setFormData] = useState<FormData | null>(null);
-
-  const onSubmit = (data: FormData) => {
-    setFormData(data);
-  };
-
+  const [name, setName] = useState('')
+  const [error, setError] = useState<Error>({status: false, title: '', desc: ''})
 
 
   return (
     <Container width={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} maxW="container.md" mt="8">
-    <Heading as="h1" mb="4">Pre-Checkout Page</Heading>
-    <HStack width={'100%'}>
-    <VStack spacing="4" align="start">
-      {orderItems.map((item ) => {
-        return (<PreCheckoutItem key={item.catalogObjectId} item={item}/>)
-      })}
-    </VStack>
+      <Heading as="h1" mb="4">Pre-Checkout Page</Heading>
+      {error.status && <ErrorAlert title={error.title} description={error.desc}/>}
+      <HStack width={'100%'}>
+        <VStack spacing="4" align="start">
+          {orderItems.map((item) => (
+            <PreCheckoutItem key={item.catalogObjectId} item={item} />
+          ))}
+        </VStack>
+
+        <VStack display={'flex'} justifyContent={'flex-start'} spacing={4} p={10}>
+          <FormControl isInvalid={errors.name ? true : false}>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <Input id="name" type="text" onChange={(e) => setName(e.target.value)} />
+          </FormControl>
+
+          <FormControl isInvalid={errors.email ? true : false}>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Input id="email" type="email" onChange={(e) => setEmail(e.target.value)} />
+          </FormControl>
+
+          <FormControl isInvalid={errors.phone ? true : false}>
+            <FormLabel htmlFor="phone">Phone Number</FormLabel>
+            <Input id="phone" type="tel" value={phone} onChange={(e) => handlePhoneChange(e)} />
+          </FormControl>
+
+          <Button type="button" onClick={getPaymentLink} mt={4}>
+            Proceed to checkout
+          </Button>
+        </VStack>
+      </HStack>
+
+      <Text mt="4">Total Price: ${calculated ? calculated : 'Unable to calculate'}</Text>
+    </Container>
+  )
+
+  function validatePhoneNumber(phoneNumber: string) {
+    // Regular expression for North American phone number format (e.g., (123) 456-7890)
+    const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
     
-    <VStack display={'flex'} justifyContent={'flex-start'} spacing={4} p={10}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={errors.name ? true : false}>
-          <FormLabel htmlFor="name">Name</FormLabel>
-          <Input id="name" type="text" {...register('name', { required: 'Name is required' })} />
-          <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
-        </FormControl>
+    return phoneRegex.test(phoneNumber);
+  }
 
-        <FormControl isInvalid={errors.email ? true : false}>
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <Input id="email" type="email" {...register('email', { required: 'Email is required' })} />
-          <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
-        </FormControl>
+  function validateEmail(email: string) {
+    // Regular expression for validating an email address
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    return emailRegex.test(email);
+  }
 
-        <FormControl isInvalid={errors.phone ? true : false}>
-          <FormLabel htmlFor="phone">Phone Number</FormLabel>
-          <Input id="phone" type="tel" {...register('phone', { required: 'Phone number is required' })} />
-          <FormErrorMessage>{errors.phone && errors.phone.message}</FormErrorMessage>
-        </FormControl>
-      </form>
-    </VStack>
-    </HStack>
-    <Text mt="4">Total Price: ${calculated ? calculated : 'Unable to calculate'}</Text>
-    <Button type="submit" onClick={getPaymentLink}>
-      Proceed to checkout
-    </Button>
-  </Container>
-  );
+  function validateForm(){
+
+      if(!name){
+        setError({status: true, title: 'Invalid Name', desc: 'Please provide a name so that we can process your order accurately'})
+        return false
+      } else if(!validatePhoneNumber(phone)){
+        setError({status: true, title: 'Invalid Phone', desc: 'Please provide a valid phone number so that we can update you on your order'})
+        return false
+
+      } else if(!validateEmail(email)){
+        setError({status: true, title: 'Invalid Email', desc: 'Please provide a valid email so that we can send purchase receipt'})
+        return false
+      } else{
+
+        return true
+      }
+
+  }
 
   function createPickupFulfillment(name: string, email: string, phone: string, note: string | null){
     const date = dayjs()
@@ -130,59 +158,59 @@ const PreCheckoutPage: React.FC = () => {
 
   async function getPaymentLink(){
 
-    if(formData?.name && formData?.email && formData?.phone){
+    const valid = validateForm()
 
-    const fulfillment = createPickupFulfillment(formData?.name, formData?.email, formData?.phone, null)
+    if(valid){
 
-    const stJosephs = 'L3C4J69QTRCAA'
+      const fulfillment = createPickupFulfillment(name, email, phone, null)
 
-    const lineItems: OrderLineItem[] = orderItems.map((item : OrderItem) => {
+      const stJosephs = 'L3C4J69QTRCAA'
 
-      const line = {
-        'quantity': item.quantity,
-        'appliedTaxes': item.appliedTaxes,
-        'appliedDiscounts': item.appliedDiscounts,
-        'catalogObjectId': item.catalogObjectId
-      } as OrderLineItem
+      const lineItems: OrderLineItem[] = orderItems.map((item : OrderItem) => {
 
-      return line
-    })
+        const line = {
+          'quantity': item.quantity,
+          'appliedTaxes': item.appliedTaxes,
+          'appliedDiscounts': item.appliedDiscounts,
+          'catalogObjectId': item.catalogObjectId
+        } as OrderLineItem
 
-    const order = createOrder(lineItems, [fulfillment], stJosephs)
+        return line
+      })
 
-    const request = {
-      paymentNote: checkoutNote,
-      idempotencyKey: uuid(),
-      order: order.order,
-      checkoutOptions: {
-        allowTipping: true,
-        redirectUrl: `${window.location.hostname}/plants`,
-        acceptedPaymentMethods: {
-          applePay: true,
-          googlePay: true,
-          cashAppPay: true
-        },
-        appFeeMoney: {
-          amount: 0,
-          currency: 'USD'
+      const order = createOrder(lineItems, [fulfillment], stJosephs)
+
+      const request = {
+        paymentNote: checkoutNote,
+        idempotencyKey: uuid(),
+        order: order.order,
+        checkoutOptions: {
+          allowTipping: true,
+          redirectUrl: `https://${window.location.host}/plants`,
+          acceptedPaymentMethods: {
+            applePay: true,
+            googlePay: true,
+            cashAppPay: true
+          },
+          appFeeMoney: {
+            amount: 0,
+            currency: 'USD'
+          }
         }
       }
-    }
 
-    console.log(request)
+      try {
 
-    try {
+        const response = await axios.post('/api/createPaymentLink', request);
 
-      const response = await axios.post('/api/createPaymentLink', request);
-
-      if(response.data.url){
-        window.location.href = response.data.url
+        if(response.data.url){
+          window.location.href = response.data.url
+        }
+        
+      } catch(error) {
+        console.log(error);
+        setError({status: true, title: 'Request Error', desc: 'Sorry but there was an error in processing your request, please try again later.'})
       }
-      
-    
-      console.log(response);
-    } catch(error) {
-      console.log(error);
     }
   }
 
@@ -196,9 +224,30 @@ const PreCheckoutPage: React.FC = () => {
         currency: 'USD'
     });
   }
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>){
+    const input = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+    let formatted = '';
+
+    // Format as (112) 123-1234
+    if (input.length >= 1) {
+      formatted += `(${input.slice(0, 3)}`;
+    }
+    if (input.length > 3) {
+      formatted += `) ${input.slice(3, 6)}`;
+    }
+    if (input.length > 6) {
+      formatted += `-${input.slice(6, 10)}`;
+    }
+
+
+    // Update state
+    setPhone(formatted);
+;
+  };
+
 }
 
   
-};
 
 export default PreCheckoutPage;
