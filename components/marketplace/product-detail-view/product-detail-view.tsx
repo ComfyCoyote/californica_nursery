@@ -1,22 +1,21 @@
 import React from 'react';
-import { Box, HStack, Image, Text, VStack, Button } from '@chakra-ui/react';
-import { Apparel, OrderItem, PlaidProduct, Plant, Merch, Seed, PriceVariation } from '@/Interfaces/interfaces'
+import { Box, HStack, VStack, Button } from '@chakra-ui/react';
+import { OrderItem, Plant, Merch, Seed, PriceVariation } from '@/Interfaces/interfaces'
 import { useCart } from '../shoppingCartContext/shoppingCartContext';
 import { useState } from 'react';
 import ProductDetailInfo from './product-detail-info';
 import ProductDetailImages from './product-detail-images';
 import ProductDetailPrices from './product-detail-prices';
 import CustomAlert from '@/components/alert';
-import { OrderLineItemAppliedTax } from 'square';
-// a user should first select a plant size and then select add to cart to add to cart,
-// add to cart is disabled unless the select a size
+import { theme } from '@/theme/theme';
 
 const success = 'Added item to cart!'
 const fail = 'Unable to add item to cart!'
 
 
 interface ProductCardPropTypes {
-    item: Plant | Merch | Seed
+    item: Plant | Merch | Seed,
+    type: string
 }
 
 export interface Variation {
@@ -25,7 +24,7 @@ export interface Variation {
 }
 
 
-const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
+const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
 
     const { addToCart } = useCart()
 
@@ -49,33 +48,51 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item}) => {
             p={50}
             h='100%'
             w='100%'
-            spacing={10}>
+            spacing={20}
+            >
                 <ProductDetailImages item={item}/>
                 <VStack
-                    w='50%'
-                    h='100%'
+                    spacing={10}
+                    w='100%'
+                    h={719}
                     display={'flex'}
                     alignItems={'flex-start'}>
-                <ProductDetailInfo item={item}/>
+                <ProductDetailInfo item={item} type={type}/>
                 {
-                    item.price && <ProductDetailPrices prices={item.price} selectPrice={selectPrice} priceVariation={priceVariation}/>
+                    item.price && <ProductDetailPrices 
+                                        type={type} 
+                                        prices={item.price} 
+                                        selectPrice={selectPrice} 
+                                        priceVariation={priceVariation}
+                                    />
                 }
-                <CustomAlert display={alert} status={'success'} message={success} toggleFunction={() => { setAlert(!alert)}}/>
                 <Button
+                    size={'lg'}
                     isDisabled={!priceVariation}
                     onClick={(event) => handleAddToCartClick(event)}
-                    bg={'green.200'}
+                    bg={getColor(type)}
                     borderRadius={0}
                     borderWidth={1}
                     borderColor={'black'}>
-                    <Box>
                         add to cart!
-                    </Box>
                 </Button>
+                <CustomAlert display={alert} status={'success'} message={success} toggleFunction={() => { setAlert(!alert)}}/>
                 </VStack>
         </HStack>
         </Box>
     )
+
+
+    function getColor(type: string){
+        switch(type){
+          case 'plants':
+            return theme.palette.lime
+          case 'seeds':
+            return theme.palette.skyBlue
+          case 'merch':
+            return 'purple.700'
+        }
+      }
 
 
     function handleAddToCartClick(event: React.MouseEvent<HTMLButtonElement>){

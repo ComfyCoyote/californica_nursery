@@ -1,14 +1,15 @@
 import axios from "axios";
 
-
-export const getCatalogItemsAPI = async (category_id: string) => {
-    console.log("This call was made from the custom api call")
+export const getCatalogItemsAPI = async (category_id: string, cursor: string | string[] | null = null) => {
 
     const url = "https://connect.squareup.com/v2/catalog/search-catalog-items"
 
     const body = {
         "category_ids" : [category_id],
-        "archived_state": "ARCHIVED_STATE_NOT_ARCHIVED"
+        "archived_state": "ARCHIVED_STATE_NOT_ARCHIVED",
+        "cursor": cursor,
+        "limit": 15
+
     }
 
     const headers = {

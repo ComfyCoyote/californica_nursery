@@ -14,6 +14,11 @@ import {
 } from '@chakra-ui/react';
 import { theme } from '@/theme/theme';
 
+
+//make the dropdown solid color, no white background
+//sharp corner
+//capitalize the word
+
 interface NavbarDropdownProps {
   options: { value: string; label: string; bgColor: string, hoverColor: string, href: string }[];
   placeholder?: string;

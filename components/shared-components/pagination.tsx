@@ -1,40 +1,69 @@
-import { Box, Button, ButtonGroup, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { HStack, Text, Button} from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { theme } from "@/theme/theme"
 
 interface PaginationProps {
-  currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  loadMore: () => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
-  const renderPageButtons = () => {
-    const buttons = [];
+const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange, loadMore }) => {
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => {
+        const newPage = prevPage - 1;
+        onPageChange(newPage);
+        return newPage;
+      });
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prevPage => {
+        const newPage = prevPage + 1;
+        onPageChange(newPage);
+        return newPage;
+      });
+    }
+  };
+
+  const handlePageClick = (page: number) => {
+    setCurrentPage(page);
+    onPageChange(page);
+  };
+
+  const renderPageNumbers = () => {
+    const pages = [];
     for (let i = 1; i <= totalPages; i++) {
-      buttons.push(
-        <Button
+      pages.push(
+        <Text
           key={i}
-          variant={currentPage === i ? 'solid' : 'outline'}
-          colorScheme={currentPage === i ? 'blue' : 'gray'}
-          onClick={() => onPageChange(i)}
+          fontSize={30}
+          fontWeight={700}
+          onClick={() => handlePageClick(i)}
+          colorScheme={i === currentPage ? 'blue' : 'gray'}
+          mx={1}
         >
           {i}
-        </Button>
+        </Text>
       );
     }
-
-    return buttons;
+    return pages;
   };
 
   return (
-    <Box>
-      <ButtonGroup spacing="2">
-        {renderPageButtons()}
-      </ButtonGroup>
-      <Text mt="2">
-        Page {currentPage} of {totalPages}
+    <HStack bg={theme.palette.cream} spacing={2} py={8} justifyContent="center">
+      <Button variant={'unstyled'} onClick={loadMore}>
+      <Text fontSize={25} fontWeight={700}>
+        Load More
       </Text>
-    </Box>
+      </Button>
+    </HStack>
   );
 };
 

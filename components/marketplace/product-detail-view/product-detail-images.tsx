@@ -31,6 +31,8 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
 
   return(
         <VStack
+            display={'flex'}
+            alignItems={'flex-start'}
             h='100%'
             w='35%'>
         <Box 
@@ -48,6 +50,9 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
             />
         </Box>
         <HStack
+            w={'100%'}
+            display={'flex'}
+            alignItems={'flex-start'}
             h='20%'>
 
         {

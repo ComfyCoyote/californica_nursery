@@ -5,6 +5,8 @@ import Navbar from "../layout/navbar";
 import { iansBio, bio1, bio2, jacksonsBio, jacksonsBioAlt, iansBioAlt, bio1Alt, bio2Alt, bio3Alt  } from "./bios";
 import { theme } from "@/theme/theme";
 
+//include ian and jackson image in web assets/web/images
+//replace signatures with green ones
 
 const AboutPage = () => {
 
@@ -13,14 +15,16 @@ const AboutPage = () => {
         <Box overflowX={'hidden'} bg='NavajoWhite' h='100%' w='100%' pt={40} display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
             <VStack spacing={0} p={0}>
             <VStack bg='NavajoWhite'>
-            <Text bg="brown">
-                About Us
-            </Text>
-            <Text fontSize={20} fontWeight={600} p={10}>
-                {bio1Alt}
-            </Text>
+            <Box bg={theme.palette.lime} width={'100%'}>
+                <Text textAlign={'center'} fontSize={30} fontWeight={700}>
+                    CALIFORNIA NATIVE PLANTS, GROWN BY CALIFORNIA LOCALS
+                </Text>
+            </Box>
             <HStack p={10} width={'100%'}>
                 <VStack>
+                    <Text fontSize={20} fontWeight={600} p={10}>
+                        {bio1Alt}
+                    </Text>
                     <Text fontSize={20} fontWeight={600}>
                         {bio2Alt}
                     </Text>
@@ -28,18 +32,20 @@ const AboutPage = () => {
                         {bio3Alt}
                     </Text>
                 </VStack>
-                <Image priority src='/images/person.png' alt='ian and jackson' width={500}  height={500}/>
+                <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                    <Image priority src='/images/ian_jackson.jpg' alt='ian and jackson' width={300} height={200}/>
+                </Box>
             </HStack>
             </VStack>
                 <Box bg={theme.palette.lime} width={'100%'}>
                 <Text fontSize={50} fontWeight={600} animation="scrollText 15s linear infinite"
-      sx={{
-        "@keyframes scrollText": {
-          from: { transform: "translateX(100%)" },
-          to: { transform: "translateX(-100%)" }
-        }
-      }}>
-                    Heal the urban landscape // Plant a native plant // Support local wildlife
+                sx={{
+                    "@keyframes scrollText": {
+                    from: { transform: "translateX(100%)" },
+                    to: { transform: "translateX(-100%)" }
+                    }
+                }}>
+                    Heal the urban landscape   Plant a native plant   Support local wildlife
                 </Text>
                 </Box>
             <HStack bg={theme.palette.darkBrown} width={'100%'}>

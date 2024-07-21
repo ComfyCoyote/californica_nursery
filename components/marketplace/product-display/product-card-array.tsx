@@ -1,35 +1,46 @@
 import { Plant, Seed } from "@/Interfaces/interfaces";
 import ProductCard from "./product-card";
-import { Grid, useEditable } from "@chakra-ui/react"
+import { Grid } from "@chakra-ui/react"
 import { useSearch } from "../search-sidebar/search-sidebar-context";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React from "react";
+import Pagination from "@/components/shared-components/pagination";
+import axios from "axios";
 
 interface CardArrayPropTypes {
     items: any[];
     type: string;
+    cursor: string;
 }
 
 
 const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTypes ) => {
+    const router = useRouter()
 
     const { filterValues, filters, open} = useSearch()
 
     const [displayArray, setDisplayArray] = useState<Array<any>>([])
+    const [cursor, setCursor] = useState<string>(props.cursor)
 
     useEffect(() => {
-        const filtered = props.items.filter(item => filterAnyFunction(item))
+        const newArr = [...displayArray, ...props.items]
+        const filtered = newArr.filter(item => filterAnyFunction(item))
         setDisplayArray(filtered)
     }, [filterValues])
 
 
         if(props.items){
             return(
+                <React.Fragment>
                 <Grid 
                 width={open ? '50vw' : '100%'}
                 templateColumns="repeat(4, 1fr)"
                 gap={4}>
                 {displayArray.map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
+                <Pagination totalPages={1} onPageChange={() => (console.log('page changed'))} loadMore={loadMore}/>
+                </React.Fragment>
             )
         } else {
             return (
@@ -75,8 +86,6 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
 
         } else {
 
-            console.log('ITEM RETURNED')
-
             return item
         }
 
@@ -116,10 +125,20 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
 
         } else {
 
-            console.log('ITEM RETURNED')
-
             return item
         }
+
+    }
+
+    async function loadMore(){
+
+        const location = router.pathname
+        const items = await axios.post('api/getItems', {'type': location, 'cursor': cursor})
+
+        if(items){
+            setDisplayArray([...displayArray, ...items.data.items])
+        }
+
 
     }
 

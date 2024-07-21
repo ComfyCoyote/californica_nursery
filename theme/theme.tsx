@@ -10,6 +10,7 @@ export const theme = {
         lime: '#C0D84D',
         orange: '#F36E21',
         skyBlue: '#91D7eE',
-        darkGreen: '#443e18'
+        darkGreen: '#443e18',
+        purple: '#FF99CC'
     }
 }

@@ -1,22 +1,12 @@
-import { getImageURL, queryFirestorePlants } from "@/firebase/firebaseFunctions"
-import MarketplaceDrawer from "@/components/marketplace-drawer"
 import React from 'react'
-import Navbar from "@/components/layout/navbar"
-import { useCart } from "@/components/marketplace/shoppingCartContext/shoppingCartContext"
-import { Grid, VStack } from "@chakra-ui/react"
-import ProductCardArray from "./product-display/product-card-array"
-import { Box, Flex} from "@chakra-ui/react"
-import { useState } from "react"
-import ShoppingCart from "./shoppingCartContext/shoppingCart"
+import { HStack, VStack } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 import SearchSidebar from "./search-sidebar/search-sidebar"
-import FloatingActionButton from "../shared-components/cart-fab"
-import Image from "next/image"
 import SearchFloatingActionButton from "../shared-components/search-fab"
-import { CustomOption } from "../shared-components/search-dropdown" 
-import { MultiValue } from 'react-select';
 import { useSearch } from "./search-sidebar/search-sidebar-context"
 import { theme } from "@/theme/theme"
 import { Text } from "@chakra-ui/react"
+import Pagination from "../shared-components/pagination"
 
 
 interface MarketplacePropTypes{
@@ -26,46 +16,15 @@ interface MarketplacePropTypes{
     
 }
 
+const length = 10;
+const numbers = Array.from({ length }, (_, i) => i + 1);
+
 //make plants banner continuous
 
 
 const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOptions}) => {
 
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [shoppingCartOpen, setShoppingCartOpen] = useState(false)
-
-    const {open, toggleOpen, filters} = useSearch()
-
-    const handleDrawerOpen = () => {
-        setIsDrawerOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setIsDrawerOpen(false);
-    };
-
-    const handleShoppingCartOpen = () => {
-        setShoppingCartOpen(true)
-    }
-
-    const toggleShoppingCart = () => {
-        setShoppingCartOpen(!shoppingCartOpen)
-    }
-
-    const handleFilterChange = (selectedFilters: string[]) => {
-        // Implement your filter logic here
-        console.log('Selected filters:', selectedFilters);
-      };
-    
-    const handleSortChange = (selectedSortOption: string) => {
-    // Implement your sorting logic here
-    console.log('Selected sort option:', selectedSortOption);
-    };
-
-    const handleSearchChange = (searchQuery: string) => {
-    // Implement your search logic here
-    console.log('Search query:', searchQuery);
-    };
+    const {open, toggleOpen} = useSearch()
 
     return(
         <React.Fragment>
@@ -76,10 +35,10 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         />
         <Box bg={theme.palette.cream} h='100%' w='100%' p={10} pt={20}>
             <VStack spacing="auto" justify="center" p={5}>
-                <Box bg={theme.palette.lime} width={'100vw'} height={55}>
+                <Box bg={getColor(title)} overflow={'hidden'} width={'100vw'} height={55}>
                     <Text 
                         pt={2}
-                        width={'100vw'}
+                        width={'100%'}
                         fontSize={30} 
                         fontWeight={700} 
                         animation="scrollText 15s linear infinite"
@@ -90,26 +49,18 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
                             to: { transform: "translateX(-100%)" }
                             }
                     }}>
-                        <Flex justifyContent={'space-between'} alignItems={'center'} w={'100vw'} h={'100%'}>
-                            <Text>
-                                {title.toUpperCase()}
-                            </Text>
-                            <Text>
-                                {title.toUpperCase()}
-                            </Text>
-                            <Text>
-                                {title.toUpperCase()}
-                            </Text>
-                            <Text>
-                                {title.toUpperCase()}
-                            </Text>
-                            <Text>
-                                {title.toUpperCase()}
-                            </Text>
-                            <Text>
-                                {title.toUpperCase()}
-                            </Text>
-                        </Flex>
+                        <HStack bg="green" spacing={20} display={'inline-block'} justifyContent={'space-between'} alignItems={'center'} h={'100%'}>
+
+                            {
+                                numbers.map((i) => {
+                                    return (
+                                        <Text>
+                                            {title.toUpperCase()}
+                                        </Text>
+                                    )
+                                })
+                            }
+                        </HStack>
                     </Text>
                 </Box>
                 <Text fontSize={25} fontWeight={600} p={10} color="black" textAlign={'center'}>
@@ -118,50 +69,32 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
             </VStack>
             {children}
         </Box>
-        <SearchFloatingActionButton toggleSearchDrawer={toggleOpen}/>
+        {/*<SearchFloatingActionButton toggleSearchDrawer={toggleOpen}/>*/}
         </React.Fragment>
 
     )
 
-    function getBanner(): string{
-        const spaces = '          '
-        const upper = title.toUpperCase()
-        const spaced = upper + spaces
-        const banner = [0,1,2].map((i) => (spaced)).join(' ')
-
-        console.log(banner)
-
-        return banner
-    }
-
-    function getImage(): string{
-        let src = ''
-
-        switch(title){
-            case 'plants':
-                src = `/images/titles/${title}.png`
-                break;
-            case 'seeds':
-                break;
-            case 'merch':
-                break;
+    function getColor(type: string){
+        switch(type){
+          case 'plants':
+            return theme.palette.lime
+          case 'seeds':
+            return theme.palette.skyBlue
+          case 'merch':
+            return theme.palette.purple
         }
+      }
 
-        return src
+    function getBanner(){
+        const arr = numbers.map((i) => {
+            return title.toUpperCase()
+                
+        })
+
+        return arr.join('')
     }
+
 }
 
-/*
-
-        <ShoppingCart 
-            open={shoppingCartOpen}
-            toggleCart={toggleShoppingCart}/>
-        <MarketplaceDrawer 
-            isDrawerOpen={isDrawerOpen}
-            handleDrawerClose={handleDrawerClose}
-            handleDrawerOpen={handleDrawerOpen}
-        />
-        <Navbar toggleShoppingCart={toggleShoppingCart} />
-*/
 
 export default Marketplace;

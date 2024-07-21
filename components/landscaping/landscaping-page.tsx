@@ -12,7 +12,7 @@ const LandscapingPage = () => {
 
     return(
         <>
-        <Box overflowX={'hidden'} bg='NavajoWhite' h='100%' w='100%' pt={40} display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
+        <Box overflowX={'hidden'} bg={theme.palette.cream} h='100%' w='100%' pt={40} display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
             <VStack spacing={0} p={0}>
             <Text bg="brown">
                 Landscaping

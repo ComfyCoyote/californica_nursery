@@ -1,46 +1,47 @@
 import React from 'react';
-import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
-import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
-import Link from 'next/link';
+import { HStack, Text, VStack } from '@chakra-ui/react';
+import {  Plant } from '@/Interfaces/interfaces'
+import { theme } from '@/theme/theme';
 
 interface ProductDetailInfoPropTypes {
-    item: Plant 
+    item: Plant,
+    type: string
 }
 
-
-
-const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
+const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) => {
 
 
   return(
-    <VStack 
-    h='100%'
-    w='65%'
-    display={'flex'} 
-    alignItems={'flex-start'}
->
-    <Box
-        bg='green.200'>
-    <Text 
-        fontWeight={700}
-        fontSize={'2xl'}>
-        {item?.name && getComName(item?.name)}
-    </Text>
-    <Text
-        fontStyle={'italic'}>
-        {item?.name ? 
-        getSciName(item?.name) 
-        :
-        ''
-        }
-    </Text>
-    </Box>
+    <React.Fragment>
+    <VStack
+        display={'flex'}
+        alignItems={'flex-start'}
+        bg={getColor(type)}
+        spacing={-1}
+    >
+        <Text 
+            fontWeight={700}
+            fontSize={'2xl'}>
+            {item?.name && getComName(item?.name)}
+        </Text>
+        <Text
+            fontStyle={'italic'}>
+            {item?.name ? 
+            getSciName(item?.name) 
+            :
+            ''
+            }
+        </Text>
+    </VStack>
     <Text>
         {item.description}
     </Text>
+    {
+        type === 'plants' &&
         <VStack
         display={'flex'} 
-        alignItems={'flex-start'}>
+        alignItems={'flex-start'}
+        spacing={-1}>
         <HStack>
         <Text fontWeight={600}>
             {`LIFE CYCLE: `}
@@ -83,16 +84,29 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
         </HStack>
         <HStack>
         <Text fontWeight={600}>
-            {`DIFFICUTY: `}
+            {`DIFFICULTY: `}
         </Text>
         <Text>
             {item.plantAttributes?.difficulty?.join(', ')}
         </Text>
         </HStack>
     </VStack>
-    </VStack>
-    
+
+    }
+    </React.Fragment>
+  
   );
+
+  function getColor(type: string){
+    switch(type){
+      case 'plants':
+        return theme.palette.lime
+      case 'seeds':
+        return theme.palette.skyBlue
+      case 'merch':
+        return 'purple.700'
+    }
+  }
 
   function getComName(name: string){
     const start = name.indexOf('(')

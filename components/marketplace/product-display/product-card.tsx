@@ -33,7 +33,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
         priority 
         sizes="(max-width: 600px) 50vw, (max-width: 1200px) 25vw, 25vw"/>
       </Box>
-        <HStack bgColor={`${theme.palette.lime}`} p={2} w='100%' justify={"space-between"} alignItems={'center'}>
+        <HStack bgColor={getColor(type)} p={2} w='100%' justify={"space-between"} alignItems={'center'}>
             <Text fontWeight={700}>{formatName(item)}</Text>
            <Text fontWeight={600}>{getPriceRange(item)}</Text> 
         </HStack>
@@ -55,6 +55,17 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
     }
   
 
+  }
+
+  function getColor(type: string){
+    switch(type){
+      case 'plants':
+        return theme.palette.lime
+      case 'seeds':
+        return theme.palette.skyBlue
+      case 'merch':
+        return theme.palette.purple
+    }
   }
 
   function formatName(item: Plant | Apparel | PlaidProduct): string {
@@ -80,8 +91,8 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
 
     if(priceArr){
 
-      const startPrice = priceArr[0].price
-      const endPrice = priceArr[priceArr.length - 1].price
+      const startPrice = priceArr[0]?.price
+      const endPrice = priceArr[priceArr.length - 1]?.price
 
       return `$${Number(startPrice)/100} - $${Number(endPrice)/100}`
 

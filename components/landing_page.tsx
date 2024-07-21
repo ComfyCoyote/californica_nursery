@@ -78,10 +78,10 @@ const LandingPage: React.FC = () => {
               as="a"
               border="2px solid black" 
               borderRadius={0}
-              bg="green.300" 
+              bg={theme.palette.lime} 
               color="black" 
-              _hover={{ bg: 'green.700' }} 
-              _active={{ bg: 'green.700' }}
+              _hover={{ bg: theme.palette.lime }} 
+              _active={{ bg: theme.palette.lime }}
               >
                 PLANTS
         </Button>
@@ -101,10 +101,10 @@ const LandingPage: React.FC = () => {
               as="a"
               border="2px solid black" 
               borderRadius={0}
-              bg="blue.300" 
+              bg={theme.palette.skyBlue} 
               color="black" 
-              _hover={{ bg: 'blue.700' }} 
-              _active={{ bg: 'blue.700' }}
+              _hover={{ bg: theme.palette.skyBlue }} 
+              _active={{ bg: theme.palette.skyBlue }}
               >
                 SEEDS
         </Button>
@@ -149,10 +149,10 @@ const LandingPage: React.FC = () => {
               as="a"
               border="2px solid black" 
               borderRadius={0}
-              bg="purple.400" 
+              bg={theme.palette.purple} 
               color="black" 
-              _hover={{ bg: 'purple.700' }} 
-              _active={{ bg: 'purple.700' }}
+              _hover={{ bg: theme.palette.purple }} 
+              _active={{ bg: theme.palette.purple }}
               >
                 MERCH
         </Button>
@@ -172,10 +172,10 @@ const LandingPage: React.FC = () => {
         as="a"
         border="2px solid black" 
         borderRadius={0}
-        bg="yellow.200" 
+        bg={theme.palette.lightYellow} 
         color="black" 
-        _hover={{ bg: 'yellow.600' }} 
-        _active={{ bg: 'yellow.700' }} 
+        _hover={{ bg: theme.palette.lightYellow }} 
+        _active={{ bg: theme.palette.lightYellow }} 
         >
         ABOUT
         </Button>

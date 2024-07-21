@@ -1,7 +1,6 @@
 import { VStack, HStack, Text, Box} from "@chakra-ui/react";
 import { theme } from '../../theme/theme'       
 import Image from "next/image";
-import { text } from "stream/consumers";
 
 const bp1 = 'Create a functioning habitat of hyper-local plants'
 const bp2 = 'Utilize rainwater capture and varied topography, free from supplemental irrigation'
@@ -29,7 +28,7 @@ const BulletPoint: React.FC<BulletPointProps> = ({text}) => {
     return(
         <HStack spacing={10}>
             <Image src={'/images/icons/pink_star.png'} alt="star" height={50} width={50}/>
-            <Text color={'navajowhite'} fontSize={27} fontWeight={700}>
+            <Text color={theme.palette.cream} fontSize={27}>
                 {text}
             </Text>
         </HStack>
@@ -40,9 +39,9 @@ const LandscapingSectionTwo = () => {
 
 
     return(
-        <VStack width={'100%'} pt={105} spacing={0}>
-            <Box backgroundColor={theme.palette.lime} width={'100%'} height={100} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-                <Text fontSize={60} fontWeight={700}>
+        <VStack width={'100%'} spacing={0}>
+            <Box backgroundColor={theme.palette.lime} width={'100%'} height={55} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                <Text fontSize={30} fontWeight={700}>
                     OUR APPROACH
                 </Text>
             </Box>
@@ -57,37 +56,21 @@ const LandscapingSectionTwo = () => {
             </VStack>
             <VStack width={'100%'} height={'100%'} backgroundColor={theme.palette.olive}>
                 <Box px={10} width={'100%'}>
-                    <Text fontSize={25} fontWeight={700} color={'navajowhite'} p={10}>
+                    <Text fontSize={25} color={theme.palette.cream} p={10}>
                         {text1}
                     </Text>
                 </Box>
                 <HStack 
+                    px={20}
                     height={'100%'} 
                     width={"100%"}
                     display={'flex'}
                     alignItems={'center'}
                     justifyContent={'center'}
                 >
-                    <Box 
-                        display={'flex'}
-                        alignItems={'center'}
-                        flex="0 0 auto"
-                        justifyContent={'center'}
-                        overflow="hidden"
-                        position={'relative'}
-                        height={400} 
-                        width={400}
-                        >
-                        <Image 
-                            src='/images/hand paper demo.png' 
-                            alt='hand paper' 
-                            fill={true}
-                            style={{objectFit: "cover"}}
-                        />
-                    </Box>
                     <VStack 
-                        height={400}
                         py={10}
+                        height={400}
                         width={'100%'}
                         display={'flex'} 
                         flexDirection={'column'} 
@@ -98,15 +81,51 @@ const LandscapingSectionTwo = () => {
                             wpArr.map((wp) => {
 
                                 return(
-                                    <Text fontSize={25} fontWeight={700} color={'navajowhite'} key={wp}>
+                                    <Text fontSize={25} fontWeight={700} color={theme.palette.cream} key={wp}>
                                         {wp}
                                     </Text>
                                 )
                             })
                         }
                     </VStack>
+                    <Box 
+                        bg={'green'}
+                        display={'flex'}
+                        alignItems={'center'}
+                        flex="0 0 auto"
+                        justifyContent={'center'}
+                        position={'relative'}
+                        >
+                            <Box
+                                height={500}
+                                width={700}
+                                zIndex={1}>
+                            <Image
+                                src={'/images/ian_jackson.jpg'}
+                                alt="Background Image"
+                                fill={true}
+                                style={{objectFit: "cover"}} // Ensure it's below the overlay
+                            />
+                            </Box>
+                            {/* Overlay Image */}
+                            <Box
+                                height={200}
+                                width={200}
+                                position="absolute"
+                                top={350}
+                                left={600}
+                                zIndex={2} >
+                            <Image
+                                src={'/animations/shovel transparent.gif' }
+                                alt="Overlay Image"
+                                fill={true}
+                                style={{objectFit: "cover"}}
+                                // Ensure it's above the background
+                            />
+                            </Box>
+                    </Box>
                 </HStack>
-                <Text fontSize={25} fontWeight={700} color={'navajowhite'} p={10}>
+                <Text fontSize={25} color={theme.palette.cream} p={10}>
                     {text2}
                 </Text>
             </VStack>
