@@ -42,6 +42,8 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
             overflow={'hidden'}
             >
             <Image 
+                placeholder='blur'
+                blurDataURL='images/icons/pink_star_placeholder.png'
                 src={mainImage} 
                 alt="Image"  
                 fill={true}

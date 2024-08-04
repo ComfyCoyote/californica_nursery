@@ -23,6 +23,8 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
     const [displayArray, setDisplayArray] = useState<Array<any>>([])
     const [cursor, setCursor] = useState<string>(props.cursor)
 
+    console.log(cursor)
+
     useEffect(() => {
         const newArr = [...displayArray, ...props.items]
         const filtered = newArr.filter(item => filterAnyFunction(item))
@@ -39,7 +41,9 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                 gap={4}>
                 {displayArray.map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
-                <Pagination totalPages={1} onPageChange={() => (console.log('page changed'))} loadMore={loadMore}/>
+                {
+                    cursor && <Pagination totalPages={1} onPageChange={() => (console.log('page changed'))} loadMore={loadMore}/> 
+                }
                 </React.Fragment>
             )
         } else {
@@ -135,7 +139,10 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         const location = router.pathname
         const items = await axios.post('api/getItems', {'type': location, 'cursor': cursor})
 
+        console.log(items.data.cursor)
+
         if(items){
+            setCursor(items.data.cursor)
             setDisplayArray([...displayArray, ...items.data.items])
         }
 

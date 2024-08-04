@@ -26,11 +26,9 @@ interface NavbarDropdownProps {
 }
 
 const NavbarDropdown: React.FC<NavbarDropdownProps> = ({ options, placeholder }) => {
-
-  const handleOptionSelect = (option: object) => { console.log(option)}
-
-  return (
-    <VStack spacing={4}>
+  
+  return(
+    <VStack>
       <Popover>
         <PopoverTrigger>
           <Button bgColor={'transparent'} color={'white'} fontSize={23} _hover={{bgColor: 'transparent'}}>
@@ -39,18 +37,17 @@ const NavbarDropdown: React.FC<NavbarDropdownProps> = ({ options, placeholder })
             </Text>
           </Button>
         </PopoverTrigger>
-        <PopoverContent>
-          <PopoverBody>
-            <VStack>
+        <PopoverContent mt={7} borderRadius={0}>
+          <PopoverBody p={0} borderRadius={0}>
+            <VStack spacing={0}>
               {options.map((option) => (
-                <Box width={'100%'} key={option.value}>
+                <Box width={'100%'} key={option.value} backgroundColor={option.bgColor}>
                 <Link href={option.href}>
                 <Button
                   width={'100%'}
                   key={option.value}
-                  onClick={() => handleOptionSelect(option)}
                   backgroundColor={option.bgColor}
-                  _hover={{ backgroundColor: option.hoverColor }}
+                  _hover={{ backgroundColor: option.hoverColor, borderRadius: 0}}
                 >
                   {option.label}
                 </Button>

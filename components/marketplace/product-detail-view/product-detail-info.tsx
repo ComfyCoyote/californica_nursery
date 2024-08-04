@@ -2,6 +2,7 @@ import React from 'react';
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import {  Plant } from '@/Interfaces/interfaces'
 import { theme } from '@/theme/theme';
+import { it } from 'node:test';
 
 interface ProductDetailInfoPropTypes {
     item: Plant,
@@ -9,88 +10,87 @@ interface ProductDetailInfoPropTypes {
 }
 
 const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) => {
-
-
-  return(
-    <React.Fragment>
-    <VStack
-        display={'flex'}
-        alignItems={'flex-start'}
-        bg={getColor(type)}
-        spacing={-1}
-    >
-        <Text 
-            fontWeight={700}
-            fontSize={'2xl'}>
-            {item?.name && getComName(item?.name)}
-        </Text>
-        <Text
-            fontStyle={'italic'}>
-            {item?.name ? 
-            getSciName(item?.name) 
-            :
-            ''
-            }
-        </Text>
-    </VStack>
-    <Text>
-        {item.description}
-    </Text>
-    {
-        type === 'plants' &&
+    
+    return(
+        <React.Fragment>
         <VStack
-        display={'flex'} 
-        alignItems={'flex-start'}
-        spacing={-1}>
-        <HStack>
-        <Text fontWeight={600}>
-            {`LIFE CYCLE: `}
-        </Text>
+            display={'flex'}
+            alignItems={'flex-start'}
+            bg={getColor(type)}
+            spacing={-1}
+        >
+            <Text 
+                fontWeight={700}
+                fontSize={'2xl'}>
+                {item?.name && getComName(item?.name)}
+            </Text>
+            <Text
+                fontStyle={'italic'}>
+                {item?.name ? 
+                getSciName(item?.name) 
+                :
+                ''
+                }
+            </Text>
+        </VStack>
         <Text>
-            {item.plantAttributes?.lifeCycle?.join(', ')}
+            {item.description}
         </Text>
-        </HStack>
-        <HStack>
-        <Text fontWeight={600}>
-            {'PLANT TYPE:'}
-        </Text>
-        <Text>
-        {item.plantAttributes?.plantType?.join(', ')}
-        </Text>
-        </HStack>
-        <HStack>
-        <Text fontWeight={600}>
-            {`GROWTH: `}
-        </Text>
-        <Text>
-            {item.plantAttributes?.growthForm?.join(', ')}
-        </Text>
-        </HStack>
-        <HStack>
-        <Text fontWeight={600}>
-            {`DORMANCY: `}
-        </Text>
-        <Text>
-            {item.plantAttributes?.dormancy?.join(', ')}
-        </Text>
-        </HStack>
-        <HStack>
-        <Text fontWeight={600}>
-            {`FLOWERING: `}
-        </Text>
-        <Text>
-            {item.plantAttributes?.flowerColor?.join(', ')}
-        </Text>
-        </HStack>
-        <HStack>
-        <Text fontWeight={600}>
-            {`DIFFICULTY: `}
-        </Text>
-        <Text>
-            {item.plantAttributes?.difficulty?.join(', ')}
-        </Text>
-        </HStack>
-    </VStack>
+        {
+            type === 'plants' &&
+            <VStack
+            display={'flex'} 
+            alignItems={'flex-start'}
+            spacing={-1}>
+            <HStack>
+            <Text fontWeight={600}>
+                {`LIFE CYCLE: `}
+            </Text>
+            <Text>
+                {item.plantAttributes?.lifeCycle?.join(', ')}
+            </Text>
+            </HStack>
+            <HStack>
+            <Text fontWeight={600}>
+                {'PLANT TYPE:'}
+            </Text>
+            <Text>
+            {item.plantAttributes?.plantType?.join(', ')}
+            </Text>
+            </HStack>
+            <HStack>
+            <Text fontWeight={600}>
+                {`GROWTH: `}
+            </Text>
+            <Text>
+                {item.plantAttributes?.growthForm?.join(', ')}
+            </Text>
+            </HStack>
+            <HStack>
+            <Text fontWeight={600}>
+                {`DORMANCY: `}
+            </Text>
+            <Text>
+                {item.plantAttributes?.dormancy?.join(', ')}
+            </Text>
+            </HStack>
+            <HStack>
+            <Text fontWeight={600}>
+                {`FLOWERING: `}
+            </Text>
+            <Text>
+                {item.plantAttributes?.flowerColor?.join(', ')}
+            </Text>
+            </HStack>
+            <HStack>
+            <Text fontWeight={600}>
+                {`DIFFICULTY: `}
+            </Text>
+            <Text>
+                {item.plantAttributes?.difficulty?.join(', ')}
+            </Text>
+            </HStack>
+        </VStack>
 
     }
     </React.Fragment>

@@ -5,7 +5,6 @@ import ProductDetailView from "@/components/marketplace/product-detail-view/prod
 import Layout from "@/components/layout/layout";
 import type { ReactElement } from 'react'
 import type { NextPageWithLayout } from "../_app";
-import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import constructPlant from "@/components/square-utils/constructPlant";
 import { getCatalogObject } from "@/components/square-utils/getCatalogObject";
 
@@ -44,15 +43,13 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
     
     try{
 
-        const attributeMapping = await getCustomAttributes(client)
-
         if(params?.pid){
 
             const response = await getCatalogObject(params?.pid as string)
 
             const item = response?.object
 
-            const promise = constructPlant(client, item, attributeMapping)
+            const promise = constructPlant(client, item)
 
             console.log(promise)
 

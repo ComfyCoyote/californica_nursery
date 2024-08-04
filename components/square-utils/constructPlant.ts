@@ -1,14 +1,14 @@
 import type { Client, CatalogObject, InventoryCount, CatalogItem } from "square"
 import { PriceVariation, SelectOption, AttributeSelectionMap, Plant } from "@/Interfaces/interfaces"
 import getInventoryCount from "./getInventoryCount"
-import { PlantAttributesAsArray } from "@/Interfaces/interfaces"
-import { attributeArray, plantAttributeMapping } from "./custom-attributes"
+import { PlantAttributes } from "@/Interfaces/interfaces"
+import { plantCustomAttributeValues } from "./customAttributeValueObject"
 
 //This function constructs a Plant object by calling a series of square api's which gather
 //all relevant data for the Plant to function in the marketplace
 
 
-async function constructPlant(client: Client, item: any, attributeMapping: AttributeSelectionMap){
+async function constructPlant(client: Client, item: any){
 
 
         //from the catalogobject's priceVariation, contruct a PriceVariation object which contains simplified
@@ -35,29 +35,30 @@ async function constructPlant(client: Client, item: any, attributeMapping: Attri
 
         //check to see if the item has customAttributeValues. if so, then create a PlantAttributesAsArray object which
         //maps the specific attributes to the item and assigns it to the key "plantAttributes"
-        const attributeCheck = item.custom_attribute_values
+        const customAttributeValues = item.custom_attribute_values
         
-        const plantAttributes: PlantAttributesAsArray = {}
+        const plantAttributes: PlantAttributes = {
+            "soilMoisture": [],
+            "plantType": [],
+            "difficulty": [],
+            "dormancy": [],
+            "growthRate": [],
+            "flowerColor": [],
+            "ecosystems": [],
+            "lifeCycle": [],
+            "sun": [],
+            "growthForm": []
+        }
 
-        if(attributeCheck){
-            attributeArray.forEach((val) => {
+        //if the item has custom attributes defined
+        if(customAttributeValues){
+            //for each item in local custom_attribute_values array
+            plantCustomAttributeValues.forEach((val) => {
+                //check to see if the item has a custom attribute for the item in our local array, return the object
+                const customAttribute = customAttributeValues[val["id"]]
                 
-                const valCheck = attributeCheck[plantAttributeMapping[val]]
-                
-                if(valCheck){
-                    let values: string[] = []
-                    valCheck.selection_uid_values?.forEach((i: any) => {
-                        attributeMapping[val]?.selectionArr?.forEach((sel: SelectOption) => {
-                            
-                            if(i === sel.id){
-                               sel.value && values.push(sel.value)
-                            }
-                        })
-                    })
-
-                   
-
-                    plantAttributes[val] = values
+                if(customAttribute){
+                    plantAttributes[val["name"]] = customAttribute.selection_uid_values.map((i: string) => { return val["attributes"][i]}) 
                 }
 
             })

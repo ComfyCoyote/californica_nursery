@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import {
-  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -11,30 +9,20 @@ import {
   DrawerOverlay,
   VStack,
   Text,
-  useEditable,
 } from '@chakra-ui/react';
-import MultiSelectDropdown from '@/components/shared-components/search-dropdown';
-import { CustomOption } from '@/components/shared-components/search-dropdown';
-import { MultiValue } from 'react-select';
-import { Client, Environment, ApiError, SearchCatalogObjectsRequest } from "square";
-import { attributeSelectionMappingReverse } from '@/components/square-utils/custom-attributes';
-
+import type { CustomOption } from './search-sidebar-dropdown';
+import { plantCustomAttributeValues, merchCustomAttributeValues, CustomAttributeValues } from '@/components/square-utils/customAttributeValueObject';
+import SearchSidebarDropdown from './search-sidebar-dropdown';
 interface SearchSidebarPropTypes {
   open: boolean;
   filters: any;
   toggleSearch: () => void;
+  type: string
 
 }
 
-interface FilterOptionsObject {
-  [key: string]: string;
-}
 
-const attributeNames = ['Life Cycle', 'Dormancy', 'Life Cycle', 'Plant Types', 'Soil Moisture', 'Difficulty', 'Sun']
-
-
-
-const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({open, toggleSearch, filters}) => {
+const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({open, toggleSearch, filters, type}) => {
   //const [cartItems, setCartItems] = useState<Product[]>([]);
   
 
@@ -47,13 +35,13 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({open, toggleSearch, fi
             <DrawerHeader>Search</DrawerHeader>
             <DrawerBody>{
 
-                filters && Object.keys(filters).map((i, index) => {
+                contextAttributes().map((i, index) => {
                   return(
-                    <VStack key={i}>
+                    <VStack key={i.name}>
                       <Text>
-                        {attributeNames[index]}
+                        {i.name}
                       </Text>
-                      <MultiSelectDropdown options={filters[i]} attribute={i}/>
+                      <SearchSidebarDropdown options={getSelectOptions(i.attributes)}/>
                     </VStack>
                     
                   )
@@ -74,40 +62,26 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({open, toggleSearch, fi
     </>
   );
 
+  function contextAttributes(){
+    if(type === 'merch'){
+      return merchCustomAttributeValues
 
-  async function getCustomAttributes(){
-      const client = new Client({
-        accessToken: process.env.SQUARE_PRODUCTION_ACCESS_TOKEN,
-        environment: Environment.Production,
-    });
+    } else {
+      return plantCustomAttributeValues
+    }
+  }
 
-    try {
-      const response = await client.catalogApi.searchCatalogObjects({
-        objectTypes: [
-          'CUSTOM_ATTRIBUTE_DEFINITION'
-        ]
-      });
-    
-      const ids = Object.keys(attributeSelectionMappingReverse)
-      const objects = response.result.objects
-      let filterOptionsObject: any;
+  function getSelectOptions(attributes: any): CustomOption[]{
 
-      objects?.forEach((i) => {
-        if(ids.indexOf(i.id) !== -1){
-          const options = i.customAttributeDefinitionData?.selectionConfig?.allowedSelections?.map((q) =>  { return({value: q.name, label : q.name} as CustomOption)});
-          const name = attributeSelectionMappingReverse[i.id]
-          filterOptionsObject[name] = options 
+    return Object.entries<string>(attributes).map((i) => {
+      return {
+        label: i[1], 
+        value: `${i[0]}:${i[1]}`
         }
-      })
+      }
+    )
 
-
-      return await filterOptionsObject as FilterOptionsObject
-
-
-    } catch(error) {
-      console.log(error);
-    }
-    }
+  }
 }
 
 export default SearchSidebar;

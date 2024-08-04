@@ -32,36 +32,77 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         open={open}
         filters={filterOptions}
         toggleSearch={toggleOpen}
+        type={title}
         />
         <Box bg={theme.palette.cream} h='100%' w='100%' p={10} pt={20}>
             <VStack spacing="auto" justify="center" p={5}>
                 <Box bg={getColor(title)} overflow={'hidden'} width={'100vw'} height={55}>
-                    <Text 
-                        pt={2}
-                        width={'100%'}
-                        fontSize={30} 
-                        fontWeight={700} 
-                        animation="scrollText 15s linear infinite"
-                        noOfLines={1}
-                        sx={{
-                            "@keyframes scrollText": {
-                            from: { transform: "translateX(100%)" },
-                            to: { transform: "translateX(-100%)" }
-                            }
-                    }}>
-                        <HStack bg="green" spacing={20} display={'inline-block'} justifyContent={'space-between'} alignItems={'center'} h={'100%'}>
-
-                            {
-                                numbers.map((i) => {
-                                    return (
-                                        <Text>
-                                            {title.toUpperCase()}
-                                        </Text>
-                                    )
-                                })
-                            }
+                    <HStack
+                    w={'100%'}
+                    h={'100%'}
+                    >
+                        <HStack 
+                            animation="scrollText 15s linear infinite" 
+                            overflow={'hidden'}
+                            whiteSpace={'nowrap'}
+                            spacing={20} 
+                            display={'inline-flex'} 
+                            justifyContent={'space-between'} 
+                            alignItems={'center'} 
+                            w={'3000px'}
+                            h={'100%'}
+                            sx={{
+                                "@keyframes scrollText": 
+                                {
+                                    from: { transform: "translateX(100%)" },
+                                    to: { transform: "translateX(-100%)" }
+                                }
+                            }}
+                            >
+                                <Text  pt={2}
+                                    width={'100%'}
+                                    fontSize={30} 
+                                    fontWeight={700} 
+                                >
+                                    {title.toUpperCase()}
+                                </Text>
+                                <Text  pt={2}
+                                    width={'100%'}
+                                    fontSize={30} 
+                                    fontWeight={700} 
+                                >
+                                    {title.toUpperCase()}
+                                </Text>
+                                <Text  pt={2}
+                                    width={'100%'}
+                                    fontSize={30} 
+                                    fontWeight={700} 
+                                >
+                                    {title.toUpperCase()}
+                                </Text>
+                                <Text  pt={2}
+                                    width={'100%'}
+                                    fontSize={30} 
+                                    fontWeight={700} 
+                                >
+                                    {title.toUpperCase()}
+                                </Text>
+                                <Text  pt={2}
+                                    width={'100%'}
+                                    fontSize={30} 
+                                    fontWeight={700} 
+                                >
+                                    {title.toUpperCase()}
+                                </Text>
+                                <Text  pt={2}
+                                    width={'100%'}
+                                    fontSize={30} 
+                                    fontWeight={700} 
+                                >
+                                    {title.toUpperCase()}
+                                </Text>
                         </HStack>
-                    </Text>
+                        </HStack>
                 </Box>
                 <Text fontSize={25} fontWeight={600} p={10} color="black" textAlign={'center'}>
                     *Purchased plants, seeds, and merchandise are available for contactless pickup every Friday in Long Beach, CA.  For wholesale inquiries, contact californicanursery@gmail.com

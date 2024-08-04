@@ -26,6 +26,8 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
             overflow={'hidden'}
             >
       <Image 
+        placeholder='blur'
+        blurDataURL='images/icons/pink_star_placeholder.png'
         src={imageCheck(item)} 
         alt="Image" 
         fill={true} 
@@ -93,6 +95,10 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
 
       const startPrice = priceArr[0]?.price
       const endPrice = priceArr[priceArr.length - 1]?.price
+
+      if(startPrice === endPrice){
+        return `$${Number(startPrice)/100}`
+      }
 
       return `$${Number(startPrice)/100} - $${Number(endPrice)/100}`
 

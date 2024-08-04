@@ -1,9 +1,14 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { PlantFilters, MerchFilters, SeedFilters } from './search-filters-interfaces';
-import { CustomOption } from '@/components/shared-components/search-dropdown';
-import { filter } from '@chakra-ui/react';
+import { type } from 'os';
 
+export interface QueryValue {
+  [key: string] : string
+
+  "custom_attribute_definition_id": string,
+  "string_filter": string
+}
 
 
 interface SearchContextProps {
@@ -11,9 +16,8 @@ interface SearchContextProps {
     filters: PlantFilters | MerchFilters | SeedFilters | null
     filterValues: string[] | null
     toggleOpen: () => void
-    setPlantFilters: (body: any, attribute: string) => void
-    setSeedFilters: (body: any, attribute: string) => void
-    setMerchFilters: (body: any, attribute: string) => void
+    addQuery: (value: any) => void
+    query: any[]
 }
 
 interface CartProviderProps {
@@ -26,9 +30,8 @@ const SearchContext = createContext<SearchContextProps>({
     filters: null,
     filterValues: null,
     toggleOpen: () => {},
-    setPlantFilters: () => {},
-    setSeedFilters: () => {},
-    setMerchFilters: () => {}
+    addQuery: () => {},
+    query: []
 });
 
 export const useSearch = () => useContext(SearchContext);
@@ -36,8 +39,9 @@ export const useSearch = () => useContext(SearchContext);
 export const SearchProvider: React.FC <CartProviderProps>= (props) => {
   const [open, setOpen] = useState(false);
   const [filters, setFilters] = useState<PlantFilters | MerchFilters | SeedFilters | null>(null)
+  const [query, setQuery] = useState<any>({})
 
-  console.log(filters)
+  console.log(query)
 
   let filtersRef = useRef<any[]>([])
 
@@ -47,26 +51,18 @@ export const SearchProvider: React.FC <CartProviderProps>= (props) => {
     }
   }, [filters])
 
-  //this filter setter function gets passed directly to the dropdown component 'search-dropdown'
-  const setPlantFilters = (body: any, key: string) => {
-    const current: any = filters ? filters : {}
-    const value = body.map((i: CustomOption) => (i.value))
-    current[key] = value
-    setFilters(current as PlantFilters)
+  const addQuery = (value: any) => {
+    if(value){
+      const [id, val] = value.split(":")
+      const newQuery = query
+      newQuery[id] = val
+      setQuery(newQuery)
+    }
+    
   }
 
-  const setMerchFilters = (body: any, key: string) => {
-    const current: any = filters ? filters : {}
-    const value = body.map((i: CustomOption) => (i.value))
-    current[key] = value
-    setFilters(current as MerchFilters)
-  }
+  const searchItems = ()  => {
 
-  const setSeedFilters = (body: any, key: string) => {
-    const current: any = filters ? filters : {}
-    const value = body.map((i: CustomOption) => (i.value))
-    current[key] = value
-    setFilters(current as SeedFilters)
   }
 
 
@@ -75,7 +71,7 @@ export const SearchProvider: React.FC <CartProviderProps>= (props) => {
   }
 
   return (
-    <SearchContext.Provider value={{ open, filters, filterValues: filtersRef.current, toggleOpen, setMerchFilters, setPlantFilters, setSeedFilters}}>
+    <SearchContext.Provider value={{ open, filters, filterValues: filtersRef.current, toggleOpen, addQuery, query}}>
       {props.children}
     </SearchContext.Provider>
   );

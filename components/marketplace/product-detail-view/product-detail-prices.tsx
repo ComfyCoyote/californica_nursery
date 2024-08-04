@@ -74,8 +74,6 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ prices, pri
 
     const upper = cut.toUpperCase()
 
-    console.log(upper)
-
     return upper
 
   }

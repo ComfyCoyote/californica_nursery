@@ -4,12 +4,12 @@ import type { OrderLineItemModifier, OrderLineItemAppliedDiscount, OrderLineItem
 
 
 export interface Seed extends PlaidProduct{
-    seedAttributes: PlantAttributesAsArray | null
+    seedAttributes: PlantAttributes | null
 }
 
 
 export interface Plant extends PlaidProduct {
-    plantAttributes?: PlantAttributesAsArray;
+    plantAttributes?: PlantAttributes;
 }
 
 export interface Merch extends PlaidProduct {
@@ -40,35 +40,19 @@ export interface AttributeSelection {
 }
 
 export interface PlantAttributes {
-        [key: string]: any;
+        [key: string]: string[];
 
-        soilMoisture?: string | string[]; 
-        plantType?: string | string[]; 
-        difficulty?: string | string[]; 
-        dormancy?: string | string[];
-        growthRate?: string | string[];
-        flowerColor?: string | string[];
-        ecosystems?: string | string[];
-        lifeCycle?: string | string[];
-        sun?: string | string[]; 
-        growthForm?: string | string[];
+        soilMoisture:  string[]; 
+        plantType:  string[]; 
+        difficulty:  string[]; 
+        dormancy:  string[];
+        growthRate:  string[];
+        flowerColor:  string[];
+        ecosystems:  string[];
+        lifeCycle:  string[];
+        sun:  string[]; 
+        growthForm:  string[];
     
-}
-
-export interface PlantAttributesAsArray {
-    [key: string]: any;
-    
-    soilMoisture?: string[]; 
-    plantType?: string[]; 
-    difficulty?: string[]; 
-    dormancy?: string[];
-    growthRate?: string[];
-    flowerColor?: string[];
-    ecosystems?: string[];
-    lifeCycle?: string[];
-    sun?: string[]; 
-    growthForm?: string[];
-
 }
 
 export interface MerchAttributesAsArray {

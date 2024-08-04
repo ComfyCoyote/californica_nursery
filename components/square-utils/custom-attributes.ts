@@ -14,19 +14,7 @@ form is now plant type
 
 */
 
-export const plantAttributeMapping: PlantAttributes = {
-    'soilMoisture': "Square:a11811ec-64b6-4aaa-bf02-a1a84ce9e867",
-    'plantType': "Square:8bd38961-b53d-4f1a-8c45-d7e4d02b801a",
-    'difficulty': "Square:67ef524a-68ae-49eb-8fa9-27de90660c6a",
-    'dormancy': "Square:0e4417c9-cb0a-46e2-93ca-813fcc5f105a",
-    'growthRate': "Square:e1c09dc1-d774-4baa-8eb1-d5fbe382f802",
-    'sun': "Square:3f1890c9-6d18-4949-89db-3e4c007b91fe",
-    'lifeCycle': "Square:f17c0b0f-6c4b-45e2-9dbc-40e6f092df05",
-    'ecosystems': "Square:4ae7315c-2948-4e44-9310-4f178273bd2a",
-    'flowerColor': "Square:49a0d982-b34b-4a7a-8acb-6bf6630d0537",
-    'growthForm': "Square:06563530-5d71-4036-99a9-f4eeb9d13794"
 
-}
 
 
 export const attributeSelectionMapping = {
