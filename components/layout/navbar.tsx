@@ -1,9 +1,11 @@
-import {Flex, Box, IconButton, HStack} from '@chakra-ui/react';
+import {Flex, Box, IconButton, HStack, useStatStyles, useDisclosure} from '@chakra-ui/react';
 import Image from 'next/image';
 import React from "react";
 import Link from 'next/link';
 import NavbarDropdown from '../shared-components/navbar-dropdown';
 import { theme } from '@/theme/theme';
+import { Search2Icon } from '@chakra-ui/icons';
+import { useSearch } from '../marketplace/search-sidebar/search-sidebar-context';
 //navbar SHOP and EXPLORE buttons should collapse slide the searchable items
 
 interface NavbarProps {
@@ -22,6 +24,8 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
     { value: 'option1', label: 'Landscaping', bgColor: 'orange.300', hoverColor: 'orange.700', href: '/landscaping' },
     { value: 'option2', label: 'About', bgColor: 'yellow.200', hoverColor: 'yellow.600', href: '/about' },
   ]
+
+  const { toggleOpen } = useSearch()
 
   return (
       <Flex
@@ -48,6 +52,9 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
         <HStack as="nav" spacing="5">
           <NavbarDropdown options={shopOptions} placeholder='Shop'/>
           <NavbarDropdown options={exploreOptions} placeholder='Explore'/>
+          <Flex
+            justifyContent={'space-between'}
+            alignItems={'center'}>
           <Box>
             <IconButton
               aria-label="Add"
@@ -67,6 +74,20 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
               _hover={{ bgColor: 'transparent' }}
             />
           </Box>
+          <Box>
+            <IconButton
+              onClick={toggleOpen}
+              bgColor={theme.palette.darkGreen}
+              aria-label='search'
+              icon={<Search2Icon boxSize={7} color={theme.palette.lime}/>}
+              height={70}
+              width={70}
+              _hover={{ bgColor: 'transparent' }}
+            >
+
+            </IconButton>
+          </Box>
+          </Flex>
         </HStack>
       </Flex>
   );

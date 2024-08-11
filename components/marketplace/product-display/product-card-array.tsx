@@ -18,18 +18,19 @@ interface CardArrayPropTypes {
 const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTypes ) => {
     const router = useRouter()
 
-    const { filterValues, filters, open} = useSearch()
+    const { open, query, searching, search} = useSearch()
 
     const [displayArray, setDisplayArray] = useState<Array<any>>([])
     const [cursor, setCursor] = useState<string>(props.cursor)
 
-    console.log(cursor)
-
     useEffect(() => {
-        const newArr = [...displayArray, ...props.items]
-        const filtered = newArr.filter(item => filterAnyFunction(item))
-        setDisplayArray(filtered)
-    }, [filterValues])
+        if(searching){
+            searchItems()
+            search(false)
+        } else {
+            setDisplayArray([...props.items])
+        }
+    }, [searching])
 
 
         if(props.items){
@@ -55,91 +56,12 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         }
 
 
-    function filterAnyFunction(item: any){
-        const boo = filterValues?.length ? filterValues.length : 0
-        let flat: string[] = []
-
-        if(filters){
-            flat = Object.values(filters).flatMap(value => Array.isArray(value) ? value : [value])
-        } 
-
-        if(filters !== null && flat?.length > 0){
-            let itemAttributes: string[] = [];
-            if(item){
-                if('plantAttributes' in item){
-                    const plant = item as Plant
-                    const att = plant?.plantAttributes
-                    if(att){
-                        itemAttributes = Object.values(att).flatMap(value => Array.isArray(value) ? value : [value]);
-                    }
-                    
-                } else if('seedAttributes' in item){
-                    const seed = item as Seed
-                    const att = seed?.seedAttributes
-                    if(att){
-                        itemAttributes = Object.values(att[0]).flatMap(value => Array.isArray(value) ? value : [value]);
-                    }
-                    
-                }
-            }
-
-            if(itemAttributes?.some(el => flat?.includes(el))){
-                return item
-            }
-            
-
-        } else {
-
-            return item
-        }
-
-    }
-
-    function filterSpecificFunction(item: Plant | Seed | null){
-        
-        const boo = filterValues?.length ? filterValues.length : 0
-        let flat: string[];
-        
-        if(filters !== null){
-            flat = Object.values(filters).flatMap(value => Array.isArray(value) ? value : [value])
-            let itemAttributes: string[] = [];
-            if(item){
-                if('plantAttributes' in item){
-                    const plant = item as Plant
-                    const att = plant?.plantAttributes
-                    if(att){
-                        itemAttributes = Object.values(att).flatMap(value => Array.isArray(value) ? value : [value]);
-                    }
-                    
-                } else if('seedAttributes' in item){
-                    const seed = item as Seed
-                    const att = seed?.seedAttributes
-                    if(att){
-                        itemAttributes = Object.values(att[0]).flatMap(value => Array.isArray(value) ? value : [value]);
-                    }
-                    
-                }
-            }
-
-
-            if(itemAttributes === flat){
-                return item
-            }
-            
-
-        } else {
-
-            return item
-        }
-
-    }
-
     async function loadMore(){
 
         const location = router.pathname
         const items = await axios.post('api/getItems', {'type': location, 'cursor': cursor})
 
-        console.log(items.data.cursor)
+        console.log(items)
 
         if(items){
             setCursor(items.data.cursor)
@@ -147,6 +69,17 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         }
 
 
+    }
+
+    async function searchItems(){
+
+        const location = router.pathname
+        const items = await axios.post('api/getItems', {'type': location, 'query': query, 'limit': 100})
+        console.log(items)
+        if(items){
+            setCursor(items.data.cursor)
+            setDisplayArray([...items.data.items])
+        }
     }
 
     

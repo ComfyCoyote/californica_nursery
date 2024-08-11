@@ -1,15 +1,36 @@
 import axios from "axios";
 
-export const getCatalogItemsAPI = async (category_id: string, cursor: string | string[] | null = null) => {
+
+export interface CatalogItemsQuery {
+    [key: string]: any
+
+    custom_attribute_definition_id: string
+    selection_uids_filter: string[]
+}
+
+interface Payload {
+    [key: string]: any
+    
+    category_ids: string[]
+    archived_state: string,
+    cursor: string | string[] | null
+    limit: number
+    custom_attribute_filters?: CatalogItemsQuery[]
+}
+
+export const getCatalogItemsAPI = async (category_id: string, cursor: string | string[] | null = null, query: CatalogItemsQuery[] | null, limit=15) => {
 
     const url = "https://connect.squareup.com/v2/catalog/search-catalog-items"
 
-    const body = {
+    const body: Payload = {
         "category_ids" : [category_id],
         "archived_state": "ARCHIVED_STATE_NOT_ARCHIVED",
         "cursor": cursor,
-        "limit": 15
+        "limit": limit
+    }
 
+    if(query){
+        body["custom_attribute_filters"] = query
     }
 
     const headers = {

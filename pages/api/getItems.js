@@ -13,14 +13,16 @@ export default async function handler(req, res){
 
             const cursor = body.cursor
             const type = body.type
+            const query = body.query
+            const limit = body.limit
 
             if(type === "/plants"){
 
-              result = await getPlants(cursor)
+              result = await getPlants(cursor, query, limit)
 
             }else if(type === "/merch"){
 
-              result = await getMerch(cursor)
+              result = await getMerch(cursor, query, limit)
 
             }
             
@@ -45,7 +47,7 @@ export default async function handler(req, res){
 
 }
 
-async function getPlants(cursor){
+async function getPlants(cursor, query=null){
 
     let newCursor;
     //initialize square client
@@ -55,13 +57,10 @@ async function getPlants(cursor){
     });
 
     let data = []
-    let filterOptionsObject = {}
     
     try{
-      
-        filterOptionsObject = await getFilterOptions(client)
 
-        const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID, cursor)
+        const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID, cursor, query)
 
         newCursor = archivedState?.cursor
 
@@ -78,7 +77,7 @@ async function getPlants(cursor){
         data = await Promise.all(promise)
 
         return {
-            items: data, filterOptionsObject: filterOptionsObject, cursor: newCursor
+            items: data, cursor: newCursor
         }
 
 

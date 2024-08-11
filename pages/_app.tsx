@@ -1,12 +1,13 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { AuthProvider } from '@/firebase/firebaseAuth'
 import { CartProvider } from '@/components/marketplace/shoppingCartContext/shoppingCartContext'
-import Footer from '@/components/layout/footer'
 import { SearchProvider } from '@/components/marketplace/search-sidebar/search-sidebar-context'
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
+import {  MultiSelectTheme } from 'chakra-multiselect'
+import { components } from 'react-select'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -15,6 +16,12 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
+
+const theme = extendTheme({
+  components: {
+    MultiSelect: MultiSelectTheme
+  }
+})
 
 
 function MyApp({ Component, pageProps } : AppPropsWithLayout) {
@@ -27,7 +34,7 @@ function MyApp({ Component, pageProps } : AppPropsWithLayout) {
     <CartProvider>
     <SearchProvider>
     <AuthProvider>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
      {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
     </AuthProvider>
