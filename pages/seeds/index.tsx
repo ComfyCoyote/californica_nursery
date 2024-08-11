@@ -67,7 +67,7 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
 
       archivedState?.items?.forEach((item: CatalogObject) => {
 
-          const promiseplant = constructPlant(client, item as CatalogObject, attributeMapping)
+          const promiseplant = constructPlant(client, item as CatalogObject)
                       
           promise.push(promiseplant)
             
