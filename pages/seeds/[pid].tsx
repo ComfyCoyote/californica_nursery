@@ -51,7 +51,7 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
             const item = response?.object
 
-            const promise = constructSeed(client, item, attributeMapping)
+            const promise = constructSeed(client, item)
 
             data = await Promise.resolve(promise)
 
