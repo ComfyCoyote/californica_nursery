@@ -1,7 +1,7 @@
 import type { Client as ClientType } from "square";
 import { Environment, Client } from "square";
 import { attributeSelectionMappingReverse } from "./custom-attributes";
-import { CustomOption } from "../shared-components/search-dropdown";
+import { CustomOption } from "../marketplace/search-sidebar/search-sidebar-dropdown";
 
 
 async function getFilterOptions(client: ClientType){
