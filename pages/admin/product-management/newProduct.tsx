@@ -5,7 +5,7 @@ import { useFormik, FormikProvider} from 'formik';
 import { addDoc, collection } from "firebase/firestore";
 import { db } from '@/firebase/firebaseInit'; 
 import * as yup from 'yup'
-import AlertComponent from '@/components/alert';
+import CustomAlert from '@/components/shared-components/alert';
 import { useState } from 'react'
 import NewProductTabBar from '@/components/new-product-fields/field-tab-bar';
 import { Button } from '@chakra-ui/react';
@@ -131,7 +131,7 @@ function NewProduct() {
 
   return (
     <Box width={'100%'} mx="auto" >
-      <AlertComponent display={alert} status={error ? 'error' : 'success'} message={error ? messages[1] : messages[0]} toggleFunction={toggleAlert} />
+      <CustomAlert display={alert} status={error ? 'error' : 'success'} message={error ? messages[1] : messages[0]} toggleFunction={toggleAlert} />
         <Box width={'100%'} height={'100%'}>
           <FormikProvider value={formik}>
         <form onSubmit={formik.handleSubmit}>
