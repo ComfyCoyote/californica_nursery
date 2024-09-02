@@ -14,6 +14,9 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
+
+  const { pathname, query } = useRouter()
+
   const shopOptions = [
     { value: 'option1', label: 'PLANTS', bgColor: theme.palette.lime, hoverColor: 'green.700', href: '/plants'},
     { value: 'option2', label: 'SEEDS', bgColor: theme.palette.skyBlue, hoverColor: 'blue.700', href: '/seeds' },
@@ -83,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
           />
         </Box>
         <Box textAlign="center" mt={{ base: 2, md: 0 }}> {/* Add margin-top on mobile */}
-          {getLocation() && (
+          {getLocation(pathname, query) && (
             <IconButton
               onClick={toggleOpen}
               bgColor={theme.palette.darkGreen}
@@ -100,8 +103,8 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
   );
 
 
-  function getLocation(){
-    const { pathname, query } = useRouter()
+  function getLocation(pathname: string, query: any){
+    
     const prod = query.pid
     
     if(pathname && !prod){
