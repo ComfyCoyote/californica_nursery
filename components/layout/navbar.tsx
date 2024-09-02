@@ -1,4 +1,4 @@
-import {Flex, Box, IconButton, HStack, useBreakpointValue} from '@chakra-ui/react';
+import {Flex, Box, IconButton, HStack} from '@chakra-ui/react';
 import Image from 'next/image';
 import React from "react";
 import Link from 'next/link';
@@ -44,8 +44,8 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
     <Box padding={5} textAlign={{ base: 'center', md: 'left' }}> {/* Center logo on mobile */}
       <Link href="/">
         <Image
-          height={useBreakpointValue({ base: 40, md: 50 })} // Responsive height
-          width={useBreakpointValue({ base: 150, md: 200 })} // Responsive width
+          height={{ base: 40, md: 50 }} // Responsive height
+          width={{ base: 150, md: 200 }} // Responsive width
           src={'/images/titles/nav_bar.png'}
           alt={'/images/vercel.svg'}
         />
@@ -73,8 +73,8 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
                 objectFit="cover"
               />
             }
-            height={useBreakpointValue({ base: 50, md: 70 })} // Responsive size
-            width={useBreakpointValue({ base: 50, md: 70 })} // Responsive size
+            height={{ base: 50, md: 70 }} // Responsive size
+            width={{ base: 50, md: 70 }} // Responsive size
             borderRadius="full"
             size="lg"
             color="white"
@@ -88,9 +88,9 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
               onClick={toggleOpen}
               bgColor={theme.palette.darkGreen}
               aria-label="search"
-              icon={<Search2Icon boxSize={useBreakpointValue({ base: 5, md: 7 })} color={theme.palette.lime} />}
-              height={useBreakpointValue({ base: 50, md: 70 })} // Responsive size
-              width={useBreakpointValue({ base: 50, md: 70 })} // Responsive size
+              icon={<Search2Icon boxSize={{ base: 5, md: 7 }} color={theme.palette.lime} />}
+              height={{ base: 50, md: 70 }} // Responsive size
+              width={{ base: 50, md: 70 }} // Responsive size
               _hover={{ bgColor: 'transparent' }}
             />
           )}
