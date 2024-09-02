@@ -44,8 +44,8 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
     <Box padding={5} textAlign={{ base: 'center', md: 'left' }}> {/* Center logo on mobile */}
       <Link href="/">
         <Image
-          height={{ base: 40, md: 50 }} // Responsive height
-          width={{ base: 150, md: 200 }} // Responsive width
+          height={50} // Responsive height
+          width={200} // Responsive width
           src={'/images/titles/nav_bar.png'}
           alt={'/images/vercel.svg'}
         />
