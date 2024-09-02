@@ -34,11 +34,11 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
             display={'flex'}
             alignItems={'flex-start'}
             h='100%'
-            w='35%'>
+            w={{base: '100%', md: '35%'}}>
         <Box 
             position={'relative'}
-            height={'75vh'}
-            width={'32vw'}
+            height={{base: '75vh', md: '75vh'}}
+            width={{base: '40vh', md: '32vw'}}
             overflow={'hidden'}
             >
             <Image 
@@ -64,8 +64,8 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                         <Box 
                             key={img}
                             position={'relative'}
-                            height={'10vh'}
-                            width={'5vw'}
+                            height={{base: '10vh', md: '10vh'}}
+                            width={{base: '15vw', md: '5vw'}}
                             overflow={'hidden'}
                             cursor={'pointer'}
                             onClick={() => {setMainImage(img)}}

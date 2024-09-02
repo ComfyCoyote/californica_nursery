@@ -1,4 +1,4 @@
-import { VStack, HStack, Text, Box} from "@chakra-ui/react";
+import { VStack, HStack, Stack, Text, Box} from "@chakra-ui/react";
 import { theme } from '../../theme/theme'       
 import Image from "next/image";
 
@@ -6,8 +6,11 @@ const bp1 = 'Create a functioning habitat of hyper-local plants'
 const bp2 = 'Utilize rainwater capture and varied topography, free from supplemental irrigation'
 const bp3 = 'Work with, not against your site\'s microclimates'
 
-const text1 = 'With four easy steps, we can transform your green space into a vibrant california native landscape full of pollinators and free from excessive water use.'
-const text2 = 'Native landscaping isnt a walk in the park, so let us help you build a deeper connection with your land through a sustainable outdoor space.'
+const text1 = 'In four steps, we can transform your green space into a vibrant California native landscape full of pollinators and free from excessive water use.'
+const text2 = 'Native landscaping isn\'t a walk in the park, so let us help you build a deeper connection with your land through a sustainable outdoor space.';
+
+
+
 
 
 const wp1 = '1. Site Assessment and Consultation'
@@ -39,7 +42,7 @@ const LandscapingSectionTwo = () => {
 
 
     return(
-        <VStack width={'100%'} spacing={0}>
+        <Stack width={'100%'} spacing={0} direction={ {base: 'column', md: 'column' }}>
             <Box backgroundColor={theme.palette.lime} width={'100%'} height={55} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                 <Text fontSize={30} fontWeight={700}>
                     OUR APPROACH
@@ -54,42 +57,52 @@ const LandscapingSectionTwo = () => {
                     })
                 }
             </VStack>
-            <VStack width={'100%'} height={'100%'} backgroundColor={theme.palette.olive}>
+            {/*hstack*/ }
+            <Stack p={10} height={'100%'} direction={{base: 'column', md: 'row' }} backgroundColor={theme.palette.olive}>
+            <VStack
+                display={'flex'}
+                flexDirection={'column'}
+                justifyContent={'space-between'}
+                width={'100%'}
+                height={'100%'}
+                backgroundColor={theme.palette.olive}
+                spacing={{base: 20, md:2}}
+                >
                 <Box px={10} width={'100%'}>
-                    <Text fontSize={25} color={theme.palette.cream} p={10}>
-                        {text1}
+                    <Text
+                    fontSize={{ base: '25px', md: '25px' }} // Responsive font size for mobile and desktop
+                    textAlign={{ base: 'center', md: 'left' }} // Center text on mobile, align left on desktop
+                    color={theme.palette.cream}
+                    >
+                    {text1}
                     </Text>
                 </Box>
-                <HStack 
+                <VStack
+                    py={15}
                     px={20}
-                    height={'100%'} 
-                    width={"100%"}
+                    height={300}
+                    width={'100%'}
                     display={'flex'}
-                    alignItems={'center'}
-                    justifyContent={'center'}
+                    flexDirection={'column'}
+                    justifyContent={{ base: 'center', md: 'space-evenly' }} // Center content on mobile, space evenly on desktop
+                    alignItems={{ base: 'center', md: 'flex-start' }} // Center align items on mobile, flex-start on desktop
                 >
-                    <VStack 
-                        py={10}
-                        height={400}
-                        width={'100%'}
-                        display={'flex'} 
-                        flexDirection={'column'} 
-                        justifyContent={'space-between'} 
-                        alignItems={'flex-start'}
-                    >
-                        {
-                            wpArr.map((wp) => {
-
-                                return(
-                                    <Text fontSize={25} fontWeight={700} color={theme.palette.cream} key={wp}>
-                                        {wp}
-                                    </Text>
-                                )
-                            })
-                        }
-                    </VStack>
-                    <Box 
-                        bg={'green'}
+                    {wpArr.map((wp) => (
+                    <Text fontSize={{ base: '25px', md: '25px' }} textAlign={{ base: 'center', md: 'left' }}  fontWeight={700} color={theme.palette.cream} key={wp}>
+                        {wp}
+                    </Text>
+                    ))}
+                </VStack>
+                <Box px={10} width={'100%'}>
+                    <Text
+                        fontSize={{ base: '25px', md: '25px' }} 
+                        textAlign={{ base: 'center', md: 'left' }}  
+                        color={theme.palette.cream}>
+                    {text2}
+                    </Text>
+                </Box>
+            </VStack>
+                <Box 
                         display={'flex'}
                         alignItems={'center'}
                         flex="0 0 auto"
@@ -97,8 +110,9 @@ const LandscapingSectionTwo = () => {
                         position={'relative'}
                         >
                             <Box
-                                height={500}
-                                width={700}
+                                height={'62vh'}
+                                position={'relative'}
+                                width={'65vh'}
                                 zIndex={1}>
                             <Image
                                 src={'/images/ian_jackson.jpg'}
@@ -113,7 +127,7 @@ const LandscapingSectionTwo = () => {
                                 width={200}
                                 position="absolute"
                                 top={350}
-                                left={600}
+                                left={405}
                                 zIndex={2} >
                             <Image
                                 src={'/animations/shovel transparent.gif' }
@@ -124,12 +138,10 @@ const LandscapingSectionTwo = () => {
                             />
                             </Box>
                     </Box>
-                </HStack>
-                <Text fontSize={25} color={theme.palette.cream} p={10}>
-                    {text2}
-                </Text>
-            </VStack>
-        </VStack>
+
+            </Stack>
+            </Stack>
+
 
 
     );

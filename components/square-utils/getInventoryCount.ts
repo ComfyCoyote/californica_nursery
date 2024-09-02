@@ -1,5 +1,4 @@
-import { Environment, ApiError, SearchCatalogObjectsRequest } from "square";
-import type { InventoryCount, Client } from "square";
+import type { Client } from "square";
 
 
 async function getInventoryCount(client: Client, catalogObjectIds: string[]){
@@ -8,7 +7,7 @@ async function getInventoryCount(client: Client, catalogObjectIds: string[]){
         const response = await client.inventoryApi.batchRetrieveInventoryCounts({
           catalogObjectIds: catalogObjectIds,
           locationIds: [
-            'LDTGS9A177ABY'
+            'L3C4J69QTRCAA'
           ],
         });
       

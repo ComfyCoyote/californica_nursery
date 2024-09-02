@@ -22,6 +22,7 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ prices, pri
     {
         prices.map(
             (option) => {
+              console.log(option)
                 return(
                     <Button
                         isDisabled={option.amount === "0"}
@@ -62,7 +63,7 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ prices, pri
       case 'seeds':
         return theme.palette.skyBlue
       case 'merch':
-        return 'purple.700'
+        return theme.palette.purple
     }
   }
 

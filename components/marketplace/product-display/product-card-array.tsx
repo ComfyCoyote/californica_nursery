@@ -1,4 +1,3 @@
-import { Plant, Seed } from "@/Interfaces/interfaces";
 import ProductCard from "./product-card";
 import { Grid } from "@chakra-ui/react"
 import { useSearch } from "../search-sidebar/search-sidebar-context";
@@ -37,13 +36,15 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
             return(
                 <React.Fragment>
                 <Grid 
-                width={open ? '50vw' : '100%'}
-                templateColumns="repeat(4, 1fr)"
-                gap={4}>
+                    width={'100%'}
+                    p={{base: 5, md: 7}}
+                    templateColumns={{base: "repeat(1)", md: "repeat(4, 1fr)"}}
+                    gap={4}
+                >
                 {displayArray.map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
                 {
-                    cursor && <Pagination totalPages={1} onPageChange={() => (console.log('page changed'))} loadMore={loadMore}/> 
+                    cursor && <Pagination totalPages={1} loadMore={loadMore}/> 
                 }
                 </React.Fragment>
             )
@@ -61,8 +62,6 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         const location = router.pathname
         const items = await axios.post('api/getItems', {'type': location, 'cursor': cursor})
 
-        console.log(items)
-
         if(items){
             setCursor(items.data.cursor)
             setDisplayArray([...displayArray, ...items.data.items])
@@ -75,7 +74,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
 
         const location = router.pathname
         const items = await axios.post('api/getItems', {'type': location, 'query': query, 'limit': 100})
-        console.log(items)
+        
         if(items){
             setCursor(items.data.cursor)
             setDisplayArray([...items.data.items])

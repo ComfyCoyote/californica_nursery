@@ -18,7 +18,7 @@ interface Payload {
     custom_attribute_filters?: CatalogItemsQuery[]
 }
 
-export const getCatalogItemsAPI = async (category_id: string, cursor: string | string[] | null = null, query: CatalogItemsQuery[] | null = null, limit=15) => {
+export const getCatalogItemsAPI = async (category_id: string, cursor: string | string[] | null = null, query: CatalogItemsQuery[] | null = null, limit=16) => {
 
     const url = "https://connect.squareup.com/v2/catalog/search-catalog-items"
 

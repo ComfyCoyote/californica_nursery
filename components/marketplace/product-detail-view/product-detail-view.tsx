@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box, HStack, VStack, Button } from '@chakra-ui/react';
+import { Box, Stack, VStack, Button } from '@chakra-ui/react';
 import { OrderItem, Plant, Merch, Seed, PriceVariation } from '@/Interfaces/interfaces'
 import { useCart } from '../shoppingCartContext/shoppingCartContext';
 import { useState } from 'react';
 import ProductDetailInfo from './product-detail-info';
 import ProductDetailImages from './product-detail-images';
 import ProductDetailPrices from './product-detail-prices';
-import CustomAlert from '@/components/alert';
+import CustomAlert from '@/components/shared-components/alert';
 import { theme } from '@/theme/theme';
 
 const success = 'Added item to cart!'
@@ -39,22 +39,24 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
 
     return(
         <Box
-            bg='navajowhite'
-            p={30}  
+            bg={theme.palette.cream}
+            p={{base: 0, md: 30}}
+            pt={{base: 20, md: 30}}  
             h={'100%'} 
             w={'100%'}>
-        <HStack 
-            mt={20}
-            p={50}
+        <Stack 
+            mt={{base: 0, md: 20}}
+            p={{base: 10, md: 50}}
             h='100%'
             w='100%'
-            spacing={20}
+            spacing={{base: 5, md: 20}}
+            direction={{base: 'column', md: 'row'}}
             >
                 <ProductDetailImages item={item}/>
                 <VStack
                     spacing={10}
                     w='100%'
-                    h={719}
+                    h={{base: 975, md: 719}}
                     display={'flex'}
                     alignItems={'flex-start'}>
                 <ProductDetailInfo item={item} type={type}/>
@@ -78,7 +80,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
                 </Button>
                 <CustomAlert display={alert} status={'success'} message={success} toggleFunction={() => { setAlert(!alert)}}/>
                 </VStack>
-        </HStack>
+        </Stack>
         </Box>
     )
 
@@ -90,7 +92,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
           case 'seeds':
             return theme.palette.skyBlue
           case 'merch':
-            return 'purple.700'
+            return theme.palette.purple
         }
       }
 

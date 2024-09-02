@@ -14,7 +14,6 @@ import type { CustomOption } from './search-sidebar-dropdown';
 import { plantCustomAttributeValues, merchCustomAttributeValues } from '@/components/square-utils/customAttributeValueObject';
 import SearchSidebarDropdown from './search-sidebar-dropdown';
 import { useSearch } from './search-sidebar-context';
-import { useDisclosure } from '@chakra-ui/react';
 
 interface SearchSidebarPropTypes {
   open: boolean;

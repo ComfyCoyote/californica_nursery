@@ -1,5 +1,5 @@
-import type { Client, CatalogObject, InventoryCount, CatalogItem } from "square"
-import { PriceVariation, SelectOption, AttributeSelectionMap, Plant } from "@/Interfaces/interfaces"
+import type { Client } from "square"
+import { PriceVariation, Plant } from "@/Interfaces/interfaces"
 import getInventoryCount from "./getInventoryCount"
 import { PlantAttributes } from "@/Interfaces/interfaces"
 import { plantCustomAttributeValues } from "./customAttributeValueObject"
@@ -13,23 +13,63 @@ async function constructPlant(client: Client, item: any){
 
         //from the catalogobject's priceVariation, contruct a PriceVariation object which contains simplified
         //key value pairs and includes the inventory count for that item variation
-        const priceVariations : PriceVariation[] | undefined = item?.item_data?.variations?.map((i: any) => {
+        const pricePromises = item?.item_data?.variations?.map((i: any) => { return getInventoryCount(client, [i.id]) })
 
-            let quantity: InventoryCount[] | undefined
+        const values = await Promise.all(pricePromises)
 
-            getInventoryCount(client, [i.id]).then(
-                (response)=> {
-                    quantity = response?.counts
+        const priceVariation = values.map(
+            (inventory: any, index) => {
+
+                let amount: string | null | undefined = "0"
+
+                if(inventory){
+                    if(inventory?.counts){
+                        if(inventory?.counts?.length){
+                            amount = inventory?.counts[0].quantity
+                        }
+                    }
+    
                 }
-            )
+                
+                const i = item?.item_data?.variations[index]
 
-            return {
-                'id': i.id,
-                'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
-                'type' :  i.item_variation_data?.name,
-                'amount': quantity ? quantity[0].quantity : '0'
-            } as PriceVariation
-        })
+                return {
+                    'id': i.id,
+                    'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
+                    'type' :  i.item_variation_data?.name,
+                    'amount': amount
+                } as PriceVariation
+
+            }
+        )
+
+        /*
+        (inventory: any) => {
+
+                    let amount: string | null | undefined = "0"
+
+                    if(inventory){
+                        if(inventory?.counts){
+                            if(inventory?.counts?.length){
+                                amount = inventory?.counts[0].quantity
+                            }
+                        }
+        
+                    }
+        
+                    return {
+                        'id': i.id,
+                        'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
+                        'type' :  i.item_variation_data?.name,
+                        'amount': amount
+                    } as PriceVariation
+
+                }
+        */
+
+
+        
+        
 
 
 
@@ -91,16 +131,18 @@ async function constructPlant(client: Client, item: any){
 
         }
         
+
         
         const plant: Plant = {
             id: item.id,
             name : item?.item_data?.name ? item?.item_data?.name : '',
             description: item?.item_data?.description ? item?.item_data?.description : '',
             imageUrls: imageUrls,
-            price: priceVariations,
+            price: priceVariation,
             plantAttributes: plantAttributes
         }
 
+        console.log(plant)
         return plant
 
 

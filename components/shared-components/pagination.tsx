@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import { HStack, Text, Button} from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { theme } from "@/theme/theme"
 
 interface PaginationProps {
   totalPages: number;
-  onPageChange: (page: number) => void;
   loadMore: () => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange, loadMore }) => {
+const Pagination: React.FC<PaginationProps> = ({ totalPages, loadMore }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(prevPage => {
         const newPage = prevPage - 1;
-        onPageChange(newPage);
         return newPage;
       });
     }
@@ -26,7 +23,6 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange, loadM
     if (currentPage < totalPages) {
       setCurrentPage(prevPage => {
         const newPage = prevPage + 1;
-        onPageChange(newPage);
         return newPage;
       });
     }
@@ -34,7 +30,6 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange, loadM
 
   const handlePageClick = (page: number) => {
     setCurrentPage(page);
-    onPageChange(page);
   };
 
   const renderPageNumbers = () => {

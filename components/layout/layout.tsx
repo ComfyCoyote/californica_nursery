@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutPropTypes> = ({children}) => {
         <ShoppingCart 
             open={shoppingCartOpen}
             toggleCart={toggleShoppingCart}/>
-            <Box>
+            <Box bgColor={"yellow"} width={'100%'}>
             {children}
             </Box>
         <Footer />

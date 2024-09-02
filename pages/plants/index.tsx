@@ -10,7 +10,6 @@ import type { ReactElement } from "react";
 import { getCatalogItemsAPI } from "@/components/square-utils/getCatalogItemsAPI";
 import type { CatalogObject } from "square";
 import getFilterOptions from "@/components/square-utils/getFilterOptions";
-import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import constructPlant from "@/components/square-utils/constructPlant";
 
 interface MarketplacePropTypes{

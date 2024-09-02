@@ -1,8 +1,6 @@
 import { Client, Environment, ApiError } from "square";
-import { PLANT_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
+import { PLANT_CATEGORY_ID, MERCH_CATEGORY_ID} from "@/components/square-utils/custom-attributes";
 import { getCatalogItemsAPI } from "@/components/square-utils/getCatalogItemsAPI";
-import getFilterOptions from "@/components/square-utils/getFilterOptions";
-import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import constructPlant from "@/components/square-utils/constructPlant";
 
 export default async function handler(req, res){

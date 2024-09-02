@@ -1,4 +1,4 @@
-import { VStack, Box, Text, HStack } from "@chakra-ui/react";
+import { VStack, Box, Text, Stack } from "@chakra-ui/react";
 import { theme } from '../../theme/theme'       
 import Image from "next/image";
 
@@ -11,13 +11,38 @@ const LandscapingSectionOne = () => {
 
 
     return(
-        <VStack width={'100%'} pt={105} spacing={0}>
+        <VStack width={'100%'} pt={{base: 85, md: 105}} spacing={0}>
             <Box backgroundColor={theme.palette.lime} width={'100%'} height={55} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                 <Text fontSize={30} fontWeight={700}>
                     LETS KILL YOUR LAWN!!
                 </Text>
             </Box>
-            <Image src={'/images/landscaping/brett_ian_landscaping_cropped.png'} alt={'Ian and Jackson killing the lawn'} height={600} width={1000}/>
+            <Stack p={0} width={'100%'} spacing={0} direction={{base: 'column', md: 'row' }}>
+                <Box position={'relative'} height={'70vh'} width={'63vh'}>
+                    <Image 
+                        src={'/images/landscaping/brett_ian_landscaping_cropped.png'} 
+                        alt={'Ian and Jackson killing the lawn'} 
+                        fill  
+                        style={{objectFit: "cover"}} 
+                    />
+                </Box>
+                <Box position={'relative'} height={'70vh'} width={'66vh'}>
+                    <Image 
+                        src={'/images/landscaping/killyourlawn1.png'} 
+                        alt={'Ian and Jackson killing the lawn'} 
+                        fill  
+                        style={{objectFit: "cover"}} 
+                    />
+                </Box>
+                <Box position={'relative'} height={'70vh'} width={'63vh'}>
+                    <Image 
+                        src={'/images/landscaping/killyourlawn2.png'} 
+                        alt={'Ian and Jackson killing the lawn'} 
+                        fill  
+                        style={{objectFit: "cover"}} 
+                    />
+                </Box>
+            </Stack>
             <VStack spacing={0}>
                 <Box 
                     bg={theme.palette.olive}

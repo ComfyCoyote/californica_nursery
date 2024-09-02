@@ -2,7 +2,7 @@ import React from 'react';
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import {  Plant } from '@/Interfaces/interfaces'
 import { theme } from '@/theme/theme';
-import { it } from 'node:test';
+
 
 interface ProductDetailInfoPropTypes {
     item: Plant,
@@ -104,7 +104,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) 
       case 'seeds':
         return theme.palette.skyBlue
       case 'merch':
-        return 'purple.700'
+        return theme.palette.purple
     }
   }
 

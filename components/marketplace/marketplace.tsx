@@ -1,12 +1,10 @@
 import React from 'react'
-import { HStack, VStack } from "@chakra-ui/react"
+import { HStack } from "@chakra-ui/react"
 import { Box } from "@chakra-ui/react"
 import SearchSidebar from "./search-sidebar/search-sidebar"
-import SearchFloatingActionButton from "../shared-components/search-fab"
 import { useSearch } from "./search-sidebar/search-sidebar-context"
 import { theme } from "@/theme/theme"
 import { Text } from "@chakra-ui/react"
-import Pagination from "../shared-components/pagination"
 
 
 interface MarketplacePropTypes{
@@ -34,13 +32,8 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         toggleSearch={toggleOpen}
         type={title}
         />
-        <Box bg={theme.palette.cream} h='100%' w='100%' p={10} pt={20}>
-            <VStack spacing="auto" justify="center" p={5}>
-                <Box bg={getColor(title)} overflow={'hidden'} width={'100vw'} height={55}>
-                    <HStack
-                    w={'100%'}
-                    h={'100%'}
-                    >
+        <Box bg={theme.palette.cream} h='100%' w={'100%'} pt={{base: 75, md: 105}}>
+                <Box bg={getColor(title)} overflow={'hidden'} width={'100%'} height={55}>
                         <HStack 
                             animation="scrollText 15s linear infinite" 
                             overflow={'hidden'}
@@ -49,7 +42,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
                             display={'inline-flex'} 
                             justifyContent={'space-between'} 
                             alignItems={'center'} 
-                            w={'3000px'}
+                            w={'2000px'}
                             h={'100%'}
                             sx={{
                                 "@keyframes scrollText": 
@@ -59,7 +52,8 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
                                 }
                             }}
                             >
-                                <Text  pt={2}
+                                <Text  
+                                    pt={2}
                                     width={'100%'}
                                     fontSize={30} 
                                     fontWeight={700} 
@@ -101,13 +95,11 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
                                 >
                                     {title.toUpperCase()}
                                 </Text>
-                        </HStack>
                         </HStack>
                 </Box>
                 <Text fontSize={25} fontWeight={600} p={10} color="black" textAlign={'center'}>
                     *Purchased plants, seeds, and merchandise are available for contactless pickup every Friday in Long Beach, CA.  For wholesale inquiries, contact californicanursery@gmail.com
                 </Text>
-            </VStack>
             {children}
         </Box>
         {/*<SearchFloatingActionButton toggleSearchDrawer={toggleOpen}/>*/}

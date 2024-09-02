@@ -16,30 +16,29 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
 
   return (
     <Link href={`/${type}/${item.id}`}>
-    <VStack align="center" spacing={4}>
-      <Box>
+    <VStack align="center" spacing={0}>
       <Box 
-            bgColor={'yellow'}
+            bgColor={getColor(type)}
             position={'relative'}
-            height={'43vh'}
-            width={'22vw'}
+            height={{base: '60vh', md: '53vh'}}
+            width={{base: '46vh', md: '22vw'}}
             overflow={'hidden'}
-            >
+      >
       <Image 
         placeholder='blur'
         blurDataURL='images/icons/pink_star_placeholder.png'
         src={imageCheck(item)} 
         alt="Image" 
-        fill={true} 
-        style={{objectFit: "cover"}} 
-        priority 
-        sizes="(max-width: 600px) 50vw, (max-width: 1200px) 25vw, 25vw"/>
+        fill 
+        style={{objectFit: "cover"}}
+        sizes="(max-width: 48em) 54vh, (max-width: 62em) 22vw, 20vw" 
+        priority      
+      />
       </Box>
-        <HStack bgColor={getColor(type)} p={2} w='100%' justify={"space-between"} alignItems={'center'}>
+        <HStack bgColor={getColor(type)} p={2} w={{base: '46vh', md: '22vw'}} justify={"space-between"} alignItems={'center'}>
             <Text fontWeight={700}>{formatName(item)}</Text>
            <Text fontWeight={600}>{getPriceRange(item)}</Text> 
-        </HStack>
-      </Box>     
+        </HStack>    
     </VStack>
     </Link>
   );
@@ -47,12 +46,15 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
   function imageCheck(item: PlaidProduct): string {
     if(item.imageUrls){
         if(typeof item.imageUrls[0] === 'string'){
+          console.log(item.imageUrls[0])
             return item.imageUrls[0]
         } else {
+          console.log(null)
             return ''
         }
     } else {
 
+      console.log(null)
         return ''
     }
   
