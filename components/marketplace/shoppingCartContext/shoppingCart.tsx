@@ -16,6 +16,8 @@ import { OrderItem } from '@/Interfaces/interfaces';
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext';
 import Link from 'next/link';
+import { theme } from '@/theme/theme';
+
 
 interface ShoppingCartPropTypes {
   open: boolean
@@ -44,18 +46,22 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
     <>
       <Drawer isOpen={open} onClose={toggleCart} placement="right" size="sm">
         <DrawerOverlay>
-          <DrawerContent>
+          <DrawerContent bg={theme.palette.darkBrown}>
             <DrawerCloseButton />
-            <DrawerHeader>Shopping Cart</DrawerHeader>
-
-            <DrawerBody>
+            <DrawerHeader color={theme.palette.cream}>Shopping Cart</DrawerHeader>
+            <DrawerBody >
               {orderItems.length === 0 ? (
                 <Text>No items in the cart</Text>
               ) : (
                 orderItems.map((item) => (
-                  <Flex key={item.id} justifyContent="space-between" alignItems="center" mb={4}>
+                  <Flex 
+                    key={item.id} 
+                    justifyContent="space-between" 
+                    alignItems="center" 
+                    mb={4}
+                    >
                     <Box>
-                      <Text>{item.name}</Text>
+                      <Text color={theme.palette.cream}>{item.name}</Text>
                     </Box>
                     <Button variant="outline" colorScheme="red" size="sm" onClick={(e) => removeFromCart(e, item.catalogObjectId)}>
                       Remove
@@ -73,7 +79,7 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
               </Text>
               */}
               <Link href={`/checkout/pre-checkout?redirect=/plants`}>
-              <Button colorScheme="blue" size="sm">
+              <Button colorScheme="yellow" size="sm">
                 Checkout
               </Button>
               </Link>

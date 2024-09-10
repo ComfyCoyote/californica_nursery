@@ -47,7 +47,7 @@ const AboutPageJacksonSection = () => {
                 >
                 <Image
                     priority
-                    src='/images/Jackson signature.png'
+                    src='/images/about/signature jackson green.png'
                     alt="jackson signature"
                     width={300}
                     height={200}
@@ -66,11 +66,11 @@ const AboutPageJacksonSection = () => {
                 />
             </Box>
             </HStack>
-            <Box bg={theme.palette.lime} width={'100%'} overflow={'hidden'} height={55} >
+            <Box bg={theme.palette.lime} width={'100%'} overflow={'hidden'} height={{base: 55, md: 55}} >
             <Text
                 height={'100%'}
                 pb={10}
-                fontSize={{ base: '24px', md: '40px' }} // Responsive font size for mobile and desktop
+                fontSize={{ base: '24px', md: '30px' }} // Responsive font size for mobile and desktop
                 fontWeight={600}
                 whiteSpace="nowrap" // Prevent text from wrapping
                 overflow="hidden" // Hide overflow for smooth scrolling effect

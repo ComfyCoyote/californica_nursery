@@ -17,6 +17,8 @@ interface SearchSidebarDropdownProps extends SelectProps {
     options: CustomOption[]
 }
 
+//recolor chips light green
+
 const SearchSidebarDropdown: React.FC<SearchSidebarDropdownProps> = ({ att_id, options }) => {
     const [value, setValue] = useState<string[]>([])
     

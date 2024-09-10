@@ -14,6 +14,7 @@ import type { CustomOption } from './search-sidebar-dropdown';
 import { plantCustomAttributeValues, merchCustomAttributeValues } from '@/components/square-utils/customAttributeValueObject';
 import SearchSidebarDropdown from './search-sidebar-dropdown';
 import { useSearch } from './search-sidebar-context';
+import { theme } from '@/theme/theme';
 
 interface SearchSidebarPropTypes {
   open: boolean;
@@ -58,13 +59,15 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
         >
         <DrawerOverlay>
           <DrawerContent
+            bg={theme.palette.darkBrown}
             sx={{
               visibility: open ? 'visible' : 'hidden',
               position: 'fixed',
               transition: 'visibility 0.3s',
+              
             }}>
             <DrawerCloseButton />
-            <DrawerHeader>Search</DrawerHeader>
+            <DrawerHeader color={theme.palette.cream}>Search</DrawerHeader>
             <DrawerBody>
               {
 
@@ -74,7 +77,7 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
                       alignItems={'flex-start'}
                       spacing={3} 
                       key={i.name}>
-                      <Text fontWeight={600}>
+                      <Text fontWeight={600} color={theme.palette.cream}>
                         {attributes[i.name]}
                       </Text>
                       <SearchSidebarDropdown att_id={i.att_id} options={getSelectOptions(i.attributes)}/>

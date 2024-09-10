@@ -52,27 +52,15 @@ const LandingPage: React.FC = () => {
     <Flex direction="column" alignItems="center" justifyContent="center" minHeight="100%" p={20}>
     <Flex justifyContent="center" width={'100%'} maxWidth={'100%'}>
         <VStack>
-        {hover === 'tips' ?
-            <Link href={'/plants'}>
-            <Image 
-            onMouseEnter={() => setHover('tips')} 
-            onMouseLeave={() => setHover('')} 
-            style={{cursor: 'pointer' }}
-            src={"/images/home_images/plants ani.PNG"} 
-            alt='/images/vercel.svg'  
-            width={350} height={300} /> 
-            </Link>
-            : 
-            <Link href={'/plants'}>
-            <Image 
-            onMouseEnter={() => setHover('tips')} 
-            onMouseLeave={() => setHover('')} 
-            style={{cursor: 'pointer' }}
-            src={"/images/home_images/plants.PNG"} 
-            alt='/images/vercel.svg'  
-            width={350} height={300} />
-            </Link>
-        }
+        <Link href={'/plants'}>
+        <Image 
+        onMouseEnter={() => setHover('tips')} 
+        onMouseLeave={() => setHover('')} 
+        style={{cursor: 'pointer' }}
+        src={hover  === 'tips' ? "/animations/plantsani.gif" : "/images/landing/plants.png"} 
+        alt='/images/vercel.svg'  
+        width={350} height={300} /> 
+        </Link>
         <Link href={'/plants'} />
         <Button 
               as="a"
@@ -92,7 +80,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('hand')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }} 
-            src={hover === 'hand' ? "/images/home_images/seeds ani.PNG" : "/images/home_images/seeds.PNG"} 
+            src={hover === 'hand' ? "/animations/seedsani.gif" : "/images/home_images/seeds.PNG"} 
             alt='/images/vercel.svg' 
             width={300} height={300}  />
         </Link>
@@ -115,7 +103,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('shovel')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }}  
-            src={hover === 'shovel' ? "/images/home_images/landscaping ani.PNG" : "/images/home_images/landscaping.PNG"} 
+            src={hover === 'shovel' ? "/animations/landscapingani.gif" : "/images/home_images/landscaping.PNG"} 
             alt='/images/vercel.svg' 
             width={350} height={350} />
         </Link>
@@ -141,7 +129,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('shirt')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }} 
-            src={hover === 'shirt' ? "/images/home_images/merch ani.PNG" : "/images/home_images/merch.PNG"} alt='/images/vercel.svg'  
+            src={hover === 'shirt' ? "/animations/merchani.gif" : "/images/home_images/merch.PNG"} alt='/images/vercel.svg'  
             width={300} height={300}/>
         </Link>
         <Link href={'/merch'}>
@@ -164,7 +152,7 @@ const LandingPage: React.FC = () => {
             onMouseEnter={() => setHover('person')} 
             onMouseLeave={() => setHover('')}
             style={{cursor: 'pointer' }} 
-            src={hover === 'person' ? "/images/home_images/about ani.PNG" : "/images/home_images/about.PNG"} 
+            src={hover === 'person' ? "/animations/aboutani.gif" : "/images/home_images/about.PNG"} 
             alt='/images/vercel.svg' width={300} height={300} />
         </Link>
         <Link href={'/about'}>

@@ -48,7 +48,7 @@ const LandscapingSectionTwo = () => {
                     OUR APPROACH
                 </Text>
             </Box>
-            <VStack width={'100%'} p={20} display={'flex'} justifyContent={'center'} alignItems={'flex-start'} backgroundColor={theme.palette.darkBrown}>
+            <VStack width={'100%'} px={20} py={10} display={'flex'} justifyContent={'center'} alignItems={'flex-start'} backgroundColor={theme.palette.darkBrown}>
                 {
                     textArr.map((txt) => {
                         return(

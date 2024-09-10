@@ -70,7 +70,6 @@ const LandscapingSectionThree = () => {
                 borderRadius={0}
                 borderBottomRadius={0}
                 borderColor={theme.palette.darkBrown}
-                spacing={4} 
                 width={'100%'}
                 style={{
                     msOverflowStyle: 'none',  /* Internet Explorer 10+ */

@@ -32,7 +32,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         toggleSearch={toggleOpen}
         type={title}
         />
-        <Box bg={theme.palette.cream} h='100%' w={'100%'} pt={{base: 75, md: 105}}>
+        <Box bg={theme.palette.cream} h='100%' w={'100%'} pt={{base: 160, md: 105}}>
                 <Box bg={getColor(title)} overflow={'hidden'} width={'100%'} height={55}>
                         <HStack 
                             animation="scrollText 15s linear infinite" 
@@ -60,7 +60,8 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
                                 >
                                     {title.toUpperCase()}
                                 </Text>
-                                <Text  pt={2}
+                                <Text  
+                                    pt={2}
                                     width={'100%'}
                                     fontSize={30} 
                                     fontWeight={700} 

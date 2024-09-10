@@ -16,7 +16,7 @@ const AboutPage = () => {
             h='100%' 
             w='100%' 
             display={'flex'} 
-            pt={{ base: '86px', md: '108px' }}
+            pt={{ base: '150px', md: '108px' }}
             flexDirection={'column'} 
             justifyContent={'space-evenly'}
         >
