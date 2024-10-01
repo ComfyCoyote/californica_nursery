@@ -37,7 +37,7 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
         )
 
 
-        if(priceVariation?.length === 0){
+        if(!priceVariation){
             priceVariation = [
                 {
                     'id': '0',
@@ -85,7 +85,7 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
         //key of the plant object
 
         let imageUrls: string[] = []
-        
+
         if(imageIds){
 
             imageUrls = imageIds.map((i: any) => i.imageData?.url)

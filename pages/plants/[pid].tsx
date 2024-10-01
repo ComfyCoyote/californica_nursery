@@ -62,6 +62,8 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
             data = await Promise.resolve(promise)
 
+            console.log(data)
+
         }
 
 

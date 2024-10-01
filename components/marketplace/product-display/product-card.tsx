@@ -4,6 +4,7 @@ import { Apparel, PlaidProduct, Plant, Seed } from '@/Interfaces/interfaces'
 import Image from 'next/image';
 import Link from 'next/link';
 import { theme } from '@/theme/theme';
+import { start } from 'repl';
 
 interface ProductCardPropTypes {
     item: Plant | Seed;
@@ -99,10 +100,25 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
       const endPrice = priceArr[priceArr.length - 1]?.price
 
       if(startPrice === endPrice){
-        return `$${Number(startPrice)/100}`
+        const amount = Number(startPrice)
+        if(amount>0){
+          return `$${Number(startPrice)/100}`
+        } else {
+          return 'Out of Stock'
+        }
+        
+      } else if(startPrice !== endPrice){
+        const amount = Number(startPrice)/100 - Number(endPrice)/100
+        if(amount > 0){
+          return `$${Number(startPrice)/100} - $${Number(endPrice)/100}`
+        } else {
+          return 'Out of Stock'
+        }
+        
+
       }
 
-      return `$${Number(startPrice)/100} - $${Number(endPrice)/100}`
+      
 
     } else {
 
