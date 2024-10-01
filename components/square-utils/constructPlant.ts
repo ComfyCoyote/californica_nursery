@@ -1,6 +1,4 @@
-import type { Client } from "square"
 import { PriceVariation, Plant } from "@/Interfaces/interfaces"
-import getInventoryCount from "./getInventoryCount"
 import { PlantAttributes } from "@/Interfaces/interfaces"
 import { plantCustomAttributeValues } from "./customAttributeValueObject"
 
@@ -8,68 +6,36 @@ import { plantCustomAttributeValues } from "./customAttributeValueObject"
 //all relevant data for the Plant to function in the marketplace
 
 
-async function constructPlant(client: Client, item: any){
+async function constructPlant(item: any, priceVaritions: any[] | undefined, imageIds: any[] | undefined){
 
 
         //from the catalogobject's priceVariation, contruct a PriceVariation object which contains simplified
         //key value pairs and includes the inventory count for that item variation
-        const pricePromises = item?.item_data?.variations?.map((i: any) => { return getInventoryCount(client, [i.id]) })
+        
 
-        const values = await Promise.all(pricePromises)
-
-        const priceVariation = values.map(
-            (inventory: any, index) => {
+        const priceVariation = priceVaritions?.map(
+            (inventory: any) => {
 
                 let amount: string | null | undefined = "0"
 
                 if(inventory){
-                    if(inventory?.counts){
-                        if(inventory?.counts?.length){
-                            amount = inventory?.counts[0].quantity
-                        }
+                    if(inventory?.quantity){
+                        amount = inventory?.quantity
                     }
-    
                 }
                 
-                const i = item?.item_data?.variations[index]
+                const i = item?.item_data?.variations.filter((i: any) => i.id === inventory.catalogObjectId)
 
                 return {
-                    'id': i.id,
-                    'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
-                    'type' :  i.item_variation_data?.name,
+                    'id': i[0].id,
+                    'price' :  i[0].item_variation_data?.price_money?.amount?.toString() ?? "0",
+                    'type' :  i[0].item_variation_data?.name,
                     'amount': amount
                 } as PriceVariation
 
             }
         )
 
-        /*
-        (inventory: any) => {
-
-                    let amount: string | null | undefined = "0"
-
-                    if(inventory){
-                        if(inventory?.counts){
-                            if(inventory?.counts?.length){
-                                amount = inventory?.counts[0].quantity
-                            }
-                        }
-        
-                    }
-        
-                    return {
-                        'id': i.id,
-                        'price' :  i.item_variation_data?.price_money?.amount?.toString() ?? null,
-                        'type' :  i.item_variation_data?.name,
-                        'amount': amount
-                    } as PriceVariation
-
-                }
-        */
-
-
-        
-        
 
 
 
@@ -110,25 +76,11 @@ async function constructPlant(client: Client, item: any){
 
         let imageUrls: string[] = []
 
-        const imageIds = item.item_data?.image_ids
-
-        
-
+    
         if(imageIds){
-            const imageResponse = await client.catalogApi.batchRetrieveCatalogObjects({
-                objectIds: imageIds
-            });
-            
-            if(imageResponse.result.objects){
-                imageUrls = imageResponse.result?.objects?.map((img) => {
-                    if(img.imageData?.url){
-                        return(img.imageData?.url)
-                    } else {
-                        return ''
-                    }
-                })
-            }
 
+            imageUrls = imageIds.map((i: any) => i.imageData?.url)
+            
         }
         
 
@@ -142,7 +94,6 @@ async function constructPlant(client: Client, item: any){
             plantAttributes: plantAttributes
         }
 
-        console.log(plant)
         return plant
 
 

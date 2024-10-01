@@ -112,7 +112,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) 
     const start = name.indexOf('(')
 
     if(start){
-        console.log(name)
+        
         return name.slice(0, start - 1).toUpperCase()
 
     } else {

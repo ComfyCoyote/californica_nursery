@@ -2,6 +2,9 @@ import { Client, Environment, ApiError } from "square";
 import { PLANT_CATEGORY_ID, MERCH_CATEGORY_ID} from "@/components/square-utils/custom-attributes";
 import { getCatalogItemsAPI } from "@/components/square-utils/getCatalogItemsAPI";
 import constructPlant from "@/components/square-utils/constructPlant";
+import getImages from "@/components/square-utils/getImages"
+import getInventoryCount from "@/components/square-utils/getInventoryCount";
+
 
 export default async function handler(req, res){
     try{
@@ -60,15 +63,30 @@ async function getPlants(cursor, query=null){
 
         const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID, cursor, query)
 
+        const variationObjectIds = archivedState.items.flatMap((p) => p.item_data?.variations.map((v) => v.id) || []);
+
+        const imageIds = archivedState.items.flatMap((p) => p.item_data.image_ids)
+        
+        const inventory = await getInventoryCount(client, variationObjectIds)
+
+        const imageUrls = await getImages(client, imageIds)
+
+
         newCursor = archivedState?.cursor
 
         const promise = []
 
         archivedState?.items?.forEach((item) => {
 
-            const promiseplant = constructPlant(client, item)
-                        
-            promise.push(promiseplant)
+          const itemVariationIds = item?.item_data?.variations?.map((v) => v.id)
+            
+          const specificVariation = inventory?.counts?.filter((v) => itemVariationIds?.indexOf(v.catalogObjectId) !== -1)
+
+          const specificImages = imageUrls?.objects?.filter((i) => item.item_data.image_ids.indexOf(i.id) !== -1)
+      
+          const promiseplant = constructPlant(item, specificVariation, specificImages)
+                      
+          promise.push(promiseplant)
               
         })
 

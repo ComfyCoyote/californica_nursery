@@ -7,7 +7,8 @@ import type { ReactElement } from 'react'
 import type { NextPageWithLayout } from "../_app";
 import constructPlant from "@/components/square-utils/constructPlant";
 import { getCatalogObject } from "@/components/square-utils/getCatalogObject";
-
+import getInventoryCount from "@/components/square-utils/getInventoryCount";
+import getImages from "@/components/square-utils/getImages";
 
 interface MarketplacePropTypes{
     data: Plant
@@ -49,9 +50,15 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
             const item = response?.object
 
-            const promise = constructPlant(client, item)
+            const variationObjectIds = item.item_data?.variations.flatMap((v: any) => v.id) || [];
 
-            console.log(promise)
+            const inventory = await getInventoryCount(client, variationObjectIds)
+
+            const imageIds = item.item_data.image_ids
+
+            const imageUrls = await getImages(client, imageIds)
+
+            const promise = constructPlant(item, inventory?.counts, imageUrls?.objects)
 
             data = await Promise.resolve(promise)
 
