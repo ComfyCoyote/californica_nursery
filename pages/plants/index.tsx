@@ -68,6 +68,8 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
         
         const inventory = await getInventoryCount(client, variationObjectIds)
 
+        console.log(inventory)
+
         const imageUrls = await getImages(client, imageIds)
 
 
@@ -122,6 +124,7 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
 
     }
 
+    console.log(data.slice(-5))
 
     return {
       props: { data: [], filterOptionsObject: {}, cursor: ''}

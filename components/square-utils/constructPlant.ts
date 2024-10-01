@@ -13,7 +13,7 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
         //key value pairs and includes the inventory count for that item variation
         
 
-        const priceVariation = priceVaritions?.map(
+        let priceVariation = priceVaritions?.map(
             (inventory: any) => {
 
                 let amount: string | null | undefined = "0"
@@ -28,7 +28,7 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
 
                 return {
                     'id': i[0].id,
-                    'price' :  i[0].item_variation_data?.price_money?.amount?.toString() ?? "0",
+                    'price' :  i[0].item_variation_data?.price_money?.amount?.toString() ?? null,
                     'type' :  i[0].item_variation_data?.name,
                     'amount': amount
                 } as PriceVariation
@@ -37,6 +37,16 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
         )
 
 
+        if(priceVariation?.length === 0){
+            priceVariation = [
+                {
+                    'id': '0',
+                    'price': '0',
+                    'type': 'none',
+                    'amount': '0'
+                }
+            ]
+        }
 
 
         //check to see if the item has customAttributeValues. if so, then create a PlantAttributesAsArray object which
