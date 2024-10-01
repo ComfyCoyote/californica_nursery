@@ -61,7 +61,7 @@ const LandingPage: React.FC = () => {
         alt='/images/vercel.svg'  
         width={350} height={300} /> 
         </Link>
-        <Link href={'/plants'} />
+        <Link href={'/plants'}>
         <Button 
               as="a"
               border="2px solid black" 
@@ -73,6 +73,7 @@ const LandingPage: React.FC = () => {
               >
                 PLANTS
         </Button>
+        </Link>
         </VStack>
         <VStack>
         <Link href={'/seeds'}>
@@ -85,6 +86,7 @@ const LandingPage: React.FC = () => {
             width={300} height={300}  />
         </Link>
         <Link href={'/seeds'} />
+        <Link href={'/seeds'}>
         <Button
               as="a"
               border="2px solid black" 
@@ -96,6 +98,7 @@ const LandingPage: React.FC = () => {
               >
                 SEEDS
         </Button>
+        </Link>
         </VStack>
         <VStack>
         <Link href={'/landscaping'}>

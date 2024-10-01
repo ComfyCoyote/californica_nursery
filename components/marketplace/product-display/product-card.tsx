@@ -101,7 +101,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
 
       if(startPrice === endPrice){
         const amount = Number(startPrice)
-        if(amount>0){
+        if(amount > 0){
           return `$${Number(startPrice)/100}`
         } else {
           return 'Out of Stock'
