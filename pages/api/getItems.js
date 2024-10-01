@@ -66,11 +66,12 @@ async function getPlants(cursor, query=null){
         const variationObjectIds = archivedState.items.flatMap((p) => p.item_data?.variations.map((v) => v.id) || []);
 
         const imageIds = archivedState.items.flatMap((p) => p.item_data.image_ids)
-        
+
         const inventory = await getInventoryCount(client, variationObjectIds)
 
         const imageUrls = await getImages(client, imageIds)
 
+        console.log(imageUrls)
 
         newCursor = archivedState?.cursor
 
@@ -91,6 +92,8 @@ async function getPlants(cursor, query=null){
         })
 
         data = await Promise.all(promise)
+
+        console.log(data)
 
         return {
             items: data, cursor: newCursor
