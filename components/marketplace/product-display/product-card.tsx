@@ -4,7 +4,6 @@ import { Apparel, PlaidProduct, Plant, Seed } from '@/Interfaces/interfaces'
 import Image from 'next/image';
 import Link from 'next/link';
 import { theme } from '@/theme/theme';
-import { start } from 'repl';
 
 interface ProductCardPropTypes {
     item: Plant | Seed;

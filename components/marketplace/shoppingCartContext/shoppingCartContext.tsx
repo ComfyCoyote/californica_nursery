@@ -1,12 +1,10 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { createContext, useContext, useState, useEffect } from 'react';
 import { Apparel, PlaidProduct, Plant, OrderItem } from '@/Interfaces/interfaces';
-import type {  } from 'square';
 import {v4 as uuidv4} from 'uuid'
 import type { Fulfillment, Order, OrderLineItem} from 'square';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import { json } from 'stream/consumers';
 
 
 interface CartContextProps {

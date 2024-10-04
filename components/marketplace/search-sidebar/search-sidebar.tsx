@@ -66,7 +66,7 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
               transition: 'visibility 0.3s',
               
             }}>
-            <DrawerCloseButton />
+            <DrawerCloseButton color={theme.palette.cream}/>
             <DrawerHeader color={theme.palette.cream}>Search</DrawerHeader>
             <DrawerBody>
               {

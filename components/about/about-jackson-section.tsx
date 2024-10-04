@@ -55,13 +55,17 @@ const AboutPageJacksonSection = () => {
                 />
                 </Box>
             </VStack>
-            <Box width={{ base: '100%', md: '50%' }} display={'flex'} justifyContent={'center'}>
+            <Box 
+                width={{ base: '100%', md: '50%' }} 
+                display={'flex'} 
+                justifyContent={'center'}
+            >
                 <Image
                 priority
-                src="/images/jackson1.png"
+                src="/images/about/jackson1.png"
                 alt="hiking photo"
-                width={600}
-                height={600}
+                width={400}
+                height={400}
                 style={{ width: '100%', height: 'auto' }} // Responsive image sizing
                 />
             </Box>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -10,10 +10,10 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  HStack,
   Text,
 } from '@chakra-ui/react';
 import { OrderItem } from '@/Interfaces/interfaces';
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext';
 import Link from 'next/link';
 import { theme } from '@/theme/theme';
@@ -47,11 +47,22 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
       <Drawer isOpen={open} onClose={toggleCart} placement="right" size="sm">
         <DrawerOverlay>
           <DrawerContent bg={theme.palette.darkBrown}>
-            <DrawerCloseButton />
-            <DrawerHeader color={theme.palette.cream}>Shopping Cart</DrawerHeader>
+            <DrawerHeader 
+              color={theme.palette.cream}
+              >
+                <HStack
+                  width={'100%'}
+                  justifyContent={'space-between'}
+                  alignItems={'center'}>
+                  <Text>
+                  Shopping Cart
+                  </Text>
+                  <DrawerCloseButton color={theme.palette.cream}/>
+                </HStack>
+              </DrawerHeader>
             <DrawerBody >
               {orderItems.length === 0 ? (
-                <Text>No items in the cart</Text>
+                <Text color={theme.palette.cream}>No items in the cart</Text>
               ) : (
                 orderItems.map((item) => (
                   <Flex 
@@ -63,7 +74,12 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
                     <Box>
                       <Text color={theme.palette.cream}>{item.name}</Text>
                     </Box>
-                    <Button variant="outline" colorScheme="red" size="sm" onClick={(e) => removeFromCart(e, item.catalogObjectId)}>
+                    <Button 
+                      variant="outline" 
+                      colorScheme="red" 
+                      size="sm" 
+                      onClick={(e) => removeFromCart(e, item.catalogObjectId)}
+                    >
                       Remove
                     </Button>
                   </Flex>

@@ -43,13 +43,17 @@ const AboutPageIanSection = () => {
                 alignItems={'center'}
                 spacing={0} // Remove space between elements when stacking
             >
-            <Box width={{ base: '100%', md: 'auto' }} display={'flex'} justifyContent={'center'}>
+            <Box 
+                width={{ base: '100%', md: 'auto' }} 
+                display={'flex'} 
+                justifyContent={'center'}
+            >
                 <Image
                 priority
-                src='/images/Ian-2.png'
+                src='/images/about/Ian-2.png'
                 alt='hiking photo'
-                width={600}
-                height={600}
+                width={900}
+                height={900}
                 style={{ width: '100%', height: 'auto' }} // Responsive image sizing
                 />
             </Box>

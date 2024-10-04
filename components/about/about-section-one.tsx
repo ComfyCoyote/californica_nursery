@@ -52,7 +52,7 @@ const AboutPageSectionOne = () => {
             >
                 <Image
                 priority
-                src='/images/Jackson & Ian 2.png'
+                src='/images/about/Jackson & Ian 2.png'
                 alt='ian and jackson'
                 fill
                 style={{ objectFit: "cover" }}

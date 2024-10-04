@@ -22,7 +22,8 @@ const Layout: React.FC<LayoutPropTypes> = ({children}) => {
         <Navbar toggleShoppingCart={toggleShoppingCart}/>
         <ShoppingCart 
             open={shoppingCartOpen}
-            toggleCart={toggleShoppingCart}/>
+            toggleCart={toggleShoppingCart}
+        />
             <Box bgColor={"yellow"} width={'100%'}>
             {children}
             </Box>
