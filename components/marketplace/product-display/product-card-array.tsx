@@ -22,7 +22,6 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
     const [displayArray, setDisplayArray] = useState<Array<any>>([])
     const [cursor, setCursor] = useState<string>(props.cursor)
 
-    console.log(displayArray)
 
     useEffect(() => {
         if(searching){
