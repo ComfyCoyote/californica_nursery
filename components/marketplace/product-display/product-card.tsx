@@ -20,8 +20,8 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
       <Box 
             bgColor={getColor(type)}
             position={'relative'}
-            height={{base: '60vh', md: '53vh'}}
-            width={{base: '46vh', md: '22vw'}}
+            height={theme.sizes.mktplc.mktImgW}
+            width={theme.sizes.mktplc.mktImgH}
             overflow={'hidden'}
       >
       <Image 
@@ -31,13 +31,12 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
         alt="Image" 
         fill 
         style={{objectFit: "cover"}}
-        sizes="(max-width: 48em) 54vh, (max-width: 62em) 22vw, 20vw" 
-        priority      
+        sizes="(max-width: 48em) 54vh, (max-width: 62em) 22vw, 20vw"      
       />
       </Box>
         <HStack bgColor={getColor(type)} p={2} w={{base: '46vh', md: '22vw'}} justify={"space-between"} alignItems={'center'}>
-            <Text fontWeight={700}>{formatName(item)}</Text>
-           <Text fontWeight={600}>{getPriceRange(item)}</Text> 
+            <Text fontWeight={theme.font.bold.full}>{formatName(item)}</Text>
+           <Text fontWeight={theme.font.bold.semi}>{getPriceRange(item)}</Text> 
         </HStack>    
     </VStack>
     </Link>

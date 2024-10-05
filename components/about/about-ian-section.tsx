@@ -2,40 +2,26 @@ import { HStack, VStack, Box, Text, Stack } from "@chakra-ui/react"
 import { theme } from "@/theme/theme";
 import Image from "next/image";
 import { iansBioAlt } from "./bios";
-
+import ScrollingTextBar from "../shared-components/scrolling-text-bar";
 
 
 const AboutPageIanSection = () => {
 
     return(
         <>
-          <Box bg={theme.palette.lime} width={'100%'} height={55}>
-                <Text 
-                fontSize={{ base: '24px', md: 35 }} // Responsive font size for mobile and desktop
-                fontWeight={600}
-                whiteSpace="nowrap" // Prevent text from wrapping
-                overflow="hidden" // Hide overflow for smooth scrolling effect
-                display="inline-block" // Needed for smooth text scrolling
-                animation="scrollText 15s linear infinite"
-                sx={{
-                "@keyframes scrollText": {
-                    from: { transform: "translateX(100%)" },
-                    to: { transform: "translateX(-100%)" }
-                }
-                }}>
-                    <Stack spacing={250} direction={'row'}>
-                    <Text>
-                     HEAL THE URBAN LANDSCAPE
-                    </Text>
-                    <Text>
-                    PLANT A NATIVE PLANT
-                    </Text>
-                    <Text>
-                    SUPPORT LOCAL WILDLIFE
-                    </Text>
-                    </Stack>
+          <ScrollingTextBar color={null}>
+                <Stack spacing={250} direction={'row'}>
+                <Text>
+                    HEAL THE URBAN LANDSCAPE
                 </Text>
-            </Box>
+                <Text>
+                PLANT A NATIVE PLANT
+                </Text>
+                <Text>
+                SUPPORT LOCAL WILDLIFE
+                </Text>
+                </Stack>
+            </ScrollingTextBar>
             <HStack
                 bg={theme.palette.darkBrown}
                 width={'100%'}

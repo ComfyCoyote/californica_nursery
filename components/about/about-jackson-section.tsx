@@ -2,7 +2,7 @@ import { HStack, VStack, Box, Text } from "@chakra-ui/react"
 import { theme } from "@/theme/theme";
 import Image from "next/image";
 import { jacksonsBioAlt } from "./bios";
-
+import ScrollingTextBar from "../shared-components/scrolling-text-bar";
 
 
 
@@ -70,26 +70,10 @@ const AboutPageJacksonSection = () => {
                 />
             </Box>
             </HStack>
-            <Box bg={theme.palette.lime} width={'100%'} overflow={'hidden'} height={{base: 55, md: 55}} >
-            <Text
-                height={'100%'}
-                pb={10}
-                fontSize={{ base: '24px', md: '30px' }} // Responsive font size for mobile and desktop
-                fontWeight={600}
-                whiteSpace="nowrap" // Prevent text from wrapping
-                overflow="hidden" // Hide overflow for smooth scrolling effect
-                display="inline-block" // Needed for smooth text scrolling
-                animation="scrollText 15s linear infinite"
-                sx={{
-                "@keyframes scrollText": {
-                    from: { transform: "translateX(100%)" },
-                    to: { transform: "translateX(-100%)" }
-                }
-                }}
-            >
+            <ScrollingTextBar color={null}>
                 EMAIL US - CALIFORNICANURSERY@GMAIL.COM
-            </Text>
-            </Box>
+            </ScrollingTextBar>
+                
         </>
     )
 }

@@ -64,16 +64,17 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
   }, [orderItems])
 
   const addToCart = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct, orderItem: OrderItem) => {
-    console.log(product)
-    setCartItems((prevItems) => [...prevItems, product]);
-    setOrderItems((prev) => [...prev, orderItem])
+    if(cartItems.indexOf(product) === -1 && orderItems.indexOf(orderItem) === -1){
+      setCartItems((prevItems) => [...prevItems, product]);
+      setOrderItems((prev) => [...prev, orderItem])
+    }
+    
   };
 
   const removeFromCart = (event: React.MouseEvent<HTMLButtonElement>, orderId: string) => {
-
-    console.log(orderId)
    
     setOrderItems((prev) => prev.filter((item: OrderItem) => item.catalogObjectId !== orderId));
+
   };
 
   const subtractItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct | undefined, orderItem: OrderItem) => {
@@ -81,7 +82,6 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
     const newArray = [...cartItems]
     newArray.splice(index, 1); 
     
-    let orderIndex = orderItems.indexOf(orderItem)
     const orderArray = [...orderItems]
     orderArray.splice(index, 1)
 

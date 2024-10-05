@@ -8,6 +8,9 @@ import type { NextPageWithLayout } from "../_app";
 import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import { getCatalogObject } from "@/components/square-utils/getCatalogObject";
 import constructSeed from "@/components/square-utils/constructSeed";
+import getInventoryCount from "@/components/square-utils/getInventoryCount";
+import getImages from "@/components/square-utils/getImages";
+
 
 interface MarketplacePropTypes{
     data: Seed
@@ -43,17 +46,24 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
     
     try{
 
-        const attributeMapping = await getCustomAttributes(client)
-
         if(params?.pid){
 
-            const response = await getCatalogObject(params?.pid as string)
+          const response = await getCatalogObject(params?.pid as string)
 
-            const item = response?.object
+          const item = response?.object
 
-            const promise = constructSeed(client, item)
+          const variationObjectIds = item.item_data?.variations.flatMap((v: any) => v.id) || [];
 
-            data = await Promise.resolve(promise)
+          const inventory = await getInventoryCount(client, variationObjectIds)
+
+          const imageIds = item.item_data.image_ids
+
+          const imageUrls = await getImages(client, imageIds)
+
+          const promise = constructSeed(item, inventory?.counts, imageUrls?.objects)
+
+          data = await Promise.resolve(promise)
+
 
         }
 

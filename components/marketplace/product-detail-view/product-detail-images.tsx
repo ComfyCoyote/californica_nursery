@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { Box, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
-import { Apparel, PlaidProduct, Plant } from '@/Interfaces/interfaces'
+import { PlaidProduct } from '@/Interfaces/interfaces'
 import { useState } from 'react';
-import Link from 'next/link';
-import { randomUUID } from 'crypto';
+
 
 interface ProductDetailInfoPropTypes {
     item: PlaidProduct

@@ -6,7 +6,6 @@ import { useSearch } from "./search-sidebar/search-sidebar-context"
 import { theme } from "@/theme/theme"
 import { Text } from "@chakra-ui/react"
 
-
 interface MarketplacePropTypes{
     children: any
     title: string;
@@ -32,7 +31,12 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         toggleSearch={toggleOpen}
         type={title}
         />
-        <Box bg={theme.palette.cream} h='100%' w={'100%'} pt={{base: 160, md: 105}}>
+        <Box 
+            bg={theme.palette.cream} 
+            h='100%' 
+            w={'100%'} 
+            pt={{base: 160, md: 105}}
+        >
                 <Box bg={getColor(title)} overflow={'hidden'} width={'100%'} height={55}>
                         <HStack 
                             animation="scrollText 15s linear infinite" 

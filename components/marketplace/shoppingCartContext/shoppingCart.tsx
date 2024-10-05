@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Box,
   Button,
@@ -13,7 +12,6 @@ import {
   HStack,
   Text,
 } from '@chakra-ui/react';
-import { OrderItem } from '@/Interfaces/interfaces';
 import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext';
 import Link from 'next/link';
 import { theme } from '@/theme/theme';
@@ -26,20 +24,8 @@ interface ShoppingCartPropTypes {
 }
 
 const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [items, setItems] = useState<OrderItem[]>([])
-  const [checkoutLink, setCheckoutLink] = useState('')
   //const [cartItems, setCartItems] = useState<Product[]>([]);
   const { orderItems, removeFromCart } = useCart()
-
-
-  const handleCartOpen = () => {
-    setIsCartOpen(true);
-  };
-
-  const handleCartClose = () => {
-    setIsCartOpen(false);
-  };
 
 
   return (

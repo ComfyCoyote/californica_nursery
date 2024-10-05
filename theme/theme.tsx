@@ -12,5 +12,18 @@ export const theme = {
         skyBlue: '#91D7eE',
         darkGreen: '#443e18',
         purple: '#FF99CC'
+    },
+    sizes: {
+        mktplc: {
+            mktImgW: {base: '60vh', md: '53vh'},
+            mktImgH: {base: '46vh', md: '22vw'}
+        }
+        
+    },
+    font: {
+        bold: {
+            semi: 600,
+            full: 700
+        }
     }
 }

@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react';
 import { useCart } from '../marketplace/shoppingCartContext/shoppingCartContext';
 import { HStack, Button, Container, Heading, Text, VStack, FormControl, FormLabel, FormErrorMessage, Input  } from '@chakra-ui/react';
 import { OrderItem } from '@/Interfaces/interfaces';
@@ -11,7 +10,7 @@ import { uuid } from 'uuidv4';
 import { checkoutNote } from './checkout-note';
 import { useForm } from 'react-hook-form';
 import ErrorAlert from './error-alert';
-import { title } from 'process';
+
 
 interface Error {
   title: string,
@@ -37,7 +36,7 @@ const PreCheckoutPage: React.FC = () => {
 
   const { orderItems, calculated } = useCart(); // Assuming useCart provides orderItems, calculated, and getPaymentLink
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { formState: { errors } } = useForm();
 
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -47,7 +46,7 @@ const PreCheckoutPage: React.FC = () => {
 
   return (
     <Container width={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} maxW="container.md" mt="8">
-      <Heading as="h1" mb="4">Pre-Checkout Page</Heading>
+      <Heading as="h1" mb="4">Review Items</Heading>
       {error.status && <ErrorAlert title={error.title} description={error.desc}/>}
       <HStack width={'100%'}>
         <VStack spacing="4" align="start">

@@ -7,6 +7,8 @@ import type { ReactElement } from 'react'
 import Layout from "@/components/layout/layout";
 import constructMerch from "@/components/square-utils/constructMerch";
 import { getCatalogObject } from "@/components/square-utils/getCatalogObject";
+import getInventoryCount from "@/components/square-utils/getInventoryCount";
+import getImages from "@/components/square-utils/getImages";
 
 
 interface MarketplacePropTypes{
@@ -49,14 +51,21 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
         if(params?.pid){
 
-            const response = await getCatalogObject(params?.pid as string)
+          const response = await getCatalogObject(params?.pid as string)
 
-            const item = response?.object
+          const item = response?.object
 
-            const promise = constructMerch(client, item)
+          const variationObjectIds = item.item_data?.variations.flatMap((v: any) => v.id) || [];
 
-            data = await Promise.resolve(promise)
+          const inventory = await getInventoryCount(client, variationObjectIds)
 
+          const imageIds = item.item_data.image_ids
+
+          const imageUrls = await getImages(client, imageIds)
+
+          const promise = constructMerch(item, inventory?.counts, imageUrls?.objects)
+
+          data = await Promise.resolve(promise)
         }
 
 
