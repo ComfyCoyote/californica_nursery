@@ -149,6 +149,14 @@ const custom = {
               {
                 "uid": "K5XIPGJSQXD7RP3QUO2H2XLF",
                 "name": "Semi-Deciduous"
+              },
+              {
+                "uid": "KRY53OB626NBDB4OTG7UKHH5",
+                "name": "Summer Deciduous"
+              },
+              {
+                "uid": "QGDGYWZHRJPGYEITMYKRWB6Y",
+                "name": "Winter Deciduous"
               }
             ]
           },
@@ -223,6 +231,10 @@ const custom = {
                 "name": "Cactus"
               },
               {
+                "uid": "PHSAWKEIPOT3YMXOMQXHKGTM",
+                "name": "Herbaceous Perennial"
+              },
+              {
                 "uid": "WLETVG3UFAXJWY4JR2V6E4EK",
                 "name": "Large Bunchgrass"
               },
@@ -241,6 +253,10 @@ const custom = {
               {
                 "uid": "KDNAHQJAC2YR5VNOJVDFJIYH",
                 "name": "Medium Shrub"
+              },
+              {
+                "uid": "SUJRJDMPMI7KUPLOD5FXD5BG",
+                "name": "Medium Tree"
               },
               {
                 "uid": "KV3UGWZR7RR64BANTY5A7EBF",

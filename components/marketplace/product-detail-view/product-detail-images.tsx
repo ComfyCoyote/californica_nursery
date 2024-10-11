@@ -14,18 +14,7 @@ const image = 'https://items-images-production.s3.us-west-2.amazonaws.com/files/
 
 const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
 
-    const [mainImage, setMainImage] = useState('')
-
-    useEffect(() => {
-
-        const image = imageCheck(item)
-
-        if(image){
-            setMainImage(image)
-
-        }
-
-    }, [])
+    const [mainImage, setMainImage] = useState(0)
 
 
   return(
@@ -43,9 +32,12 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
             <Image 
                 placeholder='blur'
                 blurDataURL='images/icons/pink_star_placeholder.png'
-                src={mainImage} 
+                // [mainImage] ? item?.imageUrls?.[mainImage] : ''
+                // [0] ? item?.imageUrls?.[0] : ''
+                src={getImageSrc()} 
                 alt="Image"  
                 fill={true}
+                sizes = "(max-width: 768px) 40vh, 32vw"
                 style={{objectFit: 'cover'}}
                 priority
             />
@@ -57,7 +49,7 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
             h='20%'>
 
         {
-            item?.imageUrls && item?.imageUrls.map((img) => {
+            item?.imageUrls && item?.imageUrls.map((img, index) => {
                 if(img){
                     return(
                         <Box 
@@ -67,12 +59,13 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                             width={{base: '15vw', md: '5vw'}}
                             overflow={'hidden'}
                             cursor={'pointer'}
-                            onClick={() => {setMainImage(img)}}
+                            onClick={() => {selectImage(index); console.log('set main image')}}
                         >
                             <Image 
                             key={img}
                             src={img} 
-                            alt="Image" 
+                            alt="Image"
+                            sizes="(max-width: 768px) 15vw, 5vw" 
                             fill={true}
                             style={{objectFit: 'cover'}}
                             priority
@@ -92,25 +85,21 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
     
   );
 
-  function imageCheck(item : PlaidProduct){
+  function selectImage(index: number){
+    setMainImage(index)
+  }
 
-    const itemImg = item?.imageUrls
+  function getImageSrc(): string{
+    if(mainImage == 0){
+        return item?.imageUrls?.[0] ? item?.imageUrls?.[0] : ''
+    } else if(mainImage > 0){
+        return item?.imageUrls?.[mainImage] ? item?.imageUrls?.[mainImage] : ''
+    } 
 
-    if(itemImg){
-        if(itemImg[0]){
-            return(
-                itemImg[0]
-            )
-
-        }
-        
-    } else {
-
-        return image
-    }
-
+    return ''
 
   }
+
 
   
 };

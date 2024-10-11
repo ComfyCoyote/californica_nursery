@@ -33,7 +33,9 @@ export const plantCustomAttributeValues: CustomAttributeValues[] = [
         "attributes": {
             "QXKVIDR6CQUMDO4GYPAVRBJ4": "Deciduous",
             "ASA6L3CM2TDACMYNUVFOQU3E": "Evergreen",
-            "K5XIPGJSQXD7RP3QUO2H2XLF": "Semi-Deciduous"
+            "K5XIPGJSQXD7RP3QUO2H2XLF": "Semi-Deciduous",
+            "KRY53OB626NBDB4OTG7UKHH5": "Summer Deciduous",
+            "QGDGYWZHRJPGYEITMYKRWB6Y": "Winter Deciduous"
         }
     },
     {   "id": "Square:f17c0b0f-6c4b-45e2-9dbc-40e6f092df05", 
@@ -50,9 +52,11 @@ export const plantCustomAttributeValues: CustomAttributeValues[] = [
         "name": "plantType",
         "attributes": {
             "EISGCJBAGMH6QEFZ6KUALJCH": "Cactus",
+            "PHSAWKEIPOT3YMXOMQXHKGTM": "Herbaceous Perennial",
             "WLETVG3UFAXJWY4JR2V6E4EK": "Large Bunchgrass",
             "GNMZO2S4VL3KVXHZG26YFRWT": "Large Shrub",
             "MV4GB6P3Y4KB7ISVEG6DMHM3": "Large Tree",
+            "SUJRJDMPMI7KUPLOD5FXD5BG": "Medium Tree",
             "JAT6YAT7HPWLGTXVBFZQEWLU": "Medium Bunchgrass",
             "KDNAHQJAC2YR5VNOJVDFJIYH": "Medium Shrub",
             "KV3UGWZR7RR64BANTY5A7EBF": "Small Bunchgrass",

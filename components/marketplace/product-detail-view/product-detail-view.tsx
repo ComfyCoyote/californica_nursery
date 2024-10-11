@@ -41,7 +41,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
         <Box
             bg={theme.palette.cream}
             p={{base: 0, md: 30}}
-            pt={{base: 20, md: 30}}  
+            pt={{base: 125, md: 30}}  
             h={'100%'} 
             w={'100%'}>
         <Stack 

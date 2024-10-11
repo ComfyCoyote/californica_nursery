@@ -129,13 +129,6 @@ const LandscapingSectionTwo = () => {
                                 top={350}
                                 left={405}
                                 zIndex={2} >
-                            <Image
-                                src={'/animations/shovel transparent.gif' }
-                                alt="Overlay Image"
-                                fill={true}
-                                style={{objectFit: "cover"}}
-                                // Ensure it's above the background
-                            />
                             </Box>
                     </Box>
 

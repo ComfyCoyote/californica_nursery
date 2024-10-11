@@ -100,6 +100,9 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
 
         data = await Promise.all(promise)
 
+        console.log(data[3])
+
+
         return {
             props: { data: data, filterOptionsObject: filterOptionsObject, cursor: cursor}
         }
