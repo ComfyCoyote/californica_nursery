@@ -101,7 +101,12 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
         }
     } 
 
-    return image
+    if(image){
+        return image
+    } else {
+        return ''
+    }
+    
 
   }
 
