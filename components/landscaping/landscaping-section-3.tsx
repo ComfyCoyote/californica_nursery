@@ -88,12 +88,10 @@ const LandscapingSectionThree = () => {
                         height={{base: 570, md: 600}} 
                     >
                         <Image 
-                        
                             style={{objectFit: "cover", borderRadius: 0}} 
                             src={`/images/landscaping/${src}`} 
                             alt={`Image ${index + 1}`}
                             fill={true}
-                            
                         />
                     </Box>
                     ))}

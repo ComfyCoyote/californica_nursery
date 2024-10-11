@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Flex, VStack} from '@chakra-ui/react';
+import { Box, Flex} from '@chakra-ui/react';
 import Image from 'next/image'
-import Link from 'next/link';
 import { theme } from '@/theme/theme';
 import Footer from '../layout/footer';
 import ShoppingCart from "../marketplace/shoppingCartContext/shoppingCart";
