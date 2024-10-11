@@ -90,7 +90,7 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
   }
 
   function getImageSrc(): string{
-    let image = ''
+    let image: string | null | undefined = ''
     if(mainImage ===  0){
         if(item?.imageUrls?.[0]){
             image =item?.imageUrls?.[0]
