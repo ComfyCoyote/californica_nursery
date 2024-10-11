@@ -9,9 +9,6 @@ interface ProductDetailInfoPropTypes {
     item: PlaidProduct
 }
 
-const image = 'https://items-images-production.s3.us-west-2.amazonaws.com/files/b8cbe24e82bb4b9aad5b8f35485ddca30541986a/original.jpeg'
-
-
 const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
 
     const [mainImage, setMainImage] = useState(0)
