@@ -9,8 +9,6 @@ interface ProductDetailInfoPropTypes {
     item: PlaidProduct
 }
 
-const image = 'https://items-images-production.s3.us-west-2.amazonaws.com/files/b8cbe24e82bb4b9aad5b8f35485ddca30541986a/original.jpeg'
-
 
 const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {
 
@@ -34,7 +32,7 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                 blurDataURL='images/icons/pink_star_placeholder.png'
                 // [mainImage] ? item?.imageUrls?.[mainImage] : ''
                 // [0] ? item?.imageUrls?.[0] : ''
-                src={getImageSrc()} 
+                src={item?.imageUrls?.[mainImage] ? item?.imageUrls?.[mainImage] : ''} 
                 alt="Image"  
                 fill={true}
                 sizes = "(max-width: 768px) 40vh, 32vw"
@@ -87,27 +85,6 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
 
   function selectImage(index: number){
     setMainImage(index)
-  }
-
-  function getImageSrc(): string{
-    let image: string | null | undefined = ''
-    if(mainImage ===  0){
-        if(item?.imageUrls?.[0]){
-            image =item?.imageUrls?.[0]
-        }
-    } else if(mainImage > 0){
-        if(item?.imageUrls?.[mainImage]){
-            image = item?.imageUrls?.[mainImage] 
-        }
-    } 
-
-    if(image){
-        return image
-    } else {
-        return ''
-    }
-    
-
   }
 
 

@@ -45,15 +45,14 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
   function imageCheck(item: PlaidProduct): string {
     if(item.imageUrls){
         if(typeof item.imageUrls[0] === 'string'){
-          console.log(item.imageUrls[0])
+
             return item.imageUrls[0]
         } else {
-          console.log(null)
+          
             return ''
         }
     } else {
 
-      console.log(null)
         return ''
     }
   
