@@ -110,7 +110,7 @@ const AltLandingPage: React.FC = () => {
        {
             pages.slice(3, 5).map((l) => {
                 return(
-                    <LinkIcon iconName={l.name} color={l.color} />
+                    <LinkIcon key={l.name} iconName={l.name} color={l.color} />
                 )
             })
         }
