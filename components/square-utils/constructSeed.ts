@@ -17,7 +17,10 @@ async function constructSeed(item: any, priceVaritions: any[] | undefined, image
 
                 if(inventory){
                     if(inventory?.quantity){
-                        amount = inventory?.quantity
+                        if(Number(inventory?.quantity) > 0){
+                            amount = inventory?.quantity
+                        }
+                        
                     }
                 }
                 

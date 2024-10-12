@@ -20,7 +20,10 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
 
                 if(inventory){
                     if(inventory?.quantity){
-                        amount = inventory?.quantity
+                        if(Number(inventory?.quantity) > 0){
+                            amount = inventory?.quantity
+                        }
+                        
                     }
                 }
                 
@@ -30,7 +33,7 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
                     'id': i[0].id,
                     'price' :  i[0].item_variation_data?.price_money?.amount?.toString() ?? null,
                     'type' :  i[0].item_variation_data?.name,
-                    'amount': amount
+                    'amount': amount 
                 } as PriceVariation
 
             }
