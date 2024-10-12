@@ -22,7 +22,7 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ prices, pri
     {
         prices.map(
             (option) => {
-              console.log(option)
+    
                 return(
                     <Button
                         isDisabled={option.amount === "0"}
@@ -39,7 +39,7 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ prices, pri
                         <Box>
                             <VStack>
                                 <Text>
-                                    {formatSize(option.type)}
+                                    {formatSizeText(option.type)}
                                 </Text>
                                 <Text>
                                     {option.amount === "0" ? 'out of stock' : `$${Number(option.price)/100}`}
@@ -67,11 +67,10 @@ const ProductDetailPrices: React.FC<ProductDetailInfoPropTypes> = ({ prices, pri
     }
   }
 
-  function formatSize(size: string) : string {
+  function formatSizeText(text: string) : string {
+    console.log(text)
 
-
-
-    const cut = size.slice(0, 5)
+    const cut = text.slice(0, 5)
 
     const upper = cut.toUpperCase()
 

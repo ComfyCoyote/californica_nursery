@@ -11,6 +11,7 @@ interface ProductDetailInfoPropTypes {
 
 const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) => {
     
+    
     return(
         <React.Fragment>
         <VStack
@@ -109,16 +110,25 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) 
   }
 
   function getComName(name: string){
-    const start = name.indexOf('(')
 
-    if(start){
-        
-        return name.slice(0, start - 1).toUpperCase()
+    if(type === 'plant' || type === 'seed'){
+        const start = name.indexOf('(')
+
+        if(start){
+            
+            return name.slice(0, start - 1).toUpperCase()
+
+        } else {
+
+            return ''
+        }
+
 
     } else {
 
-        return ''
+        return name.toUpperCase()
     }
+    
   }
 
   function getSciName(name: string ){
