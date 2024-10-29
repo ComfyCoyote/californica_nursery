@@ -1,6 +1,6 @@
 import { PriceVariation, Plant } from "@/Interfaces/interfaces"
 import { PlantAttributes } from "@/Interfaces/interfaces"
-import { plantCustomAttributeValues } from "./customAttributeValueObject"
+import { plantCustomAttributeValues } from "../customAttributeValueObject"
 
 //This function constructs a Plant object by calling a series of square api's which gather
 //all relevant data for the Plant to function in the marketplace
@@ -114,4 +114,4 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
     }
 
 
-export default constructPlant
+export default constructPlant;

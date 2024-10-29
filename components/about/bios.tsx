@@ -7,7 +7,7 @@ export const iansBio = 'My fiery passion for plants, animals, and fungi grows mo
 export const jacksonsBio = 'Since I was a kid I knew I wanted to work outdoors and with nature. As I grew up, I came across many passionate educators who I credit for leading me to where I am today. Ian, an already long-time friend and I coincidentally ended up studying similar topics in school. Once reconvening after college, we joined forces and committed to making our shared dream a reality.  '
 
 
-export const jacksonsBioAlt = 'Simply put, passionate educators and enthusiastic friends are who I credit for leading me to where I am today. Discovering what I love to, while having it be something my community calls for, is a blessing and a role I’m honored to fulfill. See you out there!'
+export const jacksonsBioAlt = 'Passionate educators and enthusiastic friends are who I credit for leading me to where I am today. Discovering what I love to do while having it be something my community calls for is a blessing and a role I’m honored to fulfill. See you out there!'
 
 export const iansBioAlt = 'Ever since I was a kid, I’ve loved being in nature. Thanks to amazing resources in my life, my relationship with it has grown tremendously over the years and I couldn’t be more grateful. '
 

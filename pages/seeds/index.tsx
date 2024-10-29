@@ -7,10 +7,10 @@ import { SEED_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
 import type { ReactElement } from "react";
 import type { NextPageWithLayout } from "../_app";
 import Layout from "@/components/layout/layout";
-import { getCatalogItemsAPI } from "@/components/square-utils/getCatalogItemsAPI";
+import { getCatalogItemsAPI } from "@/components/square-utils/square-api-wrappers/getCatalogItemsAPI";
 import getFilterOptions from "@/components/square-utils/getFilterOptions";
 import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
-import constructPlant from "@/components/square-utils/constructPlant";
+import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import getImages from "@/components/square-utils/getImages";
 

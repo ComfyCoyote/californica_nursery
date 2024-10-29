@@ -77,7 +77,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) 
             </HStack>
             <HStack>
             <Text fontWeight={600}>
-                {`FLOWERING: `}
+                {`FLOWER COLOR: `}
             </Text>
             <Text>
                 {item.plantAttributes?.flowerColor?.join(', ')}
@@ -111,7 +111,7 @@ const ProductDetailInfo: React.FC<ProductDetailInfoPropTypes> = ({ item, type}) 
 
   function getComName(name: string){
 
-    if(type === 'plant' || type === 'seed'){
+    if(type === 'plants' || type === 'seeds' || type === 'merch'){
         const start = name.indexOf('(')
 
         if(start){

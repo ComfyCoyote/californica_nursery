@@ -24,23 +24,21 @@ const pages = [
         "color": theme.palette.skyBlue
     },
     {
+        "name": "merch",
+        "color": theme.palette.purple
+    },
+    {
         "name": "landscaping",
         "color": theme.palette.orange
     },
     {
         "name": "about",
         "color": theme.palette.lightYellow
-    },
-    {
-        "name": "merch",
-        "color": theme.palette.purple
     }
 ]
 
 
 const AltLandingPage: React.FC = () => {
-
-    const [hover, setHover] = useState('')
     
     const [shoppingCartOpen, setShoppingCartOpen] = useState(false)
 
@@ -72,7 +70,6 @@ const AltLandingPage: React.FC = () => {
                 width={600} height={100}/>
         </Box>
         <Box
-
             position={"absolute"}
             right={{base: 400, md: 10}}>
             <Image

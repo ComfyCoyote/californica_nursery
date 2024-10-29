@@ -1,4 +1,4 @@
-import { PlantAttributes } from "@/Interfaces/interfaces"
+
 
 export const PLANT_CATEGORY_ID = "D3C6IP7C54EQIVCPEXVZ3GF7"
 export const SEED_CATEGORY_ID = "L3ZHDHK6PECMYE552SF7OM4E"

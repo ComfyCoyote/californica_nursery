@@ -1,8 +1,11 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-import { createContext, useContext, useEffect, useState, useRef } from 'react';
-import { PlantFilters, MerchFilters, SeedFilters } from './search-filters-interfaces';
-import type { CatalogItemsQuery } from '@/components/square-utils/getCatalogItemsAPI';
-import { useDisclosure } from '@chakra-ui/react';
+import { createContext, useContext, useState } from 'react';
+import type { CatalogItemsQuery } from '@/components/square-utils/square-api-wrappers/getCatalogItemsAPI';
+
+interface SearchBehaviour {
+  action: number,
+  search: boolean
+}
 
 interface SearchContextProps {
     open: boolean;
@@ -11,8 +14,10 @@ interface SearchContextProps {
     removeAttribute: (att_id:string) => void
     removeSelection: (att_id: string, selection_id: string) => void
     clearQuery: () => void
-    search: (arg: boolean) => void
-    searching: boolean
+    textSearch: (input: string) => void 
+    textQuery: string
+    search: (arg: boolean, index: number) => void
+    searching: SearchBehaviour
     query: CatalogItemsQuery[] | null
 }
 
@@ -28,8 +33,10 @@ const SearchContext = createContext<SearchContextProps>({
     toggleOpen: () => {},
     addQuery: () => {},
     clearQuery: () => {},
+    textSearch: () => {},
+    textQuery: '',
     search: () => {},
-    searching: false,
+    searching: {search: false, action: 0},
     query: []
 });
 
@@ -37,14 +44,11 @@ export const useSearch = () => useContext(SearchContext);
 
 export const SearchProvider: React.FC <CartProviderProps>= (props) => {
   const [open, setOpen] = useState(false);
-  const [searching, setSearching] = useState(false)
+  const [searching, setSearching] = useState<SearchBehaviour>({search: false, action: 0})
   const [query, setQuery] = useState<CatalogItemsQuery[] | null>(null)
+  const [textQuery, setTextQuery] = useState<string>('')
 
-  const { isOpen, onClose, onOpen} = useDisclosure({isOpen: open, onClose: () => setOpen(false), onOpen: () => setOpen(true)})
-
-  console.log(query)
-
-  let filtersRef = useRef<any[]>([])
+  console.log(searching)
 
   const addQuery = (att_id: string, selection_id: string) => {
     if(att_id && selection_id){   
@@ -54,8 +58,6 @@ export const SearchProvider: React.FC <CartProviderProps>= (props) => {
         let current = query
 
         const item = current.find(i => i.custom_attribute_definition_id === att_id)
-
-        console.log(item)
 
         if(item){
           const index = current.indexOf(item)
@@ -124,6 +126,11 @@ export const SearchProvider: React.FC <CartProviderProps>= (props) => {
     }
   }
 
+  const textSearch = (input: string) => {
+    setTextQuery(input)
+
+  }
+
   const removeAttribute = (att_id: string) => {
     if(att_id){
       const newQuery = query?.filter((i) => {
@@ -139,14 +146,18 @@ export const SearchProvider: React.FC <CartProviderProps>= (props) => {
     }
   }
 
-  const search = (arg: boolean) => {
-    setSearching(arg)
+  const search = (arg: boolean, index: number) => {
+    console.log(arg)
+    console.log(index)
+    if(index === 0 || index === 1){
+      setSearching({search: arg, action: index})
+    }
+    
     setOpen(false)
 
   }
 
   const clearQuery = () => {
-    console.log('clearquery')
     setQuery([])
   }
 
@@ -155,7 +166,7 @@ export const SearchProvider: React.FC <CartProviderProps>= (props) => {
   }
 
   return (
-    <SearchContext.Provider value={{ open, search, searching, clearQuery, removeAttribute, removeSelection, toggleOpen, addQuery, query}}>
+    <SearchContext.Provider value={{ open, search, searching, textQuery, clearQuery, textSearch, removeAttribute, removeSelection, toggleOpen, addQuery, query}}>
       {props.children}
     </SearchContext.Provider>
   );

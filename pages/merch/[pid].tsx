@@ -5,7 +5,7 @@ import { NextPageWithLayout } from "../_app";
 import ProductDetailView from "@/components/marketplace/product-detail-view/product-detail-view";
 import type { ReactElement } from 'react'
 import Layout from "@/components/layout/layout";
-import constructMerch from "@/components/square-utils/constructMerch";
+import constructMerch from "@/components/square-utils/product-constuctors/constructMerch";
 import { getCatalogObject } from "@/components/square-utils/getCatalogObject";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import getImages from "@/components/square-utils/getImages";

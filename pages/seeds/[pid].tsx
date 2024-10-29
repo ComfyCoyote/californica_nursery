@@ -7,7 +7,7 @@ import type { ReactElement } from 'react'
 import type { NextPageWithLayout } from "../_app";
 import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import { getCatalogObject } from "@/components/square-utils/getCatalogObject";
-import constructSeed from "@/components/square-utils/constructSeed";
+import constructSeed from "@/components/square-utils/product-constuctors/constructSeed";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import getImages from "@/components/square-utils/getImages";
 

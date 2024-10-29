@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
                 LANDSCAPING
               </Text>
             </Link>
-            <Link href={'/'}>
+            <Link href={'https://www.instagram.com/californicanursery/'}>
               <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>
                 INSTAGRAM
               </Text>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Stack, VStack, Button } from '@chakra-ui/react';
 import { OrderItem, Plant, Merch, Seed, PriceVariation } from '@/Interfaces/interfaces'
 import { useCart } from '../shoppingCartContext/shoppingCartContext';
@@ -30,6 +30,16 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
 
     const [priceVariation, setPriceVariation] = useState<Variation>()
     const [alert, setAlert] = useState(false)
+    const [addButton, setAddButton] = useState(true)
+
+    useEffect(() => {
+        if(item?.price){
+            if(item?.price.length === 1){
+                const option = item?.price[0]
+                setPriceVariation({id: option.id, name: option.type})
+            }
+        }
+    }, [])
 
 
     const selectPrice = (event: React.MouseEvent<HTMLButtonElement>, option: PriceVariation ) => {
@@ -70,7 +80,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
                 }
                 <Button
                     size={'lg'}
-                    isDisabled={!priceVariation}
+                    isDisabled={setDisabled()}
                     onClick={(event) => handleAddToCartClick(event)}
                     bg={getColor(type)}
                     borderRadius={0}
@@ -95,6 +105,18 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
             return theme.palette.purple
         }
       }
+
+    function setDisabled(){
+        if(item?.price){
+            if(priceVariation){
+                return false
+            } else {
+                return true
+            }
+
+        }        
+        
+    }
 
 
     function handleAddToCartClick(event: React.MouseEvent<HTMLButtonElement>){

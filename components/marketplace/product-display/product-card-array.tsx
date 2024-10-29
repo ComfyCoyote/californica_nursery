@@ -17,16 +17,21 @@ interface CardArrayPropTypes {
 const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTypes ) => {
     const router = useRouter()
 
-    const { open, query, searching, search} = useSearch()
+    const { query, searching, textQuery, search} = useSearch()
+    console.log(`${searching.action} ${textQuery}`)
 
     const [displayArray, setDisplayArray] = useState<Array<any>>([])
     const [cursor, setCursor] = useState<string>(props.cursor)
 
 
     useEffect(() => {
-        if(searching){
-            searchItems()
-            search(false)
+        if(searching.search){
+            if(searching.action === 0 || searching.action === 1){
+                console.log(searching.action)
+                searchItems(searching.action)
+                search(false,0)
+            }
+            
         } else {
             setDisplayArray([...props.items])
         }
@@ -71,10 +76,19 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
 
     }
 
-    async function searchItems(){
+    async function searchItems(index: number){
+        console.log('search items invoked')
+        let items: any = null
 
-        const location = router.pathname
-        const items = await axios.post('api/getItems', {'type': location, 'query': query, 'limit': 100})
+        if(index === 1){
+            console.log("attribute query")
+            const location = router.pathname
+            items = await axios.post('api/getItems', {'type': location, 'query': query, 'limit': 100})
+        }else if(index === 0){
+            console.log("text query")
+            const location = router.pathname
+            items = await axios.post('api/getItems', {'type': location, 'textFilter': textQuery, 'limit': 100})
+        }
         
         if(items){
             setCursor(items.data.cursor)

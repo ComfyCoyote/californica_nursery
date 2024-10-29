@@ -7,14 +7,18 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  VStack,
-  Text,
+  Tab,
+  TabPanel,
+  Tabs,
+  TabList,
+  TabPanels,
+  useStatStyles
 } from '@chakra-ui/react';
-import type { CustomOption } from './search-sidebar-dropdown';
-import { plantCustomAttributeValues, merchCustomAttributeValues } from '@/components/square-utils/customAttributeValueObject';
-import SearchSidebarDropdown from './search-sidebar-dropdown';
+import { useState } from 'react';
 import { useSearch } from './search-sidebar-context';
 import { theme } from '@/theme/theme';
+import AttributeSearch from './attribute-search';
+import SearchBar from './searchbar';
 
 interface SearchSidebarPropTypes {
   open: boolean;
@@ -24,30 +28,12 @@ interface SearchSidebarPropTypes {
 
 }
 
-interface AttributeTitle {
-  [key: string]: any;
-}
-
-const attributes: AttributeTitle = {
-  'flowerColor': 'Flower Color',
-  'dormancy': 'Dormancy',
-  'lifeCycle': 'Life Cycle',
-  'plantType': 'Plant Type',
-  'soilMoisture': 'Soil Moisture',
-  'difficulty': 'Difficulty',
-  'sun': 'Sun',
-  'ecosystem': 'Ecosystem',
-  'growthForm': 'Growth Form'
-}
-
-
-
-
 
 const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
  
   const { open, search, toggleOpen } = useSearch()
 
+  const [tabIndex, setTabIndex] = useState<number>(0)
   
   return (
     <>
@@ -69,27 +55,25 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
             <DrawerCloseButton color={theme.palette.cream}/>
             <DrawerHeader color={theme.palette.cream}>Search</DrawerHeader>
             <DrawerBody>
-              {
+              <Tabs color={theme.palette.cream} onChange={(e) => setTabIndex(e)}>
+                <TabList color={theme.palette.cream}>
+                  <Tab _selected={{ color: theme.palette.cream}}>{"Search by name"}</Tab>
+                  <Tab _selected={{ color: theme.palette.cream}}>{"Search by attributes"}</Tab>
+                </TabList>
+                <TabPanels>
+                <TabPanel>
+                    <SearchBar type={type}/>
+                  </TabPanel>
+                  <TabPanel>
+                    <AttributeSearch type={type}/>
+                  </TabPanel>
+                </TabPanels>
 
-                contextAttributes().map((i, index) => {
-                  return(
-                    <VStack
-                      alignItems={'flex-start'}
-                      spacing={3} 
-                      key={i.name}>
-                      <Text fontWeight={600} color={theme.palette.cream}>
-                        {attributes[i.name]}
-                      </Text>
-                      <SearchSidebarDropdown att_id={i.att_id} options={getSelectOptions(i.attributes)}/>
-                    </VStack>
-                    
-                  )
-                })
+              </Tabs>
               
-              }
             </DrawerBody>
             <DrawerFooter>
-                <Button onClick={(e) => search(true)} colorScheme={'yellow'} size="sm">
+                <Button onClick={(e) => {console.log("search"); search(true, tabIndex)}} colorScheme={'yellow'} size="sm">
                   search
                 </Button>
             </DrawerFooter>
@@ -99,26 +83,9 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
     </>
   );
 
-  function contextAttributes(){
-    if(type === 'merch'){
-      return merchCustomAttributeValues
+  
 
-    } else {
-      return plantCustomAttributeValues
-    }
-  }
-
-  function getSelectOptions(attributes: any): CustomOption[]{
-
-    return Object.entries<string>(attributes).map((i) => {
-      return {
-        label: i[1], 
-        value: i[0]
-        }
-      }
-    )
-
-  }
+  
 }
 
 export default SearchSidebar;
