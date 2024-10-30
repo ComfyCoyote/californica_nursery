@@ -55,6 +55,15 @@ const LandscapingSectionThree = () => {
                    EMAIL US AT CALIFORNICANURSERY@GMAIL.COM
                 </Text>
             </Box>
+            <Text 
+                width={'100%'}
+                p={5}
+                bg={theme.palette.darkBrown} 
+                color={theme.palette.cream}
+                fontSize={{base: '30px', md: '30px'}} 
+                fontWeight={700} textAlign={'center'}>
+                    {'SCROLL RIGHT TO VIEW GALLERY >>'}
+            </Text>
             <Box
                 overflowX="scroll"
                 borderBottomRadius={0}

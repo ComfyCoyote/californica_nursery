@@ -44,7 +44,7 @@ const AboutPageSectionOne = () => {
             <Box
                 flex={1} // Ensure the image box takes up equal space
                 position={'relative'}
-                width={{ base: '100%', md: '800px' }} // Full width on mobile, fixed width on desktop
+                width={{ base: '225px', md: '800px' }} // Full width on mobile, fixed width on desktop
                 height={{ base: '375px', md: '700px' }} // Adjusted heights for consistency
                 display={'flex'}
                 alignItems={'center'}

@@ -12,7 +12,6 @@ import {
   Tabs,
   TabList,
   TabPanels,
-  useStatStyles
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useSearch } from './search-sidebar-context';
@@ -55,10 +54,10 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
             <DrawerCloseButton color={theme.palette.cream}/>
             <DrawerHeader color={theme.palette.cream}>Search</DrawerHeader>
             <DrawerBody>
-              <Tabs color={theme.palette.cream} onChange={(e) => setTabIndex(e)}>
+              <Tabs variant='soft-rounded' colorScheme='yellow' onChange={(e) => setTabIndex(e)}>
                 <TabList color={theme.palette.cream}>
-                  <Tab _selected={{ color: theme.palette.cream}}>{"Search by name"}</Tab>
-                  <Tab _selected={{ color: theme.palette.cream}}>{"Search by attributes"}</Tab>
+                  <Tab color={theme.palette.cream}>{"Search by name"}</Tab>
+                  <Tab color={theme.palette.cream}>{"Search by attributes"}</Tab>
                 </TabList>
                 <TabPanels>
                 <TabPanel>
@@ -68,9 +67,7 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
                     <AttributeSearch type={type}/>
                   </TabPanel>
                 </TabPanels>
-
               </Tabs>
-              
             </DrawerBody>
             <DrawerFooter>
                 <Button onClick={(e) => {console.log("search"); search(true, tabIndex)}} colorScheme={'yellow'} size="sm">

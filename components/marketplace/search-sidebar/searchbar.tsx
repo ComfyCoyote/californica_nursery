@@ -10,7 +10,7 @@ interface SearchBarPropTypes {
 
 const SearchBar: React.FC<SearchBarPropTypes> = ({type}) => {
  
-    const { textQuery, textSearch } = useSearch()
+    const { textQuery, textSearch, search } = useSearch()
 
     return (
         <Box width="100%" maxW="400px" mx="auto">
@@ -20,8 +20,14 @@ const SearchBar: React.FC<SearchBarPropTypes> = ({type}) => {
             </InputLeftElement>
             <Input
             type="text"
+            color={theme.palette.cream}
             value={textQuery}
             onChange={(e) => textSearch(e.target.value)}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  search(true, 0); // Call the onSearch function when Enter is pressed
+                }
+              }}
             placeholder={placeholder()}
             variant="filled"
             bg={theme.palette.darkBrown}

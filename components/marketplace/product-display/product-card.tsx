@@ -31,7 +31,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
         alt="Image" 
         fill 
         style={{objectFit: "cover"}}
-        sizes="(max-width: 48em) 54vh, (max-width: 62em) 22vw, 20vw"      
+        sizes="(max-width: 30em) 50vw,(max-width: 48em) 25vw,(max-width: 62em) 22vw,20vw"
       />
       </Box>
         <HStack bgColor={getColor(type)} p={2} w={{base: '46vh', md: '22vw'}} justify={"space-between"} alignItems={'center'}>

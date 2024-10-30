@@ -185,7 +185,7 @@ const PreCheckoutPage: React.FC = () => {
         order: order.order,
         checkoutOptions: {
           allowTipping: true,
-          redirectUrl: `https://${window.location.host}/plants`,
+          redirectUrl: `https://${window.location.host}/plants?fromcheckout=true`,
           acceptedPaymentMethods: {
             applePay: true,
             googlePay: true,

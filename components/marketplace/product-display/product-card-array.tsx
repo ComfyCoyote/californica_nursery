@@ -44,7 +44,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                 <Grid 
                     width={'100%'}
                     p={{base: 5, md: 7}}
-                    templateColumns={{base: "repeat(1)", md: "repeat(4, 1fr)"}}
+                    templateColumns={{base: "repeat(2) 1fr", md: "repeat(4, 1fr)"}}
                     gap={4}
                 >
                 {displayArray.map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}

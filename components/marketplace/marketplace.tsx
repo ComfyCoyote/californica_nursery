@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HStack } from "@chakra-ui/react"
 import { Box } from "@chakra-ui/react"
 import SearchSidebar from "./search-sidebar/search-sidebar"
 import { useSearch } from "./search-sidebar/search-sidebar-context"
 import { theme } from "@/theme/theme"
 import { Text } from "@chakra-ui/react"
+import ThankYouModal from '../shared-components/thank-you-modal'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 interface MarketplacePropTypes{
     children: any
@@ -23,8 +26,20 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
 
     const {open, toggleOpen} = useSearch()
 
+    const [modal, setModal] = useState(false)
+
+    const { query } = useRouter()
+
+    useEffect(() => {
+        if(query.fromcheckout === 'true'){
+            setModal(true)
+        }
+        
+    }, [])
+
     return(
         <React.Fragment>
+        <ThankYouModal isOpen={modal} onClose={() => setModal(false)}/>
         <SearchSidebar 
         open={open}
         filters={filterOptions}
