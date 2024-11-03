@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Pagination from "@/components/shared-components/pagination";
 import axios from "axios";
+import { useMarketplace } from "../marketplaceContext/marketplaceContext";
 
 interface CardArrayPropTypes {
     items: any[];
@@ -17,12 +18,9 @@ interface CardArrayPropTypes {
 const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTypes ) => {
     const router = useRouter()
 
+    
     const { query, searching, textQuery, search} = useSearch()
-    console.log(`${searching.action} ${textQuery}`)
-
-    const [displayArray, setDisplayArray] = useState<Array<any>>([])
-    const [cursor, setCursor] = useState<string>(props.cursor)
-
+    const { plantData, seedData, merchData, cursor, setCursor, setItems, setItemsBySearch} = useMarketplace()
 
     useEffect(() => {
         if(searching.search){
@@ -32,9 +30,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                 search(false,0)
             }
             
-        } else {
-            setDisplayArray([...props.items])
-        }
+        } 
     }, [searching])
 
 
@@ -47,7 +43,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                     templateColumns={{base: "repeat(2) 1fr", md: "repeat(4, 1fr)"}}
                     gap={4}
                 >
-                {displayArray.map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
+                {getDataType().map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
                 {
                     cursor && <Pagination totalPages={1} loadMore={loadMore}/> 
@@ -70,14 +66,30 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
 
         if(items){
             setCursor(items.data.cursor)
-            setDisplayArray([...displayArray, ...items.data.items])
+            setItems(location, items.data.items)
         }
 
 
     }
 
+    function getDataType(){
+        const location = router.pathname
+        if (location === "/plants") {
+            return plantData;
+        }
+        if (location === "/seeds") {
+            return seedData;
+        }
+        if (location === "/merch") {
+           return merchData;
+        } 
+
+        return []
+    }
+
     async function searchItems(index: number){
         console.log('search items invoked')
+        const location = router.pathname
         let items: any = null
 
         if(index === 1){
@@ -92,7 +104,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         
         if(items){
             setCursor(items.data.cursor)
-            setDisplayArray([...items.data.items])
+            setItemsBySearch(location, items.data.items)
         }
     }
 

@@ -1,4 +1,4 @@
-import {Flex, Box, IconButton, HStack} from '@chakra-ui/react';
+import {Flex, Box, Button, IconButton, HStack, Text} from '@chakra-ui/react';
 import Image from 'next/image';
 import React from "react";
 import Link from 'next/link';
@@ -64,6 +64,16 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
     >
       <NavbarDropdown options={shopOptions} placeholder="Shop" />
       <NavbarDropdown options={exploreOptions} placeholder="Explore" />
+      <Link href={'/contact'}>
+      <Button
+              bgColor={'transparent'}
+              color={'white'}
+              fontSize={23}
+              _hover={{ bgColor: 'transparent' }}
+            >
+              <Text color="cream">{'CONTACT'}</Text>
+        </Button>
+        </Link>
         <Box textAlign="center">
           <IconButton
             aria-label="Add"

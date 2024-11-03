@@ -14,13 +14,15 @@ export default async function handler(req, res){
             const limit = body.limit
             const textFilter = body.textFilter
 
+            console.log(textFilter)
+
             if(type === "/plants"){
 
               result = await getPlants(cursor, query, textFilter, limit)
 
             }else if(type === "/merch"){
 
-              result = await getMerch(cursor, query, limit)
+              result = await getMerch(cursor, query, textFilter, limit)
 
             }
             

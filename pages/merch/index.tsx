@@ -13,7 +13,8 @@ import constructMerch from "@/components/square-utils/product-constuctors/constr
 import getFilterOptions from "@/components/square-utils/getFilterOptions";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import getImages from "@/components/square-utils/getImages";
-
+import { useEffect } from "react";
+import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -24,6 +25,18 @@ interface MarketplacePropTypes{
 
 
 const MarketplacePage: NextPageWithLayout<MarketplacePropTypes> = (props) => {
+
+    const { setCursor, setItems, merchData } = useMarketplace()
+    
+    useEffect(() => {
+        if(merchData.length === 0){
+            console.log('useeffect')
+            setCursor(props.cursor)
+            setItems("/merch", props.data)
+        }
+        
+
+    }, [])
 
     return(
         <Marketplace title='merch' filterOptions={null}>

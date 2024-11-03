@@ -6,13 +6,14 @@ import ProductCardArray from "@/components/marketplace/product-display/product-c
 import { PLANT_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
 import { NextPageWithLayout } from "../_app";
 import Layout from "@/components/layout/layout";
-import type { ReactElement } from "react";
+import { useEffect, type ReactElement } from "react";
 import { getCatalogItemsAPI } from "@/components/square-utils/square-api-wrappers/getCatalogItemsAPI";
 import type { CatalogObject } from "square";
 import getFilterOptions from "@/components/square-utils/getFilterOptions";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import getImages from "@/components/square-utils/getImages";
+import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -25,6 +26,17 @@ interface MarketplacePropTypes{
 
 const MarketplacePage: NextPageWithLayout<MarketplacePropTypes> = (props) => {
 
+    const { setCursor, setItems, plantData } = useMarketplace()
+    
+    useEffect(() => {
+        if(plantData.length === 0){
+            console.log('useeffect')
+            setCursor(props.cursor)
+            setItems("/plants", props.data)
+        }
+        
+
+    }, [])
 
     return(
 
@@ -45,6 +57,7 @@ MarketplacePage.getLayout = function getLayout(page: ReactElement){
 
 
 export const getServerSideProps : GetServerSideProps = async (context) => {
+
 
     let cursor: string;
 
@@ -100,8 +113,6 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
 
         data = await Promise.all(promise)
 
-        console.log(data[3])
-
 
         return {
             props: { data: data, filterOptionsObject: filterOptionsObject, cursor: cursor}
@@ -124,8 +135,6 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
         }
 
     }
-
-    console.log(data.slice(-5))
 
     return {
       props: { data: [], filterOptionsObject: {}, cursor: ''}

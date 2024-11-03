@@ -13,6 +13,8 @@ import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import getImages from "@/components/square-utils/getImages";
+import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
+import { useEffect } from "react";
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -23,6 +25,18 @@ interface MarketplacePropTypes{
 
 
 const MarketplacePage: NextPageWithLayout<MarketplacePropTypes> = (props) => {
+
+    const { setCursor, setItems, seedData } = useMarketplace()
+    
+    useEffect(() => {
+        if(seedData.length === 0){
+            console.log('useeffect')
+            setCursor(props.cursor)
+            setItems("/seeds", props.data)
+        }
+        
+
+    }, [])
 
     return(
         <Marketplace title='seeds' filterOptions={null}>

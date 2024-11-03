@@ -6,6 +6,7 @@ import { SearchProvider } from '@/components/marketplace/search-sidebar/search-s
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import {  MultiSelectTheme } from 'chakra-multiselect'
+import { MarketplaceProvider } from '@/components/marketplace/marketplaceContext/marketplaceContext'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps } : AppPropsWithLayout) {
 
   return (
     
+    <MarketplaceProvider>
     <CartProvider>
     <SearchProvider>
     <ChakraProvider theme={theme}>
@@ -36,6 +38,7 @@ function MyApp({ Component, pageProps } : AppPropsWithLayout) {
     </ChakraProvider>
     </SearchProvider>
     </CartProvider>
+    </MarketplaceProvider>
   )
 }
 

@@ -50,8 +50,6 @@ async function getMerch(cursor, query=null, textFilter, limit){
 
         data = await Promise.all(promise)
 
-        console.log(data)
-
         return {
             items: data, cursor: newCursor
         }
