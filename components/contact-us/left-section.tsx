@@ -20,7 +20,6 @@ const LeftSection: React.FC = () => {
             </HStack>
             <HStack>
                 <Text fontSize={25} fontWeight={600} color={theme.palette.cream}>Phone: </Text>
-                <Text fontSize={20} color={theme.palette.cream}> Need a number</Text>
             </HStack>
             <SocialMediaIcons />
         </VStack>

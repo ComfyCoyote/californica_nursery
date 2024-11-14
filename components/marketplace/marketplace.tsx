@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { HStack } from "@chakra-ui/react"
-import { Box } from "@chakra-ui/react"
+import { HStack, Link, Box } from "@chakra-ui/react"
 import SearchSidebar from "./search-sidebar/search-sidebar"
 import { useSearch } from "./search-sidebar/search-sidebar-context"
 import { theme } from "@/theme/theme"
@@ -56,7 +55,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         return () => {
           router.events.off('routeChangeStart', handleRouteChange);
         };
-        
+
     }, [router])
 
 
@@ -140,8 +139,11 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
                                 </Text>
                         </HStack>
                 </Box>
-                <Text fontSize={25} fontWeight={600} p={10} color="black" textAlign={'center'}>
-                    *Purchased plants, seeds, and merchandise are available for contactless pickup every Friday in Long Beach, CA.  For wholesale inquiries, contact californicanursery@gmail.com
+                <Text fontSize={25} fontWeight={600} p={10} color="black" textAlign="center">
+                *Purchased plants, seeds, and merchandise are available for contactless pickup every Friday in Long Beach, CA. For wholesale inquiries, contact{' '}
+                <Link href="mailto:wholesale@californicanursery.com" isExternal>
+                    wholesale@californicanursery.com
+                </Link>
                 </Text>
             {children}
         </Box>

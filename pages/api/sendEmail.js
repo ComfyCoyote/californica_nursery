@@ -14,7 +14,7 @@ export default async function sendEmail(req, res) {
 
 
             const msg = {
-                to: 'test@example.com', // Change to your recipient
+                to: 'ian@californicanursery.com', // Change to your recipient
                 from: email, // Change to your verified sender
                 subject: subject,
                 text: text,
