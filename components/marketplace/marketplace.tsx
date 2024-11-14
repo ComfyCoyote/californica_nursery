@@ -25,6 +25,7 @@ const numbers = Array.from({ length }, (_, i) => i + 1);
 const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOptions}) => {
 
     const {open, toggleOpen} = useSearch()
+    const router = useRouter()
 
     const [modal, setModal] = useState(false)
 
@@ -36,6 +37,28 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         }
         
     }, [])
+
+    useEffect(() => {
+        const savedPosition = sessionStorage.getItem(router.pathname);
+
+        if (savedPosition) {
+          window.scrollTo(0, parseInt(savedPosition, 10));
+        }
+    
+        // Save scroll position before navigating away
+        const handleRouteChange = () => {
+          sessionStorage.setItem(router.pathname, window.scrollY.toString());
+        };
+    
+        // Listen to route changes
+        router.events.on('routeChangeStart', handleRouteChange);
+
+        return () => {
+          router.events.off('routeChangeStart', handleRouteChange);
+        };
+        
+    }, [router])
+
 
     return(
         <React.Fragment>
