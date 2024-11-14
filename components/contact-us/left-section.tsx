@@ -10,7 +10,7 @@ const LeftSection: React.FC = () => {
     return(
         <VStack alignItems={'left'} maxW={400}>
             <Text fontSize={20} color={theme.palette.cream}>
-                {'Feel Free to contact us for any inquiry, and we will get back as soon as possible'}
+                {'Feel free to contact us for any inquiries, and we will get back to you as soon as possible'}
             </Text>
             <HStack>
                 <Text fontSize={25} fontWeight={600} color={theme.palette.cream}>Email: </Text>
