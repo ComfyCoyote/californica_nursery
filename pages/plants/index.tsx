@@ -12,7 +12,6 @@ import type { CatalogObject } from "square";
 import getFilterOptions from "@/components/square-utils/getFilterOptions";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
-import getImages from "@/components/square-utils/getImages";
 import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
 
 interface MarketplacePropTypes{
@@ -76,18 +75,8 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
         const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID)
 
         const variationObjectIds = archivedState.items.flatMap((p: any) => p.item_data?.variations.map((v: any) => v.id) || []);
-
-        const imageIds = archivedState.items.flatMap((p: any) => p.item_data.image_ids)
         
         const inventory = await getInventoryCount(client, variationObjectIds)
-
-        const imageUrls = await getImages(client, imageIds)
-
-
-        //instead of calling the API iteratively in constructPlant, call it once with a broad
-        // item scope, and iteratively match IDs and values with plants
-
-        //get inventory counts for all items
 
         cursor = archivedState?.cursor
 
@@ -99,10 +88,8 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
                 const itemVariationIds = item?.item_data?.variations?.map((v: any) => v.id)
             
                 const specificVariation = inventory?.counts?.filter((v) => itemVariationIds?.indexOf(v.catalogObjectId) !== -1)
-
-                const specificImages = imageUrls?.objects?.filter((i) => item.item_data.image_ids.indexOf(i.id) !== -1)
             
-                const promiseplant = constructPlant(item as CatalogObject, specificVariation, specificImages)
+                const promiseplant = constructPlant(item as CatalogObject, specificVariation)
                             
                 promise.push(promiseplant)
                   

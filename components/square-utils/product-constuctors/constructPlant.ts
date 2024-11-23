@@ -6,7 +6,7 @@ import { plantCustomAttributeValues } from "../customAttributeValueObject"
 //all relevant data for the Plant to function in the marketplace
 
 
-async function constructPlant(item: any, priceVaritions: any[] | undefined, imageIds: any[] | undefined){
+async function constructPlant(item: any, priceVaritions: any[] | undefined){
 
 
         //from the catalogobject's priceVariation, contruct a PriceVariation object which contains simplified
@@ -87,16 +87,12 @@ async function constructPlant(item: any, priceVaritions: any[] | undefined, imag
         //get the image urls for each id listed in the CatalogObjects images key and append them to the images
         //key of the plant object
 
-        let imageUrls: string[] = []
+        const imageUrls = item.item_data.image_ids.map((id: string) => {
+            return `https://d4ixhj8jfp690.cloudfront.net/${item.id}_${id}.webp`
 
-        if(imageIds){
-
-            imageUrls = imageIds.map((i: any) => i.imageData?.url)
-            
-        }
+        })
         
 
-        
         const plant: Plant = {
             id: item.id,
             name : item?.item_data?.name ? item?.item_data?.name : '',

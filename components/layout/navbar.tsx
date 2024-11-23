@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from "react";
 import Link from 'next/link';
 import NavbarDropdown from '../shared-components/navbar-dropdown';
-import { Search2Icon } from '@chakra-ui/icons';
+import { FaSearch } from 'react-icons/fa';
 import { useSearch } from '../marketplace/search-sidebar/search-sidebar-context';
 import { useRouter } from 'next/router';
 import { theme } from '@/theme/theme';
@@ -44,7 +44,9 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
     justifyContent="space-between"
     direction={{ base: 'column', md: 'row' }} // Responsive direction
   >
-    <Box padding={5} textAlign={{ base: 'center', md: 'left' }}> {/* Center logo on mobile */}
+    <Box 
+    padding={5} 
+    textAlign={{ base: 'center', md: 'left' }}> {/* Center logo on mobile */}
       <Link href="/">
         <Image
           height={50} // Responsive height
@@ -57,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
   
     <HStack
       as="nav"
-      spacing={{ base: 2, md: 5 }} // Adjust spacing for mobile
+      spacing={{ base: 0, md: 5 }} // Adjust spacing for mobile
       direction={{ base: 'column', md: 'row' }} // Stack vertically on mobile
       w={{ base: '100%', md: 'auto' }} // Full width on mobile
       justifyContent={{ base: 'center', md: 'space-evenly' }} // Center items on mobile
@@ -81,9 +83,8 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
             icon={
               <Image
                 src="/images/icons/basket_lime.png"
-                alt="Your Image Alt Text"
+                alt="Shopping Cart"
                 fill
-                objectFit="cover"
               />
             }
             height={{ base: 50, md: 70 }} // Responsive size
@@ -101,7 +102,7 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
               onClick={toggleOpen}
               bgColor={theme.palette.darkGreen}
               aria-label="search"
-              icon={<Search2Icon boxSize={{ base: 5, md: 7 }} color={theme.palette.lime} />}
+              icon={<FaSearch color={theme.palette.lime} style={{fontSize: '30px'}}/>}
               height={{ base: 50, md: 70 }} // Responsive size
               width={{ base: 50, md: 70 }} // Responsive size
               _hover={{ bgColor: 'transparent' }}

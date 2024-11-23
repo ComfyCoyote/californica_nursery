@@ -12,7 +12,6 @@ import getFilterOptions from "@/components/square-utils/getFilterOptions";
 import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
-import getImages from "@/components/square-utils/getImages";
 import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
 import { useEffect } from "react";
 
@@ -83,7 +82,6 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
       
       const inventory = await getInventoryCount(client, variationObjectIds)
 
-      const imageUrls = await getImages(client, imageIds)
 
       cursor = archivedState?.cursor
 
@@ -94,10 +92,8 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
         const itemVariationIds = item?.item_data?.variations?.map((v: any) => v.id)
             
         const specificVariation = inventory?.counts?.filter((v) => itemVariationIds?.indexOf(v.catalogObjectId) !== -1)
-
-        const specificImages = imageUrls?.objects?.filter((i) => item.item_data.image_ids.indexOf(i.id) !== -1)
     
-        const promiseplant = constructPlant(item as CatalogObject, specificVariation, specificImages)
+        const promiseplant = constructPlant(item as CatalogObject, specificVariation)
                     
         promise.push(promiseplant)
             

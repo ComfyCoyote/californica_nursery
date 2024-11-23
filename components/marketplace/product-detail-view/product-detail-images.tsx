@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import { PlaidProduct } from '@/Interfaces/interfaces'
@@ -28,10 +28,11 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
             >
             <Image 
                 placeholder='blur'
-                blurDataURL='images/icons/pink_star_placeholder.png'
+                blurDataURL={getImageSrc()}
                 // [mainImage] ? item?.imageUrls?.[mainImage] : ''
                 // [0] ? item?.imageUrls?.[0] : ''
-                src={getImageSrc()} 
+                src={getImageSrc()}
+                loading='eager' 
                 alt="Image"  
                 fill={true}
                 sizes = "(max-width: 768px) 40vh, 32vw"
@@ -56,16 +57,18 @@ const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => 
                             width={{base: '15vw', md: '5vw'}}
                             overflow={'hidden'}
                             cursor={'pointer'}
-                            onClick={() => {selectImage(index); console.log('set main image')}}
+                            onClick={() => {selectImage(index)}}
                         >
                             <Image 
                             key={img}
                             src={img} 
+                            placeholder='blur'
+                            blurDataURL={getImageSrc()}
                             alt="Image"
                             sizes="(max-width: 768px) 15vw, 5vw" 
                             fill={true}
                             style={{objectFit: 'cover'}}
-                            priority
+                            quality={50}
                         />
                     </Box>
                     )

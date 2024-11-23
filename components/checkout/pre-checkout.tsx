@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCart } from '../marketplace/shoppingCartContext/shoppingCartContext';
-import { HStack, Button, Container, Heading, Text, VStack, FormControl, FormLabel, FormErrorMessage, Input  } from '@chakra-ui/react';
-import { OrderItem } from '@/Interfaces/interfaces';
+import { HStack, Button, Container, Heading, Text, VStack, FormControl, FormLabel, Input  } from '@chakra-ui/react';
+import { OrderItem } from "@/Interfaces/interfaces";
 import PreCheckoutItem from './pre-checkout-item';
 import type { Fulfillment,  OrderLineItem } from 'square';
 import dayjs from 'dayjs';

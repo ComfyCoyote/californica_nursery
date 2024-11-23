@@ -1,5 +1,5 @@
 import { Input, InputGroup, InputLeftElement, Icon, Box } from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
+import { FaSearch } from 'react-icons/fa';
 import { useSearch } from './search-sidebar-context';
 import { theme } from '@/theme/theme';
 
@@ -16,7 +16,7 @@ const SearchBar: React.FC<SearchBarPropTypes> = ({type}) => {
         <Box width="100%" maxW="400px" mx="auto">
         <InputGroup>
             <InputLeftElement pointerEvents="none">
-            <Icon as={SearchIcon} color="gray.400" />
+            <Icon as={FaSearch} color="gray.400" />
             </InputLeftElement>
             <Input
             type="text"

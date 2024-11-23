@@ -70,7 +70,7 @@ const SearchSidebar: React.FC<SearchSidebarPropTypes> = ({type}) => {
               </Tabs>
             </DrawerBody>
             <DrawerFooter>
-                <Button onClick={(e) => {console.log("search"); search(true, tabIndex)}} colorScheme={'yellow'} size="sm">
+                <Button onClick={(e) => {search(true, tabIndex)}} colorScheme={'yellow'} size="sm">
                   search
                 </Button>
             </DrawerFooter>

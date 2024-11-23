@@ -1,5 +1,4 @@
-import getMerch from "../../components/square-utils/custom-api-functions/getMerch";
-import getPlants from "../../components/square-utils/custom-api-functions/getPlants";
+import getProduct from "../../components/square-utils/custom-api-functions/getProduct";
 
 
 export default async function handler(req, res){
@@ -18,11 +17,11 @@ export default async function handler(req, res){
 
             if(type === "/plants"){
 
-              result = await getPlants(cursor, query, textFilter, limit)
+              result = await getProduct('PLANT', cursor, query, textFilter, limit)
 
             }else if(type === "/merch"){
 
-              result = await getMerch(cursor, query, textFilter, limit)
+              result = await getProduct('MERCH', cursor, query, textFilter, limit)
 
             }
             

@@ -1,6 +1,5 @@
 // Footer.tsx
-import React from 'react';
-import { Box, Container, Stack, Text } from '@chakra-ui/react';
+import {Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { theme } from '@/theme/theme'
 //embedded email link into email
@@ -10,17 +9,10 @@ import { theme } from '@/theme/theme'
 
 const Footer: React.FC = () => {
   return (
-    <Box>
-    <Container
-      as={Stack}
-      maxW={'100vw'}
-      py={10}
-      spacing={4}
-      justify={'center'}
-      align={'center'}
-      bgColor={theme.palette.darkBrown}
-    >
       <Stack
+        backgroundColor={theme.palette.darkBrown}
+        py={4}
+        px={10}
         width={'100%'}
         direction={{ base: 'column', md: 'row' }} // Responsive direction for mobile and desktop
         justifyContent={{ base: 'center', md: 'space-between' }} // Center content on mobile, space between on desktop
@@ -89,8 +81,6 @@ const Footer: React.FC = () => {
           </Stack>
         </Stack>
       </Stack>
-    </Container>
-  </Box>  
   );
 };
 

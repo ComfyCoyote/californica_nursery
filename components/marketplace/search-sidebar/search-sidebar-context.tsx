@@ -147,8 +147,6 @@ export const SearchProvider: React.FC <CartProviderProps>= (props) => {
   }
 
   const search = (arg: boolean, index: number) => {
-    console.log(arg)
-    console.log(index)
     if(index === 0 || index === 1){
       setSearching({search: arg, action: index})
     }

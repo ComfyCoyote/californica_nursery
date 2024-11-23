@@ -39,11 +39,9 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
   const [orderItems, setOrderItems] = useState<OrderItem[]>([])
   const [calculated, setCalculated] = useState<string>()
 
-  console.log(orderItems)
 
   useEffect(() => {
-    const localItems = localStorage.getItem("orderItems")
-    console.log(localItems)
+    const localItems = sessionStorage.getItem("orderItems")
     if(localItems){
       const obj = JSON.parse(localItems)
       setOrderItems(obj)
@@ -56,9 +54,9 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
 
     if(orderItems.length > 0){
       const localItems = JSON.stringify(orderItems)
-      localStorage.setItem("orderItems", localItems)
-      localStorage.setItem("calculated", JSON.stringify(calculated))
-      calculateOrder().then((response) => {console.log(response); setCalculated(response.data.net)})
+      sessionStorage.setItem("orderItems", localItems)
+      sessionStorage.setItem("calculated", JSON.stringify(calculated))
+      calculateOrder().then((response) => {setCalculated(response.data.net)})
     }
 
   }, [orderItems])
@@ -189,38 +187,6 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
     console.log(response)
 
     return response
-  }
-
-  const getPaymentLink = async () => {
-
-    const fulfillment = createPickupFulfillment('', '', '', '')
-
-    const stJosephs = 'L3C4J69QTRCAA'
-
-    const order = createOrder(orderItems, [fulfillment], stJosephs)
-
-    try {
-      const response = await axios.post('api/createPaymentLink',{
-        idempotencyKey: uuidv4(),
-        order: order,
-        checkoutOptions: {
-          allowTipping: true,
-          acceptedPaymentMethods: {
-            applePay: true,
-            googlePay: true,
-            cashAppPay: true
-          },
-          appFeeMoney: {
-            amount: 300,
-            currency: 'USD'
-          }
-        }
-      });
-    
-      console.log(response);
-    } catch(error) {
-      console.log(error);
-    }
   }
 
   return (

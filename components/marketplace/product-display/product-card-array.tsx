@@ -1,7 +1,7 @@
 import ProductCard from "./product-card";
 import { Grid } from "@chakra-ui/react"
 import { useSearch } from "../search-sidebar/search-sidebar-context";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import React from "react";
 import Pagination from "@/components/shared-components/pagination";
@@ -95,11 +95,11 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
         if(index === 1){
             console.log("attribute query")
             const location = router.pathname
-            items = await axios.post('api/getItems', {'type': location, 'query': query, 'limit': 100})
+            items = await axios.post('api/getItems', {'type': location, 'query': query, 'textFilter': '', 'limit': 100})
         }else if(index === 0){
             console.log("text query")
             const location = router.pathname
-            items = await axios.post('api/getItems', {'type': location, 'textFilter': textQuery, 'limit': 100})
+            items = await axios.post('api/getItems', {'type': location, 'query': [], 'textFilter': textQuery, 'limit': 100})
         }
         
         if(items){

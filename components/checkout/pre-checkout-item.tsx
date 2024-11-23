@@ -1,5 +1,6 @@
 import { OrderItem } from '@/Interfaces/interfaces';
-import { Flex, Image, Text, VStack, Button, Input} from '@chakra-ui/react';
+import { Flex, Text, VStack, Button, Input, Box, Stack} from '@chakra-ui/react';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useCart } from '../marketplace/shoppingCartContext/shoppingCartContext';
 
@@ -17,8 +18,9 @@ const PreCheckoutItem: React.FC<ItemProps> = ({ item }) => {
    
 
   return (
-    <Flex 
+    <Stack 
         align="center" 
+        direction={{base: 'column', md: 'row'}}
         backgroundColor={isHovered ? "yellow.100" : "white"}
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)}
@@ -26,7 +28,18 @@ const PreCheckoutItem: React.FC<ItemProps> = ({ item }) => {
         p="4" 
         borderWidth="1px" 
         borderRadius="md">
-      <Image src={item.misc.image} alt={item.name} boxSize="100px" objectFit="cover" mr="4" />
+        <Box
+            width={{base: '100px', md: '150px'}}
+            height={{base: '100px', md: '150px'}}
+            padding={{base: '0', md: '4'}}
+        >
+            <Image 
+            src={item.misc.image} 
+            alt={item.name} 
+            width={100} 
+            height={100} 
+          />
+        </Box>
       <VStack align="flex-start" flex="1">
         <Text fontSize="lg" fontWeight="bold">{item.name}</Text>
         <Text fontSize="md">Price: ${item.misc.price/100}</Text>
@@ -52,7 +65,7 @@ const PreCheckoutItem: React.FC<ItemProps> = ({ item }) => {
           Remove
         </Button>
       )}
-    </Flex>
+    </Stack>
   );
 };
 

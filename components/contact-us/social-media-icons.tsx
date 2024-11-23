@@ -1,48 +1,30 @@
 // SocialMediaIcons.tsx
 import React from 'react';
-import { HStack, IconButton } from '@chakra-ui/react';
-import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { Stack, IconButton } from '@chakra-ui/react';
+import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 
-interface SocialMediaIconsProps {
-  spacing?: number;
-}
-
-const SocialMediaIcons: React.FC<SocialMediaIconsProps> = ({ spacing = 4 }) => {
+const SocialMediaIcons: React.FC = () => {
   return (
-    <HStack spacing={spacing} justify="left">
+    <Stack direction={{base: 'column', md: 'row'}} spacing={2} justify="left">
       <IconButton
         as="a"
-        href="https://www.instagram.com"
+        href="https://www.instagram.com/californicanursery/"
         aria-label="Instagram"
-        icon={<FaInstagram />}
+        icon={<FaInstagram style={{fontSize: '3rem'}} />}
         colorScheme="pink"
         variant="ghost"
-      />
-      <IconButton
-        as="a"
-        href="https://www.facebook.com"
-        aria-label="Facebook"
-        icon={<FaFacebook />}
-        colorScheme="facebook"
-        variant="ghost"
-      />
-      <IconButton
-        as="a"
-        href="https://www.twitter.com"
-        aria-label="Twitter"
-        icon={<FaTwitter />}
-        colorScheme="twitter"
-        variant="ghost"
+        size={'lg'}
       />
       <IconButton
         as="a"
         href="https://www.linkedin.com"
         aria-label="LinkedIn"
-        icon={<FaLinkedin />}
-        colorScheme="linkedin"
+        size={'lg'}
+        icon={<FaLinkedin style={{fontSize: '3rem'}}/>}
+        colorScheme="blue"
         variant="ghost"
       />
-    </HStack>
+    </Stack>
   );
 };
 

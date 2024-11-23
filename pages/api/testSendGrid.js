@@ -1,13 +1,19 @@
 const sgMail = require('@sendgrid/mail')
 const apiKey = "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"
 sgMail.setApiKey(apiKey)
-console.log(process.env.SENDGRID_API_KEY)
+
+
+const subject = 'Hi Californica Nursery'
+const text = 'I am testing what emails sent through the contact us page look like'
+const name = 'Muzzy Adamjee'
+const email = 'ian@californicanursery.com'
+
 const msg = {
-  to: 'wholesale@californicanursery.com', // Change to your recipient
+  to: 'muzzadamjee@gmail.com', // Change to your recipient
   from: 'californicanursery@gmail.com', // Change to your verified sender
-  subject: 'Sending with SendGrid is Fun',
+  subject: `Contact Us Message from ${name}`,
   text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  html: `<h3>${subject}</h3><strong>${text}</strong><h3>${name}</h3><h3>${email}</h3>`,
 }
 sgMail
   .send(msg)

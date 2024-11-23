@@ -12,7 +12,6 @@ import { getCatalogItemsAPI } from "@/components/square-utils/square-api-wrapper
 import constructMerch from "@/components/square-utils/product-constuctors/constructMerch";
 import getFilterOptions from "@/components/square-utils/getFilterOptions";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
-import getImages from "@/components/square-utils/getImages";
 import { useEffect } from "react";
 import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
 
@@ -80,8 +79,6 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
       const imageIds = archivedState.items.flatMap((p: any) => p.item_data.image_ids)
       
       const inventory = await getInventoryCount(client, variationObjectIds)
-
-      const imageUrls = await getImages(client, imageIds)
       
       cursor = archivedState?.cursor
 
@@ -93,10 +90,8 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
             const itemVariationIds = item?.item_data?.variations?.map((v: any) => v.id)
         
             const specificVariation = inventory?.counts?.filter((v) => itemVariationIds?.indexOf(v.catalogObjectId) !== -1)
-
-            const specificImages = imageUrls?.objects?.filter((i) => item.item_data.image_ids.indexOf(i.id) !== -1)
         
-            const promiseplant = constructMerch(item as CatalogObject, specificVariation, specificImages)
+            const promiseplant = constructMerch(item as CatalogObject, specificVariation)
                         
             promise.push(promiseplant)
               

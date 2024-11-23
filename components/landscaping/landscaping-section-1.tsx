@@ -17,7 +17,7 @@ const LandscapingSectionOne = () => {
                 </Text>
             </Box>
             <Stack p={0} width={'100%'} spacing={0} direction={{base: 'column', md: 'row' }}>
-                <Box position={'relative'} height={'70vh'} width={'63vh'}>
+                <Box position={'relative'} height={'70vh'} flex={1}>
                     <Image 
                         src={'/images/landscaping/brett_ian_landscaping_cropped.png'} 
                         alt={'Ian and Jackson killing the lawn'} 
@@ -25,7 +25,7 @@ const LandscapingSectionOne = () => {
                         style={{objectFit: "cover"}} 
                     />
                 </Box>
-                <Box position={'relative'} height={'70vh'} width={'66vh'}>
+                <Box position={'relative'} height={'70vh'} flex={1}>
                     <Image 
                         src={'/images/landscaping/killyourlawn1.png'} 
                         alt={'Ian and Jackson killing the lawn'} 
@@ -33,7 +33,7 @@ const LandscapingSectionOne = () => {
                         style={{objectFit: "cover"}} 
                     />
                 </Box>
-                <Box position={'relative'} height={'70vh'} width={'63vh'}>
+                <Box position={'relative'} height={'70vh'} flex={1}>
                     <Image 
                         src={'/images/landscaping/killyourlawn2.png'} 
                         alt={'Ian and Jackson killing the lawn'} 
@@ -55,7 +55,6 @@ const LandscapingSectionOne = () => {
                     <Text textAlign="center" fontSize={25} color={theme.palette.cream}>
                         At Californica Nursery, {text1 + ' ' + text2}
                     </Text>
-                    
                 </Box>
             </VStack>
         </VStack>

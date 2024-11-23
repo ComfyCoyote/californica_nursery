@@ -15,7 +15,10 @@ interface ProductCardPropTypes {
 const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
 
   return (
-    <Link href={`/${type}/${item.id}`}>
+    <Link 
+      prefetch={true}
+      href={`/${type}/${item.id}/${item.name}`}
+    >
     <VStack align="center" spacing={0}>
       <Box 
             bgColor={getColor(type)}
@@ -26,12 +29,15 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
       >
       <Image 
         placeholder='blur'
-        blurDataURL='images/icons/pink_star_placeholder.png'
+        blurDataURL={imageCheck(item)}
         src={imageCheck(item)} 
         alt="Image" 
         fill 
         style={{objectFit: "cover"}}
         sizes="(max-width: 30em) 50vw,(max-width: 48em) 25vw,(max-width: 62em) 22vw,20vw"
+        priority
+        quality={60}
+        loading='eager'
       />
       </Box>
         <HStack bgColor={getColor(type)} p={2} w={{base: '46vh', md: '22vw'}} justify={"space-between"} alignItems={'center'}>
@@ -45,7 +51,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
   function imageCheck(item: PlaidProduct): string {
     if(item.imageUrls){
         if(typeof item.imageUrls[0] === 'string'){
-
+            console.log(item.imageUrls[0])
             return item.imageUrls[0]
         } else {
           

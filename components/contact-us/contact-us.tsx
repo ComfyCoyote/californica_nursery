@@ -8,22 +8,36 @@ import {
   Textarea, 
   VStack, 
   Heading, 
-  useToast, 
-  Stack
+  Stack,
+  useToast
 } from '@chakra-ui/react';
 import { theme } from '../../theme/theme' 
 import LeftSection from './left-section';
 import ReCAPTCHA from 'react-google-recaptcha'
+import axios from 'axios';
+import Toaster from '../shared-components/toast';
+import { ToasterPropTypes } from '../shared-components/toast';
+
 
 const ContactUs: React.FC = () => {
-  const toast = useToast();
+
+  const toast = useToast()
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
+
   const [captchaVerified, setCaptchaVerified] = useState(false);
+
+  const [alert, setAlert] = useState<ToasterPropTypes>({
+    display: false,
+    status: 'success',
+    title: '',
+    message: ''
+  })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -36,40 +50,15 @@ const ContactUs: React.FC = () => {
     setCaptchaVerified(!!value); // Set to true if a captcha value exists
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!captchaVerified) {
-      toast({
-        title: "Captcha not verified",
-        description: "Please complete the captcha test.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return;
-    }
-
-    toast({
-      title: "Message Sent",
-      description: "Thank you for contacting us. We will get back to you shortly.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setCaptchaVerified(false);
-  };
-
   return (
     <Box backgroundColor={theme.palette.darkBrown} py={40} px={20}>
       <Heading as="h1" mb={6} color={theme.palette.cream} textAlign="center">
         Contact Us
       </Heading>
-      <Stack direction={{base: 'column', md: 'row'}}spacing={20}>
-        <LeftSection/>
-        <form onSubmit={handleSubmit}>
-            <VStack spacing={4} minWidth={500}>
+      <Stack direction={{base: 'column', md: 'row'}} spacing={20} justifyContent={'center'} alignItems={'center'}>
+        <LeftSection />
+        <form onSubmit={sendMessage} >
+            <VStack spacing={4} width={{base: '100%', md: '500px'}}>
             <FormControl id="name" isRequired>
                 <FormLabel color={theme.palette.cream}>Name</FormLabel>
                 <Input
@@ -123,6 +112,43 @@ const ContactUs: React.FC = () => {
       </Stack>
     </Box>
   );
-};
 
-export default ContactUs;
+  async function sendMessage(event: React.FormEvent<HTMLFormElement>) {
+    event?.preventDefault()
+    if(captchaVerified) {
+      try {
+        const response = await axios.post('/api/sendEmail', formData);
+        if(response.status === 200) {
+          toast({
+            title: 'Message Sent',
+            status: 'success',
+            duration: 10000,
+            isClosable: true,
+            position: 'bottom-right',
+            description: 'Thank you for contacting us. We will get back to you shortly.'
+        })
+          
+        } else {
+          toast({
+            title: 'Message Error',
+            status: 'error',
+            duration: 10000,
+            isClosable: true,
+            position: 'bottom-right',
+            description: 'There was an error sending your message. Please try again later.'
+        })
+        }
+      } catch (error) {
+        toast({
+          title: 'Message Error',
+          status: 'error',
+          duration: 10000,
+          isClosable: true,
+          position: 'bottom-right',
+          description: 'There was an error sending your message. Please try again later.'
+        })
+      }
+    }
+  }
+};
+  export default ContactUs;

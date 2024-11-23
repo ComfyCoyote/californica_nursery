@@ -1,16 +1,12 @@
 import React, { useEffect } from 'react';
-import { Box, Stack, VStack, Button } from '@chakra-ui/react';
+import { Box, Stack, VStack, Button, useToast } from '@chakra-ui/react';
 import { OrderItem, Plant, Merch, Seed, PriceVariation } from '@/Interfaces/interfaces'
 import { useCart } from '../shoppingCartContext/shoppingCartContext';
 import { useState } from 'react';
 import ProductDetailInfo from './product-detail-info';
 import ProductDetailImages from './product-detail-images';
 import ProductDetailPrices from './product-detail-prices';
-import CustomAlert from '@/components/shared-components/alert';
 import { theme } from '@/theme/theme';
-
-const success = 'Added item to cart!'
-const fail = 'Unable to add item to cart!'
 
 
 interface ProductCardPropTypes {
@@ -27,14 +23,13 @@ export interface Variation {
 const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
 
     const { addToCart } = useCart()
+    const toast = useToast()
 
     const [priceVariation, setPriceVariation] = useState<Variation>()
-    const [alert, setAlert] = useState(false)
-    const [addButton, setAddButton] = useState(true)
 
     useEffect(() => {
         if(item?.price){
-            if(item?.price.length === 1){
+            if(item?.price.length === 1 && item?.price[0].amount !== "0"){
                 const option = item?.price[0]
                 setPriceVariation({id: option.id, name: option.type})
             }
@@ -43,8 +38,10 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
 
 
     const selectPrice = (event: React.MouseEvent<HTMLButtonElement>, option: PriceVariation ) => {
-
-        setPriceVariation({id: option.id, name: option.type} as Variation)
+        if(option.amount !== "0"){
+            setPriceVariation({id: option.id, name: option.type} as Variation)
+            
+        }
     }
 
     return(
@@ -88,7 +85,6 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
                     borderColor={'black'}>
                         add to cart!
                 </Button>
-                <CustomAlert display={alert} status={'success'} message={success} toggleFunction={() => { setAlert(!alert)}}/>
                 </VStack>
         </Stack>
         </Box>
@@ -139,7 +135,14 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
 
         addToCart(event,item,orderItem)
             
-        setAlert(true)
+        toast({
+            title: 'Item Added',
+            status: 'success',
+            duration: 10000,
+            isClosable: true,
+            position: 'bottom-right',
+            description: `${item.name} ${priceVariation?.name} added to cart!`,
+        })
     }
 
 }

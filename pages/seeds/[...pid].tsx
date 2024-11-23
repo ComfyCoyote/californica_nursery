@@ -5,11 +5,9 @@ import ProductDetailView from "@/components/marketplace/product-detail-view/prod
 import Layout from "@/components/layout/layout";
 import type { ReactElement } from 'react'
 import type { NextPageWithLayout } from "../_app";
-import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import { getCatalogObject } from "@/components/square-utils/getCatalogObject";
 import constructSeed from "@/components/square-utils/product-constuctors/constructSeed";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
-import getImages from "@/components/square-utils/getImages";
 
 
 interface MarketplacePropTypes{
@@ -36,19 +34,18 @@ ProductDetailPage.getLayout = function getLayout(page: ReactElement){
 
 export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
-    const client = new Client({
-        accessToken: process.env.SQUARE_PRODUCTION_ACCESS_TOKEN,
-        environment: Environment.Production,
-    });
+  const client = new Client({
+      accessToken: process.env.SQUARE_PRODUCTION_ACCESS_TOKEN,
+      environment: Environment.Production,
+  });
 
-
-    let data : Seed | undefined
+  let data : Seed | undefined
     
-    try{
+  try{
 
         if(params?.pid){
 
-          const response = await getCatalogObject(params?.pid as string)
+          const response = await getCatalogObject(params?.pid[0] as string)
 
           const item = response?.object
 
@@ -56,11 +53,7 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
 
           const inventory = await getInventoryCount(client, variationObjectIds)
 
-          const imageIds = item.item_data.image_ids
-
-          const imageUrls = await getImages(client, imageIds)
-
-          const promise = constructSeed(item, inventory?.counts, imageUrls?.objects)
+          const promise = constructSeed(item, inventory?.counts)
 
           data = await Promise.resolve(promise)
 
