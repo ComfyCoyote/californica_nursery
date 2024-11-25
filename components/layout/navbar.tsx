@@ -7,7 +7,7 @@ import { FaSearch } from 'react-icons/fa';
 import { useSearch } from '../marketplace/search-sidebar/search-sidebar-context';
 import { useRouter } from 'next/router';
 import { theme } from '@/theme/theme';
-//navbar SHOP and EXPLORE buttons should collapse slide the searchable items
+
 
 interface NavbarProps {
   toggleShoppingCart: () => void;
@@ -42,27 +42,27 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
     py="2"
     alignItems="center"
     justifyContent="space-between"
-    direction={{ base: 'column', md: 'row' }} // Responsive direction
+    direction={{ base: 'column', md: 'row' }}
   >
     <Box 
     padding={5} 
-    textAlign={{ base: 'center', md: 'left' }}> {/* Center logo on mobile */}
+    textAlign={{ base: 'center', md: 'left' }}>
       <Link href="/">
         <Image
-          height={50} // Responsive height
-          width={200} // Responsive width
+          height={50}
+          width={200} 
           src={'/images/titles/nav_bar.png'}
-          alt={'/images/vercel.svg'}
+          alt={'Californica Nursery Logo'}
         />
       </Link>
     </Box>
   
     <HStack
       as="nav"
-      spacing={{ base: 0, md: 5 }} // Adjust spacing for mobile
-      direction={{ base: 'column', md: 'row' }} // Stack vertically on mobile
-      w={{ base: '100%', md: 'auto' }} // Full width on mobile
-      justifyContent={{ base: 'center', md: 'space-evenly' }} // Center items on mobile
+      spacing={{ base: 0, md: 5 }} 
+      direction={{ base: 'column', md: 'row' }}
+      w={{ base: '100%', md: 'auto' }} 
+      justifyContent={{ base: 'center', md: 'space-evenly' }}
     >
       <NavbarDropdown options={shopOptions} placeholder="Shop" />
       <NavbarDropdown options={exploreOptions} placeholder="Explore" />
@@ -87,8 +87,8 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
                 fill
               />
             }
-            height={{ base: 50, md: 70 }} // Responsive size
-            width={{ base: 50, md: 70 }} // Responsive size
+            height={{ base: 50, md: 70 }} 
+            width={{ base: 50, md: 70 }} 
             borderRadius="full"
             size="lg"
             color="white"
@@ -96,15 +96,15 @@ const Navbar: React.FC<NavbarProps> = ({toggleShoppingCart}) => {
             _hover={{ bgColor: 'transparent' }}
           />
         </Box>
-        <Box textAlign="center" mt={{ base: 2, md: 0 }}> {/* Add margin-top on mobile */}
+        <Box textAlign="center" mt={{ base: 2, md: 0 }}> 
           {getLocation(pathname, query) && (
             <IconButton
               onClick={toggleOpen}
               bgColor={theme.palette.darkGreen}
               aria-label="search"
               icon={<FaSearch color={theme.palette.lime} style={{fontSize: '30px'}}/>}
-              height={{ base: 50, md: 70 }} // Responsive size
-              width={{ base: 50, md: 70 }} // Responsive size
+              height={{ base: 50, md: 70 }} 
+              width={{ base: 50, md: 70 }} 
               _hover={{ bgColor: 'transparent' }}
             />
           )}

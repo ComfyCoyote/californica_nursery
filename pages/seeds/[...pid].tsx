@@ -56,8 +56,6 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
           const promise = constructSeed(item, inventory?.counts)
 
           data = await Promise.resolve(promise)
-
-
         }
 
 

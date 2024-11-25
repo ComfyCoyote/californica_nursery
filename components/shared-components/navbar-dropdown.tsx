@@ -41,7 +41,7 @@ const NavbarDropdown: React.FC<NavbarDropdownProps> = ({ options, placeholder })
               <Text color="cream">{placeholder?.toUpperCase()}</Text>
             </Button>
           </PopoverTrigger>
-          <PopoverContent mt={7} borderRadius={0}>
+          <PopoverContent width={{base: '100vw', md: '20vw'}} mt={7} borderRadius={0}>
             <PopoverBody p={0} borderRadius={0}>
               <VStack spacing={0}>
                 {options.map((option) => (

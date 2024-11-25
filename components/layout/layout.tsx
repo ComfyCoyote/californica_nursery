@@ -2,7 +2,8 @@ import ShoppingCart from "../marketplace/shoppingCartContext/shoppingCart";
 import Footer from "./footer";
 import Navbar from "./navbar";
 import React, { useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, useBreakpointValue } from "@chakra-ui/react";
+import NavbarMobile from "./navbar-mobile";
 
 interface LayoutPropTypes {
     children: any
@@ -10,8 +11,11 @@ interface LayoutPropTypes {
 }
 
 const Layout: React.FC<LayoutPropTypes> = ({children}) => {
-
     const [shoppingCartOpen, setShoppingCartOpen] = useState(false)
+
+    const isMobile = useBreakpointValue({ base: true, md: false });
+
+    console.log(isMobile)
 
     const toggleShoppingCart = () => {
         setShoppingCartOpen(!shoppingCartOpen)
@@ -19,7 +23,9 @@ const Layout: React.FC<LayoutPropTypes> = ({children}) => {
 
     return(
         <React.Fragment>
-        <Navbar toggleShoppingCart={toggleShoppingCart}/>
+        {
+            isMobile ? <NavbarMobile toggleShoppingCart={toggleShoppingCart}/> : <Navbar toggleShoppingCart={toggleShoppingCart}/>
+        }
         <ShoppingCart 
             open={shoppingCartOpen}
             toggleCart={toggleShoppingCart}

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Head from 'next/head';
 import { Box, Stack, VStack, Button, useToast } from '@chakra-ui/react';
 import { OrderItem, Plant, Merch, Seed, PriceVariation } from '@/Interfaces/interfaces'
 import { useCart } from '../shoppingCartContext/shoppingCartContext';
@@ -45,12 +46,22 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
     }
 
     return(
+        <>
+        <Head>
+            <title>{item.name} | Claifornica Nursery</title>
+            <meta name="description" content={item.description} />
+            <meta property="og:title" content={item.name} />
+            <meta property="og:description" content={item.description} />
+            <meta property="og:image" content={getImageUrl()}/>
+            <meta property="og:url" content={`https://yourwebsite.com/products/${item.id}`} />
+        </Head>
         <Box
             bg={theme.palette.cream}
             p={{base: 0, md: 30}}
             pt={{base: 125, md: 30}}  
             h={'100%'} 
-            w={'100%'}>
+            w={'100%'}
+        >
         <Stack 
             mt={{base: 0, md: 20}}
             p={{base: 10, md: 50}}
@@ -88,6 +99,7 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
                 </VStack>
         </Stack>
         </Box>
+        </>
     )
 
 
@@ -112,6 +124,15 @@ const ProductDetailView: React.FC<ProductCardPropTypes> = ({item, type}) => {
 
         }        
         
+    }
+
+    function getImageUrl(){
+        if(item.imageUrls){
+            if(item.imageUrls[0]){
+                return item.imageUrls[0]
+            }
+        }
+        return undefined
     }
 
 
