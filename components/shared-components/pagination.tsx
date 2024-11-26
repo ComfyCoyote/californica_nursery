@@ -1,63 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { HStack, Text, Button} from '@chakra-ui/react';
 import { theme } from "@/theme/theme"
+import { Spinner } from '@chakra-ui/react'
 
 interface PaginationProps {
   totalPages: number;
+  loading: boolean;
   loadMore: () => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalPages, loadMore }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prevPage => {
-        const newPage = prevPage - 1;
-        return newPage;
-      });
-    }
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(prevPage => {
-        const newPage = prevPage + 1;
-        return newPage;
-      });
-    }
-  };
-
-  const handlePageClick = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const renderPageNumbers = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <Text
-          key={i}
-          fontSize={30}
-          fontWeight={700}
-          onClick={() => handlePageClick(i)}
-          colorScheme={i === currentPage ? 'blue' : 'gray'}
-          mx={1}
-        >
-          {i}
-        </Text>
-      );
-    }
-    return pages;
-  };
+const Pagination: React.FC<PaginationProps> = ({ totalPages, loadMore, loading }) => {
 
   return (
     <HStack bg={theme.palette.cream} spacing={2} py={8} justifyContent="center">
-      <Button variant={'unstyled'} onClick={loadMore}>
+      {
+        loading ? (
+          <Spinner />
+        ) : (
+          <Button variant={'unstyled'} onClick={loadMore}>
       <Text fontSize={25} fontWeight={700}>
         Load More
-      </Text>
-      </Button>
+            </Text>
+          </Button>
+        )
+      }
+      
     </HStack>
   );
 };

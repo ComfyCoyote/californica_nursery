@@ -1,5 +1,5 @@
 import { OrderItem } from '@/Interfaces/interfaces';
-import { Flex, Text, VStack, Button, Input, Box, Stack} from '@chakra-ui/react';
+import {Text, VStack, Button, Input, Box, HStack} from '@chakra-ui/react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useCart } from '../marketplace/shoppingCartContext/shoppingCartContext';
@@ -9,16 +9,15 @@ interface ItemProps {
 }
 
 const PreCheckoutItem: React.FC<ItemProps> = ({ item }) => {
-    console.log(item)
 
-    const {removeFromCart, updateItemQuantity} = useCart()
+  const {removeFromCart, updateItemQuantity} = useCart()
 
-    const [isHovered, setIsHovered] = useState(false);
-    const [quantity, setQuantity] = useState(item.quantity)
+  const [isHovered, setIsHovered] = useState(false);
+  const [quantity, setQuantity] = useState(item.quantity)
    
 
   return (
-    <Stack 
+    <HStack 
         align="center" 
         direction={{base: 'column', md: 'row'}}
         backgroundColor={isHovered ? "yellow.100" : "white"}
@@ -31,13 +30,14 @@ const PreCheckoutItem: React.FC<ItemProps> = ({ item }) => {
         <Box
             width={{base: '100px', md: '150px'}}
             height={{base: '100px', md: '150px'}}
-            padding={{base: '0', md: '4'}}
+            padding={{base: '2', md: '4'}}
         >
             <Image 
-            src={item.misc.image} 
-            alt={item.name} 
-            width={100} 
-            height={100} 
+              src={item.misc.image} 
+              alt={item.name} 
+              loading='eager'
+              width={100} 
+              height={100} 
           />
         </Box>
       <VStack align="flex-start" flex="1">
@@ -65,7 +65,7 @@ const PreCheckoutItem: React.FC<ItemProps> = ({ item }) => {
           Remove
         </Button>
       )}
-    </Stack>
+    </HStack>
   );
 };
 

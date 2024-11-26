@@ -25,12 +25,13 @@ const AboutPageIanSection = () => {
             <HStack
                 bg={theme.palette.darkBrown}
                 width={'100%'}
-                flexDirection={{ base: 'column', md: 'row' }} // Stack column for mobile, row for desktop
+                flexDirection={{ base: 'column', md: 'row' }} 
                 alignItems={'center'}
-                spacing={0} // Remove space between elements when stacking
+                spacing={0} 
             >
             <Box 
                 width={{ base: '100%', md: 'auto' }} 
+                height={{ base: '100%', md: 'auto' }}
                 display={'flex'} 
                 justifyContent={'center'}
             >
@@ -40,25 +41,24 @@ const AboutPageIanSection = () => {
                 alt='hiking photo'
                 width={900}
                 height={900}
-                style={{ width: '100%', height: 'auto' }} // Responsive image sizing
                 />
             </Box>
             <VStack
-                p={{ base: 5, md: 10 }} // Adjust padding for mobile
-                width={{ base: '100%', md: 'auto' }} // Full width for mobile, auto for desktop
-                alignItems={{ base: 'center', md: 'flex-start' }} // Center text for mobile, left-align for desktop
-                textAlign={{ base: 'center', md: 'left' }} // Center text on mobile
-                spacing={4} // Add some space between the elements in the VStack
+                p={{ base: 5, md: 10 }} 
+                width={{ base: '100%', md: 'auto' }} 
+                alignItems={{ base: 'center', md: 'flex-start' }} 
+                textAlign={{ base: 'center', md: 'left' }} 
+                spacing={4} 
             >
                 <Text
-                fontSize={{ base: '24px', md: '30px' }} // Responsive font size
+                fontSize={{ base: '24px', md: '30px' }} 
                 fontWeight={600}
                 color={'white'}
                 >
                 IAN RHODES
                 </Text>
                 <Text
-                fontSize={{ base: '16px', md: '20px' }} // Responsive font size
+                fontSize={{ base: '16px', md: '20px' }} 
                 fontWeight={600}
                 color={'white'}
                 >
@@ -67,8 +67,8 @@ const AboutPageIanSection = () => {
                 <Box
                 display={'flex'}
                 alignItems={'center'}
-                justifyContent={{ base: 'center', md: 'flex-start' }} // Center image on mobile, left-align on desktop
-                width={{ base: '100%', md: 'auto' }} // Full width for mobile, auto for desktop
+                justifyContent={{ base: 'center', md: 'flex-start' }} 
+                width={{ base: '100%', md: 'auto' }}
                 >
                 <Image
                     priority
@@ -76,7 +76,7 @@ const AboutPageIanSection = () => {
                     alt="ian signature"
                     width={300}
                     height={200}
-                    style={{ width: '100%', height: 'auto' }} // Responsive image sizing
+                    style={{ width: '100%', height: 'auto' }} 
                 />
                 </Box>
             </VStack>

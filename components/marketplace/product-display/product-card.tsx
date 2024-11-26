@@ -115,7 +115,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
       } else if(startPrice !== endPrice){
         const amount = Number(startPrice)/100 - Number(endPrice)/100
         if(amount > 0){
-          return `$${Number(endPrice)/100}- $${Number(startPrice)/100} `
+          return `$${Number(endPrice)/100} - $${Number(startPrice)/100} `
         } 
         
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCart } from '../marketplace/shoppingCartContext/shoppingCartContext';
-import { HStack, Button, Container, Heading, Text, VStack, FormControl, FormLabel, Input  } from '@chakra-ui/react';
+import { Stack, Button, Container, Heading, Text, VStack, FormControl, FormLabel, Input  } from '@chakra-ui/react';
 import { OrderItem } from "@/Interfaces/interfaces";
 import PreCheckoutItem from './pre-checkout-item';
 import type { Fulfillment,  OrderLineItem } from 'square';
@@ -48,13 +48,12 @@ const PreCheckoutPage: React.FC = () => {
     <Container width={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} maxW="container.md" mt="8">
       <Heading as="h1" mb="4">Review Items</Heading>
       {error.status && <ErrorAlert title={error.title} description={error.desc}/>}
-      <HStack width={'100%'}>
+      <Stack width={'100%'} direction={{base: 'column', md: 'row'}}>
         <VStack spacing="4" align="start">
           {orderItems.map((item) => (
             <PreCheckoutItem key={item.catalogObjectId} item={item} />
           ))}
         </VStack>
-
         <VStack display={'flex'} justifyContent={'flex-start'} spacing={4} p={10}>
           <FormControl isInvalid={errors.name ? true : false}>
             <FormLabel htmlFor="name">Name</FormLabel>
@@ -75,8 +74,7 @@ const PreCheckoutPage: React.FC = () => {
             Proceed to checkout
           </Button>
         </VStack>
-      </HStack>
-
+      </Stack>
       <Text mt="4">Total Price: ${calculated ? calculated : 'Unable to calculate'}</Text>
     </Container>
   )
@@ -203,7 +201,7 @@ const PreCheckoutPage: React.FC = () => {
         const response = await axios.post('/api/createPaymentLink', request);
 
         if(response.data.url){
-          window.location.href = response.data.url
+          window.location.href = response.data.long_url
         }
         
       } catch(error) {

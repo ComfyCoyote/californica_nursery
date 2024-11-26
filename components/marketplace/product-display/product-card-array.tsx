@@ -1,7 +1,7 @@
 import ProductCard from "./product-card";
 import { Grid } from "@chakra-ui/react"
 import { useSearch } from "../search-sidebar/search-sidebar-context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import React from "react";
 import Pagination from "@/components/shared-components/pagination";
@@ -16,9 +16,11 @@ interface CardArrayPropTypes {
 
 
 const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTypes ) => {
+
     const router = useRouter()
 
-    
+    const [loading, setLoading] = useState(false)
+
     const { query, searching, textQuery, search} = useSearch()
     const { plantData, seedData, merchData, cursor, setCursor, setItems, setItemsBySearch} = useMarketplace()
 
@@ -46,7 +48,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                 {getDataType().map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
                 {
-                    cursor && <Pagination totalPages={1} loadMore={loadMore}/> 
+                    cursor && <Pagination loading={loading} totalPages={1} loadMore={loadMore}/> 
                 }
                 </React.Fragment>
             )
@@ -60,13 +62,14 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
 
 
     async function loadMore(){
-
+        setLoading(true)
         const location = router.pathname
         const items = await axios.post('api/getItems', {'type': location, 'cursor': cursor})
 
         if(items){
             setCursor(items.data.cursor)
             setItems(location, items.data.items)
+            setLoading(false)
         }
 
 

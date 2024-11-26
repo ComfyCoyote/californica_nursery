@@ -81,8 +81,8 @@ const LandscapingSectionThree = () => {
                 borderColor={theme.palette.darkBrown}
                 width={'100%'}
                 style={{
-                    msOverflowStyle: 'none',  /* Internet Explorer 10+ */
-                    scrollbarWidth: 'none',   /* Firefox */
+                    msOverflowStyle: 'none',  
+                    scrollbarWidth: 'none',  
                   }}>
                     {images.map((src, index) => (
                     <Box
@@ -100,6 +100,8 @@ const LandscapingSectionThree = () => {
                             style={{objectFit: "cover", borderRadius: 0}} 
                             src={`/images/landscaping/${src}`} 
                             alt={`Image ${index + 1}`}
+                            quality={65}
+                            loading='eager'
                             fill={true}
                         />
                     </Box>

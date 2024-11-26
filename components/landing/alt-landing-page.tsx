@@ -6,14 +6,6 @@ import Footer from '../layout/footer';
 import ShoppingCart from "../marketplace/shoppingCartContext/shoppingCart";
 import LinkIcon from './link-icon';
 
-// add text under each link
-
-/// for mobile devices, stack the link icons vertically
-
-// for mobile devices, marketplace pages should be 2 columns
-
-//line up the button text, reduce the image sizes
-
 const pages = [
     {
         "name": "plants",
@@ -41,6 +33,7 @@ const pages = [
 const AltLandingPage: React.FC = () => {
     
     const [shoppingCartOpen, setShoppingCartOpen] = useState(false)
+
 
     const toggleShoppingCart = () => {
         setShoppingCartOpen(!shoppingCartOpen)

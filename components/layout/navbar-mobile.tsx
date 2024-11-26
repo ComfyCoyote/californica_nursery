@@ -74,19 +74,19 @@ const NavbarMobile: React.FC<NavbarProps> = ({toggleShoppingCart}: NavbarProps) 
                     _hover={{ bgColor: 'transparent' }}
                 />
                 </Box>
-                <Box textAlign="center" mt={{ base: 2, md: 0 }}> 
                 {getLocation(pathname, query) && (
-                    <IconButton
-                    onClick={toggleOpen}
-                    bgColor={theme.palette.darkGreen}
-                    aria-label="search"
-                    icon={<FaSearch color={theme.palette.lime} style={{fontSize: '30px'}}/>}
-                    height={50} 
-                    width={50} 
-                    _hover={{ bgColor: 'transparent' }}
-                    />
+                    <Box textAlign="center" mt={{ base: 2, md: 0 }}> 
+                        <IconButton
+                        onClick={toggleOpen}
+                        bgColor={theme.palette.darkGreen}
+                        aria-label="search"
+                        icon={<FaSearch color={theme.palette.lime} style={{fontSize: '30px'}}/>}
+                        height={50} 
+                        width={50} 
+                        _hover={{ bgColor: 'transparent' }}
+                        />
+                     </Box>
                 )}
-                </Box>
             </HStack>   
         </Flex>
     )

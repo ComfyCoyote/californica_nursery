@@ -22,7 +22,7 @@ const AboutPageSectionOne = () => {
             <Stack
                 p={{base: 5, md: 20}}
                 spacing={20}
-                direction={{ base: 'column', md: 'row' }} // Column direction for mobile, row for desktop
+                direction={{ base: 'column', md: 'row' }}
                 display={'flex'}
                 alignItems={'center'}
                 justifyContent={'space-evenly'}
@@ -30,22 +30,22 @@ const AboutPageSectionOne = () => {
             >
             <Text
                 h={{base: 400, md: 600}}
-                flex={1} // Ensure the text takes up equal space
-                fontSize={{ base: '16px', md: '30px' }} // Responsive font size
+                flex={1} 
+                fontSize={{ base: '16px', md: '30px' }} 
                 fontWeight={600}
                 py={10}
                 display={'flex'}
                 alignItems={'center'}
                 justifyContent={'center'}
-                textAlign={'center'} // Center text for better mobile appearance
+                textAlign={'center'} 
             >
                 {bio1Alt + ' ' + bio2Alt + ' ' + bio3Alt}
             </Text>
             <Box
-                flex={1} // Ensure the image box takes up equal space
+                flex={1} 
                 position={'relative'}
-                width={{ base: '225px', md: '800px' }} // Full width on mobile, fixed width on desktop
-                height={{ base: '375px', md: '700px' }} // Adjusted heights for consistency
+                width={{ base: '225px', md: '800px' }} 
+                height={{ base: '375px', md: '700px' }} 
                 display={'flex'}
                 alignItems={'center'}
                 justifyContent={'center'}

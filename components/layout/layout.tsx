@@ -15,7 +15,6 @@ const Layout: React.FC<LayoutPropTypes> = ({children}) => {
 
     const isMobile = useBreakpointValue({ base: true, md: false });
 
-    console.log(isMobile)
 
     const toggleShoppingCart = () => {
         setShoppingCartOpen(!shoppingCartOpen)

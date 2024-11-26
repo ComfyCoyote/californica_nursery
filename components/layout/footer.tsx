@@ -14,9 +14,9 @@ const Footer: React.FC = () => {
         py={4}
         px={10}
         width={'100%'}
-        direction={{ base: 'column', md: 'row' }} // Responsive direction for mobile and desktop
-        justifyContent={{ base: 'center', md: 'space-between' }} // Center content on mobile, space between on desktop
-        alignItems={{ base: 'center', md: 'flex-start' }} // Center align items on mobile
+        direction={{ base: 'column', md: 'row' }} 
+        justifyContent={{ base: 'center', md: 'space-between' }} 
+        alignItems={{ base: 'center', md: 'flex-start' }} 
         spacing={4}
       >
         <Stack alignItems={{ base: 'center', md: 'flex-start' }} spacing={2}>
