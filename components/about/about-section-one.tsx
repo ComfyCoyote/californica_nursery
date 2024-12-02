@@ -9,12 +9,21 @@ const AboutPageSectionOne = () => {
 
         <>
          <Stack bg={theme.palette.cream} direction={{base: 'column', md: 'column'}}>
-            <Box backgroundColor={theme.palette.lime} width={'100%'} height={55} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+            <Box 
+                backgroundColor={theme.palette.lime} 
+                width={'100vw'} 
+                height={55} 
+                display={'flex'} 
+                justifyContent={'center'} 
+                textAlign={'center'} 
+                alignItems={'center'}
+            >
                 <Text
                     whiteSpace="nowrap" 
+                    textAlign={'center'}
                     overflow="visible"   
                     textOverflow="clip" 
-                    fontSize={{ base: '20px', md: '30px' }} 
+                    fontSize={{ base: '13px', md: '30px' }} 
                     fontWeight={700}>
                     CALIFORNIA NATIVE PLANTS, GROWN BY CALIFORNIA LOCALS
                 </Text>

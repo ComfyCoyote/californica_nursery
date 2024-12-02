@@ -70,8 +70,8 @@ const LandscapingSectionTwo = () => {
                 >
                 <Box px={10} width={'100%'}>
                     <Text
-                    fontSize={{ base: '25px', md: '25px' }} // Responsive font size for mobile and desktop
-                    textAlign={{ base: 'center', md: 'left' }} // Center text on mobile, align left on desktop
+                    fontSize={{ base: '25px', md: '25px' }} 
+                    textAlign={{ base: 'center', md: 'left' }} 
                     color={theme.palette.cream}
                     >
                     {text1}
@@ -84,8 +84,8 @@ const LandscapingSectionTwo = () => {
                     width={'100%'}
                     display={'flex'}
                     flexDirection={'column'}
-                    justifyContent={{ base: 'center', md: 'space-evenly' }} // Center content on mobile, space evenly on desktop
-                    alignItems={{ base: 'center', md: 'flex-start' }} // Center align items on mobile, flex-start on desktop
+                    justifyContent={{ base: 'center', md: 'space-evenly' }} 
+                    alignItems={{ base: 'center', md: 'flex-start' }}
                 >
                     {wpArr.map((wp) => (
                     <Text fontSize={{ base: '25px', md: '25px' }} textAlign={{ base: 'center', md: 'left' }}  fontWeight={700} color={theme.palette.cream} key={wp}>

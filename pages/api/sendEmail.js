@@ -12,9 +12,10 @@ export default async function sendEmail(req, res) {
             const text = body.message
             const name = body.name
 
+            const to_email = process.env.ENVIRONEMT === 'PROD' ?  'contact@californicanursery.com':'muzzadamjee@gmail.com' 
 
             const msg = {
-              to: 'muzzadamjee@gmail.com', // Change to your recipient
+              to: to_email, // Change to your recipient
               from: 'californicanursery@gmail.com', // Change to your verified sender
               subject: `Contact Us Message from ${name}`,
               text: text,
