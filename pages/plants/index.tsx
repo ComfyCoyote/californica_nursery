@@ -9,7 +9,6 @@ import Layout from "@/components/layout/layout";
 import { useEffect, type ReactElement } from "react";
 import { getCatalogItemsAPI } from "@/components/square-utils/square-api-wrappers/getCatalogItemsAPI";
 import type { CatalogObject } from "square";
-import getFilterOptions from "@/components/square-utils/getFilterOptions";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
@@ -65,12 +64,9 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
         environment: Environment.Production,
     });
 
-    let filterOptionsObject: any = {}
     let data: Plant[] = []
     
     try{
-
-        filterOptionsObject = await getFilterOptions(client)
 
         const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID)
 
@@ -102,7 +98,7 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
 
 
         return {
-            props: { data: data, filterOptionsObject: filterOptionsObject, cursor: cursor}
+            props: { data: data, cursor: cursor}
         }
 
 

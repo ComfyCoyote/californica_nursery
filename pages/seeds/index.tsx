@@ -8,8 +8,6 @@ import type { ReactElement } from "react";
 import type { NextPageWithLayout } from "../_app";
 import Layout from "@/components/layout/layout";
 import { getCatalogItemsAPI } from "@/components/square-utils/square-api-wrappers/getCatalogItemsAPI";
-import getFilterOptions from "@/components/square-utils/getFilterOptions";
-import getCustomAttributes from "@/components/square-utils/getCustomAttributes";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
@@ -70,18 +68,11 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
   try{
 
 
-      filterOptionsObject = await getFilterOptions(client)
-
-      const attributeMapping = await getCustomAttributes(client)
-
       const archivedState = await getCatalogItemsAPI(SEED_CATEGORY_ID)
 
       const variationObjectIds = archivedState.items.flatMap((p: any) => p.item_data?.variations.map((v: any) => v.id) || []);
-
-      const imageIds = archivedState.items.flatMap((p: any) => p.item_data.image_ids)
       
       const inventory = await getInventoryCount(client, variationObjectIds)
-
 
       cursor = archivedState?.cursor
 
@@ -102,7 +93,7 @@ export const getServerSideProps : GetServerSideProps = async (context) => {
       data = await Promise.all(promise)
 
       return {
-          props: { data: data, filterOptionsObject: filterOptionsObject, cursor: cursor}
+          props: { data: data, cursor: cursor}
       }
 
 

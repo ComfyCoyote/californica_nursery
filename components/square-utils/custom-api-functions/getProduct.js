@@ -82,7 +82,7 @@ async function getProduct(type, cursor, query=null, textFilter, limit){
     }
 
     return {
-      props: { data: [], filterOptionsObject: {}, cursor: ''}
+      props: { data: [], cursor: ''}
     }
 }
 

@@ -20,9 +20,6 @@ import AttributeSearch from './attribute-search';
 import SearchBar from './searchbar';
 
 interface SearchSidebarPropTypes {
-  open: boolean;
-  filters: any;
-  toggleSearch: () => void;
   type: string
 
 }

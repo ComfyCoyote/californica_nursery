@@ -201,6 +201,8 @@ const PreCheckoutPage: React.FC = () => {
         const response = await axios.post('/api/createPaymentLink', request);
 
         if(response.data.url){
+          sessionStorage.removeItem("orderItems")
+          sessionStorage.removeItem("calculated")
           window.location.href = response.data.longUrl
         }
         

@@ -21,7 +21,7 @@ const numbers = Array.from({ length }, (_, i) => i + 1);
 //make plants banner continuous
 
 
-const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOptions}) => {
+const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
 
     const {open, toggleOpen} = useSearch()
     const router = useRouter()
@@ -63,10 +63,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title, filterOpti
         <React.Fragment>
         <ThankYouModal isOpen={modal} onClose={() => setModal(false)}/>
         <SearchSidebar 
-        open={open}
-        filters={filterOptions}
-        toggleSearch={toggleOpen}
-        type={title}
+            type={title}
         />
         <Box 
             bg={theme.palette.cream} 
