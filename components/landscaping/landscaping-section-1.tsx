@@ -23,6 +23,7 @@ const LandscapingSectionOne = () => {
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
                         style={{objectFit: "cover"}} 
+                        priority
                     />
                 </Box>
                 <Box position={'relative'} height={'70vh'} flex={1}>
@@ -31,6 +32,7 @@ const LandscapingSectionOne = () => {
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
                         style={{objectFit: "cover"}} 
+                        priority
                     />
                 </Box>
                 <Box position={'relative'} height={'70vh'} flex={1}>
@@ -39,6 +41,7 @@ const LandscapingSectionOne = () => {
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
                         style={{objectFit: "cover"}} 
+                        priority
                     />
                 </Box>
             </Stack>

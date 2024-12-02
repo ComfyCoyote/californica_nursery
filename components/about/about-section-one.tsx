@@ -44,8 +44,8 @@ const AboutPageSectionOne = () => {
             <Box
                 flex={1} 
                 position={'relative'}
-                width={{ base: '225px', md: '800px' }} 
-                height={{ base: '375px', md: '700px' }} 
+                width={{ base: '225px', md: '800px', lg: '1000px' }} 
+                height={{ base: '375px', md: '700px', lg: '1000px' }} 
                 display={'flex'}
                 alignItems={'center'}
                 justifyContent={'center'}

@@ -1,5 +1,5 @@
 // Footer.tsx
-import {Stack, Text } from '@chakra-ui/react';
+import {Stack, Text, Link as ChakraLink } from '@chakra-ui/react';
 import Link from 'next/link';
 import { theme } from '@/theme/theme'
 //embedded email link into email
@@ -26,9 +26,11 @@ const Footer: React.FC = () => {
           <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>
             Tongva and Acjachemen Land - Long Beach, CA
           </Text>
-          <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>
-            californicanursery@gmail.com
-          </Text>
+          <ChakraLink href="mailto:californicanursery@gmail.com" isExternal >
+            <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>
+              californicanursery@gmail.com
+            </Text>
+          </ChakraLink>
           <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>
             © {new Date().getFullYear()} Californica Nursery. All rights reserved.
           </Text>
