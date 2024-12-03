@@ -19,29 +19,30 @@ const LandscapingSectionOne = () => {
             <Stack p={0} width={'100%'} spacing={0} direction={{base: 'column', md: 'row' }}>
                 <Box position={'relative'} height={'70vh'} flex={1}>
                     <Image 
-                        src={'/images/landscaping/brett_ian_landscaping_cropped.png'} 
+                        src={'/images/landscaping/brett_ian_landscaping_cropped.webp'} 
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
                         style={{objectFit: "cover"}} 
-                        loading="eager"
+                        priority
                     />
                 </Box>
                 <Box position={'relative'} height={'70vh'} flex={1}>
                     <Image 
-                        src={'/images/landscaping/killyourlawn1.png'} 
+                        src={'/images/landscaping/killyourlawn1.webp'} 
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
                         style={{objectFit: "cover"}} 
                         loading='eager'
+                        priority
                     />
                 </Box>
                 <Box position={'relative'} height={'70vh'} flex={1}>
                     <Image 
-                        src={'/images/landscaping/killyourlawn2.png'} 
+                        src={'/images/landscaping/killyourlawn2.webp'} 
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
                         style={{objectFit: "cover"}} 
-                        loading='eager'
+                        priority
                     />
                 </Box>
             </Stack>

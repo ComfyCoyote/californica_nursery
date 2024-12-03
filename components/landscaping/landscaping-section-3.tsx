@@ -6,17 +6,17 @@ import Image from "next/image";
 // remove scrollbar for image carousel
 
 const images1 = [
-    'IMG_0092.png',
-    'IMG_0960.png',
-    'IMG_1012.png',
-    'IMG_1180.png',
-    'IMG_1305.png',
-    'IMG_2254.png',
-    'IMG_2569.png'
+    'IMG_0092.webp',
+    'IMG_0960.webp',
+    'IMG_1012.webp',
+    'IMG_1180.webp',
+    'IMG_1305.webp',
+    'IMG_2254.webp',
+    'IMG_2569.webp'
 ]
 
 const images2 = [2,3,4,5,6,7,8].map(
-    (i) => `killyourlawn${i+1}.png`
+    (i) => `killyourlawn${i+1}.webp`
 )
 
 const images = [...images1, ...images2]

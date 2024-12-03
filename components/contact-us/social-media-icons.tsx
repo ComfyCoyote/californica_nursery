@@ -9,6 +9,7 @@ const SocialMediaIcons: React.FC = () => {
       <IconButton
         as="a"
         href="https://www.instagram.com/californicanursery/"
+        target='_blank'
         aria-label="Instagram"
         icon={<FaInstagram style={{fontSize: '3rem'}} />}
         colorScheme="pink"
@@ -17,7 +18,8 @@ const SocialMediaIcons: React.FC = () => {
       />
       <IconButton
         as="a"
-        href="https://www.linkedin.com"
+        href="https://www.linkedin.com/company/californica-nursery/posts/?feedView=all"
+        target='_blank'
         aria-label="LinkedIn"
         size={'lg'}
         icon={<FaLinkedin style={{fontSize: '3rem'}}/>}
