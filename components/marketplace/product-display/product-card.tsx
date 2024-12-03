@@ -35,7 +35,6 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
         fill 
         style={{objectFit: "cover"}}
         sizes="(max-width: 30em) 50vw,(max-width: 48em) 25vw,(max-width: 62em) 22vw,20vw"
-        priority
         quality={60}
         loading='eager'
       />
