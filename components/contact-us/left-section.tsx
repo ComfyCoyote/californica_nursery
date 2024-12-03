@@ -15,8 +15,8 @@ const LeftSection: React.FC = () => {
             </Text>
             <Stack direction={{base: 'column', md: 'row'}} alignItems={{base: 'center', md: 'center'}}>
                 <Text fontSize={25} fontWeight={600} color={theme.palette.cream}>Email: </Text>
-                <Link href="mailto:californicanursery@gmail.com" color="blue.500" isExternal >
-                    <Text fontSize={20} color={theme.palette.cream}>californicanursery@gmail.com</Text>
+                <Link href="mailto:info@californicanursery.com" color="blue.500" isExternal >
+                    <Text fontSize={20} color={theme.palette.cream}>info@californicanursery.com</Text>
                 </Link>
             </Stack>
             <SocialMediaIcons />

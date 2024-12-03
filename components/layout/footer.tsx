@@ -26,9 +26,9 @@ const Footer: React.FC = () => {
           <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>
             Tongva and Acjachemen Land - Long Beach, CA
           </Text>
-          <ChakraLink href="mailto:californicanursery@gmail.com" isExternal >
+          <ChakraLink href="mailto:info@californicanursery.com" isExternal >
             <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>
-              californicanursery@gmail.com
+              info@californicanursery.com
             </Text>
           </ChakraLink>
           <Text fontSize={{ base: '14px', md: '20px' }} color={theme.palette.cream}>

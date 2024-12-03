@@ -12,7 +12,7 @@ export default async function sendEmail(req, res) {
             const text = body.message
             const name = body.name
 
-            const to_email = process.env.ENVIRONEMT === 'PROD' ?  'contact@californicanursery.com':'muzzadamjee@gmail.com' 
+            const to_email = process.env.ENVIRONEMT === 'PROD' ?  'info@californicanursery.com':'muzzadamjee@gmail.com' 
 
             const msg = {
               to: to_email, // Change to your recipient

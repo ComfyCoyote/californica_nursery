@@ -69,7 +69,7 @@ const AboutPageJacksonSection = () => {
             </Box>
             </HStack>
             <ScrollingTextBar color={null}>
-                EMAIL US - CALIFORNICANURSERY@GMAIL.COM
+                EMAIL US - INFO@CALIFORNICANURSERY.COM
             </ScrollingTextBar>
                 
         </>
