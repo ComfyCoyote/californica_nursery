@@ -8,6 +8,7 @@ import type { NextPage } from 'next'
 import {  MultiSelectTheme } from 'chakra-multiselect'
 import { MarketplaceProvider } from '@/components/marketplace/marketplaceContext/marketplaceContext'
 
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps } : AppPropsWithLayout) {
 
   const getLayout = Component.getLayout ?? ((page) => page)
 
+  
 
   return (
     <MarketplaceProvider>

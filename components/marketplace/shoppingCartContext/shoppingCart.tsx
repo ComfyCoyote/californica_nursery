@@ -15,6 +15,8 @@ import {
 import { useCart } from '@/components/marketplace/shoppingCartContext/shoppingCartContext';
 import Link from 'next/link';
 import { theme } from '@/theme/theme';
+import { useRouter } from 'next/router';
+import path from 'path';
 
 
 interface ShoppingCartPropTypes {
@@ -26,6 +28,8 @@ interface ShoppingCartPropTypes {
 const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
   //const [cartItems, setCartItems] = useState<Product[]>([]);
   const { orderItems, removeFromCart } = useCart()
+
+  const { pathname } = useRouter()
 
 
   return (
@@ -81,7 +85,11 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
               </Text>
               */}
               <Link href={`/checkout/pre-checkout?redirect=/plants`}>
-              <Button colorScheme="yellow" size="sm">
+              <Button 
+                isDisabled={orderItems.length === 0} 
+                colorScheme="yellow" 
+                size="sm"
+                onClick={checkoutClicked}>
                 Checkout
               </Button>
               </Link>
@@ -91,6 +99,11 @@ const ShoppingCart: React.FC<ShoppingCartPropTypes> = ({open, toggleCart}) => {
       </Drawer>
     </>
   );
+
+  function checkoutClicked(){
+    const redirectPath = pathname.split("/")[1]
+    sessionStorage.setItem("redirectPath", redirectPath)
+  }
 
 
 }

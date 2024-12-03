@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { HStack, Link, Box } from "@chakra-ui/react"
 import SearchSidebar from "./search-sidebar/search-sidebar"
-import { useSearch } from "./search-sidebar/search-sidebar-context"
 import { theme } from "@/theme/theme"
 import { Text } from "@chakra-ui/react"
 import ThankYouModal from '../shared-components/thank-you-modal'
@@ -23,19 +22,7 @@ const numbers = Array.from({ length }, (_, i) => i + 1);
 
 const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
 
-    const {open, toggleOpen} = useSearch()
     const router = useRouter()
-
-    const [modal, setModal] = useState(false)
-
-    const { query } = useRouter()
-
-    useEffect(() => {
-        if(query.fromcheckout === 'true'){
-            setModal(true)
-        }
-        
-    }, [])
 
     useEffect(() => {
         const savedPosition = sessionStorage.getItem(router.pathname);
@@ -61,7 +48,6 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
 
     return(
         <React.Fragment>
-        <ThankYouModal isOpen={modal} onClose={() => setModal(false)}/>
         <SearchSidebar 
             type={title}
         />

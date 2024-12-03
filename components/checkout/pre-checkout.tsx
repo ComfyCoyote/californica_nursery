@@ -18,23 +18,11 @@ interface Error {
   status: boolean
 }
 
+/** FROMCHEKOUT URL PARAMETER DOESNT WORK */
+
 const PreCheckoutPage: React.FC = () => {
-  // Sample items data
-  // State to store selected items
-  // notify users that orders made are available friday-sunday
-  // orders made on friday will be available next friday
 
-  //if you have any questions about your order email californicanursery@gmail.com
-  
-  //post purchase message to inform client when and where pickup is
-
-  //all purchases should have california sales tax
-
-  //provide the redirect url for when users purchase, redirect to the marketplace page!
-  
-  //sometimes the checkout page doesnt load immediately
-
-  const { orderItems, calculated } = useCart(); // Assuming useCart provides orderItems, calculated, and getPaymentLink
+  const { orderItems, calculated } = useCart(); 
 
   const { formState: { errors } } = useForm();
 
@@ -177,13 +165,15 @@ const PreCheckoutPage: React.FC = () => {
 
       const order = createOrder(lineItems, [fulfillment], stJosephs)
 
+      const redirectPath = sessionStorage.getItem("redirectPath")
+
       const request = {
         paymentNote: checkoutNote,
         idempotencyKey: uuid(),
         order: order.order,
         checkoutOptions: {
           allowTipping: true,
-          redirectUrl: `https://${window.location.host}/plants?fromcheckout=true`,
+          redirectUrl: `https://${window.location.host}/${redirectPath}`,
           acceptedPaymentMethods: {
             applePay: true,
             googlePay: true,
@@ -203,6 +193,7 @@ const PreCheckoutPage: React.FC = () => {
         if(response.data.url){
           sessionStorage.removeItem("orderItems")
           sessionStorage.removeItem("calculated")
+          sessionStorage.setItem("fromCheckout", "1")
           window.location.href = response.data.longUrl
         }
         

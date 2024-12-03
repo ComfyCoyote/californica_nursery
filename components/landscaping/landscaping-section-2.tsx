@@ -115,7 +115,7 @@ const LandscapingSectionTwo = () => {
                                 width={'65vh'}
                                 zIndex={1}>
                             <Image
-                                src={'/images/landscaping/ian_jackson.jpg'}
+                                src={'/images/landscaping/ian_jackson.webp'}
                                 alt="Background Image"
                                 fill={true}
                                 style={{objectFit: "cover"}} // Ensure it's below the overlay

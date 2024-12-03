@@ -5,6 +5,9 @@ import AltLandingPage from '@/components/landing/alt-landing-page'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  
+
   return (
     <React.Fragment>
       <AltLandingPage />

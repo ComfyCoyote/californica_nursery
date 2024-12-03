@@ -4,19 +4,19 @@ import {
     ModalContent, 
     ModalHeader, 
     ModalBody, 
-    ModalFooter, 
     ModalCloseButton, 
-    Button, 
     Text, 
   } from '@chakra-ui/react';
-  import React from 'react';
-  
-  interface ThankYouModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-  }
+import { useRouter } from 'next/router';
+import React from 'react';
+
+interface ThankYouModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
 const ThankYouModal: React.FC<ThankYouModalProps> = ({ isOpen, onClose }) => {
+
     return (
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
