@@ -26,6 +26,10 @@ const pages = [
     {
         "name": "about",
         "color": theme.palette.lightYellow
+    },
+    {
+        "name": "contact",
+        "color": theme.palette.pink
     }
 ]
 
@@ -104,7 +108,7 @@ const AltLandingPage: React.FC = () => {
             justifyContent="center" 
             width={'100%'}>
         {
-                pages.slice(3, 5).map((l) => {
+                pages.slice(3, 6).map((l) => {
                     return(
                         <LinkIcon key={l.name} iconName={l.name} color={l.color} />
                     )
