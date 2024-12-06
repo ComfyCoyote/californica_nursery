@@ -37,7 +37,7 @@ const AboutPageIanSection = () => {
             >
                 <Image
                 priority
-                src='/images/about/Ian-2.png'
+                src='/images/about/Ian-2.webp'
                 alt='hiking photo'
                 width={900}
                 height={900}

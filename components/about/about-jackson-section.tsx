@@ -60,7 +60,7 @@ const AboutPageJacksonSection = () => {
             >
                 <Image
                 priority
-                src="/images/about/jackson1.png"
+                src="/images/about/jackson1.webp"
                 alt="hiking photo"
                 width={400}
                 height={400}
