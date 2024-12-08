@@ -1,5 +1,3 @@
-import exp from "constants";
-import { CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection } from "square";
 import type { OrderLineItemModifier, OrderLineItemAppliedDiscount, OrderLineItemAppliedTax } from "square";
 
 

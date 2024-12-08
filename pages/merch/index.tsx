@@ -1,7 +1,7 @@
 import Marketplace from "@/components/marketplace/marketplace";
 import { Client, Environment, ApiError } from "square";
 import type { CatalogObject } from "square";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { Merch } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
 import { MERCH_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
@@ -24,12 +24,14 @@ interface MarketplacePropTypes{
 
 const MarketplacePage: NextPageWithLayout<MarketplacePropTypes> = (props) => {
 
-    const { setCursor, setItems, merchData } = useMarketplace()
+    const { setCursor, cursor, setItems, merchData } = useMarketplace()
     
     useEffect(() => {
         if(merchData.length === 0){
-            console.log('useeffect')
-            setCursor(props.cursor)
+            const cursorKey = "/merchCursor"
+            cursor[cursorKey] = props.cursor
+            setCursor(cursor)
+            sessionStorage.setItem(cursorKey, props.cursor)
             setItems("/merch", props.data)
         }
         
@@ -52,7 +54,7 @@ MarketplacePage.getLayout = function getLayout(page: ReactElement){
 }
 
 
-export const getServerSideProps : GetServerSideProps = async (context) => {
+export const getStaticProps : GetStaticProps = async (context) => {
 
   let cursor: string;
 

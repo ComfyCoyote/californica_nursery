@@ -1,26 +1,26 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
-// Define the shape of individual items
+
 interface MarketplaceItem {
-    // Add specific item properties here
+    
     id: string;
-    // other properties...
+    
 }
 
-// Define the shape of the API response
-interface ItemsResponse {
-    data: {
-        cursor: string;
-        items: MarketplaceItem[];
-    };
+interface CursorStore {
+    [key: string]: string;
+
+    "/plantsCursor": string;
+    "/merchCursor": string;
+    "/seedsCursor": string
 }
 
 interface MarketplaceContextProps {
     plantData: MarketplaceItem[];
     seedData: MarketplaceItem[];
     merchData: MarketplaceItem[];
-    cursor: string;
-    setCursor: React.Dispatch<React.SetStateAction<string>>;
+    cursor: CursorStore;
+    setCursor: React.Dispatch<React.SetStateAction<CursorStore>>;
     setItems: (location: string, items: any) => void;
     setItemsBySearch: (location: string, items: any) => void;
 }
@@ -33,7 +33,7 @@ const MarketplaceContext = createContext<MarketplaceContextProps>({
     plantData: [],
     seedData: [],
     merchData: [],
-    cursor: '',
+    cursor: {"/plantsCursor": '', "/merchCursor": '', "/seedsCursor": ''},
     setCursor: () => {},
     setItems: () => {},
     setItemsBySearch: () => {}
@@ -45,7 +45,20 @@ export const MarketplaceProvider: React.FC<MarketplaceProviderProps> = ({ childr
     const [plantData, setPlantData] = useState<MarketplaceItem[]>([]);
     const [seedData, setSeedData] = useState<MarketplaceItem[]>([]);
     const [merchData, setMerchData] = useState<MarketplaceItem[]>([]);
-    const [cursor, setCursor] = useState<string>('');
+    const [cursor, setCursor] = useState({"/plantsCursor": '', "/merchCursor": '', "/seedsCursor": ''});
+
+
+    useEffect(() => {
+        const plantsCursor = sessionStorage.getItem("/plantsCursor") ?? ''
+        const seedsCursor = sessionStorage.getItem("/seedsCursor") ?? ''
+        const merchCursor = sessionStorage.getItem("/merchCursor") ?? ''
+
+        setCursor({
+            "/plantsCursor": plantsCursor,
+            "/seedsCursor": seedsCursor,
+            "/merchCursor": merchCursor
+        })
+    }, [])
 
     function setItems(location: string, items: any){
         console.log('setitems')

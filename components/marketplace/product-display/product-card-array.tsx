@@ -18,6 +18,7 @@ interface CardArrayPropTypes {
 const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTypes ) => {
 
     const router = useRouter()
+    const location = router.pathname
 
     const [loading, setLoading] = useState(false)
 
@@ -27,7 +28,6 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
     useEffect(() => {
         if(searching.search){
             if(searching.action === 0 || searching.action === 1){
-                console.log(searching.action)
                 searchItems(searching.action)
                 search(false,0)
             }
@@ -48,7 +48,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                 {getDataType().map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
                 {
-                    cursor && <Pagination loading={loading} totalPages={1} loadMore={loadMore}/> 
+                    cursor[`${location}Cursor`] && <Pagination loading={loading} totalPages={1} loadMore={loadMore}/> 
                 }
                 </React.Fragment>
             )
@@ -64,10 +64,14 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
     async function loadMore(){
         setLoading(true)
         const location = router.pathname
-        const items = await axios.post('api/getItems', {'type': location, 'cursor': cursor})
+        const cursorKey = `${location}Cursor`
+        const _cursor = cursor[cursorKey]
+        const items = await axios.post('api/getItems', {'type': location, 'cursor': _cursor})
 
         if(items){
-            setCursor(items.data.cursor)
+            sessionStorage.setItem(cursorKey, items.data.cursor)
+            cursor[cursorKey] = items.data.cursor
+            setCursor(cursor)
             setItems(location, items.data.items)
             setLoading(false)
         }
@@ -76,7 +80,6 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
     }
 
     function getDataType(){
-        const location = router.pathname
         if (location === "/plants") {
             return plantData;
         }
@@ -91,16 +94,12 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
     }
 
     async function searchItems(index: number){
-        console.log('search items invoked')
-        const location = router.pathname
         let items: any = null
 
         if(index === 1){
-            console.log("attribute query")
             const location = router.pathname
             items = await axios.post('api/getItems', {'type': location, 'query': query, 'textFilter': '', 'limit': 100})
         }else if(index === 0){
-            console.log("text query")
             const location = router.pathname
             items = await axios.post('api/getItems', {'type': location, 'query': [], 'textFilter': textQuery, 'limit': 100})
         }

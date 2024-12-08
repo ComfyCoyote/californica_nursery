@@ -3,8 +3,6 @@ import { HStack, Link, Box } from "@chakra-ui/react"
 import SearchSidebar from "./search-sidebar/search-sidebar"
 import { theme } from "@/theme/theme"
 import { Text } from "@chakra-ui/react"
-import ThankYouModal from '../shared-components/thank-you-modal'
-import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 interface MarketplacePropTypes{
