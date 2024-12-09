@@ -97,7 +97,7 @@ export const getStaticProps : GetStaticProps = async (context) => {
       data = await Promise.all(promise)
 
       return {
-          props: { data: data, cursor: cursor}
+          props: { data: data, cursor: cursor}, revalidate: 3600
       }
 
 

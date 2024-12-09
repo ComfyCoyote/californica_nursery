@@ -1,6 +1,3 @@
-import axios from "axios";
-
-
 export interface CatalogItemsQuery {
     [key: string]: any
 
@@ -46,9 +43,14 @@ export const getCatalogItemsAPI = async (
         'Content-Type': 'application/json'
     }
 
-    const response = await axios.post(url, body , {headers: headers}).catch((error) => console.log(error))
+
+    const response = await fetch(url, {
+        method: 'POST', 
+        body: JSON.stringify(body), 
+        headers: headers
+    }).catch((error) => console.log(error))
 
     if(response){
-        return response.data
+        return response.json()
     }
 }
