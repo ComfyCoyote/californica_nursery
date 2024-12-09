@@ -1,6 +1,6 @@
 import Marketplace from "@/components/marketplace/marketplace";
 import { Client, Environment, ApiError } from "square";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import { Plant } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
 import { PLANT_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
@@ -70,7 +70,7 @@ export const getStaticProps : GetStaticProps = async (context) => {
     
     try{
 
-        const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID)
+        const archivedState = await getCatalogItemsAPI(PLANT_CATEGORY_ID, null, null, null, 100)
 
         const variationObjectIds = archivedState.items.flatMap((p: any) => p.item_data?.variations.map((v: any) => v.id) || []);
         
@@ -100,7 +100,7 @@ export const getStaticProps : GetStaticProps = async (context) => {
 
 
         return {
-            props: { data: data, cursor: cursor}
+            props: { data: data, cursor: cursor}, revalidate: 3600
         }
 
 
