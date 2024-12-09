@@ -1,6 +1,6 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import { createContext, useContext, useState, useEffect } from 'react';
-import { Apparel, PlaidProduct, Plant, OrderItem } from '@/Interfaces/interfaces';
+import { Apparel, Product, Plant, OrderItem } from '@/Interfaces/interfaces';
 import {v4 as uuidv4} from 'uuid'
 import type { Fulfillment, Order, OrderLineItem} from 'square';
 import dayjs from 'dayjs';
@@ -10,10 +10,10 @@ import axios from 'axios';
 interface CartContextProps {
   orderItems: OrderItem[];
   calculated: string | undefined;
-  addToCart: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct, orderItem: OrderItem) => void;
+  addToCart: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | Product, orderItem: OrderItem) => void;
   removeFromCart: (event: React.MouseEvent<HTMLButtonElement>, orderId: string) => void;
-  subtractItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct, orderItem: OrderItem) => void;
-  addItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct, orderItem: OrderItem) => void;
+  subtractItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | Product, orderItem: OrderItem) => void;
+  addItem: (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | Product, orderItem: OrderItem) => void;
   updateItemQuantity: (event: React.ChangeEvent<HTMLInputElement>, itemId: string) => void;
 }
 
@@ -35,7 +35,7 @@ const CartContext = createContext<CartContextProps>({
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider: React.FC <CartProviderProps>= (props) => {
-  const [cartItems, setCartItems] = useState<Array<Plant | Apparel | PlaidProduct | undefined>>([]);
+  const [cartItems, setCartItems] = useState<Array<Plant | Apparel | Product | undefined>>([]);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([])
   const [calculated, setCalculated] = useState<string>()
 
@@ -61,7 +61,7 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
 
   }, [orderItems])
 
-  const addToCart = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct, orderItem: OrderItem) => {
+  const addToCart = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | Product, orderItem: OrderItem) => {
     if(cartItems.indexOf(product) === -1 && orderItems.indexOf(orderItem) === -1){
       setCartItems((prevItems) => [...prevItems, product]);
       setOrderItems((prev) => [...prev, orderItem])
@@ -75,7 +75,7 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
 
   };
 
-  const subtractItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct | undefined, orderItem: OrderItem) => {
+  const subtractItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | Product | undefined, orderItem: OrderItem) => {
     let index = cartItems.indexOf(product);
     const newArray = [...cartItems]
     newArray.splice(index, 1); 
@@ -87,7 +87,7 @@ export const CartProvider: React.FC <CartProviderProps>= (props) => {
     setCartItems(newArray);
   }
 
-  const addItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | PlaidProduct | undefined, orderItem: OrderItem) => {
+  const addItem = (event: React.MouseEvent<HTMLButtonElement>, product: Plant | Apparel | Product | undefined, orderItem: OrderItem) => {
     const newArray = [...cartItems, product]
     const orderArray = [...orderItems, orderItem]
 

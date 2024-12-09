@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, HStack, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
-import { PlaidProduct } from '@/Interfaces/interfaces'
+import { Product } from '@/Interfaces/interfaces'
 import { useState } from 'react';
 
 
 interface ProductDetailInfoPropTypes {
-    item: PlaidProduct
+    item: Product
 }
 
 const ProductDetailImages: React.FC<ProductDetailInfoPropTypes> = ({ item }) => {

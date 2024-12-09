@@ -1,9 +1,9 @@
 import React from 'react';
 import { VStack, Text, ListItem, UnorderedList } from '@chakra-ui/react';
-import { Apparel, Plant, PlaidProduct} from '@/Interfaces/interfaces';
+import { Apparel, Plant, Product} from '@/Interfaces/interfaces';
 
 interface ProductListProps {
-    products: Array<Plant | Apparel | PlaidProduct>;
+    products: Array<Plant | Apparel | Product>;
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
