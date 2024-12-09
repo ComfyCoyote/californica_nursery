@@ -1,5 +1,5 @@
 import { Client, Environment, ApiError} from "square";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { Merch } from "@/Interfaces/interfaces";
 import { NextPageWithLayout } from "../_app";
 import ProductDetailView from "@/components/marketplace/product-detail-view/product-detail-view";
@@ -36,7 +36,7 @@ ProductDetailPage.getLayout = function getLayout(page: ReactElement){
 
 
 
-export const getServerSideProps : GetServerSideProps = async ({params}) => {
+export const getStaticProps : GetStaticProps = async ({params}) => {
 
 
     const client = new Client({

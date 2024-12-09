@@ -1,5 +1,5 @@
 import { Client, Environment, ApiError} from "square";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { Seed } from "@/Interfaces/interfaces";
 import ProductDetailView from "@/components/marketplace/product-detail-view/product-detail-view";
 import Layout from "@/components/layout/layout";
@@ -32,7 +32,7 @@ ProductDetailPage.getLayout = function getLayout(page: ReactElement){
     )
 }
 
-export const getServerSideProps : GetServerSideProps = async ({params}) => {
+export const getStaticProps : GetStaticProps = async ({params}) => {
 
   const client = new Client({
       accessToken: process.env.SQUARE_PRODUCTION_ACCESS_TOKEN,

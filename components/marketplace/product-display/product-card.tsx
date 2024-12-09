@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
-import { Apparel, PlaidProduct, Plant, Seed } from '@/Interfaces/interfaces'
+import { Plant, Seed, Merch } from '@/Interfaces/interfaces'
 import Image from 'next/image';
 import Link from 'next/link';
 import { theme } from '@/theme/theme';
@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
     </Link>
   );
 
-  function imageCheck(item: PlaidProduct): string {
+  function imageCheck(item: Plant | Merch | Seed): string {
     if(item.imageUrls){
         if(typeof item.imageUrls[0] === 'string'){
             console.log(item.imageUrls[0])
@@ -75,7 +75,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
     }
   }
 
-  function formatName(item: Plant | Apparel | PlaidProduct): string {
+  function formatName(item: Plant | Merch | Seed): string {
     
     const name = item?.name
 
@@ -92,15 +92,26 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
   }
 
   
-  function getPriceRange(item: PlaidProduct){
+  function getPriceRange(item: Plant | Merch | Seed){
+    
 
     const priceArr = item?.price ?? null
+
+    console.log(item.name)
+    console.log(priceArr)
 
     if(priceArr){
 
       if(priceArr.length == 0){
         return 'Out of stock'
       }
+
+      const allOutOfStock = priceArr.map((price) => price.amount === '0' && true)
+
+      if(allOutOfStock.every(Boolean)){
+        return 'Out of stock'
+      }
+
 
       const startPrice = priceArr[0]?.price
       const endPrice = priceArr[priceArr.length - 1]?.price

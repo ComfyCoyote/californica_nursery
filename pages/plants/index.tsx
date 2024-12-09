@@ -56,7 +56,7 @@ MarketplacePage.getLayout = function getLayout(page: ReactElement){
 }
 
 
-export const getStaticProps : GetStaticProps = async (context) => {
+export const getStaticProps : GetStaticProps = async ({params}) => {
 
 
     let cursor: string;

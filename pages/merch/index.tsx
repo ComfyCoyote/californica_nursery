@@ -63,7 +63,6 @@ export const getStaticProps : GetStaticProps = async (context) => {
       environment: Environment.Production,
   });
 
-  let filterOptionsObject: any = {}
   let data: Merch[] = []
   
   try{

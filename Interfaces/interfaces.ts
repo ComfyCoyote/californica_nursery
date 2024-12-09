@@ -1,20 +1,20 @@
 import type { OrderLineItemModifier, OrderLineItemAppliedDiscount, OrderLineItemAppliedTax } from "square";
 
 
-export interface Seed extends PlaidProduct{
+export interface Seed extends Product{
     seedAttributes: PlantAttributes | null
 }
 
 
-export interface Plant extends PlaidProduct {
+export interface Plant extends Product {
     plantAttributes?: PlantAttributes;
 }
 
-export interface Merch extends PlaidProduct {
+export interface Merch extends Product {
     merchAttributes?: MerchAttributesAsArray;
 }
 
-export interface PlaidProduct {
+export interface Product {
     id?: string;
     name?: string;
     description?: string;

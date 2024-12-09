@@ -32,7 +32,6 @@ const LandscapingSectionOne = () => {
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
                         style={{objectFit: "cover"}} 
-                        loading='eager'
                         priority
                     />
                 </Box>

@@ -1,6 +1,6 @@
 import Marketplace from "@/components/marketplace/marketplace";
 import { Client, Environment, ApiError, CatalogObject } from "square";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import { Seed } from "@/Interfaces/interfaces"
 import ProductCardArray from "@/components/marketplace/product-display/product-card-array";
 import { SEED_CATEGORY_ID } from "@/components/square-utils/custom-attributes";
@@ -64,7 +64,6 @@ export const getStaticProps : GetStaticProps = async (context) => {
       environment: Environment.Production,
   });
 
-  let filterOptionsObject: any = {}
   let data: Seed[] = []
   
   try{

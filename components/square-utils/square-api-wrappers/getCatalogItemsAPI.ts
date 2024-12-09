@@ -24,7 +24,7 @@ export const getCatalogItemsAPI = async (
     cursor: string | string[] | null = null, 
     query: CatalogItemsQuery[] | null = null,
     textFilter: string | null = null, 
-    limit=16 ) => {
+    limit=100 ) => {
 
     const url = "https://connect.squareup.com/v2/catalog/search-catalog-items"
 
