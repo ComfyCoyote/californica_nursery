@@ -48,7 +48,7 @@ const ProductCardArray: React.FC<CardArrayPropTypes> = (props : CardArrayPropTyp
                 {getDataType().map((item) => <ProductCard key={item.id} item={item} type={props.type} />)}
                 </Grid>
                 {
-                    cursor[`${location}Cursor`] && <Pagination loading={loading} totalPages={1} loadMore={loadMore}/> 
+                    cursor?.[`${location}Cursor`] && <Pagination loading={loading} totalPages={1} loadMore={loadMore}/> 
                 }
                 </React.Fragment>
             )

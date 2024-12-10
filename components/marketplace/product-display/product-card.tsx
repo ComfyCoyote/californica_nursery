@@ -95,45 +95,50 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
   function getPriceRange(item: Plant | Merch | Seed){
     
 
-    const priceArr = item?.price ?? null
+    const priceArr = item?.price ?? []
 
-    console.log(item.name)
     console.log(priceArr)
 
-    if(priceArr){
-
-      if(priceArr.length == 0){
-        return 'Out of stock'
-      }
+    if(priceArr?.length > 0){
+      console.log("EVALUAATING PRICE")
 
       const allOutOfStock = priceArr.map((price) => price.amount === '0' && true)
 
       if(allOutOfStock.every(Boolean)){
+
+        console.log("OUT OF STOCK")
+
         return 'Out of stock'
-      }
 
+      } else {
 
-      const startPrice = priceArr[0]?.price
-      const endPrice = priceArr[priceArr.length - 1]?.price
+        const startPrice = priceArr[0]?.price
+        const endPrice = priceArr[priceArr.length - 1]?.price
 
-      if(startPrice === endPrice){
-        const amount = Number(startPrice)
-        if(amount > 0){
-          return `$${Number(startPrice)/100}`
-        }
-        
-      } else if(startPrice !== endPrice){
-        const amount = Number(startPrice)/100 - Number(endPrice)/100
-        if(amount > 0){
-          return `$${Number(endPrice)/100} - $${Number(startPrice)/100} `
+        if(startPrice === endPrice){
+          console.log("SAME PRICE")
+          const amount = Number(startPrice)
+          if(amount > 0){
+            return `$${Number(startPrice)/100}`
+          }
+          
+        } else if(startPrice !== endPrice){
+          console.log("DIFFERENT PRICE")
+          const amount = Number(startPrice)/100 - Number(endPrice)/100
+          if(amount > 0){
+            return `$${Number(endPrice)/100} - $${Number(startPrice)/100} `
         } 
+
+        console.log("NO CONDITION MET")
         
 
       }
 
-      
+    }
 
     } else {
+
+      console.log("RETURNING NULL")
 
       return ''
 
