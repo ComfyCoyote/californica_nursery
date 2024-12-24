@@ -1,15 +1,16 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import Navbar from '@/components/navbar'
 import React from 'react'
-import LandingPage from '@/components/landing_page'
+import AltLandingPage from '@/components/landing/alt-landing-page'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  
+
   return (
     <React.Fragment>
-      <LandingPage />
+      <AltLandingPage />
     </React.Fragment>
   )
 }
