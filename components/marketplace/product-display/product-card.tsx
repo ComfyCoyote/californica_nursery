@@ -140,7 +140,7 @@ const ProductCard: React.FC<ProductCardPropTypes> = ({ item , type}) => {
 
       console.log("RETURNING NULL")
 
-      return ''
+      return 'Out of stock'
 
     }
 

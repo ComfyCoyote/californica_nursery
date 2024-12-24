@@ -15,7 +15,6 @@ import { theme } from '../../theme/theme'
 import LeftSection from './left-section';
 import ReCAPTCHA from 'react-google-recaptcha'
 import axios from 'axios';
-import Toaster from '../shared-components/toast';
 import { ToasterPropTypes } from '../shared-components/toast';
 
 
