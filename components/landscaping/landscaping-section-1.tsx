@@ -22,7 +22,9 @@ const LandscapingSectionOne = () => {
                         src={'/images/landscaping/brett_ian_landscaping_cropped.webp'} 
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
-                        style={{objectFit: "cover"}} 
+                        style={{objectFit: "cover"}}
+                        quality={60} 
+                        sizes="(max-width: 1200px) 33.33vw, (min-width: 1201px) 400px"
                         priority
                     />
                 </Box>
@@ -31,7 +33,9 @@ const LandscapingSectionOne = () => {
                         src={'/images/landscaping/killyourlawn1.webp'} 
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
-                        style={{objectFit: "cover"}} 
+                        style={{objectFit: "cover"}}
+                        quality={60} 
+                        sizes="(max-width: 1200px) 33.33vw, (min-width: 1201px) 400px"
                         priority
                     />
                 </Box>
@@ -40,7 +44,9 @@ const LandscapingSectionOne = () => {
                         src={'/images/landscaping/killyourlawn2.webp'} 
                         alt={'Ian and Jackson killing the lawn'} 
                         fill  
-                        style={{objectFit: "cover"}} 
+                        style={{objectFit: "cover"}}
+                        quality={60} 
+                        sizes="(max-width: 1200px) 33.33vw, (min-width: 1201px) 400px"
                         priority
                     />
                 </Box>

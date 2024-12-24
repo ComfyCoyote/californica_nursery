@@ -18,7 +18,7 @@ Landscaping.getLayout = function getLayout(page: ReactElement){
             {page}
         </Layout>
     )
-  }
+}
 
 
 export default Landscaping;
