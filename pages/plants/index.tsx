@@ -100,7 +100,7 @@ export const getStaticProps : GetStaticProps = async ({params}) => {
 
 
         return {
-            props: { data: data, cursor: cursor}, revalidate: 3600
+            props: { data: data, cursor: cursor}, revalidate: 60
         }
 
 
