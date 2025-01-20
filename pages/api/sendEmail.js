@@ -1,6 +1,9 @@
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
+const CC = [
+  "jacksond0423@gmail.com",
+]
 
 export default async function sendEmail(req, res) {
     try{
@@ -12,7 +15,7 @@ export default async function sendEmail(req, res) {
             const text = body.message
             const name = body.name
 
-            const to_email = process.env.ENVIRONEMT === 'PROD' ?  'info@californicanursery.com':'muzzadamjee@gmail.com' 
+            const to_email = process.env.ENVIRONEMT === 'PROD' ?  'info@californicanursery.com':'californicnursery@gmail.com' 
 
             const msg = {
               to: to_email, // Change to your recipient

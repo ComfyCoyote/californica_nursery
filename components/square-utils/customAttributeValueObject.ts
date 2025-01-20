@@ -24,7 +24,8 @@ export const plantCustomAttributeValues: CustomAttributeValues[] = [
             "S4PRP5C7J7QEEICPIFAZ6FMH": "Red",
             "WEAQEB24J44CXLIQFLOECBTR": "Tan",
             "IGP247YRGGB3RGGBGVIVJPL6": "White",
-            "FCB46F6UQUSHOW5L4UR4QST7": "Yellow"
+            "FCB46F6UQUSHOW5L4UR4QST7": "Yellow",
+            "FEEGDI7IWP3OOGUB2F6YHCRS": "N/A"
         }
     },
     {   "id": "Square:0e4417c9-cb0a-46e2-93ca-813fcc5f105a", 
@@ -64,8 +65,10 @@ export const plantCustomAttributeValues: CustomAttributeValues[] = [
             "GXRKL2RFYH6GFJ2HEKSL7OUE": "Small Tree",
             "OGSP4NIHRCC4WGRAJL4263EL": "Subshrub",
             "DZEEUJ4OUK6SEIXYD52DM233": "Succulent",
-            "SKPMVAJ7YHRKLOOYM3SO2NQR": "Vine"
-            }
+            "SKPMVAJ7YHRKLOOYM3SO2NQR": "Vine",
+             "FR5I3WZWDO6J2JFKKKYJ3T63": "Fern"
+        }
+              
     },
     {   "id": "Square:a11811ec-64b6-4aaa-bf02-a1a84ce9e867",
         "att_id": 'PJGVN7QD6R2CCAYG2ZSPOTHX', 

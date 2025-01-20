@@ -230,7 +230,6 @@ const PreCheckoutPage: React.FC = () => {
       formatted += `-${input.slice(6, 10)}`;
     }
 
-
     // Update state
     setPhone(formatted);
 ;
