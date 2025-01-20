@@ -121,7 +121,7 @@ const Marketplace: React.FC<MarketplacePropTypes>= ({children, title}) => {
                         </HStack>
                 </Box>
                 <Text fontSize={25} fontWeight={600} p={10} color="black" textAlign="center">
-                *Purchased plants, seeds, and merchandise are available for contactless pickup every Friday in Long Beach, CA. For wholesale inquiries, contact{' '}
+                *Purchased plants, seeds, and merchandise are available for contactless pickup in Long Beach, CA. For wholesale inquiries, contact{' '}
                 <Link href="mailto:wholesale@californicanursery.com" isExternal>
                     wholesale@californicanursery.com
                 </Link>
