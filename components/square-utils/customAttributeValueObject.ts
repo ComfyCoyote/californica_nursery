@@ -101,17 +101,20 @@ export const plantCustomAttributeValues: CustomAttributeValues[] = [
         "att_id": 'EMANJUNNUZVJGQ5TN6NLYFA7',
         "name": "ecosystem", 
         "attributes": {
-            "D2VYDDHPUD6FUH6PFTY7Z7RX": "Chaparral",
-            "22WFCLXTVYGMWP5JEN5DYICK": "Coast Sagescrub",
-            "R3UPPZSQKFVEUFEIY34WYKGX": "Coastal Bluff",
-            "B6XBNKBVUEF7ASG52WKIX27A": "Coastal Prairie",
-            "WEGBJIUNYVUBBXW52QD3KCRQ": "Coastal Salt Marsh",
-            "MKUEZTKSTSHDM4PSNNEQ6HCK": "Coastal Sand Dunes",
-            "2PGB5X3IRW7ROE6E3FL5KY7Y": "Coastal Succulent Scrub",
-            "NDONZYRHGYMCYSI3MVC73BBQ": "Desert",
-            "3DUOBYSBVIG5Y5GM3R4AGPRF": "Oak Woodland",
-            "7M2ULDAL7G2ZFUSLUUEYD7HS": "Riparian Woodland"
-        }
+            'JGM5GDTB7CLLHYGVOY5V476K': 'Alkali Meadow', 
+            'D2VYDDHPUD6FUH6PFTY7Z7RX': 'Chaparral', 
+            '22WFCLXTVYGMWP5JEN5DYICK': 'Coast Sagescrub', 
+            'R3UPPZSQKFVEUFEIY34WYKGX': 'Coastal Bluff', 
+            'B6XBNKBVUEF7ASG52WKIX27A': 'Coastal Prairie', 
+            'WEGBJIUNYVUBBXW52QD3KCRQ': 'Coastal Salt Marsh', 
+            'MKUEZTKSTSHDM4PSNNEQ6HCK': 'Coastal Sand Dunes', 
+            '2PGB5X3IRW7ROE6E3FL5KY7Y': 'Coastal Succulent Scrub', 
+            '326RAVBXYH7XP7VJIOWQ6OZL': 'Coastal Wetland', 
+            'NDONZYRHGYMCYSI3MVC73BBQ': 'Desert', 
+            '3DUOBYSBVIG5Y5GM3R4AGPRF': 'Oak Woodland', 
+            '7M2ULDAL7G2ZFUSLUUEYD7HS': 'Riparian Woodland', 
+            '67HCHRNFQZCPFKF6HZ6SHES4': 'Wet Meadow'
+    }
     },
     {   "id": "Square:06563530-5d71-4036-99a9-f4eeb9d13794",
         "att_id": "HW22ERID4Y75QG3BFBPRAFVP", 
