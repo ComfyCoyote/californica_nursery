@@ -26,8 +26,8 @@ Special thanks to these lovely people for their support and guidance in this pro
 - Product images are served using [AWS CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html) coupled with [AWS S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) in webp format
 - Pages are statically generated at build time with a scheduled revalidation interval
 - Payment processing is done by redirecting to square checkout page using the [Payments](https://developer.squareup.com/docs/payments-overview) API
-- UI is comprised modified ChakraUI components customized according to design specifications, outfitted for both desktop and mobile use.
-- SEO optimization is being done through meta/title tags, server side generation, and urls with product names, alltogether composing an effective SEO suite.
+- UI is comprised of modified ChakraUI components customized according to design specifications, outfitted for both desktop and mobile use.
+- SEO optimization is being done through meta/title tags, server side generation, and urls with product names.
 
 
 ## Tech Stack
