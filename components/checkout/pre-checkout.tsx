@@ -7,7 +7,6 @@ import type { Fulfillment,  OrderLineItem } from 'square';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import { uuid } from 'uuidv4';
-import { checkoutNote } from './checkout-note';
 import { useForm } from 'react-hook-form';
 import ErrorAlert from './error-alert';
 
@@ -168,7 +167,6 @@ const PreCheckoutPage: React.FC = () => {
       const redirectPath = sessionStorage.getItem("redirectPath")
 
       const request = {
-        paymentNote: checkoutNote,
         idempotencyKey: uuid(),
         order: order.order,
         checkoutOptions: {
