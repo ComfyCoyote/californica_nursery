@@ -9,6 +9,9 @@ async function getInventoryCount(client: Client, catalogObjectIds: string[]){
           locationIds: [
             'L3C4J69QTRCAA'
           ],
+          states: [
+            'IN_STOCK'
+          ]
         });
       
 
