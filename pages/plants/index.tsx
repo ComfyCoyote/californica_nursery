@@ -12,6 +12,11 @@ import type { CatalogObject } from "square";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
+const fs = require("fs");
+
+
+
+
 
 interface MarketplacePropTypes{
     data: Array<Object>
@@ -98,6 +103,22 @@ export const getStaticProps : GetStaticProps = async ({params}) => {
 
         data = await Promise.all(promise)
 
+        const stream = fs.createWriteStream("largeData.json");
+
+        stream.write("[\n"); // Start JSON array
+
+        data.forEach((item, index) => {
+        stream.write(JSON.stringify(item, null, 2));
+        if (index !== data.length - 1) {
+            stream.write(",\n"); // Add comma except for the last item
+        }
+        });
+
+        stream.write("\n]"); // End JSON array
+        stream.end();
+
+        console.log("Large JSON file written successfully.");
+
 
         return {
             props: { data: data, cursor: cursor}, revalidate: 60
@@ -122,7 +143,8 @@ export const getStaticProps : GetStaticProps = async ({params}) => {
     }
 
     return {
-      props: { data: [], filterOptionsObject: {}, cursor: ''}
+      props: { data: [], filterOptionsObject: {}, cursor: ''},
+      revalidate: 360,
   }
 
   

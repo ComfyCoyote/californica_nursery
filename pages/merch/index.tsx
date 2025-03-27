@@ -120,7 +120,8 @@ export const getStaticProps : GetStaticProps = async (context) => {
 
 
   return {
-    props: { data: [], filterOptionsObject: {}, cursor: ''}
+    props: { data: [], filterOptionsObject: {}, cursor: ''},
+    revalidate: 360,
 }
 
 
