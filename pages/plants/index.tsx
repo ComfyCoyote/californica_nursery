@@ -12,7 +12,6 @@ import type { CatalogObject } from "square";
 import constructPlant from "@/components/square-utils/product-constuctors/constructPlant";
 import getInventoryCount from "@/components/square-utils/getInventoryCount";
 import { useMarketplace } from "@/components/marketplace/marketplaceContext/marketplaceContext";
-const fs = require("fs");
 
 
 
