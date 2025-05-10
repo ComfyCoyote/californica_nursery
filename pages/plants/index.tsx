@@ -103,6 +103,7 @@ export const getStaticProps : GetStaticProps = async ({params}) => {
 
         data = await Promise.all(promise)
 
+        /*
         const stream = fs.createWriteStream("largeData.json");
 
         stream.write("[\n"); // Start JSON array
@@ -118,7 +119,7 @@ export const getStaticProps : GetStaticProps = async ({params}) => {
         stream.end();
 
         console.log("Large JSON file written successfully.");
-
+        */
 
         return {
             props: { data: data, cursor: cursor}, revalidate: 60
