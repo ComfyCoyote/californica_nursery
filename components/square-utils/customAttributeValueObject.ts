@@ -66,7 +66,8 @@ export const plantCustomAttributeValues: CustomAttributeValues[] = [
             "OGSP4NIHRCC4WGRAJL4263EL": "Subshrub",
             "DZEEUJ4OUK6SEIXYD52DM233": "Succulent",
             "SKPMVAJ7YHRKLOOYM3SO2NQR": "Vine",
-             "FR5I3WZWDO6J2JFKKKYJ3T63": "Fern"
+             "FR5I3WZWDO6J2JFKKKYJ3T63": "Fern",
+             "WKSUDAI3EM5LG4WGXVNMKGAJ": "Annual Wildflower"
         }
               
     },
