@@ -60,6 +60,8 @@ export const getStaticPaths = async () => {
 
       return {paths, fallback: false}
 
+    } else {
+      return {paths: [], fallback: false}
     }
     
 
